@@ -36,37 +36,37 @@ const Navbar = () => {
             <div className="lowerheader">
                 <ul className="links">
                     <li>
-                        <Link to="/" className="header_link">
+                        <Link to="/ashram/home" className="header_link">
                             Home
                         </Link>
                     </li>
                     <li>
-                        <Link to="/about" className="header_link">
+                        <Link to="/ashram/about" className="header_link">
                             About Us
                         </Link>
                     </li>
                     <li>
-                        <Link to="/activities" className="header_link">
+                        <Link to="/ashram/activities" className="header_link">
                             Activities
                         </Link>
                     </li>
                     <li>
-                        <Link to="/news_event" className="header_link">
+                        <Link to="/ashram/news_event" className="header_link">
                             News Event
                         </Link>
                     </li>
                     <li>
-                        <Link to="/media" className="header_link">
+                        <Link to="/ashram/media" className="header_link">
                             Media
                         </Link>
                     </li>
                     <li>
-                        <Link to="/contact" className="header_link">
+                        <Link to="/ashram/contact" className="header_link">
                             Contact
                         </Link>
                     </li>
                     <li>
-                        <Link to="/donate" className="header_link">
+                        <Link to="/ashram/donate" className="header_link">
                             Donation
                         </Link>
                     </li>
