@@ -25,6 +25,7 @@ const router = createBrowserRouter([
                 index: true,
                 element: <School/>
             },
+            
             //school page
             {
                 path:'school',
