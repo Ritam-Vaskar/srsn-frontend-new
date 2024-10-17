@@ -1,0 +1,245 @@
+
+.donation_div{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    margin-top: 2rem;
+    height: 90rem;
+    /* color: #d2d0d0d0; */
+}
+.upper_div{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    width: 90%;
+    margin-bottom: 3rem;
+}
+.img_div{
+    width: 50%;
+}
+.ramkrishna_img1{
+    width: 100%;
+    border-radius: 2rem;
+}
+.text_div{
+  height: 100%;
+    width: 50%;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    
+}
+.text_div h3{
+    width: 60%;
+    color: rgb(242, 124, 28);
+    font-size: xx-large;
+    border-bottom: 1px solid rgba(78, 77, 77, 0.599);
+    padding: 1rem;
+}
+
+.text_div p{
+  
+    width: 80%;
+    line-height: 2rem;
+    font-family: "Edu VIC WA NT Beginner", cursive;
+    font-optical-sizing: auto;
+    font-size: large;
+    font-weight: 500;
+    font-style: normal;
+}
+
+.bank_details {
+    width: 100%;
+    max-width: 600px;
+    margin: 20px auto;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+  }
+  .bank_details:hover{
+    box-shadow: 0 0 10px rgb(128, 124, 235);
+    transform: scale(1.05);
+    transition-duration: 1s;
+  }
+  
+  .bank_details h3 {
+    text-align: center;
+    margin-bottom: 20px;
+    font-family: Arial, sans-serif;
+    color: #333;
+    font-size: larger;
+    color: rgb(242, 124, 28);
+  }
+  .bank_details h3 p{
+    color: black;
+    font-size:medium;
+  }
+  .bank_table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  .bank_table th,
+  .bank_table td {
+    text-align: center;
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+  }
+  
+  .bank_table th {
+    background-color: #f2f2f2;
+    font-weight: bold;
+    color: #333;
+  }
+  
+  .bank_table td {
+    background-color: #fff;
+    color: #555;
+  }
+  
+  .bank_table tr:last-child th,
+  .bank_table tr:last-child td {
+    border-bottom: none;
+  }
+  
+  .bank_table tr:hover {
+    background-color: #f1f1f1;
+  }
+  
+  /* donation sub */
+  .donation_subject {
+    width: 100%;
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  .donation_subject:hover{
+    box-shadow: 0 0 10px rgb(128, 124, 235);
+    transform: scale(1.02);
+    transition-duration: 1s;
+  }
+  
+  .donation_subject h3 {
+    color: rgb(242, 124, 28);
+    text-align: center;
+    margin-bottom: 20px;
+    font-family: Arial, sans-serif;
+    /* color: #333; */
+  }
+
+  
+  .donation_table {
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .left_sub, .right_sub {
+    width: 48%;
+  }
+  
+  .item {
+    background-color: #fff;
+    margin-bottom: 10px;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    opacity: 0; 
+    animation-duration: 1s;
+    animation-iteration-count: 1;
+    animation-fill-mode: forwards; 
+    cursor: pointer;
+  }
+  
+  /* Hover effect for items */
+  .item:hover {
+    background-color: #e6f7ff;
+    transform: scale(1.05);
+  }
+  
+  /* Animation keyframes */
+  @keyframes lefttoright {
+    from {
+      transform: translateX(-100%);
+      opacity: 0; 
+    }
+    to {
+      transform: translateX(0);
+      opacity: 1; 
+    }
+  }
+  
+  @keyframes righttoleft {
+    from {
+      transform: translateX(100%);
+      opacity: 0;
+    }
+    to {
+      transform: translateX(0);
+      opacity: 1;
+    }
+    
+  }
+  
+
+
+  /* Animation classes */
+   .item1 {
+    animation-name: lefttoright;
+    animation-delay: 0s;
+  } 
+  
+  .item2 {
+    animation-name: righttoleft;
+    animation-delay: 0.5s;
+  }
+  
+  .item3 {
+    animation-name: lefttoright;
+    animation-delay: 1s;
+  }
+  
+  .item4 {
+    animation-name: righttoleft;
+    animation-delay: 1.5s;
+  }
+  
+  .item5 {
+    animation-name: lefttoright;
+    animation-delay: 2s;
+  }
+  
+  .item6 {
+    animation-name: righttoleft;
+    animation-delay: 2.5s;
+  }
+  
+  .item7 {
+    animation-name: lefttoright;
+    animation-delay: 3s;
+  }
+  
+  .item8 {
+    animation-name: righttoleft;
+    animation-delay: 3.5s;
+  }
+  
+  .item9 {
+    animation-name: lefttoright;
+    animation-delay: 4s;
+  }
+  
+  .item10 {
+    animation-name: righttoleft;
+    animation-delay: 4.5s;
+  }

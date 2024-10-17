@@ -1,0 +1,120 @@
+
+.contact-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding: 50px;
+    background-color: #f9f9f9;
+  }
+  
+  
+  .contact-left {
+    width: 40%;
+    padding-right: 30px;
+    text-align: left;
+  }
+  
+  .logo {
+    max-width: 200px;
+    margin-bottom: 20px;
+  }
+  
+  .contact-left h2 {
+    font-size: 24px;
+    margin-bottom: 15px;
+    color: #333;
+  }
+  
+  .contact-left p {
+    font-size: 18px;
+    color: #666;
+    margin: 5px 0;
+  }
+  
+  
+  .contact-right {
+    width: 50%;
+    background-color: #fff;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .contact-right h2 {
+    font-size: 24px;
+    margin-bottom: 20px;
+    color: #333;
+  }
+  
+  .contact-form {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .contact-form input,
+  .contact-form textarea {
+    margin-bottom: 15px;
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+  
+  .contact-form button {
+    padding: 12px 20px;
+    font-size: 18px;
+    color: #fff;
+    background-color: #ff8c19;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .contact-form button:hover {
+    background-color: #ff5e19;
+  }
+
+  @media (max-width: 768px) {
+    .contact-container {
+      flex-direction: column;
+      padding: 20px;
+    }
+  
+    .contact-left, .contact-right {
+      width: 100%;
+      padding-right: 0;
+      margin-bottom: 20px;
+    }
+
+    .contact-left{
+        text-align: center;
+    }
+
+    .logo {
+      max-width: 150px;
+      margin-bottom: 10px;
+    }
+  
+    .contact-right {
+      padding: 20px;
+    }
+  
+    .contact-left h2, .contact-right h2 {
+      font-size: 20px;
+    }
+  
+    .contact-left p {
+      font-size: 16px;
+    }
+  
+    .contact-form input,
+    .contact-form textarea {
+      font-size: 14px;
+    }
+  
+    .contact-form button {
+      font-size: 16px;
+    }
+  }
+  

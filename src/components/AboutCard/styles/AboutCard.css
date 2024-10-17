@@ -1,0 +1,135 @@
+.about-container {
+    display: flex;
+    flex-direction: column;
+    margin: 20px;
+    gap: 16px;
+  }
+  
+  .about-card {
+    display: flex;
+    align-items: center;
+    border: 1px solid #ff8c19;
+    padding: 16px;
+    border-radius: 8px;
+    margin: 16px;
+    background-color: #a5a5a54f;
+  }
+  
+  .about-card:hover {
+    box-shadow: 1px 1px 10px 1px #ff8c19;
+    transition: 0.3s ease-in-out;
+  }
+  
+  .content {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin: 20px;
+    flex-direction: column;
+    width: 70%;
+  }
+
+  .imgDiv{
+    width: 30%;
+    height: 250px;
+    overflow: hidden;
+  }
+
+  .imgDiv img{
+    width: 100%;
+    height: 100%;
+  }
+  
+  /* .about-card__image {
+    width: 270px;
+    height: 100%;
+  }
+  
+  .about-card__image img {
+    width: 100%;
+    height: max-content;
+  } */
+  
+  .about-card__description {
+    flex: 1;
+    font-size: 16px;
+    color: #333;
+  }
+  
+  /* Alternating layout */
+  .about-card:nth-child(odd) {
+    flex-direction: row; 
+  }
+  
+  .about-card:nth-child(even) {
+    flex-direction: row-reverse; 
+  }
+
+
+  
+  /* Responsive design for 1024px */
+  @media (max-width: 1024px) {
+    .about-card {
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+  
+    .about-card__description {
+      font-size: 15px;
+      text-align: left;
+    }
+  }
+  
+  /* Responsive design for 768px */
+  @media (max-width: 768px) {
+
+    
+    .about-card:nth-child(odd) {
+        flex-direction: column; 
+      }
+      
+      .about-card:nth-child(even) {
+        flex-direction: column; 
+      }
+      .content{
+        width: 100%;
+        align-items: center;
+      }
+
+    .about-card {
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+
+    .imgDiv{
+        width: 100%;
+    }
+  
+    .about-card__description {
+      font-size: 14px;
+      text-align: left;
+    }
+  }
+  
+  /* Responsive design for 480px */
+  @media (max-width: 480px) {
+    .about-card {
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      padding: 15px;
+      margin: 12px;
+    }
+  
+    .about-card__image {
+      width: 100%;
+      margin-bottom: 12px;
+    }
+  
+    .about-card__description {
+      font-size: 13px;
+    }
+  }
+  

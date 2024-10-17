@@ -1,0 +1,19 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;400;500;600;700&display=swap');
+:root {
+  --ashram-bg:rgb(235,226,200);
+  --ashram-border:rgb(37,88,131);
+  --ashram-text1:rgb(32,64,88);
+  --ashram-text2:rgb(99,107,108);
+  --ashram-yellow:#ff8c19;
+}
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: 'Inter', sans-serif;
+    overflow-x: hidden;
+}
+li{
+    list-style: none;
+}
