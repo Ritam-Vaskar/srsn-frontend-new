@@ -9,7 +9,7 @@ const School = () => {
   return (
     <div>
       <Navbar />
-      <Home />
+      {/* <Home /> */}
       <Outlet />
       <Footer />    
     </div>

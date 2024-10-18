@@ -1,0 +1,291 @@
+// .snavbar {
+//     width: 100%;
+//     display: flex;
+//     justify-content: space-around;
+//     align-items: center;
+//     margin: 0 auto;
+//     padding: 0.2rem 0;
+//     background-color: #f9f9f9;
+//     /* box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); */
+//     gap: 2rem;
+//     /* background-color: #cdcaca; */
+//     padding: 0 0.5rem;
+//     /* overflow-x: hidden; */
+// }
+
+// .schooldetails {
+//     display: flex;
+//     justify-content: center;
+//     align-items: center;
+//     /* height: 100%; */
+//     padding: 0;
+//     margin: 0 auto;
+//     gap: 1rem;
+//     width: 50%;
+// }
+
+// .sname {
+//     width: 15rem;
+//     text-align: center;
+// }
+
+// .sname h3 {
+//     color: #2d7f2d;
+//     text-shadow: 0.5px 0.5px 0px rgba(0, 0, 0, 0.775);
+//     font-size: 1.5rem;
+// }
+
+// .snav {
+//     width: 100%;
+//     /* background-color: #cfcdcdcc; */
+//     padding: 1rem 0;
+//     border-radius: 5px;
+    
+// }
+// /* .snav:hover{
+//     transform: translateY(-1px);
+//     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+//     transition: all 0.3s ease;
+// } */
+// .snav{
+//     display: flex;
+//     justify-content: space-around;
+//     align-items: center;
+//     gap: 1rem;
+// }
+// .snav li{
+//     display: flex;
+//     flex-direction: column;
+// }
+// .subOption{
+//     display: flex;
+//     flex-direction: column;
+//     gap: 0.5rem;
+//     position: relative;
+//     top: 10px;
+// }
+
+// .sashramLink,
+// .salumniLink {
+//     color: black;
+//     text-decoration: none;
+// }
+
+// .sashramLink:hover,
+// .salumniLink:hover {
+//     color: green;
+// }
+
+// .slogin {
+//     color: white;
+//     background-color: #2d7f2d;
+//     padding: 0.5rem 1rem;
+//     border-radius: 5px;
+//     text-decoration: none;
+// }
+
+// .slogin:hover {
+//     background-color: #1f561f;
+// }
+
+// /* Ensure the menu button is visible on mobile */
+// .stoggle {
+//     display: none;
+// }
+
+// .sidemenu {
+//     display: none; /* Hidden by default */
+//     position: fixed;
+//     top: 0;
+//     right: 0;
+//     /* height: 100%; */
+//     width: 50%;
+//     background-color: rgba(0, 0, 0, 0.7); /* Semi-transparent background */
+//     z-index: 1000;
+//     overflow-y: auto;
+//     transition: transform 0.3s ease;
+//     transform: translateX(100%); /* Hidden off-screen */
+// }
+
+// /* Show sidebar when 'active' class is added */
+// .sidemenu.active {
+//     display: block;
+//     transform: translateX(0); /* Slide in */
+// }
+
+// .sidemenu ul {
+//     list-style: none;
+//     padding: 0;
+//     margin: 0;
+//     color: #fff;
+// }
+
+// .sidemenu ul li {
+//     padding: 1rem;
+//     text-align: center;
+// }
+
+// .sidemenu ul li img {
+//     cursor: pointer;
+//     position: absolute;
+//     top: 1rem;
+//     right: 1rem;
+//     width: 2rem;
+// }
+// .sidemenu ul li div{
+//     color: rgb(255, 153, 0);
+//     font-size: x-large;
+//     font-weight: bold;
+// }
+
+// @media (max-width: 1030px) {
+//     .snavbar{
+//         width: 80%;
+//     }
+//     .snav {
+//         display: none;
+//     }
+
+//     .stoggle {
+//         display: block;
+//     }
+// }
+
+
+.snavbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #f0f0f0;
+    padding: 1rem;
+    position: relative;
+
+    .schooldetails {
+        display: flex;
+        align-items: center;
+
+        .school_logo {
+            img {
+                height: 100px;
+            }
+        }
+
+        .sname {
+            margin-left: 1rem;
+            h3 {
+                font-size: 1.5rem;
+                color: #333;
+            }
+        }
+    }
+
+    .snav {
+        display: flex;
+        align-items: center;
+        list-style: none;
+
+        li {
+            position: relative;
+            margin: 0 1rem;
+            cursor: pointer;
+            color: #333;
+            font-weight: bold;
+
+            &:hover {
+                color: orangered;
+            }
+            div{
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                gap: 0.5rem;
+            }
+
+            ul {
+                display: none;
+                position: absolute;
+                background-color: #fff;
+                box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+                list-style: none;
+                padding: 0.5rem;
+                top: 1.3rem;
+                left: 0;
+                z-index: 10;
+                width: 200px;
+
+                li {
+                    padding: 0.5rem 1rem;
+                    a {
+                        text-decoration: none;
+                        color: #333;
+                    }
+
+                    a:hover {
+                        background-color: #f5f5f5;
+                        color: green;
+                    }
+                }
+            }
+
+            &:hover ul {
+                display: block;
+            }
+        }
+    }
+
+    .stoggle {
+        display: none;
+    }
+
+    .sidemenu {
+        position: fixed;
+        top: 0;
+        right: -250px;
+        width: 250px;
+        height: 100vh;
+        background-color: rgba(0, 0, 0, 0.9);
+        color: #fff;
+        transition: 0.3s;
+        overflow-y: auto;
+        z-index: 1000;
+
+        &.active {
+            right: 0;
+        }
+
+        ul {
+            list-style: none;
+            padding: 1rem;
+
+            li {
+                margin: 1rem 0;
+                a {
+                    text-decoration: none;
+                    color: #fff;
+                }
+                p{
+                    color: rgb(252, 214, 42);
+                }
+
+                &:hover {
+                    text-decoration: underline;
+                }
+
+                img {
+                    height: 20px;
+                    cursor: pointer;
+                }
+            }
+        }
+    }
+
+    @media screen and (max-width: 768px) {
+        .snav {
+            display: none;
+        }
+
+        .stoggle {
+            display: block;
+        }
+    }
+}

@@ -1,0 +1,33 @@
+.procedureContainer {
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    text-align: center;
+  }
+  
+  .procedureList {
+    margin-top: 20px;
+    list-style-type: decimal;
+    padding-left: 20px;
+    border: 1px solid #cac9c9;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.221);
+
+  
+    li {
+      margin-bottom: 15px;
+  
+      h3 {
+        margin: 0;
+        color: #4CAF50; 
+      }
+  
+      p {
+        margin: 5px 0;
+        color: #333; 
+      }
+    }
+  }
+  
