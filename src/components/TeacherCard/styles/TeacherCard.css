@@ -1,0 +1,38 @@
+/* TeachersCarousel.css */
+.teacher-carousel {
+    width: 80%;
+    margin: 0 auto;
+    text-align: center;
+  }
+  
+  .teacher-card {
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    background-color: #fff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease-in-out;
+    margin: 20px;
+  }
+  
+
+  
+  .teacher-card img {
+    width: 100%;
+    height: auto;
+    border-radius: 50%;
+    object-fit: cover;
+  }
+  
+  .teacher-card h3 {
+    margin: 15px 0 10px;
+    font-size: 1.5em;
+    color: #333;
+  }
+  
+  .teacher-card p {
+    margin: 5px 0;
+    color: #555;
+    font-size: 0.9em;
+  }
+  

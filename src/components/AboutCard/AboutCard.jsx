@@ -23,14 +23,16 @@
 import React from 'react';
 import styles from './styles/AboutCard.module.css';
 import Button from '../Core/Button';
+// import { title } from 'framer-motion/client';
 
-const AboutCard = ({ image, description }) => {
+const AboutCard = ({ image, description ,title }) => {
   return (
     <div className={styles.aboutCard}>
       <div className={styles.imgDiv}>
         <img src={image} alt="About" className={styles.aboutCardImage} />
       </div>
       <div className={styles.content}>
+        <h3 style={{ color: "white" }}>{title}</h3>
         <p className={styles.aboutCardDescription}>{description}</p>
         <Button style={{ width: "15%" }}>Learn More</Button>
       </div>

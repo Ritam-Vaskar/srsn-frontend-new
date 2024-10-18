@@ -1,0 +1,56 @@
+/* Add this CSS to style the components */
+.teacher-carousel {
+    width: 95%;
+    margin: 0 auto;
+    text-align: center;
+
+    h2{
+        margin: 40px 0;
+        font-size: 2rem;
+    }
+  }
+  
+  .teacher-card {
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    background-color: #fff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .teacher-card img {
+    width: 100%;
+    height: auto;
+    border-radius: 50%;
+  }
+  
+  .teacher-card h3 {
+    margin: 10px 0;
+    font-size: 1.2em;
+  }
+  
+  .teacher-card p {
+    margin: 5px 0;
+    color: #555;
+  }
+
+  .btn {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #ff6513;
+    color: #fff;
+    font-size: 1rem;
+    font-weight: bolder;
+    text-decoration: none;
+    border-radius: 20px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    cursor: pointer;
+  }
+
+  .btn:hover {
+    background-color: rgb(255, 68, 0);
+    transform: scale(1.05);
+    transition-duration: 0.5s;
+  }
+  

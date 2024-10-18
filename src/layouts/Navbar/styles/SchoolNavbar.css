@@ -1,0 +1,187 @@
+.snavbar {
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin: 0 auto;
+    padding: 0.2rem 0;
+    background-color: #f9f9f9;
+    /* box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); */
+    gap: 2rem;
+    /* background-color: #cdcaca; */
+    padding: 0 0.5rem;
+    /* overflow-x: hidden; */
+}
+
+.schooldetails {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    padding: 0;
+    margin: 0 auto;
+    gap: 1rem;
+    width: 50%;
+}
+
+.sname {
+    width: 15rem;
+    text-align: center;
+}
+
+.sname h3 {
+    color: #2d7f2d;
+    text-shadow: 0.5px 0.5px 0px rgba(0, 0, 0, 0.775);
+    font-size: 1.5rem;
+}
+
+.snav {
+    width: 100%;
+    /* background-color: #cfcdcdcc; */
+    padding: 1rem 0;
+    border-radius: 5px;
+    
+}
+/* .snav:hover{
+    transform: translateY(-1px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    transition: all 0.3s ease;
+} */
+
+.snav ul {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.snav ul li {
+    position: relative;
+    padding: 0.5rem 1rem;
+}
+
+.snav ul li > div {
+    cursor: pointer;
+    color: #333;
+    font-weight: bold;
+}
+
+.snav ul li ul {
+    display: none;
+    position: absolute;
+    width: 10rem;
+    border-radius: 5px;
+    top: 100%;
+    left: 0;
+    background-color: #c5c4c498;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    list-style: none;
+    padding: 0.5rem 0;
+    margin: 0;
+    z-index: 1000;
+}
+
+.snav ul li:hover ul {
+    display: block;
+}
+
+.snav ul li ul li {
+    padding: 0.5rem 1rem;
+}
+
+.snav ul li ul li a {
+    color: #333;
+    text-decoration: none;
+}
+
+.snav ul li ul li a:hover {
+    color: #2d7f2d;
+}
+
+.sashramLink,
+.salumniLink {
+    color: black;
+    text-decoration: none;
+}
+
+.sashramLink:hover,
+.salumniLink:hover {
+    color: green;
+}
+
+.slogin {
+    color: white;
+    background-color: #2d7f2d;
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+    text-decoration: none;
+}
+
+.slogin:hover {
+    background-color: #1f561f;
+}
+
+/* Ensure the menu button is visible on mobile */
+.stoggle {
+    display: none;
+}
+
+.sidemenu {
+    display: none; /* Hidden by default */
+    position: fixed;
+    top: 0;
+    right: 0;
+    height: 100%;
+    width: 50%;
+    background-color: rgba(0, 0, 0, 0.7); /* Semi-transparent background */
+    z-index: 1000;
+    overflow-y: auto;
+    transition: transform 0.3s ease;
+    transform: translateX(100%); /* Hidden off-screen */
+}
+
+/* Show sidebar when 'active' class is added */
+.sidemenu.active {
+    display: block;
+    transform: translateX(0); /* Slide in */
+}
+
+.sidemenu ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    color: #fff;
+}
+
+.sidemenu ul li {
+    padding: 1rem;
+    text-align: center;
+}
+
+.sidemenu ul li img {
+    cursor: pointer;
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    width: 2rem;
+}
+.sidemenu ul li div{
+    color: rgb(255, 153, 0);
+    font-size: x-large;
+    font-weight: bold;
+}
+
+@media (max-width: 1030px) {
+    .snavbar{
+        width: 80%;
+    }
+    .snav {
+        display: none;
+    }
+
+    .stoggle {
+        display: block;
+    }
+}
