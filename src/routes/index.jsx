@@ -15,6 +15,7 @@ import Admission from './../Schoolpages/Admission/Admission';
 import SchoolNavbar from '../layouts/Navbar/SchoolNavbar';
 import SchoolFooter from '../layouts/Footer/Footer';
 import SchoolHome from './../Schoolpages/Home/Home';
+import Alumni from './../Schoolpages/Alumini/Alumini';
 
 
 //School Pages
@@ -51,6 +52,10 @@ const router = createBrowserRouter([
                     {
                         path:'admission',
                         element:<Admission />
+                    },
+                    {
+                        path:'alumni',
+                        element:<Alumni />
                     }
                 ]
             }

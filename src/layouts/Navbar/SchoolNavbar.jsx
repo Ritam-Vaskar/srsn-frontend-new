@@ -1,143 +1,156 @@
-// export default SchoolNavbar;
 import React, { useState, useEffect } from 'react';
 import styles from './styles/SchoolNavbar.module.scss'; // SCSS module import
-import { Link } from 'react-router-dom';
+import { HashLink } from 'react-router-hash-link'; // HashLink for smooth scrolling
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
-import ListIcon from '@mui/icons-material/List';
 import MenuIcon from '@mui/icons-material/Menu';
 import ClearIcon from '@mui/icons-material/Clear';
+import logo from '../../assets/images/Logo.png';
 
 const SchoolNavbar = () => {
     const [isSchool, setIsSchool] = useState(false);
     const [isAdmission, setIsAdmission] = useState(false);
     const [isAcademics, setIsAcademics] = useState(false);
     const [isSidebarOpen, setSidebarOpen] = useState(false);
+    const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
 
+    // Toggle sidebar visibility
     const toggleSideMenu = () => {
         setSidebarOpen(!isSidebarOpen);
     };
 
-    //size check from frontend
+    // Handle resize to enable/disable hover effects on mobile
     const handleResize = () => {
+        setIsMobile(window.innerWidth <= 768);
         if (window.innerWidth > 768) {
-            setSidebarOpen(false);
+            setSidebarOpen(false); // Close sidebar when resizing to desktop
         }
     };
 
+    // Listen for window resizing
     useEffect(() => {
         window.addEventListener('resize', handleResize);
-        handleResize();
         return () => {
             window.removeEventListener('resize', handleResize);
         };
     }, []);
 
+    // Dropdown toggle for mobile
+    const handleDropdownClick = (dropdownSetter, isDropdownOpen) => {
+        if (isMobile) {
+            dropdownSetter(!isDropdownOpen);
+        }
+    };
+
     return (
         <div className={styles.snavbar}>
+            {/* Logo Section */}
             <div className={styles.schooldetails}>
                 <div className={styles.school_logo}>
-                    <img src="./image/09584446-ca46-488d-9ded-7897fb19334c.jpeg" alt="school logo" className={styles.slogo} height={150} />
+                    <img src={logo} alt="school logo" className={styles.slogo} />
                 </div>
                 <div className={styles.sname}>
                     <h3>Sri Ramkrishna Siksha Niketan</h3>
                 </div>
             </div>
 
+            {/* Main Navigation */}
             <div className={styles.snav}>
                 <li
-                    onMouseEnter={() => setIsSchool(true)}
-                    onMouseLeave={() => setIsSchool(false)}
+                    onMouseEnter={() => !isMobile && setIsSchool(true)}
+                    onMouseLeave={() => !isMobile && setIsSchool(false)}
+                    onClick={() => handleDropdownClick(setIsSchool, isSchool)}
                 >
                     <div>
                         <p>The School</p>
                         <ArrowDropDownIcon />
                     </div>
-                    {isSchool && (
+                    {(isSchool || !isMobile) && (
                         <ul className={styles.subOption}>
-                            <li><Link to='/school/home'>Home</Link></li>
-                            <li><Link to='/mission'>Mission and Vision</Link></li>
-                            <li><Link to='/teachers'>Meet Our Teachers</Link></li>
-                            <li><Link to='/gallery'>Gallery</Link></li>
-                            <li><Link to='/contact'>Contact</Link></li>
-                            <li><Link to='/media'>Media</Link></li>
+                            <li><HashLink smooth to='/school/home#holytrio'>Home</HashLink></li>
+                            <li><HashLink smooth to='/school/home#mission'>Mission and Vision</HashLink></li>
+                            <li><HashLink smooth to='/school/home#teachers-carousel'>Meet Our Teachers</HashLink></li>
+                            <li><HashLink smooth to='/school/home#gallery'>Gallery</HashLink></li>
+                            <li><HashLink smooth to='/school/home#contact'>Contact</HashLink></li>
+                            <li><HashLink smooth to='/school/home#school-media'>Media</HashLink></li>
                         </ul>
                     )}
                 </li>
                 <li
-                    onMouseEnter={() => setIsAdmission(true)}
-                    onMouseLeave={() => setIsAdmission(false)}
+                    onMouseEnter={() => !isMobile && setIsAdmission(true)}
+                    onMouseLeave={() => !isMobile && setIsAdmission(false)}
+                    onClick={() => handleDropdownClick(setIsAdmission, isAdmission)}
                 >
                     <div>
                         <p>Admission</p>
                         <ArrowDropDownIcon />
                     </div>
-                    {isAdmission && (
+                    {(isAdmission || !isMobile) && (
                         <ul className={styles.subOption}>
-                            <li><Link to='/school/admission#notice'>Admission Notice 2025</Link></li>
-                            <li><Link to='/school/admission#procedure'>Admission Procedure</Link></li>
-                            <li><Link to='/school/admission#age'>Age Criteria</Link></li>
-                            <li><Link to='/school/admission#instruction'>Admission Instruction</Link></li>
-                            <li><Link to='/school/admission#syllabus'>Syllabus for Assessment Test</Link></li>
+                            <li><HashLink smooth to='/school/admission#notice'>Admission Notice 2025</HashLink></li>
+                            <li><HashLink smooth to='/school/admission#procedure'>Admission Procedure</HashLink></li>
+                            <li><HashLink smooth to='/school/admission#age'>Age Criteria</HashLink></li>
+                            <li><HashLink smooth to='/school/admission#instruction'>Admission Instruction</HashLink></li>
+                            <li><HashLink smooth to='/school/admission#syllabus'>Syllabus for Assessment Test</HashLink></li>
                         </ul>
-
                     )}
                 </li>
                 <li
-                    onMouseEnter={() => setIsAcademics(true)}
-                    onMouseLeave={() => setIsAcademics(false)}
+                    onMouseEnter={() => !isMobile && setIsAcademics(true)}
+                    onMouseLeave={() => !isMobile && setIsAcademics(false)}
+                    onClick={() => handleDropdownClick(setIsAcademics, isAcademics)}
                 >
                     <div>
                         <p>Academic</p>
                         <ArrowDropDownIcon />
                     </div>
-                    {isAcademics && (
+                    {(isAcademics || !isMobile) && (
                         <ul className={styles.subOption}>
-                            <li><Link to='/result'>Result Analysis</Link></li>
+                            <li><HashLink smooth to='/result'>Result Analysis</HashLink></li>
                             <li><a href="#">Syllabus</a></li>
                             <li><a href="#">Book List</a></li>
-                            <li><Link to='/classroutine'>Class Routine</Link></li>
-                            <li><Link to='/notice'>Notice Board</Link></li>
+                            <li><HashLink smooth to='/classroutine'>Class Routine</HashLink></li>
+                            <li><HashLink smooth to='/notice'>Notice Board</HashLink></li>
                             <li><a href="#">Holiday Notice</a></li>
                         </ul>
                     )}
                 </li>
-                <li><Link to='/alumni' className={styles.salumniLink}>Alumni</Link></li>
-                <li><Link to='/ashram' style={{ color: 'orangered', fontWeight: 'bold', textDecoration: 'none' }}>Ashram Page</Link></li>
-                <li><Link to='/login' className={styles.slogin}>Login</Link></li>
+                <li><HashLink smooth to='/school/alumni' className={styles.salumniLink}>Alumni</HashLink></li>
+                <li><HashLink smooth to='/ashram' style={{ color: 'orangered', fontWeight: 'bold', textDecoration: 'none' }}>Ashram Page</HashLink></li>
+                <li><HashLink smooth to='/login' className={styles.slogin}>Login</HashLink></li>
             </div>
 
+            {/* Sidebar Toggle for Mobile */}
             <button type='button' className={styles.stoggle} onClick={toggleSideMenu}>
-                <MenuIcon className={styles.smenu} style={{ cursor: 'pointer' }} />
+                {isSidebarOpen ? <ClearIcon className={styles.smenu} /> : <MenuIcon className={styles.smenu} />}
             </button>
 
+            {/* Sidebar Menu */}
             <div className={`${styles.sidemenu} ${isSidebarOpen ? styles.active : ''}`}>
                 <ul>
-                    <li><ClearIcon onClick={toggleSideMenu} style={{ cursor: 'pointer', color: 'red' }} /></li>
+                    <li onClick={toggleSideMenu}><ClearIcon style={{ cursor: 'pointer', color: 'red' }} /></li>
                     <li><p>The School</p></li>
-                    <li><Link to='/' onClick={toggleSideMenu}>Home</Link></li>
-                    <li><Link to='/mission' onClick={toggleSideMenu}>Mission and Vision</Link></li>
-                    <li><Link to='/teachers' onClick={toggleSideMenu}>Meet Our Teachers</Link></li>
-                    <li><Link to='/gallery' onClick={toggleSideMenu}>Gallery</Link></li>
-                    <li><Link to='/contact' onClick={toggleSideMenu}>Contact</Link></li>
-                    <li><Link to='/media' onClick={toggleSideMenu}>Media</Link></li>
-
+                    <li><HashLink smooth to='/school/home#holytrio' onClick={toggleSideMenu}>Home</HashLink></li>
+                    <li><HashLink smooth to='/school/home#mission' onClick={toggleSideMenu}>Mission and Vision</HashLink></li>
+                    <li><HashLink smooth to='/school/home#teachers-carousel' onClick={toggleSideMenu}>Meet Our Teachers</HashLink></li>
+                    <li><HashLink smooth to='/school/home#gallery' onClick={toggleSideMenu}>Gallery</HashLink></li>
+                    <li><HashLink smooth to='/school/home#contact' onClick={toggleSideMenu}>Contact</HashLink></li>
+                    <li><HashLink smooth to='/school/home#school-media' onClick={toggleSideMenu}>Media</HashLink></li>
                     <li><p>Admission</p></li>
-                    <li><Link to='/school/admission' onClick={toggleSideMenu}>Admission Notice 2025</Link></li>
-                    <li><Link to='/admissionprocedure' onClick={toggleSideMenu}>Admission Procedure</Link></li>
-                    <li><Link to='/admissionage' onClick={toggleSideMenu}>Age criteria</Link></li>
-                    <li><Link to='/admissioninstruction' onClick={toggleSideMenu}>Admission Instruction</Link></li>
-                    <li><Link to='/admissionsyllabus' onClick={toggleSideMenu}>Syllabus for Assessment Test</Link></li>
-
+                    <li><HashLink smooth to='/school/admission#notice' onClick={toggleSideMenu}>Admission Notice 2025</HashLink></li>
+                    <li><HashLink smooth to='/school/admission#procedure' onClick={toggleSideMenu}>Admission Procedure</HashLink></li>
+                    <li><HashLink smooth to='/school/admission#age' onClick={toggleSideMenu}>Age Criteria</HashLink></li>
+                    <li><HashLink smooth to='/school/admission#instruction' onClick={toggleSideMenu}>Admission Instruction</HashLink></li>
+                    <li><HashLink smooth to='/school/admission#syllabus' onClick={toggleSideMenu}>Syllabus for Assessment Test</HashLink></li>
                     <li><p>Academic</p></li>
-                    <li><Link to='/result' onClick={toggleSideMenu}>Result Analysis</Link></li>
+                    <li><HashLink smooth to='/result' onClick={toggleSideMenu}>Result Analysis</HashLink></li>
                     <li><a href="#" onClick={toggleSideMenu}>Syllabus</a></li>
                     <li><a href="#" onClick={toggleSideMenu}>Book List</a></li>
-                    <li><Link to='/classroutine' onClick={toggleSideMenu}>Class Routine</Link></li>
-                    <li><Link to='/notice' onClick={toggleSideMenu}>Notice Board</Link></li>
+                    <li><HashLink smooth to='/classroutine' onClick={toggleSideMenu}>Class Routine</HashLink></li>
+                    <li><HashLink smooth to='/notice' onClick={toggleSideMenu}>Notice Board</HashLink></li>
                     <li><a href="#" onClick={toggleSideMenu}>Holiday Notice</a></li>
-                    <li><Link to='/RamkrishnaSevaSangha' onClick={toggleSideMenu} style={{ color: 'rgb(255, 153, 0)', fontSize: 'large', fontWeight: 'bolder' }}>Ashram</Link></li>
-                    <li><Link to='/alumni' onClick={toggleSideMenu} style={{ color: 'rgb(255, 153, 0)', fontSize: 'large', fontWeight: 'bolder' }}>Alumni</Link></li>
-                    <li><Link to='/login' onClick={toggleSideMenu} style={{ color: 'rgb(255, 153, 0)', fontSize: 'large', fontWeight: 'bolder' }}>Login</Link></li>
+                    <li><HashLink smooth to='/RamkrishnaSevaSangha' onClick={toggleSideMenu} style={{ color: 'rgb(255, 153, 0)', fontSize: 'large', fontWeight: 'bolder' }}>Ashram</HashLink></li>
+                    <li><HashLink smooth to='/alumni' onClick={toggleSideMenu} style={{ color: 'rgb(255, 153, 0)', fontSize: 'large', fontWeight: 'bolder' }}>Alumni</HashLink></li>
+                    <li><HashLink smooth to='/login' onClick={toggleSideMenu} style={{ color: 'rgb(255, 153, 0)', fontSize: 'large', fontWeight: 'bolder' }}>Login</HashLink></li>
                 </ul>
             </div>
         </div>
