@@ -1,12 +1,26 @@
-import React, { useState } from 'react';
-import syllabusData from './../../../../public/Syllabus.json';
+import React, { useState, useEffect } from 'react';
+import SyllabusPrimary from './../../../../public/SyllabusPrimary.json';
+import SyllabusSecondary from './../../../../public/SyllabusSecondary.json';
 import styles from './Syllabus.module.scss';
 
-const Syllabus = () => {
-    const [selectedClass, setSelectedClass] = useState('ankur');
+const Syllabus = ({ flag }) => {
+    const [syllabusData, setSyllabusData] = useState(flag ? SyllabusPrimary : SyllabusSecondary);
+    const [selectedClass, setSelectedClass] = useState(flag ? 'ankur' : 'class5');
+
+    useEffect(() => {
+        setSyllabusData(flag ? SyllabusPrimary : SyllabusSecondary);
+        setSelectedClass(flag ? 'ankur' : 'class5');
+    }, [flag]);
 
     const handleClassClick = (className) => {
         setSelectedClass(className);
+    };
+
+    const formatClassName = (className) => {
+        if (className.startsWith('class')) {
+            return className.replace('class', 'Class ') + '';
+        }
+        return className.charAt(0).toUpperCase() + className.slice(1);
     };
 
     return (
@@ -19,13 +33,13 @@ const Syllabus = () => {
                         className={`${styles.classButton} ${selectedClass === className ? styles.selected : ''}`}
                         onClick={() => handleClassClick(className)}
                     >
-                        {className.charAt(0).toUpperCase() + className.slice(1)}
+                        {formatClassName(className)}
                     </button>
                 ))}
             </div>
-            {selectedClass && (
+            {selectedClass && syllabusData[selectedClass] && (
                 <div className={styles.syllabusDetails}>
-                    <h3>Syllabus for {selectedClass.charAt(0).toUpperCase() + selectedClass.slice(1)}</h3>
+                    <h3>Syllabus for {formatClassName(selectedClass)}</h3>
                     <ul>
                         {syllabusData[selectedClass].map((subject, index) => (
                             <li key={index}>{subject}</li>

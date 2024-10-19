@@ -3,6 +3,9 @@ import AdmissionNotice from '../../sections/Admission/AdmissionNotice/AdmissionN
 import AgeCriteria from '../../sections/Admission/AgeCriteria/AgeCriteria';
 import Procedure from '../../sections/Admission/Procedure/Procedure';
 import Syllabus from '../../sections/Admission/Syllabus/Syllabus';
+import styles from './Admission.module.scss';
+
+
 
 const Admission = () => {
   return (
