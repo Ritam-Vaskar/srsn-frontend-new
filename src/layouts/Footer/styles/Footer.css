@@ -236,7 +236,7 @@
   
   @media screen and (max-width:1080px) {
     .footer-container{
-      margin-top: 3rem;
+      margin-top: 0.5rem;
     }
     .footer{
         text-align: center;
