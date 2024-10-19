@@ -10,6 +10,7 @@
     background-position: center;
     position: relative;
     height: 20rem;
+    overflow-x: hidden;
 }
 
 .top_container {
@@ -21,7 +22,7 @@
     align-items: center;
     color: white;
     background-color: rgba(0, 32, 91, 0.82);
-    
+    padding: 1rem;
     text-align: center;
     gap: 1.5rem;
 }
@@ -49,8 +50,8 @@
 
 .top_social-links li a {
     position: relative;
-    width: 60px;
-    height: 60px;
+    width: 3rem;
+    height: 3rem;
     display: block;
     text-align: center;
     margin: 0 10px;
