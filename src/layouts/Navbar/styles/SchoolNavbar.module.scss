@@ -1,0 +1,192 @@
+.snavbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #f0f0f0;
+    padding: 1rem;
+    position: relative;
+    // overflow-x: hidden;
+    margin: 0 auto;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+
+    .schooldetails {
+        display: flex;
+        align-items: center;
+
+        .school_logo {
+            img {
+                height: 70px;
+            }
+        }
+
+        .sname {
+            margin-left: 1rem;
+
+            h3 {
+                font-size: 1.5rem;
+                color: #333;
+            }
+        }
+    }
+
+    .snav {
+        display: flex;
+        align-items: center;
+        list-style: none;
+
+        li {
+            position: relative;
+            margin: 0 1rem;
+            cursor: pointer;
+            color: #333;
+            font-weight: bold;
+
+            &:hover {
+                color: orangered;
+            }
+
+            div {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                gap: 0.5rem;
+            }
+
+            ul {
+                display: none;
+                position: absolute;
+                background-color: #fff;
+                box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+                list-style: none;
+                padding: 0.5rem;
+                top: 1.3rem;
+                left: 0;
+                z-index: 10;
+                width: 200px;
+
+                li {
+                    padding: 0.5rem 1rem;
+
+                    a {
+                        text-decoration: none;
+                        color: #333;
+                    }
+
+                    a:hover {
+                        background-color: #f5f5f5;
+                        color: green;
+                    }
+                }
+            }
+
+            &:hover ul {
+                display: block;
+            }
+        }
+    }
+
+    .stoggle {
+        display: none;
+    }
+
+    .sidemenu {
+        position: fixed;
+        top: 0;
+        right: -500px;
+        width: 250px;
+        height: 100vh;
+        background-color: rgba(0, 0, 0, 0.9);
+        color: #fff;
+        transition: 0.3s;
+        overflow-y: auto;
+        z-index: 1000;
+        display: none;
+
+        &.active {
+            right: 0;
+            display: block;
+        }
+
+        ul {
+            list-style: none;
+            padding: 1rem;
+
+            li {
+                margin: 1rem 0;
+
+                a {
+                    text-decoration: none;
+                    color: #fff;
+                }
+
+                p {
+                    color: rgb(252, 214, 42);
+                }
+
+                &:hover {
+                    text-decoration: underline;
+                }
+
+                img {
+                    height: 20px;
+                    cursor: pointer;
+                }
+            }
+        }
+    }
+
+    .slogin {
+        color: #fff;
+        background-color: #fd4705;
+        padding: 10px 15px;
+        border-radius: 10px;
+        transition: background-color 0.3s;
+        text-decoration: none;
+    }
+
+    .slogin:hover {
+        background-color: #fd6c05;
+    }
+
+    .salumniLink {
+        text-decoration: none;
+        color: #333;
+    }
+
+    .salumniLink:hover {
+        color: #ff4500;
+    }
+
+    .ashramPage {
+        span {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            text-align: center;
+            color: #ff4500;
+            font-weight: 800;
+            text-decoration: none;
+            border: 1.5px solid #ff4500;
+            padding: 10px 15px;
+            border-radius: 10px;
+            transition: 0.3s background-color;
+        }
+
+    }
+
+    .ashramPage:hover {
+        background-color: #fd6c05;
+        color: #fff;
+    }
+
+    @media screen and (max-width: 950px) {
+        .snav {
+            display: none;
+        }
+
+        .stoggle {
+            display: block;
+        }
+    }
+}

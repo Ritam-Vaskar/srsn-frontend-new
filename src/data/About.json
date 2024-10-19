@@ -1,13 +1,16 @@
 [
   {
+    "title": "About us",
     "image": "https://via.placeholder.com/100", 
     "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin scelerisque, lorem ut porttitor pharetra, tortor lorem fringilla nunc, vel lacinia odio nulla sit amet elit. Fusce a malesuada arcu, eget tempor purus. Integer mollis nisl eget urna lobortis, a feugiat odio ultricies. Suspendisse potenti. Morbi feugiat libero at odio sagittis, nec efficitur dui scelerisque. Aenean egestas mollis tellus non laoreet. Aliquam erat volutpat."
   },
   {
+    "title": "About us",
     "image": "https://via.placeholder.com/100",
     "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam eget nulla at risus ullamcorper interdum. Phasellus ut nisl velit. Nulla facilisi. Duis varius consectetur dapibus. Nulla facilisi. Etiam scelerisque erat nec diam suscipit, nec dapibus purus vehicula. Curabitur viverra sit amet nunc at dictum. In at lacus vitae lectus dapibus tincidunt sit amet vitae quam."
   },
   {
+    "title": "About us",
     "image": "https://via.placeholder.com/100",
     "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus sodales augue quis dui fermentum, vitae lobortis lacus pulvinar. Nullam sagittis ipsum non orci varius, at viverra lorem convallis. Vestibulum aliquet arcu ut arcu laoreet tincidunt. Integer posuere sem vitae est suscipit, sit amet gravida nulla rhoncus. Aenean luctus ex eu tellus volutpat, a scelerisque arcu suscipit. Mauris imperdiet ex sed efficitur tincidunt. Pellentesque in nulla tortor."
   }

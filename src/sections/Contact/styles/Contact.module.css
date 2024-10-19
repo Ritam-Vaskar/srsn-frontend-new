@@ -1,0 +1,138 @@
+.contactContainer {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 50px;
+  background-color: #f9f9f9;
+}
+
+.contactLeft {
+  width: 40%;
+  padding-right: 30px;
+  text-align: left;
+}
+
+.logo {
+  max-width: 200px;
+  margin-bottom: 20px;
+}
+
+.contactLeft h2 {
+  font-size: 24px;
+  margin-bottom: 15px;
+  color: #333;
+}
+
+.contactLeft p {
+  font-size: 18px;
+  color: #666;
+  margin: 5px 0;
+}
+
+.contactRight {
+  width: 50%;
+  background-color: #fff;
+  padding: 30px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.contactRight h2 {
+  font-size: 24px;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+.contactForm {
+  display: flex;
+  flex-direction: column;
+}
+
+.contactForm input,
+.contactForm textarea {
+  margin-bottom: 15px;
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.contactForm button {
+  padding: 12px 20px;
+  font-size: 18px;
+  color: #fff;
+  background-color: #ff8c19;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.contactForm button:hover {
+  background-color: #ff5e19;
+}
+
+@media (max-width: 768px) {
+  .contactContainer {
+      flex-direction: column;
+      padding: 20px;
+  }
+
+  .contactLeft, .contactRight {
+      width: 100%;
+      padding-right: 0;
+      margin-bottom: 20px;
+  }
+
+  .contactLeft {
+      text-align: center;
+  }
+
+  .logo {
+      max-width: 150px;
+      margin-bottom: 10px;
+  }
+
+  .contactRight {
+      padding: 20px;
+  }
+
+  .contactLeft h2, .contactRight h2 {
+      font-size: 20px;
+  }
+
+  .contactLeft p {
+      font-size: 16px;
+  }
+
+  .contactForm input,
+  .contactForm textarea {
+      font-size: 14px;
+  }
+
+  .contactForm button {
+      font-size: 16px;
+  }
+}
+
+.error {
+  color: red;
+  font-size: 14px;
+  margin-top: -10px;
+  margin-bottom: 10px;
+}
+
+.submitButton {
+  padding: 12px 20px;
+  font-size: 18px;
+  color: #fff;
+  background-color: #ff8c19;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.submitButton:hover {
+  background-color: #ff5e19;
+}
