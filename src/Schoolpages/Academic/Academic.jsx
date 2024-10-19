@@ -14,33 +14,39 @@ const Academic = () => {
 
         <div className={styles.academicContainer}>
 
-            <div className={styles.toggleButtons}>
-                <p
-                    className={isPrimary ? styles.selected : ''}
-                    onClick={() => setIsPrimary(true)}
-                >
-                    Primary School
-                </p>
-                <p
-                    className={!isPrimary ? styles.selected : ''}
-                    onClick={() => setIsPrimary(false)}
-                >
-                    Secondary School
-                </p>
+            <div className={styles.btncon}>
+                <h3>Welcome to Academic Details Page</h3>
+
+                {/* Toggle buttons for Primary and Secondary School */}
+                <div className={styles.toggleButtons}>
+                    <p
+                        className={isPrimary ? styles.selected : ''}
+                        onClick={() => setIsPrimary(true)}
+                    >
+                        Primary School
+                    </p>
+                    <p
+                        className={!isPrimary ? styles.selected : ''}
+                        onClick={() => setIsPrimary(false)}
+                    >
+                        Secondary School
+                    </p>
+                </div>
             </div>
+
 
             <div className={styles.section}>
                 <section id='result'>
                     <Result />
                 </section>
                 <section id='syllabus'>
-                    <Syllabus flag={isPrimary}/>
+                    <Syllabus flag={isPrimary} />
                 </section>
                 <section id='booklist'>
-                    <BookList flag={isPrimary}/>
+                    <BookList flag={isPrimary} />
                 </section>
                 <section id='routine'>
-                    <Routine flag={isPrimary}/>
+                    <Routine flag={isPrimary} />
                 </section>
                 <section id='holiday'>
                     <HolidayNotice />

@@ -9,13 +9,14 @@
   
   .admissionImg {
     width: 100%;
-    height: 100%;
+    height: 90%;
     aspect-ratio: 28/9;
   }
   .admissionOverlay{
-    height: 7vh;
+    // margin-top: 1rem;
+    height: 8vh;
     width: 100%;
-    background-color: #ff5400;
+    background-color:#ff5400;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -23,7 +24,7 @@
   
   .admissionSlider {
     position: absolute;
-    bottom: -2px; 
+    bottom: -5px; 
     width: 100%;
     white-space: nowrap; 
     animation: slide 10s linear infinite; 
@@ -37,12 +38,16 @@
     display: inline-block;
     padding: 10px 0;
     font-size: 1.5rem; 
-    background-color: rgb(0, 0, 0); 
+    // background-color: rgb(0, 0, 0);
+    font-weight: 800;
+    
     a{
-        color: white;
+      color: rgb(255, 255, 255);
     }
     a:hover{
-        color: rgb(239, 185, 22);
+        // color:rgb(142, 189, 208);
+        color:darkseagreen;
+        background-color: black;
     }
   }
   

@@ -12,23 +12,23 @@ const Admission = () => {
   return (
     <div className={styles.admissionContainer}>
       <div className={styles.btncon}>
-      <h3>Welcome to Admission Details Portal</h3>
+        <h3>Welcome to Admission Details Portal</h3>
 
-      {/* Toggle buttons for Primary and Secondary School */}
-      <div className={styles.toggleButtons}>
-        <p
-          className={isPrimary ? styles.selected : ''}
-          onClick={() => setIsPrimary(true)}
-        >
-          Primary School
-        </p>
-        <p
-          className={!isPrimary ? styles.selected : ''}
-          onClick={() => setIsPrimary(false)}
-        >
-          Secondary School
-        </p>
-      </div>
+        {/* Toggle buttons for Primary and Secondary School */}
+        <div className={styles.toggleButtons}>
+          <p
+            className={isPrimary ? styles.selected : ''}
+            onClick={() => setIsPrimary(true)}
+          >
+            Primary School
+          </p>
+          <p
+            className={!isPrimary ? styles.selected : ''}
+            onClick={() => setIsPrimary(false)}
+          >
+            Secondary School
+          </p>
+        </div>
       </div>
 
 

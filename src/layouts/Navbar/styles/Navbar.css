@@ -83,6 +83,7 @@
     height: 3rem;
     background-color: var(--ashram-border);
     display: none;
+    position:sticky;
 }
 
 .links {

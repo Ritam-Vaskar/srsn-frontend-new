@@ -1,5 +1,6 @@
 import { createBrowserRouter } from 'react-router-dom';
 import App from '../App';
+import Headroom from "react-headroom";
 
 //Ashram Pages
 import Ashram from '../Ashram';
@@ -31,7 +32,9 @@ const router = createBrowserRouter([
             {
                 index: true,
                 element: <>
-                    <SchoolNavbar />
+                    <Headroom>
+                        <SchoolNavbar />
+                    </Headroom>
                     <SchoolHome />
                     <SchoolFooter />
                 </>
@@ -51,16 +54,16 @@ const router = createBrowserRouter([
                         element: <SchoolHome />
                     },
                     {
-                        path:'admission',
-                        element:<Admission />
+                        path: 'admission',
+                        element: <Admission />
                     },
                     {
-                        path:'academic',
-                        element:<Academic />
+                        path: 'academic',
+                        element: <Academic />
                     },
                     {
-                        path:'alumni',
-                        element:<Alumni />
+                        path: 'alumni',
+                        element: <Alumni />
                     }
                 ]
             }

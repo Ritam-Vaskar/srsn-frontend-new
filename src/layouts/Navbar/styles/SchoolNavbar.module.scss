@@ -1,4 +1,3 @@
-
 .snavbar {
     display: flex;
     justify-content: space-between;
@@ -6,6 +5,9 @@
     background-color: #f0f0f0;
     padding: 1rem;
     position: relative;
+    // overflow-x: hidden;
+    margin: 0 auto;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
 
     .schooldetails {
         display: flex;
@@ -13,12 +15,13 @@
 
         .school_logo {
             img {
-                height: 50px;
+                height: 70px;
             }
         }
 
         .sname {
             margin-left: 1rem;
+
             h3 {
                 font-size: 1.5rem;
                 color: #333;
@@ -41,7 +44,8 @@
             &:hover {
                 color: orangered;
             }
-            div{
+
+            div {
                 display: flex;
                 align-items: center;
                 justify-content: center;
@@ -62,6 +66,7 @@
 
                 li {
                     padding: 0.5rem 1rem;
+
                     a {
                         text-decoration: none;
                         color: #333;
@@ -87,7 +92,7 @@
     .sidemenu {
         position: fixed;
         top: 0;
-        right: -250px;
+        right: -500px;
         width: 250px;
         height: 100vh;
         background-color: rgba(0, 0, 0, 0.9);
@@ -95,9 +100,11 @@
         transition: 0.3s;
         overflow-y: auto;
         z-index: 1000;
+        display: none;
 
         &.active {
             right: 0;
+            display: block;
         }
 
         ul {
@@ -106,11 +113,13 @@
 
             li {
                 margin: 1rem 0;
+
                 a {
                     text-decoration: none;
                     color: #fff;
                 }
-                p{
+
+                p {
                     color: rgb(252, 214, 42);
                 }
 
@@ -126,7 +135,7 @@
         }
     }
 
-    .slogin{
+    .slogin {
         color: #fff;
         background-color: #fd4705;
         padding: 10px 15px;
@@ -135,34 +144,43 @@
         text-decoration: none;
     }
 
-    .slogin:hover{
+    .slogin:hover {
         background-color: #fd6c05;
     }
 
-    .salumniLink{
+    .salumniLink {
         text-decoration: none;
         color: #333;
     }
-    .salumniLink:hover{
+
+    .salumniLink:hover {
         color: #ff4500;
     }
 
-    .ashramPage{
-        color: #ff4500;
-        font-weight: 800;
-        text-decoration: none;
-        border: 1.5px solid #ff4500;
-        padding: 10px 15px;
-        border-radius: 10px;
-        transition: 0.3s background-color;
+    .ashramPage {
+        span {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            text-align: center;
+            color: #ff4500;
+            font-weight: 800;
+            text-decoration: none;
+            border: 1.5px solid #ff4500;
+            padding: 10px 15px;
+            border-radius: 10px;
+            transition: 0.3s background-color;
+        }
+
     }
 
-    .ashramPage:hover{
+    .ashramPage:hover {
         background-color: #fd6c05;
         color: #fff;
     }
 
-    @media screen and (max-width: 768px) {
+    @media screen and (max-width: 950px) {
         .snav {
             display: none;
         }
