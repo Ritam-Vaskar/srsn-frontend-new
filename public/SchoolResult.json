@@ -1,0 +1,127 @@
+{
+    "BrittiClass4Exam": {
+      "2024": [
+        {
+          "name": "John Doe",
+          "marks": 88,
+          "gradeDivision": "A"
+        },
+        {
+          "name": "Jane Smith",
+          "marks": 92,
+          "gradeDivision": "A"
+        }
+      ],
+      "2023": [
+        {
+          "name": "Alice Johnson",
+          "marks": 75,
+          "gradeDivision": "B"
+        },
+        {
+          "name": "Bob Williams",
+          "marks": 82,
+          "gradeDivision": "A"
+        }
+      ],
+      "2022": [
+        {
+          "name": "Chris Evans",
+          "marks": 84,
+          "gradeDivision": "A"
+        },
+        {
+          "name": "Emma Watson",
+          "marks": 89,
+          "gradeDivision": "A"
+        }
+      ],
+      "2021": [
+        {
+          "name": "James Bond",
+          "marks": 78,
+          "gradeDivision": "B"
+        },
+        {
+          "name": "Lara Croft",
+          "marks": 91,
+          "gradeDivision": "A"
+        }
+      ],
+      "2020": [
+        {
+          "name": "Tony Stark",
+          "marks": 85,
+          "gradeDivision": "A"
+        },
+        {
+          "name": "Bruce Wayne",
+          "marks": 90,
+          "gradeDivision": "A"
+        }
+      ]
+    },
+    "MadhyamikClass10Exam": {
+      "2024": [
+        {
+          "name": "Steve Rogers",
+          "marks": 87,
+          "gradeDivision": "A"
+        },
+        {
+          "name": "Natasha Romanoff",
+          "marks": 90,
+          "gradeDivision": "A"
+        }
+      ],
+      "2023": [
+        {
+          "name": "Clark Kent",
+          "marks": 78,
+          "gradeDivision": "B"
+        },
+        {
+          "name": "Diana Prince",
+          "marks": 93,
+          "gradeDivision": "A"
+        }
+      ],
+      "2022": [
+        {
+          "name": "Peter Parker",
+          "marks": 80,
+          "gradeDivision": "B"
+        },
+        {
+          "name": "Wanda Maximoff",
+          "marks": 85,
+          "gradeDivision": "A"
+        }
+      ],
+      "2021": [
+        {
+          "name": "Bruce Banner",
+          "marks": 88,
+          "gradeDivision": "A"
+        },
+        {
+          "name": "Thor Odinson",
+          "marks": 91,
+          "gradeDivision": "A"
+        }
+      ],
+      "2020": [
+        {
+          "name": "Scott Lang",
+          "marks": 79,
+          "gradeDivision": "B"
+        },
+        {
+          "name": "Hope van Dyne",
+          "marks": 92,
+          "gradeDivision": "A"
+        }
+      ]
+    }
+  }
+  

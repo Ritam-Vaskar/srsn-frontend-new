@@ -5,6 +5,7 @@ import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 import MenuIcon from '@mui/icons-material/Menu';
 import ClearIcon from '@mui/icons-material/Clear';
 import logo from '../../assets/images/Logo.png';
+import { Link } from 'react-router-dom';
 
 const SchoolNavbar = () => {
     const [isSchool, setIsSchool] = useState(false);
@@ -13,16 +14,14 @@ const SchoolNavbar = () => {
     const [isSidebarOpen, setSidebarOpen] = useState(false);
     const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
 
-    // Toggle sidebar visibility
     const toggleSideMenu = () => {
         setSidebarOpen(!isSidebarOpen);
     };
 
-    // Handle resize to enable/disable hover effects on mobile
     const handleResize = () => {
         setIsMobile(window.innerWidth <= 768);
         if (window.innerWidth > 768) {
-            setSidebarOpen(false); // Close sidebar when resizing to desktop
+            setSidebarOpen(false); 
         }
     };
 
@@ -66,7 +65,7 @@ const SchoolNavbar = () => {
                     </div>
                     {(isSchool || !isMobile) && (
                         <ul className={styles.subOption}>
-                            <li><HashLink smooth to='/school/home#holytrio'>Home</HashLink></li>
+                            <li><HashLink smooth to='/school/home'>Home</HashLink></li>
                             <li><HashLink smooth to='/school/home#mission'>Mission and Vision</HashLink></li>
                             <li><HashLink smooth to='/school/home#teachers-carousel'>Meet Our Teachers</HashLink></li>
                             <li><HashLink smooth to='/school/home#gallery'>Gallery</HashLink></li>
@@ -86,10 +85,11 @@ const SchoolNavbar = () => {
                     </div>
                     {(isAdmission || !isMobile) && (
                         <ul className={styles.subOption}>
+                            <li><Link to='/school/admission'>Admission</Link></li>
                             <li><HashLink smooth to='/school/admission#notice'>Admission Notice 2025</HashLink></li>
                             <li><HashLink smooth to='/school/admission#procedure'>Admission Procedure</HashLink></li>
                             <li><HashLink smooth to='/school/admission#age'>Age Criteria</HashLink></li>
-                            <li><HashLink smooth to='/school/admission#instruction'>Admission Instruction</HashLink></li>
+                            {/* <li><HashLink smooth to='/school/admission#instruction'>Admission Instruction</HashLink></li> */}
                             <li><HashLink smooth to='/school/admission#syllabus'>Syllabus for Assessment Test</HashLink></li>
                         </ul>
                     )}
@@ -105,12 +105,13 @@ const SchoolNavbar = () => {
                     </div>
                     {(isAcademics || !isMobile) && (
                         <ul className={styles.subOption}>
-                            <li><HashLink smooth to='/result'>Result Analysis</HashLink></li>
-                            <li><a href="#">Syllabus</a></li>
-                            <li><a href="#">Book List</a></li>
-                            <li><HashLink smooth to='/classroutine'>Class Routine</HashLink></li>
+                            <li><HashLink smooth to='/school/academic#result'>Result Analysis</HashLink></li>
+                            <li><HashLink smooth to='/school/academic#syllabus'>Syllabus</HashLink></li>
+                            <li><HashLink smooth to='/school/academic#booklist'>Book List</HashLink></li>
+
+                            <li><HashLink smooth to='/school/academic#routine'>Class Routine</HashLink></li>
                             <li><HashLink smooth to='/notice'>Notice Board</HashLink></li>
-                            <li><a href="#">Holiday Notice</a></li>
+                            <li><HashLink smooth to='/school/academic#holiday'>Holiday</HashLink></li>
                         </ul>
                     )}
                 </li>

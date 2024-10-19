@@ -8,16 +8,6 @@ import styles from './Admission.module.scss';
 const Admission = () => {
   const [isPrimary, setIsPrimary] = useState(true);
 
-  // Refs for sections
-  const noticeRef = useRef(null);
-  const ageRef = useRef(null);
-  const procedureRef = useRef(null);
-  const syllabusRef = useRef(null);
-
-  // Function to scroll to a particular section
-  const handleScroll = (sectionRef) => {
-    sectionRef.current.scrollIntoView({ behavior: 'smooth' });
-  };
 
   return (
     <div className={styles.admissionContainer}>
@@ -42,16 +32,16 @@ const Admission = () => {
 
       {/* Sections */}
       <div className={styles.sections}>
-        <section id="notice" ref={noticeRef}>
+        <section id="notice">
           <AdmissionNotice flag={isPrimary} />
         </section>
-        <section id="age" ref={ageRef}>
+        <section id="age">
           <AgeCriteria flag={isPrimary} />
         </section>
-        <section id="procedure" ref={procedureRef}>
+        <section id="procedure">
           <Procedure />
         </section>
-        <section id="syllabus" ref={syllabusRef}>
+        <section id="syllabus">
           <Syllabus flag={isPrimary} />
         </section>
       </div>

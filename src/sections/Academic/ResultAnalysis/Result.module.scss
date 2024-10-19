@@ -1,0 +1,74 @@
+.resultContainer {
+    // width: 100vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 20px;
+    
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+    // width: 60%;
+    width: 90vw;
+    margin: 2rem auto;
+    gap: 1rem;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.4);
+    margin-bottom: 40px;
+  }
+  
+  .yearContainer {
+    display: flex;
+    gap: 10px;
+    margin: 10px 0;
+  }
+  
+  .yearDiv {
+    padding: 10px;
+    border: 1px solid #007bff;
+    border-radius: 5px;
+    cursor: pointer;
+    background-color: #e0f7fa;
+    transition: background-color 0.3s;
+  }
+  
+  .yearDiv:hover {
+    // background-color: #2f83dd;
+    background-color: black;
+    color: white;
+    border-color: white;
+    outline: 1px solid black;
+  }
+  
+  .selectedYear {
+    background-color:#4CAF50; 
+    color: white; 
+    border-color: #2b6c2d; 
+  }
+  
+  .resultsTable {
+    margin-top: 10px;
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  .resultsTable th, .resultsTable td {
+    border: 1px solid #ccc;
+    padding: 8px;
+    text-align: left;
+    width: 33.34%;
+  }
+  
+  .resultsTable th {
+    background-color: #4CAF50;
+    color: white;
+  }
+  
+//   .resultsTable tr:nth-child(even) {
+//     background-color: #cdcccc;
+//   }
+  
+//   .resultsTable tr:hover {
+//     background-color: #e0f7fa; 
+//   }
+  

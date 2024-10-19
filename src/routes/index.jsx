@@ -12,14 +12,15 @@ import Contact from './../Ashrampages/Contact/Contact';
 import Donate from './../Ashrampages/Donate/Donate';
 import Admission from './../Schoolpages/Admission/Admission';
 
+
+//School Pages
+import School from '../School';
 import SchoolNavbar from '../layouts/Navbar/SchoolNavbar';
 import SchoolFooter from '../layouts/Footer/Footer';
 import SchoolHome from './../Schoolpages/Home/Home';
 import Alumni from './../Schoolpages/Alumini/Alumini';
+import Academic from '../Schoolpages/Academic/Academic';
 
-
-//School Pages
-import School from '../School';
 
 
 const router = createBrowserRouter([
@@ -52,6 +53,10 @@ const router = createBrowserRouter([
                     {
                         path:'admission',
                         element:<Admission />
+                    },
+                    {
+                        path:'academic',
+                        element:<Academic />
                     },
                     {
                         path:'alumni',
