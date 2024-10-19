@@ -12,7 +12,7 @@ const SchoolNavbar = () => {
     const [isAdmission, setIsAdmission] = useState(false);
     const [isAcademics, setIsAcademics] = useState(false);
     const [isSidebarOpen, setSidebarOpen] = useState(false);
-    const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
+    const [isMobile, setIsMobile] = useState(window.innerWidth <= 950);
 
     const toggleSideMenu = () => {
         setSidebarOpen(!isSidebarOpen);
@@ -21,11 +21,20 @@ const SchoolNavbar = () => {
     const handleResize = () => {
         setIsMobile(window.innerWidth <= 768);
         if (window.innerWidth > 768) {
-            setSidebarOpen(false); 
+            setSidebarOpen(false);
         }
     };
 
-    // Listen for window resizing
+    useEffect(() => {
+        if (isSidebarOpen && isMobile) {
+            console.log('Triggered')
+            document.body.classList.add('lock-scroll');
+        } else {
+            document.body.classList.remove('lock-scroll');
+        }
+    }, [isSidebarOpen, isMobile]);
+
+
     useEffect(() => {
         window.addEventListener('resize', handleResize);
         return () => {
@@ -122,7 +131,7 @@ const SchoolNavbar = () => {
 
             {/* Sidebar Toggle for Mobile */}
             <button type='button' className={styles.stoggle} onClick={toggleSideMenu}>
-                {isSidebarOpen ? <ClearIcon className={styles.smenu} /> : <MenuIcon className={styles.smenu} />}
+                {isSidebarOpen ? <ClearIcon className={styles.smenu} /> : <MenuIcon className={styles.smenu}/>}
             </button>
 
             {/* Sidebar Menu */}
@@ -149,8 +158,8 @@ const SchoolNavbar = () => {
                     <li><HashLink smooth to='/school/academic#routine' onClick={toggleSideMenu}>Class Routine</HashLink></li>
                     <li><HashLink smooth to='/school/academic#notice' onClick={toggleSideMenu}>Notice Board</HashLink></li>
                     <li><HashLink smooth to='/school/academic#holiday' onClick={toggleSideMenu}>Holiday Notice</HashLink></li>
-                    <li><HashLink smooth to='/ashram' onClick={toggleSideMenu} style={{ color: 'rgb(255, 153, 0)', fontSize: 'large', fontWeight: 'bolder' }}>Ashram</HashLink></li>
-                    <li><HashLink smooth to='/alumni' onClick={toggleSideMenu} style={{ color: 'rgb(255, 153, 0)', fontSize: 'large', fontWeight: 'bolder' }}>Alumni</HashLink></li>
+                    <li><HashLink smooth to='/ashram' onClick={()=>{document.body.classList.remove('lock-scroll')}} style={{ color: 'rgb(255, 153, 0)', fontSize: 'large', fontWeight: 'bolder' }}>Ashram</HashLink></li>
+                    <li><HashLink smooth to='/school/alumni' onClick={toggleSideMenu} style={{ color: 'rgb(255, 153, 0)', fontSize: 'large', fontWeight: 'bolder' }}>Alumni</HashLink></li>
                     <li><HashLink smooth to='/login' onClick={toggleSideMenu} style={{ color: 'rgb(255, 153, 0)', fontSize: 'large', fontWeight: 'bolder' }}>Login</HashLink></li>
                 </ul>
             </div>

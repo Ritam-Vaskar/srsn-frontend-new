@@ -1,5 +1,6 @@
 /* Add this CSS to style the components */
 .teacher-carousel {
+  overflow-x: hidden;
     width: 95%;
     margin: 0 auto;
     text-align: center;
