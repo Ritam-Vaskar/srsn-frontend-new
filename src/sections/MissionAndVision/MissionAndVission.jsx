@@ -12,9 +12,9 @@ const Mission = () => {
     return (
       <div className="about-container" style={{marginTop:'30px'}}>
         <center><h1 style={{fontSize: '30px'}}>Mission & Vision</h1></center>
-        {cards.map((card) => (
+        {cards.map((card, index) => (
           <AboutCard 
-            key={card.id} 
+            key={index} 
             title= {card.title}
             image={card.image} 
             description={card.description} 
