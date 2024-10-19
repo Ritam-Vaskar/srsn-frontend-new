@@ -73,10 +73,11 @@ const SchoolNavbar = () => {
                     </div>
                     {isAdmission && (
                         <ul className={styles.subOption}>
+                            <li><Link to='/school/admission'>Admission</Link></li>
                             <li><Link to='/school/admission#notice'>Admission Notice 2025</Link></li>
                             <li><Link to='/school/admission#procedure'>Admission Procedure</Link></li>
                             <li><Link to='/school/admission#age'>Age Criteria</Link></li>
-                            <li><Link to='/school/admission#instruction'>Admission Instruction</Link></li>
+                            {/* <li><Link to='/school/admission#instruction'>Admission Instruction</Link></li> */}
                             <li><Link to='/school/admission#syllabus'>Syllabus for Assessment Test</Link></li>
                         </ul>
 
