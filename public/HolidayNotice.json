@@ -1,0 +1,41 @@
+{
+    "holidays": [
+      {
+        "event": "New Year's Day",
+        "date": "2024-01-01"
+      },
+      {
+        "event": "Republic Day",
+        "date": "2024-01-26"
+      },
+      {
+        "event": "Holi",
+        "date": "2024-03-18"
+      },
+      {
+        "event": "Good Friday",
+        "date": "2024-04-12"
+      },
+      {
+        "event": "Labor Day",
+        "date": "2024-05-01"
+      },
+      {
+        "event": "Independence Day",
+        "date": "2024-08-15"
+      },
+      {
+        "event": "Gandhi Jayanti",
+        "date": "2024-10-02"
+      },
+      {
+        "event": "Diwali",
+        "date": "2024-11-12"
+      },
+      {
+        "event": "Christmas",
+        "date": "2024-12-25"
+      }
+    ]
+  }
+  

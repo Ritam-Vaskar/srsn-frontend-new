@@ -1,69 +1,68 @@
-/* Styling for the News Card */
-.news-card {
+.newsCard {
     border: 1px solid #ddd;
     padding: 20px;
     margin: 10px;
-    width: 350px;           /* Fixed width */
-    height: 350px;          /* Fixed height */
+    width: 350px;
+    height: 350px;
     background-color: #fff;
-    overflow: hidden;       /* Ensures content doesn’t overflow */
+    overflow: hidden;
     position: relative;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
 }
 
-.news-card-image {
+.newsCardImage {
     width: 100%;
     height: 150px;
-    object-fit: cover;      /* Ensure the image fits properly */
+    object-fit: cover;
 }
 
-.news-card-content {
+.newsCardContent {
     margin-top: 10px;
     flex-grow: 1;
-    overflow: hidden;       /* Ensures long content is hidden */
+    overflow: hidden;
 }
 
-.school-name {
+.schoolName {
     font-size: 14px;
     color: #777;
 }
 
-.news-title {
+.newsTitle {
     font-size: 18px;
     margin: 5px 0;
 }
 
-.news-date-time {
+.newsDateTime {
     font-size: 12px;
     color: #999;
     margin-bottom: 5px;
 }
 
-.news-description {
+.newsDescription {
     font-size: 14px;
     line-height: 1.4;
-    max-height: 3.6em;        /* Limit to 3 lines of text */
-    overflow: hidden;         /* Hide content that overflows */
-    text-overflow: ellipsis;  /* Adds ellipsis (...) for long content */
-    white-space: nowrap;      /* Prevent text wrapping */
+    max-height: 3.6em;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
     margin-bottom: 10px;
 }
 
-.read-more-btn {
+.readMoreBtn {
     background-color: #007BFF;
     color: #fff;
     border: none;
     padding: 5px 10px;
     cursor: pointer;
     border-radius: 5px;
-    align-self: flex-start;  /* Align button at the start of the content */
-    margin-top: auto;        /* Push button to the bottom */
+    align-self: flex-start;
+    margin-top: auto;
 }
 
 /* Modal Styles */
-.modal-overlay {
+.modalOverlay {
     z-index: 1000;
     position: fixed;
     top: 0;
@@ -76,7 +75,7 @@
     align-items: center;
 }
 
-.modal-content {
+.modalContent {
     background-color: #fff;
     padding: 20px;
     width: 65vw;
@@ -84,41 +83,40 @@
     max-width: 90%;
     border-radius: 10px;
     position: relative;
+    overflow-y: scroll;
 }
 
-.modal-image {
+.modalImage {
     width: 100%;
     height: 300px;
     object-fit: cover;
     margin-bottom: 15px;
 }
 
-/* School name watermark */
-.modal-watermark {
+.modalWatermark {
     position: absolute;
     top: 10px;
     left: 10px;
-    opacity: 0.5; /* Make it semi-transparent */
+    opacity: 0.5;
     font-size: 20px;
     color: #ddd;
     z-index: -1;
 }
 
-.school-name-modal {
+.schoolNameModal {
     font-size: 24px;
     font-weight: bold;
     text-transform: uppercase;
 }
 
-/* Date at the bottom of the modal */
-.modal-date {
+.modalDate {
     font-size: 14px;
     color: #999;
     text-align: right;
     margin-top: 20px;
 }
 
-.close-btn {
+.closeBtn {
     background-color: #ff0000;
     color: #fff;
     border: none;

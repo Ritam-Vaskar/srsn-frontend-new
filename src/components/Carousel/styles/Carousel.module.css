@@ -1,0 +1,42 @@
+.carouselContainer {
+  display: flex;
+  overflow: hidden;
+  position: relative;
+  width: 100%; /* Ensure the container takes full width */
+  white-space: nowrap;
+  background-color: var(--ashram-text1);
+}
+
+.carousel {
+  color: white;
+  border-radius: 5px;
+  display: inline-block;
+  animation: scroll 40s linear infinite; /* Adjust timing as needed */
+}
+
+.carouselItem {
+  display: inline-block;
+  padding: 10px;
+  white-space: nowrap;
+}
+
+.carouselContainer:hover .carousel {
+  animation-play-state: paused;
+}
+
+@keyframes scroll {
+  0% {
+    transform: translateX(100%);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
+}
+
+a {
+  color: white;
+}
+
+a:hover {
+  color: rgb(223, 186, 24);
+}
