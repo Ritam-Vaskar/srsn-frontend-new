@@ -115,7 +115,7 @@ const SchoolNavbar = () => {
                     )}
                 </li>
                 <li><HashLink smooth to='/school/alumni' className={styles.salumniLink}>Alumni</HashLink></li>
-                <li><HashLink smooth to='/ashram' style={{ color: 'orangered', fontWeight: 'bold', textDecoration: 'none' }}>Ashram Page</HashLink></li>
+                <li><HashLink smooth to='/ashram' className={styles.ashramPage}>Ashram Page</HashLink></li>
                 <li><HashLink smooth to='/login' className={styles.slogin}>Login</HashLink></li>
             </div>
 

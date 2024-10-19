@@ -1,36 +1,26 @@
-import React from "react";
-import TeamCard from "../../components/ProfileCard/ProfileCard";
-import "./styles/Alumni.css";
+import React, { useEffect, useState } from 'react';
+import AlumniCard from '../../components/ProfileCard/ProfileCard';
+import alumniData from '../../data/Alumni.json'; // Import the alumni data
+import styles from './styles/Alumni.module.scss';
 
-// Sample Data for demonstration
-const alumniData = [
-  {
-    name: "John Doe",
-    img: "https://example.com/profile1.jpg",
-    linkedin: "john-doe-linkedin",
-    github: "john-doe-github",
-  },
-  {
-    name: "Jane Smith",
-    img: "https://example.com/profile2.jpg",
-    linkedin: "jane-smith-linkedin",
-    github: "jane-smith-github",
-  },
-];
+const Alumni = () => {
+  const [alumniList, setAlumniList] = useState([]);
 
-const TeamList = () => {
-  // Rendering alumni cards dynamically
+  useEffect(() => {
+    // Fetch alumni data from JSON (for now)
+    setAlumniList(alumniData);
+  }, []);
+
   return (
-    <div className="teamList">
-      {alumniData.map((member, index) => (
-        <TeamCard
-          key={index}
-          member={member}
-          blurhash="LEG8_%els7NgM{M{RiNI*0IVog%L"
-        />
-      ))}
+    <div className={styles.alumniPage}>
+      <h2>Our Alumni</h2>
+      <div className={styles.alumniGrid}>
+        {alumniList.map((alumni, index) => (
+          <AlumniCard key={index} alumni={alumni} />
+        ))}
+      </div>
     </div>
   );
 };
 
-export default TeamList;
+export default Alumni;

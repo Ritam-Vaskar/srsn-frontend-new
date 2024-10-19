@@ -21,6 +21,7 @@ const Admission = () => {
 
   return (
     <div className={styles.admissionContainer}>
+      <div className={styles.btncon}>
       <h3>Welcome to Admission Details Portal</h3>
 
       {/* Toggle buttons for Primary and Secondary School */}
@@ -37,6 +38,7 @@ const Admission = () => {
         >
           Secondary School
         </p>
+      </div>
       </div>
 
 

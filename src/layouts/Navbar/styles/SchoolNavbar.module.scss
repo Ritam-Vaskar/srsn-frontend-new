@@ -126,6 +126,42 @@
         }
     }
 
+    .slogin{
+        color: #fff;
+        background-color: #fd4705;
+        padding: 10px 15px;
+        border-radius: 10px;
+        transition: background-color 0.3s;
+        text-decoration: none;
+    }
+
+    .slogin:hover{
+        background-color: #fd6c05;
+    }
+
+    .salumniLink{
+        text-decoration: none;
+        color: #333;
+    }
+    .salumniLink:hover{
+        color: #ff4500;
+    }
+
+    .ashramPage{
+        color: #ff4500;
+        font-weight: 800;
+        text-decoration: none;
+        border: 1.5px solid #ff4500;
+        padding: 10px 15px;
+        border-radius: 10px;
+        transition: 0.3s background-color;
+    }
+
+    .ashramPage:hover{
+        background-color: #fd6c05;
+        color: #fff;
+    }
+
     @media screen and (max-width: 768px) {
         .snav {
             display: none;
