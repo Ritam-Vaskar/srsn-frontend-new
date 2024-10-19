@@ -1,13 +1,14 @@
 import React from 'react';
 import styles from './AdmissionNotice.module.scss';
-import AdmissionImg from './../../../assets/images/IhVCz.jpg';
+import AdmissionImgPrimary from './../../../assets/images/IhVCz.jpg';
+import AdmissionImgSecondary from './../../../assets/images/photo-1596180262479-467c9ef61fdc.avif'
 import { Link } from 'react-router-dom';
 
-const AdmissionNotice = () => {
+const AdmissionNotice = ({flag}) => {
   return (
     <>
       <div className={styles.admissionNoticeContainer}>
-        <img src={AdmissionImg} alt="Admission" className={styles.admissionImg} />
+        <img src={flag ? AdmissionImgPrimary : AdmissionImgSecondary} alt="Admission" className={styles.admissionImg} />
         <div className={styles.admissionOverlay}>
           <div className={styles.admissionSlider}>
             <div className={styles.admissionText}>
