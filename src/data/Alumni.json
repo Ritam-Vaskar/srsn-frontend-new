@@ -1,0 +1,98 @@
+[
+    {
+      "name": "John Doe",
+      "startingYear": "2010",
+      "endingYear": "2014",
+      "designation": "Software Engineer",
+      "currentState": "California, USA",
+      "profilePic": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR-SnDtnoTbs_JJtNW62ALeA4gKPtpCGcQ5CnVEJNNAddxjuLwrbo1c16rExrxYL4xLmIw&usqp=CAU",
+      "bioData": "John has been working in the tech industry for over 5 years, specializing in full-stack development.",
+      "socialMediaLinks": [
+        "https://www.linkedin.com/in/johndoe",
+        "https://twitter.com/johndoe"
+      ],
+      "mobileNumber": "+1 234 567 890",
+      "email": "johndoe@example.com"
+    },
+    {
+      "name": "Jane Smith",
+      "startingYear": "2008",
+      "endingYear": "2012",
+      "designation": "Product Manager",
+      "currentState": "New York, USA",
+      "profilePic": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR-SnDtnoTbs_JJtNW62ALeA4gKPtpCGcQ5CnVEJNNAddxjuLwrbo1c16rExrxYL4xLmIw&usqp=CAU",
+      "bioData": "Jane is an experienced product manager working with top companies in the tech world.",
+      "socialMediaLinks": [
+        "https://www.linkedin.com/in/janesmith",
+        "https://facebook.com/janesmith"
+      ],
+      "mobileNumber": "+1 345 678 901",
+      "email": "janesmith@example.com"
+    },
+
+
+        {
+          "name": "John Doe",
+          "startingYear": "2010",
+          "endingYear": "2014",
+          "designation": "Software Engineer",
+          "currentState": "California, USA",
+          "profilePic": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR-SnDtnoTbs_JJtNW62ALeA4gKPtpCGcQ5CnVEJNNAddxjuLwrbo1c16rExrxYL4xLmIw&usqp=CAU",
+          "bioData": "John has been working in the tech industry for over 5 years, specializing in full-stack development.",
+          "socialMediaLinks": [
+            "https://www.linkedin.com/in/johndoe",
+            "https://twitter.com/johndoe"
+          ],
+          "mobileNumber": "+1 234 567 890",
+          "email": "johndoe@example.com"
+        },
+        {
+          "name": "Jane Smith",
+          "startingYear": "2008",
+          "endingYear": "2012",
+          "designation": "Product Manager",
+          "currentState": "New York, USA",
+          "profilePic": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR-SnDtnoTbs_JJtNW62ALeA4gKPtpCGcQ5CnVEJNNAddxjuLwrbo1c16rExrxYL4xLmIw&usqp=CAU",
+          "bioData": "Jane is an experienced product manager working with top companies in the tech world.",
+          "socialMediaLinks": [
+            "https://www.linkedin.com/in/janesmith",
+            "https://facebook.com/janesmith"
+          ],
+          "mobileNumber": "+1 345 678 901",
+          "email": "janesmith@example.com"
+        },
+
+    
+        {
+            "name": "John Doe",
+            "startingYear": "2010",
+            "endingYear": "2014",
+            "designation": "Software Engineer",
+            "currentState": "California, USA",
+            "profilePic": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR-SnDtnoTbs_JJtNW62ALeA4gKPtpCGcQ5CnVEJNNAddxjuLwrbo1c16rExrxYL4xLmIw&usqp=CAU",
+            "bioData": "John has been working in the tech industry for over 5 years, specializing in full-stack development.",
+            "socialMediaLinks": [
+              "https://www.linkedin.com/in/johndoe",
+              "https://twitter.com/johndoe"
+            ],
+            "mobileNumber": "+1 234 567 890",
+            "email": "johndoe@example.com"
+          },
+          {
+            "name": "Jane Smith",
+            "startingYear": "2008",
+            "endingYear": "2012",
+            "designation": "Product Manager",
+            "currentState": "New York, USA",
+            "profilePic": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR-SnDtnoTbs_JJtNW62ALeA4gKPtpCGcQ5CnVEJNNAddxjuLwrbo1c16rExrxYL4xLmIw&usqp=CAU",
+            "bioData": "Jane is an experienced product manager working with top companies in the tech world.",
+            "socialMediaLinks": [
+              "https://www.linkedin.com/in/janesmith",
+              "https://facebook.com/janesmith"
+            ],
+            "mobileNumber": "+1 345 678 901",
+            "email": "janesmith@example.com"
+          }
+          
+  ]
+  

@@ -1,76 +1,40 @@
-import React, { useState } from "react";
-import { FaLinkedin, FaGithub } from "react-icons/fa";
-import { Blurhash } from "react-blurhash";
-import "./styles/ProfileCard.css";  
+import React, { useState } from 'react';
+import styles from './styles/ProfileCard.module.scss';
 
-const TeamCard = ({ member, blurhash }) => {
-  const [isImageLoaded, setIsImageLoaded] = useState(false);
+const AlumniCard = ({ alumni }) => {
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
-  const handleImageLoad = () => {
-    setIsImageLoaded(true);
-  };
-
-  const handleLink = (url) => {
-    if (url.startsWith("http://") || url.startsWith("https://")) {
-      return url;
-    } else {
-      return "https://" + url;
-    }
-  };
+  const openModal = () => setIsModalOpen(true);
+  const closeModal = () => setIsModalOpen(false);
 
   return (
-    <div className="teamMember">
-      <div className="teamMemberInner">
-        <div className="teamMemberFront">
-          <div className="ImgDiv">
-            {!isImageLoaded && (
-              <Blurhash
-                hash={blurhash || "LEG8_%els7NgM{M{RiNI*0IVog%L"}
-                width={"100%"}
-                height={"100%"}
-                resolutionX={32}
-                resolutionY={32}
-                punch={1}
-                className="teamMember_blurhash"
-              />
-            )}
-            <img
-              src={member?.img}
-              alt={`Profile of ${member?.name}`}
-              className="teamMemberImg"
-              onLoad={handleImageLoad}
-              style={{ display: isImageLoaded ? "block" : "none" }}
-            />
-          </div>
-          <div className="teamMemberInfo">
-            <h4 className="memName">{member?.name}</h4>
+    <div className={styles.alumniCard}>
+      <img src={alumni.profilePic} alt={alumni.name} className={styles.profilePic} />
+      <h3>{alumni.name}</h3>
+      <p><strong>Years:</strong> {alumni.startingYear} - {alumni.endingYear}</p>
+      <button onClick={openModal} className={styles.knowMoreButton}>Know More</button>
+
+      {/* Inline Modal Implementation */}
+      {isModalOpen && (
+        <div className={styles.modalOverlay}>
+          <div className={styles.modalBox}>
+            <button onClick={closeModal} className={styles.closeButton}>X</button>
+            <img src={alumni.profilePic} alt={alumni.name} className={styles.modalProfilePic} />
+            <h3>{alumni.name}</h3>
+            <p><strong>Designation:</strong> {alumni.designation}</p>
+            <p><strong>Years:</strong> {alumni.startingYear} - {alumni.endingYear}</p>
+            <p><strong>Location:</strong> {alumni.currentState}</p>
+            <p>{alumni.bioData}</p>
+            <div className={styles.socialLinks}>
+              {alumni.socialMediaLinks.map((link, index) => (
+                <a href={link} key={index} target="_blank" rel="noopener noreferrer">Link {index + 1}</a>
+              ))}
+            </div>
           </div>
         </div>
-        <div className="socialLinks">
-          {member?.linkedin && (
-            <a
-              href={handleLink(member?.linkedin)}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="socialLinksa"
-            >
-              <FaLinkedin />
-            </a>
-          )}
-          {member?.github && (
-            <a
-              href={handleLink(member?.github)}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="socialLinksa"
-            >
-              <FaGithub />
-            </a>
-          )}
-        </div>
-      </div>
+      )}
     </div>
   );
 };
 
-export default TeamCard;
+export default AlumniCard;

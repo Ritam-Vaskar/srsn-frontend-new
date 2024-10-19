@@ -4,17 +4,18 @@
     color: white;
     max-width: 100%;
     overflow: hidden; // Hide overflow for the sliding effect
+    height: 70vh;
   }
   
   .admissionImg {
     width: 100%;
-    height: 400px;
-    object-fit: cover;
+    height: 100%;
+    aspect-ratio: 28/9;
   }
   .admissionOverlay{
     height: 7vh;
     width: 100%;
-    background-color: black;
+    background-color: #ff5400;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -52,4 +53,20 @@
     100% {
       transform: translateX(-100%); 
     }
+  }
+
+
+  @media (max-width: 480px){
+  
+    .admissionImg {
+      width: 100%;
+      height: 100%;
+    }
+
+    .admissionNoticeContainer{
+      height: 50vh;
+    }
+    
+    
+    
   }

@@ -1,14 +1,21 @@
 .admissionContainer {
     text-align: center;
-    margin-top: 3rem;
+    margin-top: 1rem;
   
     h3 {
       font-size: 24px;
       margin-bottom: 20px;
+      margin-left: 10px;
+    }
+
+    .btncon{
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: -0.5rem;
     }
   
     .toggleButtons {
-      display: inline-block;
       margin-bottom: 30px;
   
       p {
@@ -33,5 +40,25 @@
         border-color: #007bff;
       }
     }
+  }
+
+  @media (max-width: 480px){
+    .btncon{
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: -0.5rem;
+    }
+
+    .toggleButtons{
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+    }
+    
+    
   }
   
