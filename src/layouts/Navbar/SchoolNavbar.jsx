@@ -110,7 +110,7 @@ const SchoolNavbar = () => {
                             <li><HashLink smooth to='/school/academic#booklist'>Book List</HashLink></li>
 
                             <li><HashLink smooth to='/school/academic#routine'>Class Routine</HashLink></li>
-                            <li><HashLink smooth to='/notice'>Notice Board</HashLink></li>
+                            <li><HashLink smooth to='/school/academic#notice'>Notice Board</HashLink></li>
                             <li><HashLink smooth to='/school/academic#holiday'>Holiday</HashLink></li>
                         </ul>
                     )}
@@ -143,12 +143,12 @@ const SchoolNavbar = () => {
                     <li><HashLink smooth to='/school/admission#instruction' onClick={toggleSideMenu}>Admission Instruction</HashLink></li>
                     <li><HashLink smooth to='/school/admission#syllabus' onClick={toggleSideMenu}>Syllabus for Assessment Test</HashLink></li>
                     <li><p>Academic</p></li>
-                    <li><HashLink smooth to='/result' onClick={toggleSideMenu}>Result Analysis</HashLink></li>
-                    <li><a href="#" onClick={toggleSideMenu}>Syllabus</a></li>
-                    <li><a href="#" onClick={toggleSideMenu}>Book List</a></li>
-                    <li><HashLink smooth to='/classroutine' onClick={toggleSideMenu}>Class Routine</HashLink></li>
-                    <li><HashLink smooth to='/notice' onClick={toggleSideMenu}>Notice Board</HashLink></li>
-                    <li><a href="#" onClick={toggleSideMenu}>Holiday Notice</a></li>
+                    <li><HashLink smooth to='/school/academic#result' onClick={toggleSideMenu}>Result Analysis</HashLink></li>
+                    <li><HashLink smooth to='/school/academic#syllabus' onClick={toggleSideMenu}>Syllabus</HashLink></li>
+                    <li><HashLink smooth to='/school/academic#booklist' onClick={toggleSideMenu}>Book List</HashLink></li>
+                    <li><HashLink smooth to='/school/academic#classroutine' onClick={toggleSideMenu}>Class Routine</HashLink></li>
+                    <li><HashLink smooth to='/school/academic#notice' onClick={toggleSideMenu}>Notice Board</HashLink></li>
+                    <li><HashLink smooth to='/school/academic#holiday' onClick={toggleSideMenu}>Holiday Notice</HashLink></li>
                     <li><HashLink smooth to='/ashram' onClick={toggleSideMenu} style={{ color: 'rgb(255, 153, 0)', fontSize: 'large', fontWeight: 'bolder' }}>Ashram</HashLink></li>
                     <li><HashLink smooth to='/alumni' onClick={toggleSideMenu} style={{ color: 'rgb(255, 153, 0)', fontSize: 'large', fontWeight: 'bolder' }}>Alumni</HashLink></li>
                     <li><HashLink smooth to='/login' onClick={toggleSideMenu} style={{ color: 'rgb(255, 153, 0)', fontSize: 'large', fontWeight: 'bolder' }}>Login</HashLink></li>
