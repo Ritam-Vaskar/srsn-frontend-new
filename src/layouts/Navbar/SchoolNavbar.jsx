@@ -149,7 +149,7 @@ const SchoolNavbar = () => {
                     <li><HashLink smooth to='/classroutine' onClick={toggleSideMenu}>Class Routine</HashLink></li>
                     <li><HashLink smooth to='/notice' onClick={toggleSideMenu}>Notice Board</HashLink></li>
                     <li><a href="#" onClick={toggleSideMenu}>Holiday Notice</a></li>
-                    <li><HashLink smooth to='/RamkrishnaSevaSangha' onClick={toggleSideMenu} style={{ color: 'rgb(255, 153, 0)', fontSize: 'large', fontWeight: 'bolder' }}>Ashram</HashLink></li>
+                    <li><HashLink smooth to='/ashram' onClick={toggleSideMenu} style={{ color: 'rgb(255, 153, 0)', fontSize: 'large', fontWeight: 'bolder' }}>Ashram</HashLink></li>
                     <li><HashLink smooth to='/alumni' onClick={toggleSideMenu} style={{ color: 'rgb(255, 153, 0)', fontSize: 'large', fontWeight: 'bolder' }}>Alumni</HashLink></li>
                     <li><HashLink smooth to='/login' onClick={toggleSideMenu} style={{ color: 'rgb(255, 153, 0)', fontSize: 'large', fontWeight: 'bolder' }}>Login</HashLink></li>
                 </ul>
