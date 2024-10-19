@@ -131,7 +131,7 @@ const SchoolNavbar = () => {
 
             {/* Sidebar Toggle for Mobile */}
             <button type='button' className={styles.stoggle} onClick={toggleSideMenu}>
-                {isSidebarOpen ? <ClearIcon className={styles.smenu} /> : <MenuIcon className={styles.smenu}/>}
+                <MenuIcon className={styles.smenu}/>
             </button>
 
             {/* Sidebar Menu */}
