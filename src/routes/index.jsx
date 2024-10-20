@@ -22,6 +22,10 @@ import SchoolHome from './../Schoolpages/Home/Home';
 import Alumni from './../Schoolpages/Alumini/Alumini';
 import Academic from '../Schoolpages/Academic/Academic';
 
+//Dashboard
+import Login from './../Authentication/Login/Login';
+
+
 
 
 const router = createBrowserRouter([
@@ -64,6 +68,10 @@ const router = createBrowserRouter([
                     {
                         path: 'alumni',
                         element: <Alumni />
+                    },
+                    {
+                        path:'login',
+                        element:<Login/>
                     }
                 ]
             }

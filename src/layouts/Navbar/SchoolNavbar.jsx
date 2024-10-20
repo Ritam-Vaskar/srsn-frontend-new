@@ -6,8 +6,12 @@ import MenuIcon from '@mui/icons-material/Menu';
 import ClearIcon from '@mui/icons-material/Clear';
 import logo from '../../assets/images/Logo.png';
 import { Link } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
 const SchoolNavbar = () => {
+    const user = useSelector(state => state?.user?.user);
+
+    // console.log('check user', user);
     const [isSchool, setIsSchool] = useState(false);
     const [isAdmission, setIsAdmission] = useState(false);
     const [isAcademics, setIsAcademics] = useState(false);
@@ -52,7 +56,7 @@ const SchoolNavbar = () => {
     return (
         <div className={styles.snavbar}>
             {/* Logo Section */}
-            <div className={styles.schooldetails}>
+            <Link to='/school' className={styles.schooldetails}>
                 <div className={styles.school_logo}>
                     <img src={logo} alt="school logo" className={styles.slogo} />
                 </div>
@@ -60,7 +64,7 @@ const SchoolNavbar = () => {
                     <h3>Sri Ramkrishna Siksha Niketan</h3>
                     <p>Established : 2001</p>
                 </div>
-            </div>
+            </Link>
 
             {/* Main Navigation */}
             <div className={styles.snav}>
@@ -127,18 +131,49 @@ const SchoolNavbar = () => {
                 </li>
                 <li><HashLink smooth to='/school/alumni' className={styles.salumniLink}>Alumni</HashLink></li>
                 <li><HashLink smooth to='/ashram' className={styles.ashramPage}><span>Ashram Page</span></HashLink></li>
-                <li><HashLink smooth to='/login' className={styles.slogin}>Login</HashLink></li>
+                <li>
+                    {(user) ?
+                        <HashLink smooth to='/school/profile' className={styles.sloginImg}>
+                            <img src={user.profilePic} alt="user" />
+                        </HashLink>
+                        :
+                        <HashLink smooth to='/school/login' className={styles.slogin}>
+                            Login
+                        </HashLink>}
+                </li>
             </div>
 
             {/* Sidebar Toggle for Mobile */}
             <button type='button' className={styles.stoggle} onClick={toggleSideMenu}>
-                <MenuIcon className={styles.smenu}/>
+                <MenuIcon className={styles.smenu} />
             </button>
+
+
 
             {/* Sidebar Menu */}
             <div className={`${styles.sidemenu} ${isSidebarOpen ? styles.active : ''}`}>
                 <ul>
-                    <li onClick={toggleSideMenu}><ClearIcon style={{ cursor: 'pointer', color: 'red' }} /></li>
+                    <div className={styles.sloginDiv}>
+                        {
+                            user&&
+                            <HashLink smooth to='/school/profile' className={styles.sloginImg}>
+                                <img src={user.profilePic} alt="user" />
+                            </HashLink>
+                        }
+                        <li onClick={toggleSideMenu}><ClearIcon style={{ cursor: 'pointer', color: 'red' }} /></li>
+                    </div>
+
+                    {/* <li>
+                        {(user) ?
+                            <HashLink smooth to='/school/profile' className={styles.sloginImg}>
+                                <img src={user.profilePic} alt="user" />
+                            </HashLink>
+                            :
+                            <HashLink smooth to='/school/login' className={styles.slogin}>
+                                Login
+                            </HashLink>}
+                    </li> */}
+                    <li>{!user&&<HashLink smooth to='/school/login' onClick={toggleSideMenu} style={{ color: 'rgb(255, 153, 0)', fontSize: 'large', fontWeight: 'bolder' }}>Login</HashLink>}</li>
                     <li><p>The School</p></li>
                     <li><HashLink smooth to='/school/home#holytrio' onClick={toggleSideMenu}>Home</HashLink></li>
                     <li><HashLink smooth to='/school/home#mission' onClick={toggleSideMenu}>Mission and Vision</HashLink></li>
@@ -159,9 +194,8 @@ const SchoolNavbar = () => {
                     <li><HashLink smooth to='/school/academic#routine' onClick={toggleSideMenu}>Class Routine</HashLink></li>
                     <li><HashLink smooth to='/school/academic#notice' onClick={toggleSideMenu}>Notice Board</HashLink></li>
                     <li><HashLink smooth to='/school/academic#holiday' onClick={toggleSideMenu}>Holiday Notice</HashLink></li>
-                    <li><HashLink smooth to='/ashram' onClick={()=>{document.body.classList.remove('lock-scroll')}} style={{ color: 'rgb(255, 153, 0)', fontSize: 'large', fontWeight: 'bolder' }}>Ashram</HashLink></li>
+                    <li><HashLink smooth to='/ashram' onClick={() => { document.body.classList.remove('lock-scroll') }} style={{ color: 'rgb(255, 153, 0)', fontSize: 'large', fontWeight: 'bolder' }}>Ashram</HashLink></li>
                     <li><HashLink smooth to='/school/alumni' onClick={toggleSideMenu} style={{ color: 'rgb(255, 153, 0)', fontSize: 'large', fontWeight: 'bolder' }}>Alumni</HashLink></li>
-                    <li><HashLink smooth to='/login' onClick={toggleSideMenu} style={{ color: 'rgb(255, 153, 0)', fontSize: 'large', fontWeight: 'bolder' }}>Login</HashLink></li>
                 </ul>
             </div>
         </div>
