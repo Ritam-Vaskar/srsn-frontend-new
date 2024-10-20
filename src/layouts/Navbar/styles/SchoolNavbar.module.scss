@@ -23,7 +23,7 @@
             margin-left: 1rem;
 
             h3 {
-                font-size: 1.5rem;
+                font-size: 1.2rem;
                 color: #333;
             }
             p{
@@ -38,10 +38,11 @@
         display: flex;
         align-items: center;
         list-style: none;
+        gap: 1.3rem;
 
         li {
             position: relative;
-            margin: 0 1rem;
+            // margin: 0 1rem;
             cursor: pointer;
             color: #333;
             font-weight: bold;
@@ -54,7 +55,6 @@
                 display: flex;
                 align-items: center;
                 justify-content: center;
-                gap: 0.5rem;
             }
 
             ul {
@@ -159,7 +159,7 @@
     }
 
     .ashramPage {
-        span {
+        
             display: flex;
             align-items: center;
             justify-content: center;
@@ -172,7 +172,7 @@
             padding: 10px 15px;
             border-radius: 10px;
             transition: 0.3s background-color;
-        }
+        
 
     }
 
