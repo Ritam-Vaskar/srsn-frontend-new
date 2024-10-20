@@ -21,6 +21,7 @@ import SchoolFooter from '../layouts/Footer/Footer';
 import SchoolHome from './../Schoolpages/Home/Home';
 import Alumni from './../Schoolpages/Alumini/Alumini';
 import Academic from '../Schoolpages/Academic/Academic';
+import AdmissionForm from '../Schoolpages/AdmissionForm/AdmissionForm';
 
 //Dashboard
 import Login from './../Authentication/Login/Login';
@@ -68,6 +69,10 @@ const router = createBrowserRouter([
                     {
                         path: 'alumni',
                         element: <Alumni />
+                    },
+                    {
+                        path: 'admission_form',
+                        element: <AdmissionForm />
                     },
                     {
                         path:'login',

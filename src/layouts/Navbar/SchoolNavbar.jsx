@@ -131,6 +131,8 @@ const SchoolNavbar = () => {
                 </li>
                 <li><HashLink smooth to='/school/alumni' className={styles.salumniLink}>Alumni</HashLink></li>
                 <li><HashLink smooth to='/ashram' className={styles.ashramPage}><span>Ashram Page</span></HashLink></li>
+                <li><HashLink smooth to='/school/admission_form' className={styles.slogin}>Apply</HashLink></li>
+                <li><HashLink smooth to='/login' className={styles.slogin}>Login</HashLink></li>
                 <li>
                     {(user) ?
                         <HashLink smooth to='/school/profile' className={styles.sloginImg}>
