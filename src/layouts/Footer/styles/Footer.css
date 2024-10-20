@@ -102,13 +102,13 @@
 }
 
 /* Remove background color for screens less than 768px */
-@media screen and (max-width: 768px) {
+/* @media screen and (max-width: 768px) {
     .over_bg, .top_container {
         background-color: transparent;
     }
-}
+} */
 
-@media screen and (max-width: 768px) {
+/* @media screen and (max-width: 768px) {
     .footer_top {
         background-image: none;
     }
@@ -116,7 +116,7 @@
         background-color: rgba(0, 32, 91, 0.992);
     }
     
-}
+} */
 
 .footer-container{
     margin-top: 2rem;
@@ -237,7 +237,7 @@
   
   @media screen and (max-width:1080px) {
     .footer-container{
-      margin-top: 0.5rem;
+      margin-top: 0rem;
     }
     .footer{
         text-align: center;
