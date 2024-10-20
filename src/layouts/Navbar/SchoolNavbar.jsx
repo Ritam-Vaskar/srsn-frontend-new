@@ -12,7 +12,7 @@ const SchoolNavbar = () => {
     const [isAdmission, setIsAdmission] = useState(false);
     const [isAcademics, setIsAcademics] = useState(false);
     const [isSidebarOpen, setSidebarOpen] = useState(false);
-    const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
+    const [isMobile, setIsMobile] = useState(window.innerWidth <= 950);
 
     const toggleSideMenu = () => {
         setSidebarOpen(!isSidebarOpen);
@@ -21,11 +21,20 @@ const SchoolNavbar = () => {
     const handleResize = () => {
         setIsMobile(window.innerWidth <= 768);
         if (window.innerWidth > 768) {
-            setSidebarOpen(false); 
+            setSidebarOpen(false);
         }
     };
 
-    // Listen for window resizing
+    useEffect(() => {
+        if (isSidebarOpen && isMobile) {
+            console.log('Triggered')
+            document.body.classList.add('lock-scroll');
+        } else {
+            document.body.classList.remove('lock-scroll');
+        }
+    }, [isSidebarOpen, isMobile]);
+
+
     useEffect(() => {
         window.addEventListener('resize', handleResize);
         return () => {
@@ -49,6 +58,7 @@ const SchoolNavbar = () => {
                 </div>
                 <div className={styles.sname}>
                     <h3>Sri Ramkrishna Siksha Niketan</h3>
+                    <p>Established : 2001</p>
                 </div>
             </div>
 
@@ -110,19 +120,20 @@ const SchoolNavbar = () => {
                             <li><HashLink smooth to='/school/academic#booklist'>Book List</HashLink></li>
 
                             <li><HashLink smooth to='/school/academic#routine'>Class Routine</HashLink></li>
-                            <li><HashLink smooth to='/notice'>Notice Board</HashLink></li>
+                            <li><HashLink smooth to='/school/academic#notice'>Notice Board</HashLink></li>
                             <li><HashLink smooth to='/school/academic#holiday'>Holiday</HashLink></li>
                         </ul>
                     )}
                 </li>
                 <li><HashLink smooth to='/school/alumni' className={styles.salumniLink}>Alumni</HashLink></li>
                 <li><HashLink smooth to='/ashram' className={styles.ashramPage}><span>Ashram Page</span></HashLink></li>
+                <li><HashLink smooth to='/school/admission_form' className={styles.slogin}>Apply</HashLink></li>
                 <li><HashLink smooth to='/login' className={styles.slogin}>Login</HashLink></li>
             </div>
 
             {/* Sidebar Toggle for Mobile */}
             <button type='button' className={styles.stoggle} onClick={toggleSideMenu}>
-                {isSidebarOpen ? <ClearIcon className={styles.smenu} /> : <MenuIcon className={styles.smenu} />}
+                <MenuIcon className={styles.smenu}/>
             </button>
 
             {/* Sidebar Menu */}
@@ -143,14 +154,14 @@ const SchoolNavbar = () => {
                     <li><HashLink smooth to='/school/admission#instruction' onClick={toggleSideMenu}>Admission Instruction</HashLink></li>
                     <li><HashLink smooth to='/school/admission#syllabus' onClick={toggleSideMenu}>Syllabus for Assessment Test</HashLink></li>
                     <li><p>Academic</p></li>
-                    <li><HashLink smooth to='/result' onClick={toggleSideMenu}>Result Analysis</HashLink></li>
-                    <li><a href="#" onClick={toggleSideMenu}>Syllabus</a></li>
-                    <li><a href="#" onClick={toggleSideMenu}>Book List</a></li>
-                    <li><HashLink smooth to='/classroutine' onClick={toggleSideMenu}>Class Routine</HashLink></li>
-                    <li><HashLink smooth to='/notice' onClick={toggleSideMenu}>Notice Board</HashLink></li>
-                    <li><a href="#" onClick={toggleSideMenu}>Holiday Notice</a></li>
-                    <li><HashLink smooth to='/RamkrishnaSevaSangha' onClick={toggleSideMenu} style={{ color: 'rgb(255, 153, 0)', fontSize: 'large', fontWeight: 'bolder' }}>Ashram</HashLink></li>
-                    <li><HashLink smooth to='/alumni' onClick={toggleSideMenu} style={{ color: 'rgb(255, 153, 0)', fontSize: 'large', fontWeight: 'bolder' }}>Alumni</HashLink></li>
+                    <li><HashLink smooth to='/school/academic#result' onClick={toggleSideMenu}>Result Analysis</HashLink></li>
+                    <li><HashLink smooth to='/school/academic#syllabus' onClick={toggleSideMenu}>Syllabus</HashLink></li>
+                    <li><HashLink smooth to='/school/academic#booklist' onClick={toggleSideMenu}>Book List</HashLink></li>
+                    <li><HashLink smooth to='/school/academic#routine' onClick={toggleSideMenu}>Class Routine</HashLink></li>
+                    <li><HashLink smooth to='/school/academic#notice' onClick={toggleSideMenu}>Notice Board</HashLink></li>
+                    <li><HashLink smooth to='/school/academic#holiday' onClick={toggleSideMenu}>Holiday Notice</HashLink></li>
+                    <li><HashLink smooth to='/ashram' onClick={()=>{document.body.classList.remove('lock-scroll')}} style={{ color: 'rgb(255, 153, 0)', fontSize: 'large', fontWeight: 'bolder' }}>Ashram</HashLink></li>
+                    <li><HashLink smooth to='/school/alumni' onClick={toggleSideMenu} style={{ color: 'rgb(255, 153, 0)', fontSize: 'large', fontWeight: 'bolder' }}>Alumni</HashLink></li>
                     <li><HashLink smooth to='/login' onClick={toggleSideMenu} style={{ color: 'rgb(255, 153, 0)', fontSize: 'large', fontWeight: 'bolder' }}>Login</HashLink></li>
                 </ul>
             </div>

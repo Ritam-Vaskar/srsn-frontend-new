@@ -15,12 +15,12 @@ const Footer = () => {
         <div>
             <div className="footer_top">
                 <div className="top_container">
-                    <h2>Ramakrishna Math and Ashram</h2>
+                    <h2>Ramakrishna School and Seva Sangha(Haridasnagar)</h2>
                     <h4>
                         Embrace the spiritual wisdom of Ramakrishna with devotion and
                         unity!
                     </h4>
-                    <ul className="top_social-links">
+                    {/* <ul className="top_social-links">
                         <li>
                             <a
                                 href="https://www.facebook.com/p/Sri-Ramakrishna-Siksha-Niketan-100057181941594/"
@@ -54,7 +54,7 @@ const Footer = () => {
                                 <FaMapMarkerAlt className="fab" aria-hidden="true" />
                             </a>
                         </li>
-                    </ul>
+                    </ul> */}
                 </div>
             </div>
             <div className="footer-container">
@@ -63,7 +63,7 @@ const Footer = () => {
                         <div className="comp-logo">
                             <Link className="logo-link" to='/'>
                                 <img className="logo-svg" src={footLogo} alt="infoma logo"/>
-                                Ramkrishna Ashram
+                                Ramkrishna Sachool and Seva Sangha
                             </Link>
                         </div>
                         <div className="filler-text">Cultivating Spiritual Wisdom for a Transcendent Life</div>

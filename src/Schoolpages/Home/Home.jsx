@@ -16,9 +16,9 @@ const Home = () => {
                 <Mission />
             </section>
 
-            <section id="holytrio">
+            {/* <section id="holytrio">
                 <HolyTrio />
-            </section>
+            </section> */}
             
             <section id="school-media">
                 <SchoolMedia />

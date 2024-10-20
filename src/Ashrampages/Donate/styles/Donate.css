@@ -6,7 +6,7 @@
     justify-content: center;
     width: 100%;
     margin-top: 2rem;
-    height: 90rem;
+    /* height: 90rem; */
     /* color: #d2d0d0d0; */
 }
 .upper_div{
@@ -24,7 +24,7 @@
     border-radius: 2rem;
 }
 .text_div{
-  height: 100%;
+    height: 100%;
     width: 50%;
     text-align: center;
     display: flex;
@@ -243,3 +243,31 @@
     animation-name: righttoleft;
     animation-delay: 4.5s;
   }
+
+  @media screen and (max-width: 768px) {
+    .upper_div{
+        flex-direction: column;
+    }
+    .img_div{
+      width: 90%;
+    }
+    .text_div{
+      width: 90%;
+      text-align: center;
+    }
+    .text_div h3{
+      width: 90%;
+      color: rgb(242, 124, 28);
+      font-size: x-large;
+      border-bottom: 1px solid rgba(78, 77, 77, 0.599);
+      padding: 0.4rem;
+    }
+  }
+
+  /* @media screen and (max-width: 600px) {
+    .donation_table {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+  } */

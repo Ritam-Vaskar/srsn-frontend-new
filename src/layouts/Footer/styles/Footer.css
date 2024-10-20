@@ -10,6 +10,7 @@
     background-position: center;
     position: relative;
     height: 20rem;
+    overflow-x: hidden;
 }
 
 .top_container {
@@ -21,7 +22,7 @@
     align-items: center;
     color: white;
     background-color: rgba(0, 32, 91, 0.82);
-    
+    padding: 1rem;
     text-align: center;
     gap: 1.5rem;
 }
@@ -49,8 +50,8 @@
 
 .top_social-links li a {
     position: relative;
-    width: 60px;
-    height: 60px;
+    width: 3rem;
+    height: 3rem;
     display: block;
     text-align: center;
     margin: 0 10px;
@@ -101,13 +102,13 @@
 }
 
 /* Remove background color for screens less than 768px */
-@media screen and (max-width: 768px) {
+/* @media screen and (max-width: 768px) {
     .over_bg, .top_container {
         background-color: transparent;
     }
-}
+} */
 
-@media screen and (max-width: 768px) {
+/* @media screen and (max-width: 768px) {
     .footer_top {
         background-image: none;
     }
@@ -115,7 +116,7 @@
         background-color: rgba(0, 32, 91, 0.992);
     }
     
-}
+} */
 
 .footer-container{
     margin-top: 2rem;
@@ -236,7 +237,7 @@
   
   @media screen and (max-width:1080px) {
     .footer-container{
-      margin-top: 0.5rem;
+      margin-top: 0rem;
     }
     .footer{
         text-align: center;

@@ -1,0 +1,194 @@
+/* Main container styles */
+.form-container {
+  margin: 50px auto;
+  width: 80%;
+  padding: 30px;
+  border: 1px solid #ddd;
+  border-radius: 15px;
+  background-color: #f7f7f7;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Title and subtitle styles */
+.form-container h2 {
+  text-align: center;
+  font-size: 24px;
+  margin-bottom: 25px;
+  color: #333;
+}
+
+/* Label and input field styles */
+.form-container label {
+  font-size: 16px;
+  color: #555;
+}
+
+.form-container input {
+  width: 100%;
+  padding: 12px 15px;
+  margin: 10px 0;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 16px;
+  box-sizing: border-box;
+  transition: all 0.3s ease;
+}
+
+input:focus {
+  outline: none;
+  border-color: #007BFF;
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+}
+
+/* Error message styles */
+.form-container p {
+  font-size: 14px;
+  color: red;
+  margin-top: -8px;
+  margin-bottom: 10px;
+}
+
+/* Navigation buttons */
+.form-container button {
+  padding: 12px 20px;
+  background-color: #007BFF;
+  border: none;
+  color: white;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.form-container button:hover {
+  background-color: #0056b3;
+}
+
+.form-container button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+/* Navigation container */
+.form-navigation {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 30px;
+}
+
+/* Terms and conditions checkbox */
+input[type="checkbox"] {
+  margin-right: 8px;
+}
+
+.checkbox-container {
+  display: flex;
+  align-items: center;
+  margin-top: 15px;
+}
+
+/* Preview table */
+table {
+  width: 100%;
+  margin-top: 20px;
+  border-collapse: collapse;
+  text-align: left;
+}
+
+td {
+  padding: 10px 15px;
+  border-bottom: 1px solid #ddd;
+  font-size: 16px;
+}
+
+tbody tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+
+
+h2 {
+  text-align: center;
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+/* Style for input fields */
+input[type="text"], 
+input[type="email"], 
+input[type="number"], 
+input[type="date"], 
+input[type="file"],
+select {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 16px;
+  box-sizing: border-box;
+  transition: border-color 0.3s ease;
+}
+
+/* Style for dropdown (select) fields */
+select {
+  appearance: none; /* Remove default arrow */
+  background: #fff url('data:image/svg+xml;utf8,<svg fill="%23ccc" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M7 10l5 5 5-5z"/></svg>') no-repeat right 10px center;
+  padding-right: 40px;
+  margin: 10px 0;
+}
+
+input:focus, select:focus {
+  border-color: #4CAF50;
+  outline: none;
+}
+
+/* Error message styling */
+.error {
+  color: red;
+  font-size: 0.9em;
+  margin-top: 4px;
+}
+
+/* Label styles */
+label {
+  font-size: 16px;
+  color: #555;
+  margin-bottom: 5px;
+}
+
+/* File input style */
+input[type="file"] {
+  padding: 10px;
+  font-size: 14px;
+  background-color: #f1f1f1;
+  border: 1px dashed #ccc;
+  cursor: pointer;
+}
+
+/* Button styles */
+button {
+  padding: 12px;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: #45a049;
+}
+
+/* Media query for responsiveness */
+@media screen and (max-width: 600px) {
+  form {
+    padding: 15px;
+  }
+
+  input, select, button {
+    font-size: 14px;
+  }
+}
+
