@@ -2,21 +2,13 @@ const backendUrl="http://localhost:8000"
 
 
 const SummaryApi={
-    UserSignUp:{
-        url:`${backendUrl}/api/userSignUp`,
-        method:"post"
+    UserSignIn:{
+        url:backendUrl+"/api/userSignUp",
+        method:"POST"
     },
-    UserLogin:{
-        url:`${backendUrl}/api/userSignIn`,
-        method:"post"
-    },
-    FetchUsersAdmin:{
-        url:`${backendUrl}/api/studentFetch1`,
-        method:"get"
-    },
-    FetchuserTeacher:{
-        url:`${backendUrl}/api/studentFetch2`,
-        method:"get"
+    UserAdmissionSignUp:{
+        url:backendUrl+"/api/userAdmissionSignUp",
+        method:"POST"
     }
 }
 
