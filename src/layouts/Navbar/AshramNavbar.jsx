@@ -35,8 +35,8 @@ const Navbar = () => {
                     />
                 </div>
                 <div className="ashram_name">
-                    <h2>Haridasnagar Sri Sri Ramakrishna Ashram</h2>
-                    <h4>Established : 2001</h4>
+                    <h2>Haridasnagar Sri Sri Ramakrishna Seva Sangha</h2>
+                    <h4>Established : 1975</h4>
                 </div>
             </div>
             <div className="lowerheader">

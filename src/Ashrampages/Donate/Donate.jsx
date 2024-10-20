@@ -26,7 +26,7 @@ const Donation = () => {
           }}
         >
           <h3>
-            Online Donations to Sri Sri Ramkrishna Sevasangha, Haridasnagar
+            Online Donations to Sri Sri Ramkrishna Seva Sangha , Haridasnagar
           </h3>
           <p>
             Lorem ipsum dolor sit amet, consectetur adipisicing elit.

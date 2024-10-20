@@ -58,6 +58,7 @@ const SchoolNavbar = () => {
                 </div>
                 <div className={styles.sname}>
                     <h3>Sri Ramkrishna Siksha Niketan</h3>
+                    <p>Established : 2001</p>
                 </div>
             </div>
 
