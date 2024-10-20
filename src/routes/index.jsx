@@ -1,5 +1,6 @@
 import { createBrowserRouter } from 'react-router-dom';
 import App from '../App';
+import Headroom from "react-headroom";
 
 //Ashram Pages
 import Ashram from '../Ashram';
@@ -10,65 +11,100 @@ import NewsEvent from './../Ashrampages/NewsEvent/NewsEvent';
 import Media from './../Ashrampages/Media/Media';
 import Contact from './../Ashrampages/Contact/Contact';
 import Donate from './../Ashrampages/Donate/Donate';
+import Admission from './../Schoolpages/Admission/Admission';
 
 
 //School Pages
 import School from '../School';
+import SchoolNavbar from '../layouts/Navbar/SchoolNavbar';
+import SchoolFooter from '../layouts/Footer/Footer';
+import SchoolHome from './../Schoolpages/Home/Home';
+import Alumni from './../Schoolpages/Alumini/Alumini';
+import Academic from '../Schoolpages/Academic/Academic';
+
 
 
 const router = createBrowserRouter([
     {
-        path:'/',
-        element: <App/>,
-        children:[
+        path: '/',
+        element: <App />,
+        children: [
             {
                 index: true,
-                element: <School/>
+                element: <>
+                    <Headroom>
+                        <SchoolNavbar />
+                    </Headroom>
+                    <SchoolHome />
+                    <SchoolFooter />
+                </>
             },
-            
+
             //school page
             {
-                path:'school',
-                element:<School/>
+                path: 'school',
+                element: <School />,
+                children: [
+                    {
+                        index: true,
+                        element: <SchoolHome />
+                    },
+                    {
+                        path: 'home',
+                        element: <SchoolHome />
+                    },
+                    {
+                        path: 'admission',
+                        element: <Admission />
+                    },
+                    {
+                        path: 'academic',
+                        element: <Academic />
+                    },
+                    {
+                        path: 'alumni',
+                        element: <Alumni />
+                    }
+                ]
             }
 
             ,
             //ashram page
             {
-                path:'ashram',
-                element:<Ashram/>,
-                children:[
+                path: 'ashram',
+                element: <Ashram />,
+                children: [
                     {
                         index: true,
-                        element: <Home/>
+                        element: <Home />
                     },
                     {
-                        path:'home',
-                        element: <Home/>
+                        path: 'home',
+                        element: <Home />
                     },
                     {
-                        path:'about',
-                        element: <About/>
+                        path: 'about',
+                        element: <About />
                     },
                     {
-                        path:'activities',
-                        element: <Activities/>
+                        path: 'activities',
+                        element: <Activities />
                     },
                     {
-                        path:'news_event',
-                        element: <NewsEvent/>
+                        path: 'news_event',
+                        element: <NewsEvent />
                     },
                     {
-                        path:'media',
-                        element: <Media/>
+                        path: 'media',
+                        element: <Media />
                     },
                     {
-                        path:'contact',
-                        element: <Contact/>
+                        path: 'contact',
+                        element: <Contact />
                     },
                     {
-                        path:'donate',
-                        element: <Donate/>
+                        path: 'donate',
+                        element: <Donate />
                     }
                 ]
             }

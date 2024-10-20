@@ -11,7 +11,7 @@ const NewsEvent = () => {
 
     return (
         <>
-        <center><h1>Media</h1></center>
+        <center><h1 style={{fontSize: '30px'}}>Media</h1></center>
         <div className="news-page">
             
             {newsList.map((news, index) => (

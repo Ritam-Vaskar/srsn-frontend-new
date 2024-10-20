@@ -1,4 +1,3 @@
-// TeacherCarousel.jsx
 import React from 'react';
 import TeacherCard from '../../components/TeacherCard/TeacherCard';
 import teachers from '../../data/Teachers';
@@ -17,20 +16,29 @@ const TeachersCarousel = () => {
         autoplay: true,
         autoplaySpeed: 3000,
         cssEase: "linear",
-        pauseOnHover: true 
+        pauseOnHover: true,
+        responsive: [
+            {
+                breakpoint: 480, // for screens smaller than 480px
+                settings: {
+                    slidesToShow: 1,
+                    slidesToScroll: 1
+                }
+            }
+        ]
     };
 
-  return (
-    <div className="teacher-carousel">
-      <h2>Know Your Teachers</h2>
-      <Slider {...settings}>
-        {teachers.map((teacher, index) => (
-          <TeacherCard key={index} teacher={teacher} />
-        ))}
-      </Slider>
-      <button className='btn'>Know Your Teachers</button>
-    </div>
-  );
+    return (
+        <div className="teacher-carousel">
+            <h2>Know Your Teachers</h2>
+            <Slider {...settings}>
+                {teachers.map((teacher, index) => (
+                    <TeacherCard key={index} teacher={teacher} />
+                ))}
+            </Slider>
+            <button className='btn'>Know Your Teachers</button>
+        </div>
+    );
 };
 
 export default TeachersCarousel;
