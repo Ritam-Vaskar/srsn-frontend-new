@@ -29,8 +29,8 @@ const BasicInfo = ({ register, errors }) => {
       <div>
         <label>Profile Picture</label>
         <input
-          type="file"
-          {...register("profilePic", { required: "Profile picture is required" })}
+          type="text"
+          {...register("profilePic", )}
         />
         {errors.profilePic && <p>{errors.profilePic.message}</p>}
       </div>
@@ -72,7 +72,8 @@ const BasicInfo = ({ register, errors }) => {
         {errors.socialCatagory && <p>{errors.socialCatagory.message}</p>}
       </div>
       <div>
-        <label>Social Category Registration Number</label>
+        <label style={{marginTop:'10px'}}>Social Category Registration Number</label>
+        <p style={{marginTop:'10px'}}>Student Catagory from General Catagory write 'N/A'</p>
         <input
           {...register("socialCatagoryRegNo", { required: "Social category registration number is required" })}
         />

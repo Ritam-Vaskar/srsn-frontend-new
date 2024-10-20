@@ -8,6 +8,9 @@ import GuardianDetails from './Step5';
 import PaymentDetails from './Step6';
 import Preview from './Step7';
 import './styles/AdmissionForm.css';
+import { toast } from 'react-toastify';
+
+import SummaryApi from '../../common';
 
 const AdmissionForm = () => {
   const [step, setStep] = useState(1);
@@ -27,8 +30,8 @@ const AdmissionForm = () => {
       aadharNo: '',
       bloodGroup: '',
       healthID: '',
-      Grade: '',
-      StudentCode: '',
+      grade: '',
+      studentCode: '',
       address: '',
       city: '',
       district: '',
@@ -57,15 +60,41 @@ const AdmissionForm = () => {
       guardianEmail: '',
       annualIncome: '',
       guardianQualification: '',
-      paymentId: ''
+      paymentId: '',
+      rAddressSameAsPermanent: '',
     }
   });
 
   // On submission of the entire form
-  const onSubmit = data => {
+  const onSubmit = async (data) => {
     console.log('Final Submission Data:', data);
-    alert('Form submitted successfully!');
+
+    try {
+      const response = await fetch(SummaryApi.UserAdmissionSignUp.url, {
+        method: SummaryApi.UserAdmissionSignUp.method,
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data),
+        credentials: 'include'
+      });
+
+      const result = await response.json();  
+
+      if (!result.success) {
+        toast.error(result.message);  
+        return;
+      }
+
+      toast.success('Form submitted successfully!');  
+      console.log(result);
+
+    } catch (error) {
+      toast.error(error.message); 
+      console.error('Submission Error:', error);
+    }
   };
+
 
   // Handle next button with validation
   const handleNext = async () => {
@@ -107,6 +136,7 @@ const AdmissionForm = () => {
           )}
         </div>
       </form>
+      <div>*If you face problems logging in, please contact the administrator.</div>
     </div>
   );
 };

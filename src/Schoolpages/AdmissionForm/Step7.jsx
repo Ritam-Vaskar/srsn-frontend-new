@@ -34,11 +34,11 @@ const Preview = ({ data }) => {
           </tr>
           <tr>
             <td><strong>Social Category:</strong></td>
-            <td>{data.socialCategory || 'N/A'}</td>
+            <td>{data.socialCatagory || 'N/A'}</td>
           </tr>
           <tr>
             <td><strong>Social Category Registration Number:</strong></td>
-            <td>{data.socialCategoryRegNo || 'N/A'}</td>
+            <td>{data.socialCatagoryRegNo || 'N/A'}</td>
           </tr>
           <tr>
             <td><strong>Religion:</strong></td>
@@ -65,12 +65,12 @@ const Preview = ({ data }) => {
             <td>{data.healthID || 'N/A'}</td>
           </tr>
           <tr>
-            <td><strong>Grade:</strong></td>
-            <td>{data.Grade || 'N/A'}</td>
+            <td><strong>Class:</strong></td>
+            <td>{data.grade || 'N/A'}</td>
           </tr>
           <tr>
             <td><strong>Student Code:</strong></td>
-            <td>{data.StudentCode || 'N/A'}</td>
+            <td>{data.studentCode || 'N/A'}</td>
           </tr>
 
           {/* Permanent Contact Details */}
@@ -91,8 +91,8 @@ const Preview = ({ data }) => {
             <td>{data.municipality || 'N/A'}</td>
           </tr>
           <tr>
-            <td><strong>Panchayat:</strong></td>
-            <td>{data.panchayat || 'N/A'}</td>
+            <td><strong>panchayt:</strong></td>
+            <td>{data.panchayt || 'N/A'}</td>
           </tr>
           <tr>
             <td><strong>Post Office:</strong></td>
@@ -116,46 +116,54 @@ const Preview = ({ data }) => {
           </tr>
 
           {/* Residential Contact Details */}
-          <tr>
-            <td><strong>Residential Address:</strong></td>
-            <td>{data.rAddress || 'N/A'}</td>
-          </tr>
-          <tr>
-            <td><strong>Residential City:</strong></td>
-            <td>{data.rCity || 'N/A'}</td>
-          </tr>
-          <tr>
-            <td><strong>Residential District:</strong></td>
-            <td>{data.rDistrict || 'N/A'}</td>
-          </tr>
-          <tr>
-            <td><strong>Residential Municipality:</strong></td>
-            <td>{data.rMunicipality || 'N/A'}</td>
-          </tr>
-          <tr>
-            <td><strong>Residential Panchayat:</strong></td>
-            <td>{data.rPanchayat || 'N/A'}</td>
-          </tr>
-          <tr>
-            <td><strong>Residential Post Office:</strong></td>
-            <td>{data.rPostOffice || 'N/A'}</td>
-          </tr>
-          <tr>
-            <td><strong>Residential Police Station:</strong></td>
-            <td>{data.rPoliceStation || 'N/A'}</td>
-          </tr>
-          <tr>
-            <td><strong>Residential PIN Code:</strong></td>
-            <td>{data.rPinCode || 'N/A'}</td>
-          </tr>
-          <tr>
-            <td><strong>Residential State:</strong></td>
-            <td>{data.rState || 'N/A'}</td>
-          </tr>
-          <tr>
-            <td><strong>Residential Country:</strong></td>
-            <td>{data.rCountry || 'N/A'}</td>
-          </tr>
+
+          {data.rAddressSameAsPermanent === 'No' ? (
+            <>
+              <tr>
+                <td><strong>Residential Address:</strong></td>
+                <td>{data.rAddress || 'N/A'}</td>
+              </tr>
+              <tr>
+                <td><strong>Residential City:</strong></td>
+                <td>{data.rCity || 'N/A'}</td>
+              </tr>
+              <tr>
+                <td><strong>Residential District:</strong></td>
+                <td>{data.rDistrict || 'N/A'}</td>
+              </tr>
+              <tr>
+                <td><strong>Residential Municipality:</strong></td>
+                <td>{data.rMunicipality || 'N/A'}</td>
+              </tr>
+              <tr>
+                <td><strong>Residential Panchayt:</strong></td>
+                <td>{data.rPanchayt || 'N/A'}</td>
+              </tr>
+              <tr>
+                <td><strong>Residential Post Office:</strong></td>
+                <td>{data.rPostOffice || 'N/A'}</td>
+              </tr>
+              <tr>
+                <td><strong>Residential Police Station:</strong></td>
+                <td>{data.rPoliceStation || 'N/A'}</td>
+              </tr>
+              <tr>
+                <td><strong>Residential PIN Code:</strong></td>
+                <td>{data.rPinCode || 'N/A'}</td>
+              </tr>
+              <tr>
+                <td><strong>Residential State:</strong></td>
+                <td>{data.rState || 'N/A'}</td>
+              </tr>
+              <tr>
+                <td><strong>Residential Country:</strong></td>
+                <td>{data.rCountry || 'N/A'}</td>
+              </tr>
+            </>
+          ) : (
+            <>Residential Address is same as Permanent</>
+          )}
+
 
           {/* Guardian Details */}
           <tr>

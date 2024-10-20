@@ -2,26 +2,28 @@ import React from 'react';
 import './styles/AdmissionForm.css';
 
 const PreviousSchoolDetails = ({ register, errors }) => {
+  
   return (
     <div>
       <h2>Previous School Details</h2>
       
       <div>
-        <label>Student Code</label>
+        <label>Student Code(Required for Class 1 to 8 Admission)</label>
+        <p style={{marginTop:'10px'}}>Student for admission in Class Beez , Ankur and Kisholoy write 'N/A'</p>
         <input 
-          {...register("StudentCode", { required: "Student Code is required" })} 
+          {...register("studentCode", { required: "Student Code is required" })} 
           placeholder="Enter Student Code"
         />
-        {errors.StudentCode && <p className="error">{errors.StudentCode.message}</p>}
+        {errors.studentCode && <p className="error">{errors.studentCode.message}</p>}
       </div>
       
       <div>
-        <label>Grade</label>
+        <label>Class</label>
         <select 
-          {...register("Grade", { required: "Grade is required" })}
+          {...register("grade", { required: "grade is required" })}
           defaultValue="" // Set default value to an empty string for validation
         >
-          <option value="" disabled>Select Grade</option>
+          <option value="" disabled>Select grade</option>
           <option value="1">1</option>
           <option value="2">2</option>
           <option value="3">3</option>
@@ -31,7 +33,7 @@ const PreviousSchoolDetails = ({ register, errors }) => {
           <option value="7">7</option>
           <option value="8">8</option>
         </select>
-        {errors.Grade && <p className="error">{errors.Grade.message}</p>}
+        {errors.grade && <p className="error">{errors.grade.message}</p>}
       </div>
     </div>
   );
