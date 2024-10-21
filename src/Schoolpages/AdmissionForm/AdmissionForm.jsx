@@ -14,7 +14,7 @@ import SummaryApi from '../../common';
 
 const AdmissionForm = () => {
   const [step, setStep] = useState(1);
-  const { register, handleSubmit, trigger, watch, formState: { errors } } = useForm({
+  const { register, handleSubmit, trigger, watch, formState: { errors },setValue } = useForm({
     defaultValues: {
       name: '',
       email: '',
@@ -98,19 +98,18 @@ const AdmissionForm = () => {
 
   // Handle next button with validation
   const handleNext = async () => {
-    const isStepValid = await trigger(); // Validates all inputs in the current step
+    const isStepValid = await trigger(); 
     if (isStepValid) {
       setStep((prevStep) => prevStep + 1);
     }
   };
 
-  // Handle previous button
   const handlePrev = () => setStep((prevStep) => prevStep - 1);
 
   return (
     <div className="form-container">
       <form onSubmit={handleSubmit(onSubmit)}>
-        {step === 1 && <BasicInfo register={register} errors={errors} />}
+        {step === 1 && <BasicInfo register={register} errors={errors} setValue={setValue} />}
         {step === 2 && <PreviousSchoolDetails register={register} errors={errors} />}
         {step === 3 && <PermanentContactDetails register={register} errors={errors} />}
         {step === 4 && <ResidentialContactDetails register={register} errors={errors} />}

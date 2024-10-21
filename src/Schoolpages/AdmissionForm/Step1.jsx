@@ -1,7 +1,24 @@
 import React from 'react';
 import './styles/AdmissionForm.css';
+import uploadImg from '../../helper/uploadImg';
+import { useState } from 'react';
 
-const BasicInfo = ({ register, errors }) => {
+const BasicInfo = ({ register, errors,setValue }) => {
+  const [profilePicUrl, setProfilePicUrl] = useState('');
+
+  const handleChange = async (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      try {
+        const imageUrl = await uploadImg(file);
+        setProfilePicUrl(imageUrl.url);
+        setValue("profilePic", imageUrl.url);  
+        console.log("Image uploaded successfully: ", imageUrl.url);
+      } catch (error) {
+        console.error("Error uploading image:", error);
+      }
+    }
+  };
   return (
     <div>
       <h2>Basic Information</h2>
@@ -29,10 +46,18 @@ const BasicInfo = ({ register, errors }) => {
       <div>
         <label>Profile Picture</label>
         <input
-          type="text"
-          {...register("profilePic", )}
+          type="file"
+          {...register("profilePic")}
+          accept="image/*"
+          onChange={handleChange}
         />
         {errors.profilePic && <p>{errors.profilePic.message}</p>}
+        {profilePicUrl && (
+          <div>
+            <p>Uploaded Image:</p>
+            <img src={profilePicUrl} alt="Profile Pic" width="100" />
+          </div>
+        )}
       </div>
       <div>
         <label>Phone</label>
@@ -72,8 +97,8 @@ const BasicInfo = ({ register, errors }) => {
         {errors.socialCatagory && <p>{errors.socialCatagory.message}</p>}
       </div>
       <div>
-        <label style={{marginTop:'10px'}}>Social Category Registration Number</label>
-        <p style={{marginTop:'10px'}}>Student Catagory from General Catagory write 'N/A'</p>
+        <label style={{ marginTop: '10px' }}>Social Category Registration Number</label>
+        <p style={{ marginTop: '10px' }}>Student Catagory from General Catagory write 'N/A'</p>
         <input
           {...register("socialCatagoryRegNo", { required: "Social category registration number is required" })}
         />
