@@ -159,7 +159,8 @@ const SchoolNavbar = () => {
                         {
                             user&&
                             <HashLink smooth to='/school/profile' className={styles.sloginImg}>
-                                <img src={user.profilePic} alt="user" />
+                                <img src={user.profilePic} alt="user" onClick={toggleSideMenu}/>
+                                
                             </HashLink>
                         }
                         <li onClick={toggleSideMenu}><ClearIcon style={{ cursor: 'pointer', color: 'red' }} /></li>

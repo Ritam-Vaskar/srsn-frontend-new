@@ -7,6 +7,7 @@ import SummaryApi from './common';
 import { useDispatch } from 'react-redux';
 import { setUserDetails } from './store/userSlice';
 import { useEffect } from 'react';
+import Context from './Context';
 
 function App() {
   const dispatch = useDispatch();
@@ -37,10 +38,13 @@ function App() {
 
   return (
     <>
-      {/* <Navbar /> */}
-      <ToastContainer />
-      <Outlet />
-      {/* <Footer /> */}
+      <Context.Provider value={{ fetchUser }}>
+        {/* <Navbar /> */}
+        <ToastContainer />
+        <Outlet />
+        {/* <Footer /> */}
+      </Context.Provider>
+
     </>
   );
 }

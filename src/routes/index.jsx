@@ -22,6 +22,7 @@ import SchoolHome from './../Schoolpages/Home/Home';
 import Alumni from './../Schoolpages/Alumini/Alumini';
 import Academic from '../Schoolpages/Academic/Academic';
 import AdmissionForm from '../Schoolpages/AdmissionForm/AdmissionForm';
+import Profile from './../Schoolpages/Profile/UserProfile/UserProfile'
 
 //Dashboard
 import Login from './../Authentication/Login/Login';
@@ -73,6 +74,10 @@ const router = createBrowserRouter([
                     {
                         path: 'admission_form',
                         element: <AdmissionForm />
+                    },
+                    {
+                        path:'profile',
+                        element:<Profile/>
                     },
                     {
                         path:'login',

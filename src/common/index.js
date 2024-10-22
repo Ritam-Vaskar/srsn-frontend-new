@@ -13,6 +13,18 @@ const SummaryApi={
     UserProfile:{
         url:backendUrl+"/api/userProfile",
         method:"GET"
+    },
+    UserEdit:{
+        url:backendUrl+"/api/userEdit",
+        method:"PUT"
+    },
+    StudentFetch:{
+        url:backendUrl+"/api/studentFetch",
+        method:"GET"
+    },
+    TeacherFetch:{
+        url:backendUrl+"/api/teacherFetch",
+        method:"GET"
     }
 }
 

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import AlumniCard from '../../components/ProfileCard/ProfileCard';
+import AlumniCard from '../../components/AlumniProfileCard/ProfileCard';
 import alumniData from '../../data/Alumni.json'; // Import the alumni data
 import styles from './styles/Alumni.module.scss';
 

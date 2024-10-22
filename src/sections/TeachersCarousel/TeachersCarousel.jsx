@@ -1,12 +1,38 @@
 import React from 'react';
+import { useState, useEffect } from 'react';
 import TeacherCard from '../../components/TeacherCard/TeacherCard';
-import teachers from '../../data/Teachers';
 import "slick-carousel/slick/slick.css"; 
 import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";
 import './styles/TeachersCarousel.css';
+import SummaryApi from '../../common';
 
 const TeachersCarousel = () => {
+    const [teachers, setTeachers] =useState([]);
+    const fetchTeachers = async () => {
+        try{
+            const response = await fetch(SummaryApi.TeacherFetch.url, {
+                method: SummaryApi.TeacherFetch.method,
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                credentials: 'include'
+            });
+            const result = await response.json();
+            if (!result.success) {
+                toast.error(result.message);
+                return;
+            }
+            setTeachers(result.teacher);
+        } catch (err) {
+            toast.error(err.message);
+        }
+    }
+
+    useEffect(() => {
+        fetchTeachers();
+    }, []);
+
     const settings = {
         dots: true,
         infinite: true,
