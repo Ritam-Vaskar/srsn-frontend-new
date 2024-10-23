@@ -15,3 +15,32 @@
     gap: 20px;
   }
 }
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+
+  button {
+    margin: 0 5px;
+    padding: 8px 12px;
+    background-color: #f0f0f0;
+    border: 1px solid #ccc;
+    cursor: pointer;
+
+    &:hover {
+      background-color: #ddd;
+    }
+
+    &.activePage {
+      background-color: #007bff;
+      color: white;
+      border-color: #007bff;
+    }
+  }
+}
+
+.alumniSearch{
+  display: flex;
+  justify-content: center;
+}

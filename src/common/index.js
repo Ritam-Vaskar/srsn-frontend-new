@@ -2,6 +2,7 @@ const backendUrl="http://localhost:8000"
 
 
 const SummaryApi={
+    //User sign up and sign in 
     UserSignIn:{
         url:backendUrl+"/api/userSignIn",
         method:"POST"
@@ -10,6 +11,7 @@ const SummaryApi={
         url:backendUrl+"/api/userAdmissionSignUp",
         method:"POST"
     },
+    //User Profile
     UserProfile:{
         url:backendUrl+"/api/userProfile",
         method:"GET"
@@ -25,7 +27,18 @@ const SummaryApi={
     TeacherFetch:{
         url:backendUrl+"/api/teacherFetch",
         method:"GET"
+    },
+
+    //Alumni
+    AlumniFetch:{
+        url:backendUrl+"/api/alumniView",
+        method:"GET"
+    },
+    AlumniSearch:{
+        url:backendUrl+"/api/alumniSearch",
+        method:"POST"
     }
+
 }
 
 
