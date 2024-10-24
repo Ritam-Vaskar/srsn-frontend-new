@@ -7,6 +7,8 @@ import { toast } from 'react-toastify';
 import { useDispatch } from 'react-redux';
 import { setUserDetails } from '../../../store/userSlice';
 import { useNavigate } from 'react-router-dom';
+import SummaryApi from '../../../common';
+
 
 
 const UserProfile = ({ user }) => {
@@ -24,11 +26,27 @@ const UserProfile = ({ user }) => {
     setEditModalOpen(false);
   };
 
-  const handleLogout = () => {
-    //backend call
-    dispatch(setUserDetails(null));
-    navigate('/school/login');
-    toast.success('Logged out successfully!');
+  const handleLogout = async() => {
+    try {
+      const response = await fetch(SummaryApi.UserLogout.url, {
+        method: SummaryApi.UserLogout.method,
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        credentials: 'include'
+      });
+      const result = await response.json();
+      if (result.success) {
+        dispatch(setUserDetails(null));
+        navigate('/school');
+        toast.success('Logged out successfully!');
+      } else {
+        toast.error(result.message);
+      }
+    } catch (error) {
+      toast.error(result.message);
+    }
+   
   }
 
   if (!user) {

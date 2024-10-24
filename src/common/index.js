@@ -11,6 +11,10 @@ const SummaryApi={
         url:backendUrl+"/api/userAdmissionSignUp",
         method:"POST"
     },
+    UserLogout:{
+        url:backendUrl+"/api/userLogout",
+        method:"POST"
+    },
     //User Profile
     UserProfile:{
         url:backendUrl+"/api/userProfile",
@@ -28,6 +32,7 @@ const SummaryApi={
         url:backendUrl+"/api/teacherFetch",
         method:"GET"
     },
+
 
     //Alumni
     AlumniFetch:{
