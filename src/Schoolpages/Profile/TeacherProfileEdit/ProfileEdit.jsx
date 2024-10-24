@@ -6,7 +6,7 @@ import { toast } from 'react-toastify';
 import styles from './ProfileEdit.module.scss';
 import Context from '../../../Context';
 
-const ProfileEdit = ({ user }) => {
+const ProfileEdit = ({ user, closeModal, fetchUser }) => {
   const { register, handleSubmit, formState: { errors }, setValue } = useForm({
     defaultValues: {
       name: user.name,
@@ -17,7 +17,6 @@ const ProfileEdit = ({ user }) => {
     }
   });
   const [profilePicUrl, setProfilePicUrl] = useState(user.profilePic);
-  const { fetchUser } = useContext(Context);
 
   const onSubmit = async (data) => {
     console.log("Form data:", data);
@@ -36,7 +35,8 @@ const ProfileEdit = ({ user }) => {
         return;
       }
       toast.success('Profile updated successfully!');
-      fetchUser();
+      fetchUser();  // Fetch the updated user data
+      closeModal(); // Automatically close the modal after successful update
     } catch (error) {
       console.log(error);
       toast.error("Failed to update profile. Please try again.");
@@ -60,7 +60,10 @@ const ProfileEdit = ({ user }) => {
 
   return (
     <div className={styles.container}>
-      <h2>Edit Profile</h2>
+      <div className={styles.modalHeader}>
+        <h2>Edit Profile</h2>
+        <button className={styles.closeButton} onClick={closeModal}>X</button> {/* Close button */}
+      </div>
       <form onSubmit={handleSubmit(onSubmit)}>
         <div className={styles['form-group']}>
           <label>Name</label>
@@ -84,7 +87,7 @@ const ProfileEdit = ({ user }) => {
         <div className={styles['form-group']}>
           <label>Profile Picture</label>
           <input type="file" onChange={handleChange} className={styles.fileInput} />
-          {profilePicUrl && <img src={profilePicUrl} alt="Profile" width="100" className={styles.img}/>}
+          {profilePicUrl && <img src={profilePicUrl} alt="Profile" width="100" className={styles.img} />}
         </div>
 
         <div className={styles['form-group']}>
