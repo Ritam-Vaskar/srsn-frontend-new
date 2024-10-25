@@ -1,5 +1,7 @@
+// pages/Alumni.js
 import React, { useEffect, useState } from 'react';
 import AlumniCard from '../../components/AlumniProfileCard/ProfileCard';
+import AlumniApplicationForm from '../../components/AlumniApplicationForm/AlumniApplicationForm';
 import styles from './styles/Alumni.module.scss';
 import SummaryApi from '../../common';
 import { toast } from 'react-toastify';
@@ -9,25 +11,25 @@ import SearchResult from './../../sections/AlumniSearch/SearchDiv/SearchPage';
 const Alumni = () => {
   const [alumniList, setAlumniList] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
+  const [search, setSearch] = useState('');
+  const [showApplicationForm, setShowApplicationForm] = useState(false);
+
   const alumniPerPage = 6;
-  const[search, setSearch] = useState("");
+
   const fetchAlumniData = async () => {
     try {
       const response = await fetch(SummaryApi.AlumniFetch.url, {
         method: SummaryApi.AlumniFetch.method,
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        credentials: 'include'
+        headers: { 'Content-Type': 'application/json' },
+        credentials: 'include',
       });
       const data = await response.json();
       setAlumniList(data.alumni);
-    }
-    catch (err) {
+    } catch (err) {
       console.log(err);
       toast.error(err.message);
     }
-  }
+  };
 
   useEffect(() => {
     fetchAlumniData();
@@ -36,21 +38,23 @@ const Alumni = () => {
   const indexOfLastAlumni = currentPage * alumniPerPage;
   const indexOfFirstAlumni = indexOfLastAlumni - alumniPerPage;
   const currentAlumni = alumniList.slice(indexOfFirstAlumni, indexOfLastAlumni);
-
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
-
-  // Calculate the total number of pages
   const totalPages = Math.ceil(alumniList.length / alumniPerPage);
 
   return (
     <div className={styles.alumniPage}>
       <div className={styles.upperDiv}>
         <h2>Our Alumni</h2>
-        <center><div className={styles.alumniSearch}>
-          <input type="text" placeholder="Search Alumni" onChange={(e)=>setSearch(e.target.value)}/>
-          <SearchIcon/>
-        </div></center>
-        {search.length>1 && <SearchResult search={search}/>}
+        <center>
+          <div className={styles.alumniSearch}>
+            <input type="text" placeholder="Search Alumni" onChange={(e) => setSearch(e.target.value)} />
+            <SearchIcon />
+          </div>
+        </center>
+        {search.length > 1 && <SearchResult search={search} />}
+        <center><button onClick={() => setShowApplicationForm(true)} className={styles.applyButton}>
+          Apply for Alumni
+        </button></center>
       </div>
 
       <div className={styles.alumniGrid}>
@@ -59,7 +63,6 @@ const Alumni = () => {
         ))}
       </div>
 
-      {/* Pagination Controls */}
       <div className={styles.pagination}>
         {[...Array(totalPages).keys()].map((page) => (
           <button
@@ -71,6 +74,8 @@ const Alumni = () => {
           </button>
         ))}
       </div>
+
+      {showApplicationForm && <AlumniApplicationForm onClose={() => setShowApplicationForm(false)} />}
     </div>
   );
 };
