@@ -12,6 +12,7 @@ const StudentFetch = () => {
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState('');
 
+
     const classOptions = [
         { value: 'beez', label: 'Beez' },
         { value: 'ankur', label: 'Ankur' },
@@ -84,11 +85,14 @@ const StudentFetch = () => {
             return;
         }
 
-        const marksPayload = students.map((student) => ({
-            student_id: student._id,
-            subjectName: selectedSubject,
-            Marks: marks[student._id] || 0,
-        }));
+        // Only include students who have a mark entered or existing marks to avoid setting default 0s
+        const marksPayload = students
+            .filter((student) => marks[student._id] !== undefined) // only include students with marks
+            .map((student) => ({
+                student_id: student._id,
+                subjectName: selectedSubject,
+                Marks: marks[student._id] || student.marks?.[selectedSubject], // use existing marks if already present
+            }));
 
         console.log("Submitting marks payload:", marksPayload);
 
@@ -138,7 +142,6 @@ const StudentFetch = () => {
                 ))}
             </select>
 
-
             {loading ? (
                 <p>Loading students...</p>
             ) : error ? (
@@ -155,8 +158,7 @@ const StudentFetch = () => {
                                 <td>
                                     <input
                                         type="number"
-                                        value={marks[student._id] || ''}
-                                        // placeholder={`${student.marks?.selectedSubject || 0}`}
+                                        // value={student.subjects?.[selectedSubject] ?? ''}
                                         onChange={e => handleMarksChange(student._id, e.target.value)}
                                         min="0"
                                         max="100"
