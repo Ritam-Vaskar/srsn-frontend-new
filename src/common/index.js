@@ -32,7 +32,10 @@ const SummaryApi={
         url:backendUrl+"/api/teacherFetch",
         method:"GET"
     },
-
+    UserMarksSubmission:{
+        url:backendUrl+"/api/userMarksSubmission",
+        method:"POST"
+    },
 
     //Alumni
     AlumniFetch:{
@@ -41,6 +44,10 @@ const SummaryApi={
     },
     AlumniSearch:{
         url:backendUrl+"/api/alumniSearch",
+        method:"POST"
+    },
+    AlumniApplicationSave:{
+        url:backendUrl+"/api/alumniTempSave",
         method:"POST"
     }
 

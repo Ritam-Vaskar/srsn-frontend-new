@@ -1,27 +1,59 @@
-// components/AlumniApplicationForm.js
-import React from 'react';
+import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { toast } from 'react-toastify';
 import styles from './styles/AlumniApplicationForm.module.scss';
+import SummaryApi from '../../common';
+import uploadImg from '../../helper/uploadImg';
 
 const AlumniApplicationForm = ({ onClose }) => {
-  const { register, handleSubmit, formState: { errors } } = useForm();
+  const [profilePicUrl, setProfilePicUrl] = useState('');
+  const [socialMediaLinks, setSocialMediaLinks] = useState(['', '']); // Array to store two links
+
+  const { register, handleSubmit, setValue, formState: { errors } } = useForm();
 
   const onSubmit = async (data) => {
-    try {
-      const response = await fetch('/api/alumni/apply', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(data),
+    // Add socialMediaLinks to the form data
+    const formData = { ...data, socialMediaLinks };
+    console.log(formData);
+    try{
+      const response = await fetch(SummaryApi.AlumniApplicationSave.url, {
+        method: SummaryApi.AlumniApplicationSave.method,
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(formData),
+        credentials: 'include'
       });
-      if (response.ok) {
-        toast.success("Application submitted successfully!");
-        onClose();
-      } else {
-        toast.error("Failed to submit application.");
+      const result = await response.json();
+      if (!result.success) {
+        toast.error(result.message);
+        return;
       }
-    } catch (error) {
-      toast.error(error.message);
+      toast.success('Application submitted successfully!');
+      onClose();
+    } catch (err) {
+      toast.error(err.message);
+    }
+  };
+
+  const handleSocialMediaChange = (index, value) => {
+    const updatedLinks = [...socialMediaLinks];
+    updatedLinks[index] = value;
+    setSocialMediaLinks(updatedLinks);
+  };
+
+  const handleChange = async (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      try {
+        const imageUrl = await uploadImg(file);
+        setProfilePicUrl(imageUrl.url);
+        setValue("profilePic", imageUrl.url); 
+        console.log("Image uploaded successfully: ", imageUrl.url);
+      } catch (error) {
+        console.error("Error uploading image:", error);
+        toast.error("Failed to upload image. Please try again.");
+      }
     }
   };
 
@@ -62,17 +94,27 @@ const AlumniApplicationForm = ({ onClose }) => {
 
             <input
               type="text"
-              placeholder="Current State"
+              placeholder="Current Place"
               {...register("currentState", { required: "Current State is required" })}
             />
             {errors.currentState && <p className={styles.error}>{errors.currentState.message}</p>}
-
-            <input
-              type="text"
-              placeholder="Profile Pic URL"
-              {...register("profilePic", { required: "Profile Pic URL is required" })}
-            />
-            {errors.profilePic && <p className={styles.error}>{errors.profilePic.message}</p>}
+            
+            <div>
+              <label>Profile Picture</label>
+              <input
+                type="file"
+                {...register("profilePic")}
+                accept="image/*"
+                onChange={handleChange}
+              />
+              {errors.profilePic && <p>{errors.profilePic.message}</p>}
+              {profilePicUrl && (
+                <div>
+                  <p>Uploaded Image:</p>
+                  <img src={profilePicUrl} alt="Profile Pic" width="100" />
+                </div>
+              )}
+            </div>
 
             <input
               type="text"
@@ -85,8 +127,16 @@ const AlumniApplicationForm = ({ onClose }) => {
           <div className={styles.row}>
             <input
               type="text"
-              placeholder="Social Media Links (comma-separated)"
-              {...register("socialMediaLinks")}
+              placeholder="Social Media Link 1"
+              value={socialMediaLinks[0]}
+              onChange={(e) => handleSocialMediaChange(0, e.target.value)}
+            />
+
+            <input
+              type="text"
+              placeholder="Social Media Link 2"
+              value={socialMediaLinks[1]}
+              onChange={(e) => handleSocialMediaChange(1, e.target.value)}
             />
 
             <input

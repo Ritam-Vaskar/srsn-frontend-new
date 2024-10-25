@@ -4,6 +4,7 @@ import styles from './StudentFetch.module.scss';
 import { toast } from 'react-toastify';
 import SubjectOptions from '../../../helper/classSubject';
 
+
 const StudentFetch = () => {
     const [students, setStudents] = useState([]);
     const [selectedClass, setSelectedClass] = useState('beez');
@@ -70,19 +71,47 @@ const StudentFetch = () => {
     };
 
     const handleSaveMarks = async () => {
+        // Check if a subject has been selected
         if (!selectedSubject) {
             toast.error('Please select a subject before saving marks.');
             return;
         }
 
-        // Create the data payload in the required format
+        // Create the payload for submission in the required format
         const marksPayload = students.map((student) => ({
             student_id: student._id,
             subjectName: selectedSubject,
-            Marks: marks[student._id] || 0, // Default to 0 if no marks entered
+            Marks: marks[student._id] || 0, // Defaults to 0 if no marks entered
         }));
 
-        console.log(marksPayload);
+        console.log("Submitting marks payload:", marksPayload);
+
+        try {
+            // Make the request to save marks
+            const response = await fetch(SummaryApi.UserMarksSubmission.url, {
+                method: SummaryApi.UserMarksSubmission.method,
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(marksPayload),
+                credentials: 'include', // Include credentials for authentication
+            });
+
+            const result = await response.json();
+
+            // Check if the result indicates success
+            if (!result.success) {
+                toast.error(result.message);
+                return;
+            }
+
+            // Success feedback
+            toast.success('Marks saved successfully!');
+        } catch (err) {
+            // General error feedback for network or other issues
+            console.error("Error saving marks:", err);
+            toast.error('Failed to save marks. Please try again later.');
+        }
     };
 
     return (
@@ -130,7 +159,7 @@ const StudentFetch = () => {
                     </tbody>
                 </table>
             )}
-            
+
             <button onClick={handleSaveMarks} className={styles.saveButton}>Save Marks</button>
         </div>
     );
