@@ -34,7 +34,7 @@
   transition: all 0.3s ease;
 }
 
-input:focus {
+.form-container input:focus {
   outline: none;
   border-color: #007BFF;
   box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
@@ -87,7 +87,7 @@ input[type="checkbox"] {
   margin-top: 15px;
 }
 
-/* Preview table */
+/* Preview table
 table {
   width: 100%;
   margin-top: 20px;
@@ -103,7 +103,7 @@ td {
 
 tbody tr:nth-child(even) {
   background-color: #f2f2f2;
-}
+} */
 
 
 
@@ -114,6 +114,9 @@ h2 {
 }
 
 /* Style for input fields */
+.form-container{
+
+
 input[type="text"], 
 input[type="email"], 
 input[type="number"], 
@@ -127,6 +130,8 @@ select {
   font-size: 16px;
   box-sizing: border-box;
   transition: border-color 0.3s ease;
+}
+
 }
 
 /* Style for dropdown (select) fields */
@@ -166,6 +171,8 @@ input[type="file"] {
 }
 
 /* Button styles */
+
+.form-container{
 button {
   padding: 12px;
   background-color: #4CAF50;
@@ -179,6 +186,8 @@ button {
 
 button:hover {
   background-color: #45a049;
+}
+
 }
 
 /* Media query for responsiveness */

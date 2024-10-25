@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import BasicInfo from './Step1';
 import PreviousSchoolDetails from './Step2';
@@ -9,12 +9,21 @@ import PaymentDetails from './Step6';
 import Preview from './Step7';
 import './styles/AdmissionForm.css';
 import { toast } from 'react-toastify';
-
 import SummaryApi from '../../common';
+
+const LOCAL_STORAGE_KEY = 'admissionFormData';
 
 const AdmissionForm = () => {
   const [step, setStep] = useState(1);
-  const { register, handleSubmit, trigger, watch, formState: { errors },setValue } = useForm({
+
+  const {
+    register,
+    handleSubmit,
+    trigger,
+    watch,
+    formState: { errors },
+    setValue,
+  } = useForm({
     defaultValues: {
       name: '',
       email: '',
@@ -62,43 +71,61 @@ const AdmissionForm = () => {
       guardianQualification: '',
       paymentId: '',
       rAddressSameAsPermanent: '',
-    }
+    },
   });
+
+  // Load form data from local storage on component mount
+  useEffect(() => {
+    const savedFormData = JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY));
+    if (savedFormData) {
+      Object.keys(savedFormData).forEach((key) => {
+        setValue(key, savedFormData[key]);
+      });
+    }
+  }, [setValue]);
+
+  // Watch form data and store it in local storage whenever it changes
+  useEffect(() => {
+    const subscription = watch((value) => {
+      localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(value));
+    });
+    return () => subscription.unsubscribe(); // Cleanup
+  }, [watch]);
 
   // On submission of the entire form
   const onSubmit = async (data) => {
     console.log('Final Submission Data:', data);
+    
 
     try {
       const response = await fetch(SummaryApi.UserAdmissionSignUp.url, {
         method: SummaryApi.UserAdmissionSignUp.method,
         headers: {
-          'Content-Type': 'application/json'
+          'Content-Type': 'application/json',
         },
         body: JSON.stringify(data),
-        credentials: 'include'
+        credentials: 'include',
       });
 
-      const result = await response.json();  
+      const result = await response.json();
 
       if (!result.success) {
-        toast.error(result.message);  
+        toast.error(result.message);
         return;
       }
 
-      toast.success('Form submitted successfully!');  
+      toast.success('Form submitted successfully!');
+      localStorage.removeItem(LOCAL_STORAGE_KEY); // Clear form data from local storage on successful submission
       console.log(result);
-
     } catch (error) {
-      toast.error(error.message); 
+      toast.error(error.message);
       console.error('Submission Error:', error);
     }
   };
 
-
   // Handle next button with validation
   const handleNext = async () => {
-    const isStepValid = await trigger(); 
+    const isStepValid = await trigger(); // Validates all fields in the current step
     if (isStepValid) {
       setStep((prevStep) => prevStep + 1);
     }
@@ -125,7 +152,7 @@ const AdmissionForm = () => {
               <label>
                 <input
                   type="checkbox"
-                  {...register("terms", { required: "You must accept terms and conditions" })}
+                  {...register('terms', { required: 'You must accept terms and conditions' })}
                 />
                 I accept the terms and conditions
               </label>

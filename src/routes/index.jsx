@@ -23,6 +23,7 @@ import Alumni from './../Schoolpages/Alumini/Alumini';
 import Academic from '../Schoolpages/Academic/Academic';
 import AdmissionForm from '../Schoolpages/AdmissionForm/AdmissionForm';
 import Profile from './../Schoolpages/Profile/Profile'
+import Teacher from '../Schoolpages/Teachers/Teachers'
 
 //Dashboard
 import Login from './../Authentication/Login/Login';
@@ -82,6 +83,10 @@ const router = createBrowserRouter([
                     {
                         path:'login',
                         element:<Login/>
+                    },
+                    {
+                        path:'teacher',
+                        element:<Teacher/>
                     }
                 ]
             }

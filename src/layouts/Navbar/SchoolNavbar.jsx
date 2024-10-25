@@ -81,7 +81,7 @@ const SchoolNavbar = () => {
                         <ul className={styles.subOption}>
                             <li><HashLink smooth to='/school/home'>Home</HashLink></li>
                             <li><HashLink smooth to='/school/home#mission'>Mission and Vision</HashLink></li>
-                            <li><HashLink smooth to='/school/home#teachers-carousel'>Meet Our Teachers</HashLink></li>
+                            <li><HashLink smooth to='/school/teacher'>Meet Our Teachers</HashLink></li>
                             <li><HashLink smooth to='/school/home#gallery'>Gallery</HashLink></li>
                             <li><HashLink smooth to='/school/home#contact'>Contact</HashLink></li>
                             <li><HashLink smooth to='/school/home#school-media'>Media</HashLink></li>

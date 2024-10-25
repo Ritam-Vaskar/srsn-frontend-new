@@ -66,8 +66,8 @@ const UserProfile = ({ user }) => {
         {user.role === 'Teacher' && (
           <>
             <div className={styles.editProfile} onClick={() => setFlag(true)}>Your Profile</div>
-            <div className={styles.studentDetails} onClick={() => setFlag(false)}>Student Details</div>
-            <div className={styles.resultPortal} onClick={handleEditClick}>Result Portal</div>
+            <div className={styles.studentDetails} onClick={() => setFlag(false)}>Result Portal</div>
+            <div className={styles.resultPortal} onClick={handleEditClick}>Student Details</div>
           </>
         )}
         {user.role === 'Student' && (
@@ -79,8 +79,8 @@ const UserProfile = ({ user }) => {
         {user.role === 'Admin' && (
           <>
             <div className={styles.editProfile} onClick={() => setFlag(true)}>Your Profile</div>
-            <div className={styles.studentDetails} onClick={() => setFlag(false)}>Student Details</div>
-            <div className={styles.resultPortal} onClick={handleEditClick}>Result Portal</div>
+            <div className={styles.studentDetails} onClick={() => setFlag(false)}>Result Portal</div>
+            <div className={styles.resultPortal} onClick={handleEditClick}>Student Details</div>
             <div className={styles.adminPortal} onClick={handleEditClick}>Admin Portal</div>
           </>
         )}

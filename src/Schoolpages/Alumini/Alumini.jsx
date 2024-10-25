@@ -46,10 +46,10 @@ const Alumni = () => {
     <div className={styles.alumniPage}>
       <div className={styles.upperDiv}>
         <h2>Our Alumni</h2>
-        <div className={styles.alumniSearch}>
+        <center><div className={styles.alumniSearch}>
           <input type="text" placeholder="Search Alumni" onChange={(e)=>setSearch(e.target.value)}/>
           <SearchIcon/>
-        </div>
+        </div></center>
         {search.length>1 && <SearchResult search={search}/>}
       </div>
 

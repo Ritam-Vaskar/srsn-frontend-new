@@ -7,11 +7,11 @@
     margin: 30px;
     border: 1px solid var(--ashram-yellow);
     border-radius: 10px;
-    background-color: #a5a5a54f
+    background-color: #dfdfdf4f
   }
 
   .hero-section h1{
-    font-size: 50px;
+    font-size: 40px;
     overflow: hidden;
     margin-top: 20px;
     margin-bottom: 10px;
@@ -36,6 +36,7 @@
   }
   
   .hero-image img {
+    aspect-ratio: 5/6;
     width: 100%;
     height: auto;
     border-radius: 10px;
