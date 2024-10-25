@@ -4,7 +4,6 @@ import styles from './StudentFetch.module.scss';
 import { toast } from 'react-toastify';
 import SubjectOptions from '../../../helper/classSubject';
 
-
 const StudentFetch = () => {
     const [students, setStudents] = useState([]);
     const [selectedClass, setSelectedClass] = useState('beez');
@@ -40,6 +39,7 @@ const StudentFetch = () => {
                 setError(result.message);
                 return;
             }
+
             const allStudents = [
                 ...result.userBeez,
                 ...result.userAnkur,
@@ -49,7 +49,15 @@ const StudentFetch = () => {
                 ...result.userC3,
                 ...result.userC4,
             ];
-            setStudents(allStudents.filter(student => student.grade === selectedClass));
+            const filteredStudents = allStudents.filter(student => student.grade === selectedClass);
+            setStudents(filteredStudents);
+
+            // Initialize marks state with the current marks for the selected subject if available
+            const initialMarks = {};
+            filteredStudents.forEach(student => {
+                initialMarks[student._id] = student.marks?.[selectedSubject] || '';
+            });
+            setMarks(initialMarks);
         } catch (err) {
             setError('Failed to fetch students. Please try again later.');
             toast.error('Failed to fetch students');
@@ -60,7 +68,7 @@ const StudentFetch = () => {
 
     useEffect(() => {
         fetchStudents();
-    }, [selectedClass]);
+    }, [selectedClass, selectedSubject]);
 
     const handleMarksChange = (studentId, value) => {
         if (value < 0 || value > 100) {
@@ -71,44 +79,38 @@ const StudentFetch = () => {
     };
 
     const handleSaveMarks = async () => {
-        // Check if a subject has been selected
         if (!selectedSubject) {
             toast.error('Please select a subject before saving marks.');
             return;
         }
 
-        // Create the payload for submission in the required format
         const marksPayload = students.map((student) => ({
             student_id: student._id,
             subjectName: selectedSubject,
-            Marks: marks[student._id] || 0, // Defaults to 0 if no marks entered
+            Marks: marks[student._id] || 0,
         }));
 
         console.log("Submitting marks payload:", marksPayload);
 
         try {
-            // Make the request to save marks
             const response = await fetch(SummaryApi.UserMarksSubmission.url, {
                 method: SummaryApi.UserMarksSubmission.method,
                 headers: {
                     'Content-Type': 'application/json',
                 },
                 body: JSON.stringify(marksPayload),
-                credentials: 'include', // Include credentials for authentication
+                credentials: 'include',
             });
 
             const result = await response.json();
 
-            // Check if the result indicates success
             if (!result.success) {
                 toast.error(result.message);
                 return;
             }
 
-            // Success feedback
             toast.success('Marks saved successfully!');
         } catch (err) {
-            // General error feedback for network or other issues
             console.error("Error saving marks:", err);
             toast.error('Failed to save marks. Please try again later.');
         }
@@ -125,11 +127,17 @@ const StudentFetch = () => {
             </select>
 
             <label>Subject:</label>
-            <select value={selectedSubject} onChange={e => setSelectedSubject(e.target.value)}>
-                {SubjectOptions[selectedClass]?.map(sub => (
-                    <option key={sub} value={sub}>{sub}</option>
+            <select value={selectedSubject} onChange={(e) => setSelectedSubject(e.target.value)}>
+                <option value="" disabled>
+                    Select Subject
+                </option>
+                {SubjectOptions[selectedClass]?.map((sub) => (
+                    <option key={sub} value={sub}>
+                        {sub}
+                    </option>
                 ))}
             </select>
+
 
             {loading ? (
                 <p>Loading students...</p>
@@ -148,10 +156,11 @@ const StudentFetch = () => {
                                     <input
                                         type="number"
                                         value={marks[student._id] || ''}
+                                        // placeholder={`${student.marks?.selectedSubject || 0}`}
                                         onChange={e => handleMarksChange(student._id, e.target.value)}
                                         min="0"
                                         max="100"
-                                        placeholder="Enter marks"
+                                        placeholder={`${student.subjects?.[selectedSubject] || 0}`}
                                     />
                                 </td>
                             </tr>
