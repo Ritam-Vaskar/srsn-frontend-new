@@ -35,6 +35,26 @@ function App() {
     fetchUser();
   })
 
+  //chatbat added
+  useEffect(() => {
+    // Create script for Botpress chat
+    const scriptInject = document.createElement('script');
+    scriptInject.src = import.meta.env.VITE_BOTPRESS_CHAT_URL;
+    document.body.appendChild(scriptInject);
+
+    // Create configuration script
+    const scriptConfig = document.createElement('script');
+    scriptConfig.src = import.meta.env.VITE_BOTPRESS_CONFIG_URL;
+    scriptConfig.defer = true;
+    document.body.appendChild(scriptConfig);
+
+    // Cleanup function to remove scripts on component unmount
+    return () => {
+      document.body.removeChild(scriptInject);
+      document.body.removeChild(scriptConfig);
+    };
+  }, []);
+
 
   return (
     <>

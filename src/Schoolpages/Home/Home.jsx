@@ -9,7 +9,7 @@ const Home = () => {
     return (
         <div>
             <section id="holytrio">
-                <HeroCarousel/>
+                <HeroCarousel />
             </section>
 
             <section id="mission">
@@ -19,7 +19,7 @@ const Home = () => {
             <section id="holytrio">
                 <HolyTrio />
             </section>
-            
+
             <section id="school-media">
                 <SchoolMedia />
             </section>
