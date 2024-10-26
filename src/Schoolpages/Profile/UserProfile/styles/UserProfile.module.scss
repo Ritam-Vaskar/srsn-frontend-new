@@ -114,6 +114,8 @@
     flex-direction: column;
     justify-content: flex-start;
     background-color: #fafafa;
+    overflow: auto;
+    height: 120vh;
 
     @media (max-width: 768px) {
         padding: 20px;

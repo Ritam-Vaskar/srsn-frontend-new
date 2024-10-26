@@ -6,62 +6,70 @@ import styles from './styles/Alumni.module.scss';
 
 const AlumniPanel = () => {
     const [alumniList, setAlumniList] = useState([]);
-    
-    // Fetch alumni data on component mount
+
+    // Fetch alumni applications on component mount
     useEffect(() => {
         fetchAlumniData();
     }, []);
 
     const fetchAlumniData = async () => {
         try {
-            const response = await fetch(SummaryApi.AlumniFetch.url, {
-                method: SummaryApi.AlumniFetch.method,
+            const response = await fetch(SummaryApi.AlumniApplicationFetch.url, {
+                method: SummaryApi.AlumniApplicationFetch.method,
                 headers: { 'Content-Type': 'application/json' },
                 credentials: 'include',
             });
             const data = await response.json();
-            setAlumniList(data.alumni);
+            if (response.ok) {
+                setAlumniList(data.alumni || []);
+            } else {
+                toast.error(data.message || "Failed to fetch alumni applications.");
+            }
         } catch (err) {
-            console.error(err);
-            toast.error("Failed to fetch alumni data");
+            console.error("Error fetching alumni data:", err);
+            toast.error("Failed to fetch alumni data.");
         }
     };
 
     const handleAccept = async (alumniId) => {
         try {
-            const response = await fetch(`${SummaryApi.AcceptAlumni.url}/${alumniId}`, {
-                method: 'POST',
+            const response = await fetch(SummaryApi.AlumniAccept.url, {
+                method: SummaryApi.AlumniAccept.method,
                 headers: { 'Content-Type': 'application/json' },
                 credentials: 'include',
+                body: JSON.stringify({ ID: alumniId, check: "true" }), // Set ID and check explicitly
             });
             const result = await response.json();
-            if (result.success) {
+            if (response.ok && result.success) {
                 toast.success("Alumni accepted!");
                 setAlumniList(prev => prev.filter(alumni => alumni._id !== alumniId));
             } else {
                 toast.error(result.message || "Failed to accept alumni");
             }
         } catch (error) {
-            toast.error("Error accepting alumni");
+            console.error("Error in accepting alumni:", error);
+            toast.error("Error accepting alumni.");
         }
     };
 
     const handleDecline = async (alumniId) => {
         try {
-            const response = await fetch(`${SummaryApi.DeclineAlumni.url}/${alumniId}`, {
-                method: 'DELETE',
+            const response = await fetch(SummaryApi.AlumniReject.url, {
+                method: SummaryApi.AlumniReject.method,
                 headers: { 'Content-Type': 'application/json' },
                 credentials: 'include',
+                body: JSON.stringify({ ID: alumniId, check: "false" }), // Set ID and check explicitly
             });
             const result = await response.json();
-            if (result.success) {
+            if (response.ok && result.success) {
                 toast.success("Alumni declined");
                 setAlumniList(prev => prev.filter(alumni => alumni._id !== alumniId));
             } else {
                 toast.error(result.message || "Failed to decline alumni");
             }
         } catch (error) {
-            toast.error("Error declining alumni");
+            console.error("Error in declining alumni:", error);
+            toast.error("Error declining alumni.");
         }
     };
 
