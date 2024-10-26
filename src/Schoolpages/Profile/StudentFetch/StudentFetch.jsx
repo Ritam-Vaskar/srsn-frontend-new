@@ -124,14 +124,14 @@ const StudentFetch = () => {
         <div className={styles.container}>
             <h1>Student List and Marks Entry</h1>
             <label>Class:</label>
-            <select value={selectedClass} onChange={e => setSelectedClass(e.target.value)}>
+            <select className={styles.select} value={selectedClass} onChange={e => setSelectedClass(e.target.value)}>
                 {classOptions.map(option => (
                     <option key={option.value} value={option.value}>{option.label}</option>
                 ))}
             </select>
 
             <label>Subject:</label>
-            <select value={selectedSubject} onChange={(e) => setSelectedSubject(e.target.value)}>
+            <select className={styles.select} value={selectedSubject} onChange={(e) => setSelectedSubject(e.target.value)}>
                 <option value="" disabled>
                     Select Subject
                 </option>

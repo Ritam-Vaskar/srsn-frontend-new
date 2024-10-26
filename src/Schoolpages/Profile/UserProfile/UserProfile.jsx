@@ -1,7 +1,9 @@
 import React, { useState, useContext } from 'react';
 import styles from './styles/UserProfile.module.scss';
-import StudentDetails from './../StudentFetch/StudentFetch';
+import StudentResult from './../StudentFetch/StudentFetch';
 import ProfileEdit from '../TeacherProfileEdit/ProfileEdit';
+import StudentDetails from '../../Profile/StudentDetails/StudentDetails';  // Import StudentDetails here
+import AdminPortal from '../Admin/AdminProfile';
 import Context from '../../../Context';
 import { toast } from 'react-toastify';
 import { useDispatch } from 'react-redux';
@@ -9,31 +11,22 @@ import { setUserDetails } from '../../../store/userSlice';
 import { useNavigate } from 'react-router-dom';
 import SummaryApi from '../../../common';
 
-
-
 const UserProfile = ({ user }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const [flag, setFlag] = useState(true);
+  const [activeComponent, setActiveComponent] = useState("Profile");
   const [isEditModalOpen, setEditModalOpen] = useState(false);
   const { fetchUser } = useContext(Context);
 
-  const handleEditClick = () => {
-    setEditModalOpen(true);
-  };
+  const handleEditClick = () => setEditModalOpen(true);
+  const closeEditModal = () => setEditModalOpen(false);
 
-  const closeModal = () => {
-    setEditModalOpen(false);
-  };
-
-  const handleLogout = async() => {
+  const handleLogout = async () => {
     try {
       const response = await fetch(SummaryApi.UserLogout.url, {
         method: SummaryApi.UserLogout.method,
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        credentials: 'include'
+        headers: { 'Content-Type': 'application/json' },
+        credentials: 'include',
       });
       const result = await response.json();
       if (result.success) {
@@ -44,10 +37,9 @@ const UserProfile = ({ user }) => {
         toast.error(result.message);
       }
     } catch (error) {
-      toast.error(result.message);
+      toast.error(error.message);
     }
-   
-  }
+  };
 
   if (!user) {
     return <div>No user data available.</div>;
@@ -59,36 +51,35 @@ const UserProfile = ({ user }) => {
         <div className={styles.profileImage}>
           <img src={user.profilePic} alt="profile" className={styles.image} />
         </div>
-
         <div className={styles.name}>{user.name}</div>
         <p>{user.role === 'Teacher' ? 'Teacher' : user.role === 'Student' ? 'Student' : 'Admin'}</p>
 
         {user.role === 'Teacher' && (
           <>
-            <div className={styles.editProfile} onClick={() => setFlag(true)}>Your Profile</div>
-            <div className={styles.studentDetails} onClick={() => setFlag(false)}>Result Portal</div>
-            <div className={styles.resultPortal} onClick={handleEditClick}>Student Details</div>
+            <div className={styles.editProfile} onClick={() => setActiveComponent("Profile")}>Your Profile</div>
+            <div className={styles.studentDetails} onClick={() => setActiveComponent("ResultPortal")}>Result Portal</div>
+            <div className={styles.resultPortal} onClick={() => setActiveComponent("StudentDetails")}>Student Details</div>
           </>
         )}
         {user.role === 'Student' && (
           <>
-            <div className={styles.editProfile} onClick={() => setFlag(true)}>Your Profile</div>
-            <div className={styles.resultPortal} onClick={handleEditClick}>Result Portal</div>
+            <div className={styles.editProfile} onClick={() => setActiveComponent("Profile")}>Your Profile</div>
+            <div className={styles.resultPortal} onClick={() => setActiveComponent("ResultPortal")}>Result Portal</div>
           </>
         )}
         {user.role === 'Admin' && (
           <>
-            <div className={styles.editProfile} onClick={() => setFlag(true)}>Your Profile</div>
-            <div className={styles.studentDetails} onClick={() => setFlag(false)}>Result Portal</div>
-            <div className={styles.resultPortal} onClick={handleEditClick}>Student Details</div>
-            <div className={styles.adminPortal} onClick={handleEditClick}>Admin Portal</div>
+            <div className={styles.editProfile} onClick={() => setActiveComponent("Profile")}>Your Profile</div>
+            <div className={styles.studentDetails} onClick={() => setActiveComponent("ResultPortal")}>Result Portal</div>
+            <div className={styles.resultPortal} onClick={() => setActiveComponent("StudentDetails")}>Student Details</div>
+            <div className={styles.adminPortal} onClick={() => setActiveComponent("AdminPortal")}>Admin Portal</div>
           </>
         )}
         <div className={styles.logoutButton} onClick={handleLogout}>Logout</div>
       </div>
 
       <div className={styles.rightBar}>
-        {flag ? (
+        {activeComponent === "Profile" && (
           <div className={styles.profileDetails}>
             <h2>Profile Details</h2>
             <table className={styles.profileTable}>
@@ -117,15 +108,17 @@ const UserProfile = ({ user }) => {
             </table>
             <button className={styles.editButton} onClick={handleEditClick}>Edit Profile</button>
           </div>
-        ) : (
-          <StudentDetails />
         )}
+        {activeComponent === "ResultPortal" && <StudentResult />}
+        {activeComponent === "StudentDetails" && <StudentDetails />}
+        {activeComponent === "AdminPortal" && <AdminPortal />}
       </div>
 
+      {/* Profile Edit Modal */}
       {isEditModalOpen && (
         <div className={styles.modalOverlay}>
           <div className={styles.modalContent}>
-            <ProfileEdit user={user} closeModal={closeModal} fetchUser={fetchUser} />
+            <ProfileEdit user={user} closeModal={closeEditModal} fetchUser={fetchUser} />
           </div>
         </div>
       )}

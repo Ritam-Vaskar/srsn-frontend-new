@@ -109,7 +109,7 @@
 
 .rightBar {
     flex: 1;
-    padding: 40px;
+    padding: 20px;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
@@ -151,7 +151,7 @@
 }
 
 .editButton {
-    background-color: #4CAF50;
+    background-color: #ff8c19;
     color: white;
     padding: 12px 25px;
     border: none;
@@ -274,7 +274,7 @@
 }
 
 .modalButtons button[type="submit"] {
-    background-color: #4CAF50;
+    background-color: #ff8c19;
     color: white;
 
     &:hover {
