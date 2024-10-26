@@ -1,13 +1,36 @@
 import React, { useState, useEffect } from 'react';
 import styles from './NoticeBar.module.scss';
-import NewsData from '../../../../public/NewsData.json';
+import SummaryApi from '../../../common';
+import { toast } from 'react-toastify';
 
 const NoticeBar = () => {
     const [news, setNews] = useState({});
 
+    const fetchNews=async ()=>{
+        try{
+            const response = await fetch(SummaryApi.NoticeFetch.url, {
+                method: SummaryApi.NoticeFetch.method,
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                credentials: 'include'
+            });
+            const result = await response.json();
+            console.log(result.news);
+            if (!result.success) {
+                toast.error(result.message);
+                return;
+            }
+            const data=result.notice;
+            setNews(data[data.length - 1] || {});
+        }catch(err){
+            console.log(err);
+            toast.error(err.message);
+        }
+    }
+
     useEffect(() => {
-        const data = NewsData.links;
-        setNews(data[data.length - 1] || {});
+        fetchNews();
     }, []);
 
     return (

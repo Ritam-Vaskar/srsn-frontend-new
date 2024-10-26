@@ -49,8 +49,18 @@ const SummaryApi={
     AlumniApplicationSave:{
         url:backendUrl+"/api/alumniTempSave",
         method:"POST"
-    }
+    },
 
+    //Notice
+
+    NoticeEntery:{
+        url:backendUrl+"/api/noticeEntery",
+        method:"POST"
+    },
+    NoticeFetch:{
+        url:backendUrl+"/api/noticeFetch",
+        method:"GET"
+    }
 }
 
 
