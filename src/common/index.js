@@ -1,3 +1,5 @@
+import Alumni from "../Schoolpages/Alumini/Alumini"
+
 const backendUrl="http://localhost:8000"
 
 
@@ -23,6 +25,10 @@ const SummaryApi={
     UserEdit:{
         url:backendUrl+"/api/userEdit",
         method:"PUT"
+    },
+    UserDelete:{
+        url:backendUrl+"/api/deleteUser",
+        method:"DELETE"
     },
     StudentFetch:{
         url:backendUrl+"/api/studentFetch",
@@ -50,17 +56,19 @@ const SummaryApi={
         url:backendUrl+"/api/alumniTempSave",
         method:"POST"
     },
-
-    //Notice
-
-    NoticeEntery:{
-        url:backendUrl+"/api/noticeEntery",
+    AlumniApplicationFetch:{
+        url:backendUrl+"/api/alumniApplicationView",
+        method:"GET"
+    },
+    AlumniAccept:{
+        url:backendUrl+"/api/alumniVeri",
         method:"POST"
     },
-    NoticeFetch:{
-        url:backendUrl+"/api/noticeFetch",
-        method:"GET"
+    AlumniReject:{
+        url:backendUrl+"/api/alumniDelete",
+        method:"POST"
     }
+
 }
 
 

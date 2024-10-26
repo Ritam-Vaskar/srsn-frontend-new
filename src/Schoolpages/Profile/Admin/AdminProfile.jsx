@@ -31,6 +31,7 @@ const AdminPortal = () => {
 
     return (
         <div className={styles.container}>
+            
             <div className={styles.topBar}>
                 <button onClick={() => setActiveSection('Messages')} className={activeSection === 'Messages' ? styles.active : ''}>Messages</button>
                 <button onClick={() => setActiveSection('Teachers')} className={activeSection === 'Teachers' ? styles.active : ''}>Teachers</button>

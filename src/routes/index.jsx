@@ -28,13 +28,19 @@ import Teacher from '../Schoolpages/Teachers/Teachers'
 //Dashboard
 import Login from './../Authentication/Login/Login';
 
+import ScrollToTop from '../helper/ScrollToTop';
+
 
 
 
 const router = createBrowserRouter([
     {
         path: '/',
-        element: <App />,
+        element: (
+            <ScrollToTop> 
+                <App />
+            </ScrollToTop>
+        ),
         children: [
             {
                 index: true,
