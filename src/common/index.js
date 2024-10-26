@@ -9,14 +9,30 @@ const SummaryApi={
         url:backendUrl+"/api/userSignIn",
         method:"POST"
     },
-    UserAdmissionSignUp:{
-        url:backendUrl+"/api/userAdmissionSignUp",
-        method:"POST"
-    },
+    
     UserLogout:{
         url:backendUrl+"/api/userLogout",
         method:"POST"
     },
+
+    //user admission
+    UserAdmissionSignUp:{
+        url:backendUrl+"/api/userAdmissionSignUp",
+        method:"POST"
+    },
+    UserAdmissionFetch:{
+        url:backendUrl+"/api/userAdmissionFetch",
+        method:"GET"
+    },
+    userAdmissionAdd:{
+        url:backendUrl+"/api/userAdmissionAdd",
+        method:"POST"
+    },
+    UserAdmissionDelete:{
+        url:backendUrl+"/api/userAdmissionDelete",
+        method:"DELETE"
+    },
+
     //User Profile
     UserProfile:{
         url:backendUrl+"/api/userProfile",
@@ -66,7 +82,7 @@ const SummaryApi={
     },
     AlumniReject:{
         url:backendUrl+"/api/alumniDelete",
-        method:"POST"
+        method:"DELETE"
     },
 
     //Notice
@@ -78,7 +94,11 @@ const SummaryApi={
     NoticeFetch:{
         url:backendUrl+"/api/noticeFetch",
         method:"GET"
-    }
+    },
+    NoticeDelete:{
+        url:backendUrl+"/api/noticeDelete",
+        method:"DELETE"
+    },
 
 }
 

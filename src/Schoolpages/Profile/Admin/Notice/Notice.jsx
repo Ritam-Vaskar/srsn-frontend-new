@@ -57,6 +57,7 @@ const Notice = () => {
 
             if (result.success) {
                 toast.success("Notice created successfully!");
+                fetchActiveNotices();
                 // setNotices([...notices, result.notice]);
                 reset();
             } else {
@@ -69,16 +70,18 @@ const Notice = () => {
 
     const handleDelete = async (noticeId) => {
         try {
-            const response = await fetch(`https://example.com/delete-notice/${noticeId}`, {
-                method: 'DELETE',
+            const response = await fetch(SummaryApi.NoticeDelete.url, {
+                method: SummaryApi.NoticeDelete.method,
                 headers: {
                     'Content-Type': 'application/json',
                 },
+                body: JSON.stringify({ id: noticeId }),
             });
             const result = await response.json();
 
             if (result.success) {
                 toast.success("Notice deleted successfully!");
+                fetchActiveNotices();
                 setNotices(notices.filter(notice => notice.id !== noticeId));
             } else {
                 toast.error("Failed to delete notice.");
@@ -152,7 +155,7 @@ const Notice = () => {
                                 <td>{notice.date}</td>
                                 <td><a href={notice.url} target="_blank" rel="noopener noreferrer">View</a></td>
                                 <td>
-                                    <button onClick={() => handleDelete(notice.id)} className={styles.deleteButton}>Delete</button>
+                                    <button onClick={() => handleDelete(notice._id)} className={styles.deleteButton}>Delete</button>
                                 </td>
                             </tr>
                         ))}

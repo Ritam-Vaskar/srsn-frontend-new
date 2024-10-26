@@ -1,0 +1,68 @@
+.classTable {
+    margin-bottom: 20px;
+    
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        text-align: center;
+        
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #4CAF50; 
+            color: white; 
+            font-weight: bold;
+        }
+        td a {
+            color: #4CAF50; 
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        tr:hover {
+            background-color: #f1f1f1;
+        }
+    }
+}
+
+.actionButton {
+    background: none;
+    border: none;
+    cursor: pointer;
+    margin-right: 8px; // Space between icons
+    transition: color 0.3s ease;
+
+    &:hover {
+        color: #007BFF; // Change color on hover
+    }
+}
+.actionButtonDelete{
+    background: none;
+    border: none;
+    cursor: pointer;
+    margin-right: 8px; // Space between icons
+    transition: color 0.3s ease;
+
+    &:hover {
+        color: #ed2038; // Change color on hover
+    }
+}
+
+
+.dropdownContainer {
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+}
+
+.dropdown {
+    margin-left: 10px;
+    padding: 5px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
