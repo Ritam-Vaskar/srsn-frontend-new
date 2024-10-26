@@ -67,6 +67,17 @@ const SummaryApi={
     AlumniReject:{
         url:backendUrl+"/api/alumniDelete",
         method:"POST"
+    },
+
+    //Notice
+
+    NoticeEntery:{
+        url:backendUrl+"/api/noticeEntery",
+        method:"POST"
+    },
+    NoticeFetch:{
+        url:backendUrl+"/api/noticeFetch",
+        method:"GET"
     }
 
 }

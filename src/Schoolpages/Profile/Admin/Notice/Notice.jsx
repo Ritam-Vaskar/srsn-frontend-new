@@ -34,7 +34,7 @@ const Notice = () => {
             const data = await response.json();
            
             if (data.success) {
-                setNotices(data.notice);
+                setNotices(data.notice.reverse());
                 console.log(data.notice);
             } else {
                 toast.error("Failed to fetch active notices.");
