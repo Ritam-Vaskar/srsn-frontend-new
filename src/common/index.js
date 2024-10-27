@@ -15,6 +15,8 @@ const SummaryApi={
         method:"POST"
     },
 
+    
+
     //user admission
     UserAdmissionSignUp:{
         url:backendUrl+"/api/userAdmissionSignUp",
@@ -37,6 +39,10 @@ const SummaryApi={
     UserProfile:{
         url:backendUrl+"/api/userProfile",
         method:"GET"
+    },
+    UserSignUp:{ //User sign up
+        url:backendUrl+"/api/userSignUp",
+        method:"POST"
     },
     UserEdit:{
         url:backendUrl+"/api/userEdit",
