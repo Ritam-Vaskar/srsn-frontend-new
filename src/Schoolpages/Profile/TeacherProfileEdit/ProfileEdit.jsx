@@ -68,7 +68,7 @@ const ProfileEdit = ({ user, closeModal, fetchUser }) => {
         <div className={styles['form-group']}>
           <label>Name</label>
           <input 
-            {...register("name", { required: "Name is required" })} 
+            {...register("name")} 
             className={styles.input}
           />
           {errors.name && <span className={styles.error}>{errors.name.message}</span>}
@@ -78,7 +78,7 @@ const ProfileEdit = ({ user, closeModal, fetchUser }) => {
           <label>Phone</label>
           <input 
             type="tel" 
-            {...register("phone", { required: "Phone is required" })} 
+            {...register("phone")} 
             className={styles.input}
           />
           {errors.phone && <span className={styles.error}>{errors.phone.message}</span>}
@@ -94,7 +94,7 @@ const ProfileEdit = ({ user, closeModal, fetchUser }) => {
           <label>Date of Joining</label>
           <input 
             type="date" 
-            {...register("DateOfJoining", { required: "Date of Joining is required" })} 
+            {...register("DateOfJoining")} 
             className={styles.input}
           />
           {errors.DateOfJoining && <span className={styles.error}>{errors.DateOfJoining.message}</span>}
@@ -103,7 +103,7 @@ const ProfileEdit = ({ user, closeModal, fetchUser }) => {
         <div className={styles['form-group']}>
           <label>Qualification</label>
           <input 
-            {...register("Qualification", { required: "Qualification is required" })} 
+            {...register("Qualification")} 
             className={styles.input}
           />
           {errors.Qualification && <span className={styles.error}>{errors.Qualification.message}</span>}

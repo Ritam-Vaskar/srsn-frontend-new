@@ -375,7 +375,7 @@ const Applications = () => {
                             <td>
                                 <a href={`/details/${student._id}`}>View Details</a>
                             </td>
-                            <td>
+                            <td id='action'>
                                 <button className={styles.actionButton} onClick={() => handleApp(student)}>
                                     <CheckBoxIcon />
                                 </button>
