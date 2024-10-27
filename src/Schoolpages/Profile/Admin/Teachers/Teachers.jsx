@@ -136,14 +136,14 @@ const Teachers = () => {
         <div className={styles.teachersPanel}>
             <h2>Teachers Management</h2>
             <button 
-                onClick={() => setIsAddTeacherFormOpen(true)} 
+                onClick={() => setIsAddTeacherFormOpen(true,fetchTeachers)} 
                 className={styles.addTeacherButton}>
                 Add Teacher
             </button>
 
             {/* Conditionally render the TeacherAddForm */}
             {isAddTeacherFormOpen && (
-                <TeacherAddForm onClose={() => setIsAddTeacherFormOpen(false)} />
+                <TeacherAddForm fetchTeachers={fetchTeachers} onClose={() => setIsAddTeacherFormOpen(false)} />
             )}
 
             <div className={styles.teachersList}>

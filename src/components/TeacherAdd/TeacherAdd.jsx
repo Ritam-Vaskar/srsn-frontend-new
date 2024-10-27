@@ -5,7 +5,7 @@ import styles from './Teacher.module.scss'; // Update the styles file name
 import SummaryApi from '../../common';
 import uploadImg from '../../helper/uploadImg';
 
-const TeacherAddForm = ({ onClose }) => {
+const TeacherAddForm = ({ onClose ,fetchTeachers}) => {
   const { register, handleSubmit, setValue, formState: { errors } } = useForm();
   const [profilePicUrl, setProfilePicUrl] = useState('');
 
@@ -28,6 +28,7 @@ const TeacherAddForm = ({ onClose }) => {
         return;
       }
       toast.success('Application submitted successfully!');
+      fetchTeachers();
       onClose();
     } catch (err) {
       toast.error(err.message);
