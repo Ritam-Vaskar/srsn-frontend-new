@@ -22,13 +22,25 @@ import SchoolHome from './../Schoolpages/Home/Home';
 import Alumni from './../Schoolpages/Alumini/Alumini';
 import Academic from '../Schoolpages/Academic/Academic';
 import AdmissionForm from '../Schoolpages/AdmissionForm/AdmissionForm';
+import Profile from './../Schoolpages/Profile/Profile'
+import Teacher from '../Schoolpages/Teachers/Teachers'
+
+//Dashboard
+import Login from './../Authentication/Login/Login';
+
+import ScrollToTop from '../helper/ScrollToTop';
+
 
 
 
 const router = createBrowserRouter([
     {
         path: '/',
-        element: <App />,
+        element: (
+            <ScrollToTop> 
+                <App />
+            </ScrollToTop>
+        ),
         children: [
             {
                 index: true,
@@ -69,6 +81,18 @@ const router = createBrowserRouter([
                     {
                         path: 'admission_form',
                         element: <AdmissionForm />
+                    },
+                    {
+                        path:'profile',
+                        element:<Profile/>
+                    },
+                    {
+                        path:'login',
+                        element:<Login/>
+                    },
+                    {
+                        path:'teacher',
+                        element:<Teacher/>
                     }
                 ]
             }

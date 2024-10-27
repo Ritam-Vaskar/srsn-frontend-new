@@ -1,0 +1,107 @@
+.container {
+    margin: 20px;
+    // padding: 20px;
+    border-radius: 8px;
+    max-width: 100%; /* Prevent overflow */
+    box-sizing: border-box; /* Ensure padding is included in width */
+
+
+h1 {
+    font-size: 24px;
+    color: #333;
+    margin-bottom: 20px;
+    text-align: center; /* Center the heading */
+}
+
+.label {
+    font-size: 16px;
+    margin-right: 10px;
+}
+
+.select {
+    padding: 8px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+    margin-bottom: 20px;
+    width: 100%; /* Make select take full width */
+    max-width: 300px; /* Set a maximum width for larger screens */
+}
+
+.table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    display: block; /* Allow scrolling */
+    overflow-x: auto; /* Enable horizontal scroll */
+}
+
+th, td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+th {
+    background-color: #ff8c19;
+    color: white;
+}
+
+tr:hover {
+    background-color: #f1f1f1;
+}
+
+.link {
+    color: #ff8c19;
+    text-decoration: none;
+}
+
+.link:hover {
+    text-decoration: underline;
+}
+
+input{
+    width: 100%;
+    padding: 8px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+    margin-bottom: 20px;
+    max-width: 300px;
+}
+table{
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+.saveButton{
+    background-color: #ff8c19;
+    color: white;
+    padding: 8px 16px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-top: 20px;
+    max-width: 300px;
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+}
+
+/* Responsive styles */
+@media (max-width: 600px) {
+    h1 {
+        font-size: 20px; /* Decrease heading size */
+    }
+
+    .label {
+        font-size: 14px; /* Decrease label size */
+    }
+
+    .select {
+        padding: 6px; /* Adjust padding for smaller screens */
+    }
+
+    th, td {
+        padding: 10px; /* Decrease padding for smaller screens */
+    }
+}

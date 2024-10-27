@@ -1,0 +1,286 @@
+.container {
+    display: flex;
+    margin: 40px auto;
+    max-width: 1200px;
+    border-radius: 12px;
+    background-color: #f4f4f9;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+
+    @media (max-width: 768px) {
+        flex-direction: column;
+        margin: 20px;
+    }
+}
+
+.leftBar {
+    width: 280px;
+    padding: 30px;
+    background-color: #fff;
+    border-right: 1px solid #e0e0e0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
+    text-align: center;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.05);
+
+    p{
+        color: #555;
+        margin: -10px 0;
+    }
+
+    @media (max-width: 768px) {
+        width: 100%;
+        border-right: none;
+        border-bottom: 1px solid #e0e0e0;
+    }
+}
+
+.logoutButton {
+    cursor: pointer;
+    padding: 12px 0;
+    width: 100%;
+    text-align: center;
+    background-color: #f44336;
+    color: white;
+    border-radius: 6px;
+    font-size: 16px;
+    font-weight: 600;
+    margin-top: auto;
+    transition: background-color 0.3s;
+
+}
+
+.profileImage {
+    width: 10rem;
+    height: 10rem;
+    border-radius: 50%;
+    background: linear-gradient(45deg, #743ad5, #d53a9d);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    @media (max-width: 480px) {
+        width: 8rem;
+        height: 8rem;
+    }
+}
+
+.profileImage img {
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 50%;
+
+    @media (max-width: 480px) {
+        width: 7.3rem;
+        height: 7.3rem;
+    }
+}
+
+.name {
+    font-size: 22px;
+    font-weight: bold;
+    color: #333;
+
+    @media (max-width: 480px) {
+        font-size: 18px;
+    }
+}
+
+.editProfile, .studentDetails , .resultPortal , .adminPortal {
+    cursor: pointer;
+    padding: 12px 0;
+    width: 100%;
+    text-align: center;
+    border-radius: 6px;
+    background-color: #ffcc80;
+    font-size: 16px;
+    font-weight: 600;
+    transition: background-color 0.3s ease-in-out;
+
+    @media (max-width: 768px) {
+        padding: 10px 0;
+        font-size: 14px;
+    }
+}
+
+.rightBar {
+    flex: 1;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    background-color: #fafafa;
+    overflow: auto;
+    height: 120vh;
+
+    @media (max-width: 768px) {
+        padding: 20px;
+        overflow: auto;
+    }
+}
+
+.profileTable {
+    width: 100%;
+    margin-bottom: 30px;
+    border-collapse: collapse;
+    border: 1px solid #e0e0e0;
+    background-color: #fff;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    border-radius: 8px;
+    overflow: hidden;
+
+    @media (max-width: 768px) {
+        font-size: 14px;
+    }
+}
+
+.profileTable td {
+    padding: 16px;
+    border-bottom: 1px solid #e0e0e0;
+    font-size: 16px;
+    color: #555;
+
+    @media (max-width: 768px) {
+        padding: 10px;
+    }
+
+    @media (max-width: 480px) {
+        font-size: 14px;
+    }
+}
+
+.editButton {
+    background-color: #ff8c19;
+    color: white;
+    padding: 12px 25px;
+    border: none;
+    border-radius: 6px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+
+    @media (max-width: 480px) {
+        padding: 10px 20px;
+        font-size: 14px;
+    }
+}
+
+.modalOverlay {
+    z-index: 1000;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.modalContent {
+    width: 600px;
+    max-height: 80%;
+    background: #fff;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+    overflow-y: auto;
+
+    @media (max-width: 768px) {
+        width: 90%;
+    }
+
+    @media (max-width: 480px) {
+        width: 95%;
+        padding: 20px;
+    }
+}
+
+.modalHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+
+    @media (max-width: 480px) {
+        margin-bottom: 15px;
+    }
+}
+
+.modalHeader h2 {
+    font-size: 24px;
+    font-weight: 700;
+    color: #333;
+
+    @media (max-width: 480px) {
+        font-size: 20px;
+    }
+}
+
+.closeButton {
+    background: none;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+    color: #555;
+    transition: color 0.3s;
+
+    @media (max-width: 480px) {
+        font-size: 20px;
+    }
+
+    &:hover {
+        color: #ff5252;
+    }
+}
+
+.modalButtons {
+    display: flex;
+    justify-content: flex-end;
+    gap: 20px;
+    margin-top: 30px;
+
+    @media (max-width: 480px) {
+        gap: 15px;
+        margin-top: 20px;
+    }
+}
+
+.modalButtons button {
+    padding: 12px 25px;
+    border: none;
+    border-radius: 6px;
+    font-size: 16px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: background-color 0.3s ease;
+
+    @media (max-width: 480px) {
+        padding: 10px 20px;
+        font-size: 14px;
+    }
+}
+
+.modalButtons button[type="button"] {
+    background-color: #f44336;
+    color: white;
+
+    &:hover {
+        background-color: #d32f2f;
+    }
+}
+
+.modalButtons button[type="submit"] {
+    background-color: #ff8c19;
+    color: white;
+
+    &:hover {
+        background-color: #45a049;
+    }
+}

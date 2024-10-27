@@ -1,0 +1,76 @@
+{
+    "links": [
+        {
+            "url": "https://example.com/news1",
+            "name": "Annual Sports Day",
+            "sendbody": "Primary School",
+            "date": "2024-08-25"
+        },
+        {
+            "url": "https://example.com/news2",
+            "name": "Science Exhibition",
+            "sendbody": "High School",
+            "date": "2024-08-25"
+        },
+        {
+            "url": "https://example.com/news3",
+            "name": "Cultural Fest",
+            "sendbody": "Ashram",
+            "date": "2024-08-25"
+        },
+        {
+            "url": "https://example.com/news4",
+            "name": "Art Competition",
+            "sendbody": "Primary School",
+            "date": "2024-08-25"
+        },
+        {
+            "url": "https://example.com/news5",
+            "name": "Mathematics Workshop",
+            "sendbody": "High School",
+            "date": "2024-08-25"
+        },
+        {
+            "url": "https://example.com/news6",
+            "name": "Yoga Camp",
+            "sendbody": "Ashram",
+            "date": "2024-08-25"
+        },
+        {
+            "url": "https://example.com/news1",
+            "name": "Annual Sports Day",
+            "sendbody": "Primary School",
+            "date": "2024-08-25"
+        },
+        {
+            "url": "https://example.com/news2",
+            "name": "Science Exhibition",
+            "sendbody": "High School",
+            "date": "2024-08-25"
+        },
+        {
+            "url": "https://example.com/news3",
+            "name": "Cultural Fest",
+            "sendbody": "Ashram",
+            "date": "2024-08-25"
+        },
+        {
+            "url": "https://example.com/news4",
+            "name": "Art Competition",
+            "sendbody": "Primary School",
+            "date": "2024-08-25"
+        },
+        {
+            "url": "https://example.com/news5",
+            "name": "Mathematics Workshop",
+            "sendbody": "High School",
+            "date": "2024-08-25"
+        },
+        {
+            "url": "https://example.com/news6",
+            "name": "Yoga Camp",
+            "sendbody": "Ashram",
+            "date": "2024-08-25"
+        }
+    ]
+}

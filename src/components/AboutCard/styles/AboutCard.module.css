@@ -12,7 +12,7 @@
   padding: 16px;
   border-radius: 8px;
   margin: 30px;
-  background-color: #a5a5a54f;
+  background-color: #dfdfdf4f;
 }
 
 .aboutCard:hover {
@@ -30,7 +30,7 @@
 }
 
 .imgDiv {
-  width: 30%;
+  width: 40%;
   height: 250px;
   overflow: hidden;
 }
@@ -53,6 +53,21 @@
 
 .aboutCard:nth-child(even) {
   flex-direction: row-reverse; 
+}
+
+.content button {
+  margin-top: 15px;
+  background-color: #ff8c19;
+  color: #000;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.content button:hover {
+  background-color: #ff6a00;
 }
 
 /* Responsive design for 1024px */

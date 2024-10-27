@@ -43,10 +43,10 @@ const PermanentContactDetails = ({ register, errors }) => {
       </div>
 
       <div>
-        <label>Panchayat</label>
+        <label>Panchayt</label>
         <input 
-          {...register("panchayt", { required: "Panchayat is required" })} 
-          placeholder="Enter Panchayat" 
+          {...register("panchayt", { required: "Panchayt is required" })} 
+          placeholder="Enter Panchayt" 
         />
         {errors.panchayt && <p className="error">{errors.panchayt.message}</p>}
       </div>

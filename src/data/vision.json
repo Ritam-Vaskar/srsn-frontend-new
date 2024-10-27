@@ -1,22 +1,18 @@
 [
     {
       "title": "Our School's Philosophy",
-      "description": "At Sri Ramakrishna Siksha Niketan, we believe in nurturing students' growth in all aspects of life—intellectually, emotionally, and socially. Our philosophy is grounded in the values of integrity, discipline, and respect.",
-      "image": "https://via.placeholder.com/150"
+      "description": "At Sri Ramakrishna Siksha Niketan, we are committed to nurturing students' growth across all facets of life—intellectual, emotional, social, and moral. Our philosophy emphasizes a balanced approach to education, instilling values of integrity, discipline, and respect to help students become well-rounded individuals. We aim to create an environment where every student feels empowered to explore their potential, think critically, and develop compassion for others. Through this holistic approach, we aspire to prepare our students not only for academic success but for a life of purpose, resilience, and positive impact on society.",
+      "image": "https://cdn.prod.website-files.com/663d1907e337de23e83c30b2/671b391978074296f490c878_455683747_1006332584616130_8392415362028802833_n.jpg"
     },
     {
       "title": "Comprehensive Education",
-      "description": "We provide a comprehensive educational experience that focuses not only on academic excellence but also on personal and social development. Our curriculum is designed to help students achieve their fullest potential.",
-      "image": "https://via.placeholder.com/150"
+      "description": "Our approach provides a comprehensive educational experience that emphasizes academic excellence alongside personal and social development. With a curriculum carefully crafted to support each student’s unique strengths and interests, we empower them to realize their fullest potential and prepare for a meaningful future.By encouraging self-discovery and collaboration, we aim to create lifelong learners who are compassionate, responsible, and ready to lead with purpose.",
+      "image": "https://cdn.prod.website-files.com/663d1907e337de23e83c30b2/671b3a8b7d06ef963777826f_366951692_788087926440598_8052607164020307209_n.jpg"
     },
-    {
-      "title": "State-of-the-Art Facilities",
-      "description": "Our school offers state-of-the-art facilities, including modern classrooms, laboratories, and libraries, creating an environment conducive to learning and exploration.",
-      "image": "https://via.placeholder.com/150"
-    },
+
     {
       "title": "A Holistic Approach",
-      "description": "Our approach to education is holistic, ensuring that students are not only well-prepared for academic challenges but also grow as compassionate, responsible individuals ready to contribute to society.",
-      "image": "https://via.placeholder.com/150"
+      "description": "Our approach to education is deeply holistic, focusing on developing students not only as academically capable individuals but as compassionate, responsible members of society. We believe that true education extends beyond academics; it involves nurturing values, empathy, and resilience. Through a balanced curriculum and supportive environment, we aim to inspire students to explore their unique potential, make thoughtful decisions, and engage meaningfully with the world around them. By promoting integrity, social awareness, and personal growth, we prepare students to face life’s challenges and contribute positively to their communities.",
+      "image": "https://cdn.prod.website-files.com/663d1907e337de23e83c30b2/6713bd34e03c2b125c749e9c_28071260_1907983642553541_4952021693143437781_o.jpg"
     }
 ]

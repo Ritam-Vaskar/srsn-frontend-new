@@ -1,23 +1,111 @@
+import Alumni from "../Schoolpages/Alumini/Alumini"
+
 const backendUrl="http://localhost:8000"
 
 
 const SummaryApi={
-    UserSignUp:{
-        url:`${backendUrl}/api/userSignUp`,
-        method:"post"
+    //User sign up and sign in 
+    UserSignIn:{
+        url:backendUrl+"/api/userSignIn",
+        method:"POST"
     },
-    UserLogin:{
-        url:`${backendUrl}/api/userSignIn`,
-        method:"post"
+    
+    UserLogout:{
+        url:backendUrl+"/api/userLogout",
+        method:"POST"
     },
-    FetchUsersAdmin:{
-        url:`${backendUrl}/api/studentFetch1`,
-        method:"get"
+
+    
+
+    //user admission
+    UserAdmissionSignUp:{
+        url:backendUrl+"/api/userAdmissionSignUp",
+        method:"POST"
     },
-    FetchuserTeacher:{
-        url:`${backendUrl}/api/studentFetch2`,
-        method:"get"
-    }
+    UserAdmissionFetch:{
+        url:backendUrl+"/api/userAdmissionFetch",
+        method:"GET"
+    },
+    userAdmissionAdd:{
+        url:backendUrl+"/api/userAdmissionAdd",
+        method:"POST"
+    },
+    UserAdmissionDelete:{
+        url:backendUrl+"/api/userAdmissionDelete",
+        method:"DELETE"
+    },
+
+    //User Profile
+    UserProfile:{
+        url:backendUrl+"/api/userProfile",
+        method:"GET"
+    },
+    UserSignUp:{ //User sign up
+        url:backendUrl+"/api/userSignUp",
+        method:"POST"
+    },
+    UserEdit:{
+        url:backendUrl+"/api/userEdit",
+        method:"PUT"
+    },
+    UserDelete:{
+        url:backendUrl+"/api/deleteUser",
+        method:"DELETE"
+    },
+    StudentFetch:{
+        url:backendUrl+"/api/studentFetch",
+        method:"GET"
+    },
+    TeacherFetch:{
+        url:backendUrl+"/api/teacherFetch",
+        method:"GET"
+    },
+    UserMarksSubmission:{
+        url:backendUrl+"/api/userMarksSubmission",
+        method:"POST"
+    },
+
+    //Alumni
+    AlumniFetch:{
+        url:backendUrl+"/api/alumniView",
+        method:"GET"
+    },
+    AlumniSearch:{
+        url:backendUrl+"/api/alumniSearch",
+        method:"POST"
+    },
+    AlumniApplicationSave:{
+        url:backendUrl+"/api/alumniTempSave",
+        method:"POST"
+    },
+    AlumniApplicationFetch:{
+        url:backendUrl+"/api/alumniApplicationView",
+        method:"GET"
+    },
+    AlumniAccept:{
+        url:backendUrl+"/api/alumniVeri",
+        method:"POST"
+    },
+    AlumniReject:{
+        url:backendUrl+"/api/alumniDelete",
+        method:"DELETE"
+    },
+
+    //Notice
+
+    NoticeEntery:{
+        url:backendUrl+"/api/noticeEntery",
+        method:"POST"
+    },
+    NoticeFetch:{
+        url:backendUrl+"/api/noticeFetch",
+        method:"GET"
+    },
+    NoticeDelete:{
+        url:backendUrl+"/api/noticeDelete",
+        method:"DELETE"
+    },
+
 }
 
 

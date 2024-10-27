@@ -1,0 +1,61 @@
+.container {
+    background-image: url('https://res.cloudinary.com/dodpgohuc/image/upload/v1729942315/mruihittgt69c1ciwbwc.webp');
+    background-size: cover; 
+    background-position: center; 
+    background-repeat: no-repeat; 
+    color: black;
+    padding: 10rem;
+    border-radius: 8px;
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    max-width: 600px; 
+    margin: 0 auto;
+    min-height: 300px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    .divider{
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        margin-bottom: 5rem;
+        margin-left: 1.8rem;
+    }
+
+    h2 {
+        font-size: 1.8rem;
+        margin-bottom: 10px;
+    }
+
+    p {
+        font-size: 1.1rem;
+        margin: 5px 0;
+    }
+
+    a {
+        color: #443dc9; // Gold color for the link
+        font-size: 1.2rem;
+        font-weight: bold;
+        text-decoration: none;
+        margin-bottom: 10px;
+        display: inline-block;
+        padding: 0.5rem;
+        border-radius: 1rem;
+
+        &:hover {
+            color: #ffffff; // Lighter gold on hover
+            background-color: black;
+            
+        }
+    }
+    .sendbody{
+        color: chocolate;
+        background-color: black;
+        padding: 0.5rem;
+        border-radius: 1rem;
+        font-weight: 500;
+    }
+}
