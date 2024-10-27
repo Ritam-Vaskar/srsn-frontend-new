@@ -4,7 +4,7 @@ import Mission from '../../sections/MissionAndVision/MissionAndVission';
 import SchoolMedia from '../../sections/SchoolMedia/Media';
 import TeachersCarousel from '../../sections/TeachersCarousel/TeachersCarousel';
 import HeroCarousel from '../../sections/HeroCarousel/HeroCarousel';
-
+import Contact from '../../sections/Contact/Contact';
 const Home = () => {
     return (
         <div>
@@ -25,6 +25,9 @@ const Home = () => {
             </section>
             <section id="teachers-carousel">
                 <TeachersCarousel />
+            </section>
+            <section id="contact">
+                <Contact/>
             </section>
         </div>
     );
