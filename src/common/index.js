@@ -1,6 +1,5 @@
-import Alumni from "../Schoolpages/Alumini/Alumini"
 
-const backendUrl="http://localhost:8000"
+const backendUrl="https://srsnbackend.onrender.com"
 
 
 const SummaryApi={
