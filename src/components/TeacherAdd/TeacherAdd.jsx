@@ -104,16 +104,16 @@ const TeacherAddForm = ({ onClose ,fetchTeachers}) => {
             <input
               type="date"
               placeholder="Date of Joining"
-              {...register("dateOfJoining", { required: "Date of Joining is required" })}
+              {...register("DateOfJoining", { required: "Date of Joining is required" })}
             />
-            {errors.dateOfJoining && <p className={styles.error}>{errors.dateOfJoining.message}</p>}
+            {errors.DateOfJoining && <p className={styles.error}>{errors.DateOfJoining.message}</p>}
 
             <input
               type="text"
               placeholder="Qualification"
-              {...register("qualification", { required: "Qualification is required" })}
+              {...register("Qualification", { required: "Qualification is required" })}
             />
-            {errors.qualification && <p className={styles.error}>{errors.qualification.message}</p>}
+            {errors.Qualification && <p className={styles.error}>{errors.Qualification.message}</p>}
 
             <select {...register("grade", { required: "Grade is required" })}>
               <option value="">Select Grade</option>
