@@ -1,0 +1,104 @@
+.preview-container {
+    width: 100%;
+    background-color: transparent;
+  }
+  
+  .school-header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    margin-bottom: 20px;
+  }
+  
+  .school-logo {
+    width: 80px;
+    height: auto;
+  }
+  
+  .school-info {
+    text-align: center;
+    p{
+        margin-top: 10px;
+    }
+  }
+  
+  .school-info h1 {
+    margin: 0;
+    font-size: 24px;
+  }
+  
+  .preview-title {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  .preview-table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  .preview-table td {
+    padding: 10px;
+    border: 1px solid #ccc;
+    vertical-align: top;
+  }
+  
+  .preview-table tr:nth-child(even) {
+    background-color: #f2f2f2;
+  }
+  
+  .preview-table tr td:first-child,
+  .preview-table tr td:nth-child(3) {
+    font-weight: bold;
+    width: 20%;
+  }
+  
+  .preview-table tr td:nth-child(2),
+  .preview-table tr td:nth-child(4) {
+    width: 30%;
+  }
+  
+  .profile-pic {
+    width: 100px;
+    height: auto;
+  }
+  
+  .print-btn-container {
+    text-align: center;
+    margin-top: 20px;
+  }
+  
+  .print-btn {
+    padding: 10px 20px;
+    background-color: #ff8c19;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .print-btn:hover {
+    background-color: #45a049;
+  }
+  
+  @media print {
+    body * {
+      visibility: hidden;
+    }
+    .preview-container, .preview-container * {
+      visibility: visible;
+    }
+    .preview-container {
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 100%;
+      background: white;
+      box-shadow: none;
+    }
+    .print-btn-container {
+      display: none;
+    }
+  }
+  

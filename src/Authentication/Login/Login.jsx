@@ -3,28 +3,58 @@ import { useForm } from 'react-hook-form';
 import styles from './Login.module.scss';
 import SummaryApi from '../../common';
 import { toast } from 'react-toastify';
+import { useDispatch } from 'react-redux';
+import { setUserDetails } from './../../store/userSlice';
+import { useNavigate } from 'react-router-dom';
 
 const Login = () => {
+
+  const Navigate = useNavigate();
   const { register, handleSubmit, formState: { errors } } = useForm();
 
-  const onSubmit = async(data) => {
-    console.log(data);
-    try{
-      const response=await fetch(SummaryApi.UserLogin.url,{
-        method:SummaryApi.UserLogin.method,
-        headers:{
-          'Content-Type':'application/json'
+  const dispatch = useDispatch();
+
+  const fetchUser = async () => {
+    try {
+      const response = await fetch(SummaryApi.UserProfile.url, {
+        method: SummaryApi.UserProfile.method,
+        headers: {
+          'Content-Type': 'application/json'
         },
-        body:JSON.stringify(data),
-        credentials:'include'
+        credentials: 'include'
       });
-      const result=await response.json();
-      if(!result.success){
+      const result = await response.json();
+      if (!result.success) {
+        // toast.error(result.message);
+        dispatch(setUserDetails(null));
+        return;
+      }
+      dispatch(setUserDetails(result.user));
+    } catch (err) {
+      toast.error(err.message);
+    }
+  }
+
+  const onSubmit = async (data) => {
+    console.log(data);
+    try {
+      const response = await fetch(SummaryApi.UserSignIn.url, {
+        method: SummaryApi.UserSignIn.method,
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data),
+        credentials: 'include'
+      });
+      const result = await response.json();
+      if (!result.success) {
         toast.error(result.message);
         return;
       }
       toast.success(result.message);
-    }catch(err){
+      fetchUser();
+      Navigate('/');
+    } catch (err) {
       toast.error(err.message);
     }
   };
@@ -33,15 +63,15 @@ const Login = () => {
     <div className={styles.container}>
       <h2>Login</h2>
       <form onSubmit={handleSubmit(onSubmit)}>
-        {/* Username Field */}
+        {/* Email Field */}
         <div className={styles['form-group']}>
-          <label>Username:</label>
+          <label>Email:</label>
           <input
-            type="text"
-            {...register('username', { required: 'Username is required' })}
-            placeholder="Username"
+            type="email"
+            {...register('email', { required: 'Email is required' })}
+            placeholder="Email"
           />
-          {errors.username && <p className={styles.error}>{errors.username.message}</p>}
+          {errors.email && <p className={styles.error}>{errors.email.message}</p>}
         </div>
 
         {/* Password Field */}
@@ -57,9 +87,13 @@ const Login = () => {
 
         {/* Submit Button */}
         <div className={styles['form-group']}>
-          <button type="submit">Login</button>
+          <button type="submit" className={styles.button}>Login</button>
         </div>
       </form>
+      <div className={styles['contact-admin']}>
+        *If you face problems logging in, please contact the administrator.
+      </div>
+
     </div>
   );
 };

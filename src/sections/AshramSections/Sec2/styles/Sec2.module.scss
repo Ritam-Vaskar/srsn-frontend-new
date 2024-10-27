@@ -1,0 +1,55 @@
+.card {
+    display: flex;
+    flex-direction: column;
+    background-color: #dfdfdf4f; // Light grey background
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    margin: 30px;
+    transition: transform 0.2s;
+
+    &:hover {
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    }
+}
+
+.imageContainer {
+    background-color: #ff8c19; // Orange type background
+    text-align: center;
+}
+
+.image {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin: 0 auto;
+    aspect-ratio: 23/9;
+
+    @media (max-width: 768px) {
+        aspect-ratio: 16/9;
+    }
+
+    @media (max-width: 480px) {
+        aspect-ratio: 10/9;
+    }
+}
+
+.content {
+    padding: 20px;
+}
+
+.title {
+    color: #ff6a00; // Dark orange text
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+.text {
+    color: #333; // Text color
+    line-height: 1.5;
+}
+
+.guidelinesNote {
+    color: #333; // Text color for guidelines note
+    margin-top: 10px;
+}

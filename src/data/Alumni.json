@@ -1,98 +1,227 @@
 [
-    {
-      "name": "John Doe",
-      "startingYear": "2010",
-      "endingYear": "2014",
-      "designation": "Software Engineer",
-      "currentState": "California, USA",
-      "profilePic": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR-SnDtnoTbs_JJtNW62ALeA4gKPtpCGcQ5CnVEJNNAddxjuLwrbo1c16rExrxYL4xLmIw&usqp=CAU",
-      "bioData": "John has been working in the tech industry for over 5 years, specializing in full-stack development.",
-      "socialMediaLinks": [
-        "https://www.linkedin.com/in/johndoe",
-        "https://twitter.com/johndoe"
-      ],
-      "mobileNumber": "+1 234 567 890",
-      "email": "johndoe@example.com"
-    },
-    {
-      "name": "Jane Smith",
-      "startingYear": "2008",
-      "endingYear": "2012",
-      "designation": "Product Manager",
-      "currentState": "New York, USA",
-      "profilePic": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR-SnDtnoTbs_JJtNW62ALeA4gKPtpCGcQ5CnVEJNNAddxjuLwrbo1c16rExrxYL4xLmIw&usqp=CAU",
-      "bioData": "Jane is an experienced product manager working with top companies in the tech world.",
-      "socialMediaLinks": [
-        "https://www.linkedin.com/in/janesmith",
-        "https://facebook.com/janesmith"
-      ],
-      "mobileNumber": "+1 345 678 901",
-      "email": "janesmith@example.com"
-    },
-
-
-        {
-          "name": "John Doe",
-          "startingYear": "2010",
-          "endingYear": "2014",
-          "designation": "Software Engineer",
-          "currentState": "California, USA",
-          "profilePic": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR-SnDtnoTbs_JJtNW62ALeA4gKPtpCGcQ5CnVEJNNAddxjuLwrbo1c16rExrxYL4xLmIw&usqp=CAU",
-          "bioData": "John has been working in the tech industry for over 5 years, specializing in full-stack development.",
-          "socialMediaLinks": [
-            "https://www.linkedin.com/in/johndoe",
-            "https://twitter.com/johndoe"
-          ],
-          "mobileNumber": "+1 234 567 890",
-          "email": "johndoe@example.com"
-        },
-        {
-          "name": "Jane Smith",
-          "startingYear": "2008",
-          "endingYear": "2012",
-          "designation": "Product Manager",
-          "currentState": "New York, USA",
-          "profilePic": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR-SnDtnoTbs_JJtNW62ALeA4gKPtpCGcQ5CnVEJNNAddxjuLwrbo1c16rExrxYL4xLmIw&usqp=CAU",
-          "bioData": "Jane is an experienced product manager working with top companies in the tech world.",
-          "socialMediaLinks": [
-            "https://www.linkedin.com/in/janesmith",
-            "https://facebook.com/janesmith"
-          ],
-          "mobileNumber": "+1 345 678 901",
-          "email": "janesmith@example.com"
-        },
-
-    
-        {
-            "name": "John Doe",
-            "startingYear": "2010",
-            "endingYear": "2014",
-            "designation": "Software Engineer",
-            "currentState": "California, USA",
-            "profilePic": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR-SnDtnoTbs_JJtNW62ALeA4gKPtpCGcQ5CnVEJNNAddxjuLwrbo1c16rExrxYL4xLmIw&usqp=CAU",
-            "bioData": "John has been working in the tech industry for over 5 years, specializing in full-stack development.",
-            "socialMediaLinks": [
-              "https://www.linkedin.com/in/johndoe",
-              "https://twitter.com/johndoe"
-            ],
-            "mobileNumber": "+1 234 567 890",
-            "email": "johndoe@example.com"
-          },
-          {
-            "name": "Jane Smith",
-            "startingYear": "2008",
-            "endingYear": "2012",
-            "designation": "Product Manager",
-            "currentState": "New York, USA",
-            "profilePic": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR-SnDtnoTbs_JJtNW62ALeA4gKPtpCGcQ5CnVEJNNAddxjuLwrbo1c16rExrxYL4xLmIw&usqp=CAU",
-            "bioData": "Jane is an experienced product manager working with top companies in the tech world.",
-            "socialMediaLinks": [
-              "https://www.linkedin.com/in/janesmith",
-              "https://facebook.com/janesmith"
-            ],
-            "mobileNumber": "+1 345 678 901",
-            "email": "janesmith@example.com"
-          }
-          
-  ]
-  
+  {
+    "name": "John Doe",
+    "startingYear": "2010",
+    "endingYear": "2014",
+    "designation": "Software Engineer",
+    "currentState": "California, USA",
+    "profilePic": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR-SnDtnoTbs_JJtNW62ALeA4gKPtpCGcQ5CnVEJNNAddxjuLwrbo1c16rExrxYL4xLmIw&usqp=CAU",
+    "bioData": "John has been working in the tech industry for over 5 years, specializing in full-stack development.",
+    "socialMediaLinks": [
+      "https://www.linkedin.com/in/johndoe",
+      "https://twitter.com/johndoe"
+    ],
+    "mobileNumber": "+1 234 567 890",
+    "email": "johndoe@example.com"
+  },
+  {
+    "name": "Jane Smith",
+    "startingYear": "2008",
+    "endingYear": "2012",
+    "designation": "Product Manager",
+    "currentState": "New York, USA",
+    "profilePic": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR-SnDtnoTbs_JJtNW62ALeA4gKPtpCGcQ5CnVEJNNAddxjuLwrbo1c16rExrxYL4xLmIw&usqp=CAU",
+    "bioData": "Jane is an experienced product manager working with top companies in the tech world.",
+    "socialMediaLinks": [
+      "https://www.linkedin.com/in/janesmith",
+      "https://facebook.com/janesmith"
+    ],
+    "mobileNumber": "+1 345 678 901",
+    "email": "janesmith@example.com"
+  },
+  {
+    "name": "Sandipto Doe",
+    "startingYear": "2010",
+    "endingYear": "2014",
+    "designation": "Software Engineer",
+    "currentState": "California, USA",
+    "profilePic": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR-SnDtnoTbs_JJtNW62ALeA4gKPtpCGcQ5CnVEJNNAddxjuLwrbo1c16rExrxYL4xLmIw&usqp=CAU",
+    "bioData": "John has been working in the tech industry for over 5 years, specializing in full-stack development.",
+    "socialMediaLinks": [
+      "https://www.linkedin.com/in/johndoe",
+      "https://twitter.com/johndoe"
+    ],
+    "mobileNumber": "+1 234 567 890",
+    "email": "johndoe@example.com"
+  },
+  {
+    "name": "Ritam Smith",
+    "startingYear": "2008",
+    "endingYear": "2012",
+    "designation": "Product Manager",
+    "currentState": "New York, USA",
+    "profilePic": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR-SnDtnoTbs_JJtNW62ALeA4gKPtpCGcQ5CnVEJNNAddxjuLwrbo1c16rExrxYL4xLmIw&usqp=CAU",
+    "bioData": "Jane is an experienced product manager working with top companies in the tech world.",
+    "socialMediaLinks": [
+      "https://www.linkedin.com/in/janesmith",
+      "https://facebook.com/janesmith"
+    ],
+    "mobileNumber": "+1 345 678 901",
+    "email": "janesmith@example.com"
+  },
+  {
+    "name": "Sohom Doe",
+    "startingYear": "2010",
+    "endingYear": "2014",
+    "designation": "Software Engineer",
+    "currentState": "California, USA",
+    "profilePic": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR-SnDtnoTbs_JJtNW62ALeA4gKPtpCGcQ5CnVEJNNAddxjuLwrbo1c16rExrxYL4xLmIw&usqp=CAU",
+    "bioData": "John has been working in the tech industry for over 5 years, specializing in full-stack development.",
+    "socialMediaLinks": [
+      "https://www.linkedin.com/in/johndoe",
+      "https://twitter.com/johndoe"
+    ],
+    "mobileNumber": "+1 234 567 890",
+    "email": "johndoe@example.com"
+  },
+  {
+    "name": "Abhinav Smith",
+    "startingYear": "2008",
+    "endingYear": "2012",
+    "designation": "Product Manager",
+    "currentState": "New York, USA",
+    "profilePic": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR-SnDtnoTbs_JJtNW62ALeA4gKPtpCGcQ5CnVEJNNAddxjuLwrbo1c16rExrxYL4xLmIw&usqp=CAU",
+    "bioData": "Jane is an experienced product manager working with top companies in the tech world.",
+    "socialMediaLinks": [
+      "https://www.linkedin.com/in/janesmith",
+      "https://facebook.com/janesmith"
+    ],
+    "mobileNumber": "+1 345 678 901",
+    "email": "janesmith@example.com"
+  },
+  {
+    "name": "David Clark",
+    "startingYear": "2011",
+    "endingYear": "2015",
+    "designation": "Data Scientist",
+    "currentState": "Texas, USA",
+    "profilePic": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTOAnWQoE7DjSt_zmA7XzXFd-YVlbFqAEznX97pRhXE0XeUqD7M4yeWqA9yFg&usqp=CAU",
+    "bioData": "David has been working in data science for 6 years and is passionate about machine learning.",
+    "socialMediaLinks": [
+      "https://www.linkedin.com/in/davidclark",
+      "https://github.com/davidclark"
+    ],
+    "mobileNumber": "+1 456 789 012",
+    "email": "davidclark@example.com"
+  },
+  {
+    "name": "Emma Williams",
+    "startingYear": "2009",
+    "endingYear": "2013",
+    "designation": "UX Designer",
+    "currentState": "Florida, USA",
+    "profilePic": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRMjBDRdc4v1V1aeLObEj6XIjRZh2B5w2WVfdLPkrYlduUvDw7ORP2IFX9_Xg&usqp=CAU",
+    "bioData": "Emma is a creative UX designer who has been crafting beautiful and user-friendly interfaces.",
+    "socialMediaLinks": [
+      "https://www.linkedin.com/in/emmawilliams",
+      "https://dribbble.com/emmawilliams"
+    ],
+    "mobileNumber": "+1 567 890 123",
+    "email": "emmawilliams@example.com"
+  },
+  {
+    "name": "Michael Brown",
+    "startingYear": "2012",
+    "endingYear": "2016",
+    "designation": "Systems Analyst",
+    "currentState": "Georgia, USA",
+    "profilePic": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRxAn-WykwKZXwOPUOCcdMrPOJpgkflxIuOWXPz8ThbXIn_POFXDsO3E8tkx8&usqp=CAU",
+    "bioData": "Michael is a systems analyst with a focus on optimizing large-scale infrastructure.",
+    "socialMediaLinks": [
+      "https://www.linkedin.com/in/michaelbrown",
+      "https://twitter.com/michaelbrown"
+    ],
+    "mobileNumber": "+1 678 901 234",
+    "email": "michaelbrown@example.com"
+  },
+  {
+    "name": "Sophia Johnson",
+    "startingYear": "2007",
+    "endingYear": "2011",
+    "designation": "HR Manager",
+    "currentState": "Washington, USA",
+    "profilePic": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTFyz-v7U2C7kEcvSRWzxW4Vz5JgyqsFYDBmBWPC_q4L1GXHRA-N-yT89v8bQ&usqp=CAU",
+    "bioData": "Sophia is an HR manager with a passion for helping teams thrive and grow.",
+    "socialMediaLinks": [
+      "https://www.linkedin.com/in/sophiajohnson",
+      "https://facebook.com/sophiajohnson"
+    ],
+    "mobileNumber": "+1 789 012 345",
+    "email": "sophiajohnson@example.com"
+  },
+  {
+    "name": "James Lee",
+    "startingYear": "2013",
+    "endingYear": "2017",
+    "designation": "Marketing Specialist",
+    "currentState": "Chicago, USA",
+    "profilePic": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTx-Dz7L4cHsT8P_C8cqJAfDrfU6h-Z-tmWLpiO3yYG0xeEBOMnpPvGdHvBZQ&usqp=CAU",
+    "bioData": "James specializes in digital marketing and SEO, helping companies expand their online presence.",
+    "socialMediaLinks": [
+      "https://www.linkedin.com/in/jameslee",
+      "https://instagram.com/jameslee"
+    ],
+    "mobileNumber": "+1 890 123 456",
+    "email": "jameslee@example.com"
+  },
+  {
+    "name": "Olivia Davis",
+    "startingYear": "2006",
+    "endingYear": "2010",
+    "designation": "Financial Analyst",
+    "currentState": "Boston, USA",
+    "profilePic": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRzoGh2btP-1KxRsKTwmAvVZ8Jth8C6TA_hKhINl51xWy_7smhxZofZg_8u2g&usqp=CAU",
+    "bioData": "Olivia is a financial analyst with experience in corporate finance and investment strategies.",
+    "socialMediaLinks": [
+      "https://www.linkedin.com/in/oliviadavis",
+      "https://twitter.com/oliviadavis"
+    ],
+    "mobileNumber": "+1 901 234 567",
+    "email": "oliviadavis@example.com"
+  },
+  {
+    "name": "William Martinez",
+    "startingYear": "2014",
+    "endingYear": "2018",
+    "designation": "Business Consultant",
+    "currentState": "Miami, USA",
+    "profilePic": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQNa5EpDw_lXFTAmQKD7pf_7m7zSLz7an1BlPGwYtK_Oa7-vFrv5wyyGLjcxt0&usqp=CAU",
+    "bioData": "William helps businesses improve their operations and grow their revenue through strategic consulting.",
+    "socialMediaLinks": [
+      "https://www.linkedin.com/in/williammartinez",
+      "https://facebook.com/williammartinez"
+    ],
+    "mobileNumber": "+1 234 567 890",
+    "email": "williammartinez@example.com"
+  },
+  {
+    "name": "Emily Garcia",
+    "startingYear": "2015",
+    "endingYear": "2019",
+    "designation": "Operations Manager",
+    "currentState": "San Francisco, USA",
+    "profilePic": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR1BPmcpTGbSRH3nvHPKZ6KhmgA0ZnrEul0aUPNDoKxZUhwbmSLVefWsFwSgA&usqp=CAU",
+    "bioData": "Emily leads operations teams to optimize workflows and improve efficiency in various industries.",
+    "socialMediaLinks": [
+      "https://www.linkedin.com/in/emilygarcia",
+      "https://twitter.com/emilygarcia"
+    ],
+    "mobileNumber": "+1 345 678 901",
+    "email": "emilygarcia@example.com"
+  },
+  {
+    "name": "Jacob Rodriguez",
+    "startingYear": "2010",
+    "endingYear": "2014",
+    "designation": "Graphic Designer",
+    "currentState": "Los Angeles, USA",
+    "profilePic": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTtgb5byuEItSAXymzqUnl7-2v-EdlSAkdeVnZRUeGuhSjqkIGIvNWjaI5XYA&usqp=CAU",
+    "bioData": "Jacob is a creative graphic designer with a passion for visual storytelling and branding.",
+    "socialMediaLinks": [
+      "https://www.linkedin.com/in/jacobrodriguez",
+      "https://instagram.com/jacobrodriguez"
+    ],
+    "mobileNumber": "+1 456 789 012",
+    "email": "jacobrodriguez@example.com"
+  }
+]
