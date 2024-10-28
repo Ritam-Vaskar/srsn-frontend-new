@@ -156,7 +156,7 @@ const AlumniApplicationForm = ({ onClose }) => {
             <button 
               type="submit" 
               className={styles.submitButton}
-              disabled={!profilePicUrl} // Disable if profilePicUrl is empty
+              disabled={!profilePicUrl} 
             >
               Submit
             </button>

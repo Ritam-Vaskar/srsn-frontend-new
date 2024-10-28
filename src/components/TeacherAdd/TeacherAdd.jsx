@@ -122,7 +122,7 @@ const TeacherAddForm = ({ onClose ,fetchTeachers}) => {
             </select>
             {errors.grade && <p className={styles.error}>{errors.grade.message}</p>}
 
-            <button type="submit" className={styles.submitButton}>Submit</button>
+            <button type="submit" disabled={!profilePicUrl} className={styles.submitButton}>Submit</button>
           </div>
         </form>
       </div>

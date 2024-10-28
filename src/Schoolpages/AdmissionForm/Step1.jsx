@@ -3,7 +3,7 @@ import './styles/AdmissionForm.css';
 import uploadImg from '../../helper/uploadImg';
 import { useState } from 'react';
 
-const BasicInfo = ({ register, errors,setValue }) => {
+const BasicInfo = ({ register, errors, setValue }) => {
   const [profilePicUrl, setProfilePicUrl] = useState('');
 
   const handleChange = async (e) => {
@@ -12,7 +12,7 @@ const BasicInfo = ({ register, errors,setValue }) => {
       try {
         const imageUrl = await uploadImg(file);
         setProfilePicUrl(imageUrl.url);
-        setValue("profilePic", imageUrl.url);  
+        setValue("profilePic", imageUrl.url);
         console.log("Image uploaded successfully: ", imageUrl.url);
       } catch (error) {
         console.error("Error uploading image:", error);
@@ -158,6 +158,12 @@ const BasicInfo = ({ register, errors,setValue }) => {
       <div>
         <label>Health ID</label>
         <input {...register("healthID")} />
+      </div>
+      <div>
+        <label>
+          <input type="checkbox" required disabled={!profilePicUrl} />
+          I confirm that the above information is correct
+        </label>
       </div>
     </div>
   );
