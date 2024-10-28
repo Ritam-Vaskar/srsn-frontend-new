@@ -1,5 +1,4 @@
-
-const backendUrl="https://srsnbackend.onrender.com"
+const backendUrl=import.meta.env.VITE_BACKEND_URL
 
 
 const SummaryApi={
