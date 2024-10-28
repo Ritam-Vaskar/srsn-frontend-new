@@ -4,6 +4,7 @@ import Syllabus from './../../sections/Academic/Syllabus/Sylabus'
 import BookList from './../../sections/Academic/BookList/BookList'
 import HolidayNotice from './../../sections/Academic/HolidayNotice/HolidayNotice'
 import Routine from './../../sections/Academic/ClassRoutine/Routine'
+import Notice from './../../sections/Notice/Notice'
 
 import styles from './Academic.module.scss'
 import { useState } from 'react'
@@ -36,6 +37,9 @@ const Academic = () => {
 
 
             <div className={styles.section}>
+                <section id='notice'>
+                    <Notice />
+                </section>
                 <section id='result'>
                     <Result />
                 </section>
