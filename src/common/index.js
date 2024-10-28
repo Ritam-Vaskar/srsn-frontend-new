@@ -1,6 +1,4 @@
-import Alumni from "../Schoolpages/Alumini/Alumini"
-
-const backendUrl="http://localhost:8000"
+const backendUrl=import.meta.env.VITE_BACKEND_URL
 
 
 const SummaryApi={
