@@ -79,6 +79,8 @@ const AlumniApplicationForm = ({ onClose }) => {
       }
     } else {
       console.warn("No file selected.");
+      toast.error("No file selected. Please try again.");
+      setValue("profilePic", "");
     }
   };
   

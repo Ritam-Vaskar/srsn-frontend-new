@@ -72,6 +72,8 @@ const TeacherAddForm = ({ onClose ,fetchTeachers}) => {
       }
     } else {
       console.warn("No file selected.");
+      toast.error("Please select a file.");
+      setValue("profilePic", "");
     }
   };
   
