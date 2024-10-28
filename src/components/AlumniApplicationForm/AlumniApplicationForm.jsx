@@ -15,7 +15,7 @@ const AlumniApplicationForm = ({ onClose }) => {
     // Add socialMediaLinks to the form data
     const formData = { ...data, socialMediaLinks };
     console.log(formData);
-    try{
+    try {
       const response = await fetch(SummaryApi.AlumniApplicationSave.url, {
         method: SummaryApi.AlumniApplicationSave.method,
         headers: {
@@ -153,7 +153,13 @@ const AlumniApplicationForm = ({ onClose }) => {
             />
             {errors.email && <p className={styles.error}>{errors.email.message}</p>}
 
-            <button type="submit" className={styles.submitButton}>Submit</button>
+            <button 
+              type="submit" 
+              className={styles.submitButton}
+              disabled={!profilePicUrl} // Disable if profilePicUrl is empty
+            >
+              Submit
+            </button>
           </div>
         </form>
       </div>
