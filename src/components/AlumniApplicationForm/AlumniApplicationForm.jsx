@@ -42,21 +42,46 @@ const AlumniApplicationForm = ({ onClose }) => {
     setSocialMediaLinks(updatedLinks);
   };
 
+  // const handleChange = async (e) => {
+  //   const file = e.target.files[0];
+  //   if (file) {
+  //     try {
+  //       const imageUrl = await uploadImg(file);
+  //       setProfilePicUrl(imageUrl.url);
+  //       setValue("profilePic", imageUrl.url); 
+  //       console.log("Image uploaded successfully: ", imageUrl.url);
+  //     } catch (error) {
+  //       console.error("Error uploading image:", error);
+  //       toast.error("Failed to upload image. Please try again.");
+  //     }
+  //   }
+  // };
   const handleChange = async (e) => {
-    const file = e.target.files[0];
-    if (file) {
+    const fileList = e.target.files;
+    console.log("File List: ", fileList);
+    
+    if (fileList.length > 0) {
+      const file = fileList[0];
+      console.log("Selected file: ", file); // Log the selected file
       try {
         const imageUrl = await uploadImg(file);
-        setProfilePicUrl(imageUrl.url);
-        setValue("profilePic", imageUrl.url); 
-        console.log("Image uploaded successfully: ", imageUrl.url);
+        console.log("Upload response: ", imageUrl);
+        if (imageUrl.url) {
+          setProfilePicUrl(imageUrl.url);
+          setValue("profilePic", imageUrl.url);
+          console.log("Image uploaded successfully: ", imageUrl.url);
+        } else {
+          toast.error("Image upload was successful, but URL is missing.");
+        }
       } catch (error) {
         console.error("Error uploading image:", error);
         toast.error("Failed to upload image. Please try again.");
       }
+    } else {
+      console.warn("No file selected.");
     }
   };
-
+  
   return (
     <div className={styles.popupOverlay}>
       <div className={styles.popupContent}>
