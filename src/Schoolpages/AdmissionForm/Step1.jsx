@@ -42,6 +42,7 @@ const BasicInfo = ({ register, errors, setValue }) => {
       }
     } else {
       console.warn("No file selected.");
+      setValue("profilePic", "");
     }
   };
   
