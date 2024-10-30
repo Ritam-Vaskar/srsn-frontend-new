@@ -2,10 +2,31 @@ import React from 'react';
 import styles from './styles/Contact.module.css';
 import logo from '../../assets/images/Logo.png';
 import { useForm } from "react-hook-form";
+import SummaryApi from '../../common';
+import { toast } from 'react-toastify';
 
 const ContactPage = () => {
   const { register, handleSubmit, formState: { errors } } = useForm();
-  const onSubmit = data => console.log(data);  
+  const onSubmit = async(data) => {
+    try{
+      const response=await fetch(SummaryApi.Message.url, {
+        method: SummaryApi.Message.method,
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data),
+        credentials: 'include'
+      })
+      const result=await response.json();
+      if(result.success){
+        toast.success('Message sent successfully!');
+      }else{
+        toast.error(result.message);
+      }
+    }catch(err){
+      toast.error(err.message);
+    }
+  }
 
   return (
     <div className={styles.contactContainer}>
@@ -46,13 +67,6 @@ const ContactPage = () => {
             placeholder='Email'
           />
           {errors.Email && <span className={styles.error}>*This field is required</span>}
-
-          <input
-            type='text'
-            {...register("Identity", { required: true })}
-            placeholder='Identity'
-          />
-          {errors.Identity && <span className={styles.error}>*This field is required</span>}
 
           <textarea
             {...register("Message", { required: true })}

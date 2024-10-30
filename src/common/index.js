@@ -113,6 +113,12 @@ const SummaryApi={
     UserChangeClass:{
         url:backendUrl+"/api/chnageYearClass",
         method:"PUT"
+    },
+
+    //Message
+    Message:{
+        url:backendUrl+"/api/message",
+        method:"POST"
     }
 
 }
