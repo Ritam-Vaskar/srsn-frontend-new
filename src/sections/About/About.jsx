@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import AboutCard from '../../components/AboutCard/AboutCard';
 import aboutData from '../../data/About.json';
 
+
 const About = () => {
     const [cards, setCards] = useState([]);
   
@@ -17,7 +18,9 @@ const About = () => {
             image={card.image} 
             description={card.description} 
           />
+         
         ))}
+        
       </div>
     );
   };

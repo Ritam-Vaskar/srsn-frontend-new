@@ -1,0 +1,41 @@
+.card {
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    margin: 30px;
+    background-color: #fff5e6;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+
+    @media(max-width: 480px) {
+        margin: 20px;
+    }
+
+}
+
+.content {
+    padding: 20px;
+}
+
+.title {
+    font-size: 1.8rem;
+    color: #ff6a00;
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+.introText,
+.introTextBengali {
+    font-size: 1rem;
+    line-height: 1.6;
+    color: #333;
+    margin: 10px 0;
+    text-align: justify;
+}
+
+.introTextBengali {
+    color: #444;
+    font-weight: 500;
+    border-top: 1px solid #ffd6a1;
+    padding-top: 10px;
+}
