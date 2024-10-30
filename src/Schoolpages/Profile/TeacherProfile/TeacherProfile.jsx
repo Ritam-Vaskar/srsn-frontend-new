@@ -1,7 +1,7 @@
 import React, { useState, useContext } from 'react';
 import styles from './TeacherProfile.module.scss';
 import StudentDetails from './../StudentFetch/StudentFetch';
-import ProfileEdit from '../TeacherProfileEdit/ProfileEdit';
+import ProfileEdit from '../ProfileEdit/ProfileEdit';
 import Context from '../../../Context';
 
 const UserProfile = ({ user }) => {

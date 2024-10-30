@@ -104,6 +104,17 @@ const SummaryApi={
         method:"DELETE"
     },
 
+    //user danger option
+
+    UserGetResult:{
+        url:backendUrl+"/api/getResult",
+        method:"GET"
+    },
+    UserChangeClass:{
+        url:backendUrl+"/api/chnageYearClass",
+        method:"PUT"
+    }
+
 }
 
 
