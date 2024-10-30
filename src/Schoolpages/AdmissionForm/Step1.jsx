@@ -5,47 +5,66 @@ import { useState } from 'react';
 
 const BasicInfo = ({ register, errors, setValue }) => {
   const [profilePicUrl, setProfilePicUrl] = useState('');
-
   // const handleChange = async (e) => {
-  //   const file = e.target.files[0];
-  //   if (file) {
+  //   const fileList = e.target.files;
+  //   console.log("File List: ", fileList);
+    
+  //   if (fileList.length > 0) {
+  //     const file = fileList[0];
+  //     console.log("Selected file: ", file); 
   //     try {
   //       const imageUrl = await uploadImg(file);
-  //       setProfilePicUrl(imageUrl.url);
-  //       setValue("profilePic", imageUrl.url);
-  //       console.log("Image uploaded successfully: ", imageUrl.url);
+  //       console.log("Upload response: ", imageUrl);
+  //       if (imageUrl.url) {
+  //         setProfilePicUrl(imageUrl.url);
+  //         setValue("profilePic", imageUrl.url);
+  //         console.log("Image uploaded successfully: ", imageUrl.url);
+  //       } else {
+  //         toast.error("Image upload was successful, but URL is missing.");
+  //       }
   //     } catch (error) {
   //       console.error("Error uploading image:", error);
+  //       toast.error("Failed to upload image. Please try again.");
   //     }
+  //   } else {
+  //     console.warn("No file selected.");
+  //     setValue("profilePic", "");
   //   }
   // };
   const handleChange = async (e) => {
     const fileList = e.target.files;
     console.log("File List: ", fileList);
-    
+  
     if (fileList.length > 0) {
       const file = fileList[0];
-      console.log("Selected file: ", file); // Log the selected file
-      try {
-        const imageUrl = await uploadImg(file);
-        console.log("Upload response: ", imageUrl);
-        if (imageUrl.url) {
-          setProfilePicUrl(imageUrl.url);
-          setValue("profilePic", imageUrl.url);
-          console.log("Image uploaded successfully: ", imageUrl.url);
-        } else {
-          toast.error("Image upload was successful, but URL is missing.");
+      console.log("Selected file: ", file);
+  
+      // Check file type and size
+      if (file.type.startsWith("image/") && file.size > 0) {
+        try {
+          const imageUrl = await uploadImg(file);
+          console.log("Upload response: ", imageUrl);
+  
+          if (imageUrl.url) {
+            setProfilePicUrl(imageUrl.url);
+            setValue("profilePic", imageUrl.url);
+            console.log("Image uploaded successfully: ", imageUrl.url);
+          } else {
+            toast.error("Image upload was successful, but URL is missing.");
+          }
+        } catch (error) {
+          console.error("Error uploading image:", error);
+          toast.error("Failed to upload image. Please try again.");
         }
-      } catch (error) {
-        console.error("Error uploading image:", error);
-        toast.error("Failed to upload image. Please try again.");
+      } else {
+        console.warn("Invalid file type or size.");
+        setValue("profilePic", "");
       }
     } else {
       console.warn("No file selected.");
       setValue("profilePic", "");
     }
   };
-  
   return (
     <div>
       <h2>Basic Information</h2>
@@ -168,7 +187,7 @@ const BasicInfo = ({ register, errors, setValue }) => {
       <div>
         <label>Blood Group</label>
         <select
-          {...register("bloodGroup", { required: "Blood group is required" })}
+          {...register("bloodGroup", { required: "Blood group is required" })} disabled={!profilePicUrl}
         >
           <option value="">Select...</option>
           <option value="A+">A+</option>
@@ -185,12 +204,6 @@ const BasicInfo = ({ register, errors, setValue }) => {
       <div>
         <label>Health ID</label>
         <input {...register("healthID")} />
-      </div>
-      <div>
-        <label>
-          <input type="checkbox" required disabled={!profilePicUrl} />
-          I confirm that the above information is correct
-        </label>
       </div>
     </div>
   );
