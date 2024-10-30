@@ -12,7 +12,7 @@ const NewsEvent = () => {
 
     return (
         <>
-        <h1>News & Blogs</h1>
+        <center style={{marginTop:'30px'}}><h1>News & Blogs</h1></center>
         <div className="news-page">
             
             {newsList.map((news, index) => (
