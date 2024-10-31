@@ -4,7 +4,7 @@ import Students from './Students/Students';
 import Applications from './Applications/Applications';
 import Alumni from './Alumni/Alumni';
 import Notice from './Notice/Notice';
-import Messages from './Messages/Messages';
+// import Messages from './Messages/Messages';
 import styles from './styles/AdminProfile.module.scss';
 
 const AdminPortal = () => {
@@ -12,8 +12,8 @@ const AdminPortal = () => {
 
     const renderSection = () => {
         switch (activeSection) {
-            case 'Messages':
-                return <Messages />;
+            // case 'Messages':
+            //     return <Messages />;
             case 'Teachers':
                 return <Teachers />;
             case 'Students':
@@ -33,7 +33,7 @@ const AdminPortal = () => {
         <div className={styles.container}>
             
             <div className={styles.topBar}>
-                <button onClick={() => setActiveSection('Messages')} className={activeSection === 'Messages' ? styles.active : ''}>Messages</button>
+                {/* <button onClick={() => setActiveSection('Messages')} className={activeSection === 'Messages' ? styles.active : ''}>Messages</button> */}
                 <button onClick={() => setActiveSection('Teachers')} className={activeSection === 'Teachers' ? styles.active : ''}>Teachers</button>
                 <button onClick={() => setActiveSection('Students')} className={activeSection === 'Students' ? styles.active : ''}>Students</button>
                 <button onClick={() => setActiveSection('Applications')} className={activeSection === 'Applications' ? styles.active : ''}>Applications</button>
