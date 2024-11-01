@@ -1,9 +1,10 @@
 import React, { useState, useContext } from 'react';
 import styles from './styles/UserProfile.module.scss';
 import StudentResult from './../StudentFetch/StudentFetch';
-import ProfileEdit from '../TeacherProfileEdit/ProfileEdit';
+import ProfileEdit from '../ProfileEdit/ProfileEdit';
 import StudentDetails from '../../Profile/StudentDetails/StudentDetails';  // Import StudentDetails here
 import AdminPortal from '../Admin/AdminProfile';
+import StudentResultPortal from '../StudentResultPortal/StudentResult';
 import Context from '../../../Context';
 import { toast } from 'react-toastify';
 import { useDispatch } from 'react-redux';
@@ -118,6 +119,7 @@ const UserProfile = ({ user }) => {
             <button className={styles.editButton} onClick={handleEditClick}>Edit Profile</button>
           </div>
         )}
+        {activeComponent==='StudentResult' && <StudentResultPortal />}
         {activeComponent === "ResultPortal" && <StudentResult />}
         {activeComponent === "StudentDetails" && <StudentDetails />}
         {activeComponent === "AdminPortal" && <AdminPortal />}

@@ -75,22 +75,22 @@ const AdmissionForm = () => {
   });
 
   // Load form data from local storage on component mount
-  useEffect(() => {
-    const savedFormData = JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY));
-    if (savedFormData) {
-      Object.keys(savedFormData).forEach((key) => {
-        setValue(key, savedFormData[key]);
-      });
-    }
-  }, [setValue]);
+  // useEffect(() => {
+  //   const savedFormData = JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY));
+  //   if (savedFormData) {
+  //     Object.keys(savedFormData).forEach((key) => {
+  //       setValue(key, savedFormData[key]);
+  //     });
+  //   }
+  // }, [setValue]);
 
-  // Watch form data and store it in local storage whenever it changes
-  useEffect(() => {
-    const subscription = watch((value) => {
-      localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(value));
-    });
-    return () => subscription.unsubscribe(); // Cleanup
-  }, [watch]);
+  // // Watch form data and store it in local storage whenever it changes
+  // useEffect(() => {
+  //   const subscription = watch((value) => {
+  //     localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(value));
+  //   });
+  //   return () => subscription.unsubscribe(); // Cleanup
+  // }, [watch]);
 
   // On submission of the entire form
   const onSubmit = async (data) => {
