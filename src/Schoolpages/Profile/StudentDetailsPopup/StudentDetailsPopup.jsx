@@ -24,7 +24,7 @@ const StudentDetailsPopup = ({ student, onClose }) => {
         <div className={styles.overlay}>
             <div className={styles.popup}>
                 <button className={styles.closeButton} onClick={onClose}>X</button>
-                <h2>Student Details</h2>
+                <h2 style={{ textAlign: 'center', marginBottom: '10px' }}>Student Details</h2>
 
                 <center><div className={styles.actions}>
                     <button className={styles.downloadButton} onClick={handleDownloadPDF}>Download as PDF</button>

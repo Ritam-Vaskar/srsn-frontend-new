@@ -11,6 +11,9 @@
         flex-direction: column;
         margin: 20px;
     }
+    @media(max-width: 480px) {
+        margin: 0;
+    }
 }
 
 .leftBar {

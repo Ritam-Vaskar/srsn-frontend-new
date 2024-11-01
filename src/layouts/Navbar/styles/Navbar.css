@@ -23,7 +23,7 @@
 }
 
 .logo img {
-    height: 8rem;
+    height: 6rem;
 }
 
 .ashram_name {
@@ -87,7 +87,6 @@
 .lowerheader {
     max-width: 100vw;
     margin-top: 0.5rem;
-    height: 3rem;
     background-color: var(--ashram-border);
     display: none;
     position:sticky;
@@ -130,7 +129,9 @@
     flex-direction: column;
     align-items: center;
 }
-
+.headroom-wrapper {
+    height: 55px;
+}
 /* Menu Logo */
 .menu_logo {
     width: 100%;

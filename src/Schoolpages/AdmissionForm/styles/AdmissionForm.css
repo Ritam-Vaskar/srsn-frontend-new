@@ -7,6 +7,10 @@
   border-radius: 15px;
   background-color: #f7f7f7;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+
+  @media(max-width: 480px) {
+    width: 90%;
+  }
 }
 
 /* Title and subtitle styles */
@@ -107,7 +111,7 @@ tbody tr:nth-child(even) {
 
 
 
-h2 {
+.form-container h2 {
   text-align: center;
   font-size: 24px;
   margin-bottom: 20px;

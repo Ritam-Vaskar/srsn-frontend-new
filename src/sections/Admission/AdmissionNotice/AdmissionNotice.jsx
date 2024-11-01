@@ -39,7 +39,7 @@ const AdmissionNotice = ({ flag }) => {
         <div className={styles.admissionOverlay}>
           <div className={styles.admissionSlider}>
             <div className={styles.admissionText}>
-              <Link to='/'>🎉 Admission Open! Click Now! 🎉</Link>
+              <Link to='/school/admission_form'>🎉 Admission Open! Click Now! 🎉</Link>
             </div>
           </div>
         </div>
