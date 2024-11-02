@@ -1,5 +1,6 @@
 .classTable {
     margin-bottom: 20px;
+    padding: 20px;
     
     table {
         width: 100%;
@@ -14,12 +15,12 @@
         }
 
         th {
-            background-color: #4CAF50; 
+            background-color: #ff8c19; 
             color: white; 
             font-weight: bold;
         }
         td a {
-            color: #4CAF50; 
+            color: #ff8c19; 
             text-decoration: none;
             font-weight: bold;
         }
@@ -62,7 +63,7 @@
 
 
 .dropdownContainer {
-    margin-bottom: 20px;
+    margin: 20px;
     display: flex;
     align-items: center;
 }

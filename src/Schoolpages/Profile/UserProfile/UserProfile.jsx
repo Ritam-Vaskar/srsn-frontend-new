@@ -22,6 +22,15 @@ const UserProfile = ({ user }) => {
   const handleEditClick = () => setEditModalOpen(true);
   const closeEditModal = () => setEditModalOpen(false);
 
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
+  const handleLeftBarOptionClick = (option) => {
+    scrollToTop();
+    setActiveComponent(option);
+  };
+
   const handleLogout = async () => {
     try {
       const response = await fetch(SummaryApi.UserLogout.url, {
@@ -57,23 +66,23 @@ const UserProfile = ({ user }) => {
 
         {user.role === 'Teacher' && (
           <>
-            <div className={styles.editProfile} onClick={() => setActiveComponent("Profile")}>Your Profile</div>
-            <div className={styles.studentDetails} onClick={() => setActiveComponent("ResultPortal")}>Result Portal</div>
-            <div className={styles.resultPortal} onClick={() => setActiveComponent("StudentDetails")}>Student Details</div>
+            <div className={styles.editProfile} onClick={() => handleLeftBarOptionClick("Profile")}>Your Profile</div>
+            <div className={styles.studentDetails} onClick={() => handleLeftBarOptionClick("ResultPortal")}>Result Portal</div>
+            <div className={styles.resultPortal} onClick={() => handleLeftBarOptionClick("StudentDetails")}>Student Details</div>
           </>
         )}
         {user.role === 'Student' && (
           <>
-            <div className={styles.editProfile} onClick={() => setActiveComponent("Profile")}>Your Profile</div>
-            <div className={styles.resultPortal} onClick={() => setActiveComponent("StudentResult")}>Result Portal</div>
+            <div className={styles.editProfile} onClick={() => handleLeftBarOptionClick("Profile")}>Your Profile</div>
+            <div className={styles.resultPortal} onClick={() => handleLeftBarOptionClick("ResultPortal")}>Result Portal</div>
           </>
         )}
         {user.role === 'Admin' && (
           <>
-            <div className={styles.editProfile} onClick={() => setActiveComponent("Profile")}>Your Profile</div>
-            <div className={styles.studentDetails} onClick={() => setActiveComponent("ResultPortal")}>Result Portal</div>
-            <div className={styles.resultPortal} onClick={() => setActiveComponent("StudentDetails")}>Student Details</div>
-            <div className={styles.adminPortal} onClick={() => setActiveComponent("AdminPortal")}>Admin Portal</div>
+            <div className={styles.editProfile} onClick={() => handleLeftBarOptionClick("Profile")}>Your Profile</div>
+            <div className={styles.studentDetails} onClick={() => handleLeftBarOptionClick("ResultPortal")}>Result Portal</div>
+            <div className={styles.resultPortal} onClick={() => handleLeftBarOptionClick("StudentDetails")}>Student Details</div>
+            <div className={styles.adminPortal} onClick={() => handleLeftBarOptionClick("AdminPortal")}>Admin Portal</div>
           </>
         )}
         <div className={styles.logoutButton} onClick={handleLogout}>Logout</div>
@@ -82,7 +91,7 @@ const UserProfile = ({ user }) => {
       <div className={styles.rightBar}>
         {activeComponent === "Profile" && (
           <div className={styles.profileDetails}>
-            <h2>Profile Details</h2>
+            <h2 style={{ textAlign: "center" , marginBottom: "20px" }}>Profile Details</h2>
             <table className={styles.profileTable}>
               <tbody>
                 <tr>

@@ -46,7 +46,7 @@ const NewsCard = ({ image, title, date, time, content }) => {
                             {date} - {time}
                         </p>
 
-                        <button className={styles.closeBtn} onClick={handleReadMore}>Close</button>
+                        <button className={styles.closeBtn} onClick={handleReadMore}>X</button>
                     </div>
                 </div>
             )}

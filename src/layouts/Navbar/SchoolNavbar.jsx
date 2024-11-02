@@ -177,6 +177,9 @@ const SchoolNavbar = () => {
                             </HashLink>}
                     </li> */}
                     <li>{!user&&<HashLink smooth to='/school/login' onClick={toggleSideMenu} style={{ color: 'rgb(255, 153, 0)', fontSize: 'large', fontWeight: 'bolder' }}>Login</HashLink>}</li>
+                    <li>{!user&&<HashLink smooth to='/school/admission_form' onClick={toggleSideMenu} style={{ color: 'rgb(255, 153, 0)', fontSize: 'large', fontWeight: 'bolder' }}>Apply</HashLink>}</li>
+                    <li><HashLink smooth to='/ashram' onClick={() => { document.body.classList.remove('lock-scroll') }} style={{ color: 'rgb(255, 153, 0)', fontSize: 'large', fontWeight: 'bolder' }}>Ashram</HashLink></li>
+                    <li><HashLink smooth to='/school/alumni' onClick={toggleSideMenu} style={{ color: 'rgb(255, 153, 0)', fontSize: 'large', fontWeight: 'bolder' }}>Alumni</HashLink></li>
                     <li><p>The School</p></li>
                     <li><HashLink smooth to='/school/home#holytrio' onClick={toggleSideMenu}>Home</HashLink></li>
                     <li><HashLink smooth to='/school/home#mission' onClick={toggleSideMenu}>Mission and Vision</HashLink></li>
@@ -197,8 +200,7 @@ const SchoolNavbar = () => {
                     <li><HashLink smooth to='/school/academic#routine' onClick={toggleSideMenu}>Class Routine</HashLink></li>
                     <li><HashLink smooth to='/school/academic#notice' onClick={toggleSideMenu}>Notice Board</HashLink></li>
                     <li><HashLink smooth to='/school/academic#holiday' onClick={toggleSideMenu}>Holiday Notice</HashLink></li>
-                    <li><HashLink smooth to='/ashram' onClick={() => { document.body.classList.remove('lock-scroll') }} style={{ color: 'rgb(255, 153, 0)', fontSize: 'large', fontWeight: 'bolder' }}>Ashram</HashLink></li>
-                    <li><HashLink smooth to='/school/alumni' onClick={toggleSideMenu} style={{ color: 'rgb(255, 153, 0)', fontSize: 'large', fontWeight: 'bolder' }}>Alumni</HashLink></li>
+                    
                 </ul>
             </div>
         </div>

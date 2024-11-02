@@ -56,6 +56,10 @@
     overflow: auto;
     max-width: 75%;
     position: relative;
+
+    @media(max-width: 480px) {
+        max-width: 90%;
+    }
     
 }
 

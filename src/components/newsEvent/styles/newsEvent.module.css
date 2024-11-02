@@ -79,11 +79,15 @@
     background-color: #fff;
     padding: 20px;
     width: 65vw;
-    height: 80vh;
+    height: 90vh;
     max-width: 90%;
     border-radius: 10px;
     position: relative;
     overflow-y: scroll;
+    @media(max-width: 480px) {
+        width: 90vw;
+        height: 70vh;
+    }
 }
 
 .modalImage {

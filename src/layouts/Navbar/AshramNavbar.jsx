@@ -4,6 +4,7 @@ import "./styles/Navbar.css";
 import LogoImg from "../../assets/images/Logo.png";
 import MenuIcon from '@mui/icons-material/Menu';
 import CancelIcon from '@mui/icons-material/Cancel';
+import Headroom from "react-headroom";
 
 const Navbar = () => {
     let menuref = useRef(null);
@@ -39,6 +40,7 @@ const Navbar = () => {
                     <h4>Established : 1975</h4>
                 </div>
             </div>
+            <Headroom style={{ height: "55px"}}>
             <div className="lowerheader">
                 <ul className="links">
                     <li>
@@ -83,6 +85,7 @@ const Navbar = () => {
                     </li>
                 </ul>
             </div>
+            </Headroom>
             <div className="lowerheader_hidden">
                 <div className="menu_logo">
                     <MenuIcon className="menu_logo_img"

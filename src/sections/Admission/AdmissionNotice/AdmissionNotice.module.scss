@@ -25,7 +25,7 @@
   .admissionSlider {
     position: absolute;
     bottom: -5px; 
-    width: 100%;
+    width: 65%;
     white-space: nowrap; 
     animation: slide 10s linear infinite; 
   
@@ -46,8 +46,7 @@
     }
     a:hover{
         // color:rgb(142, 189, 208);
-        color:darkseagreen;
-        background-color: black;
+        color:deepskyblue;
     }
   }
   

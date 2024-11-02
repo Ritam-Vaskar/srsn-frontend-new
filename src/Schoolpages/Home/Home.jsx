@@ -1,15 +1,78 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import HolyTrio from '../../sections/HolyTrio/HolyTrio';
 import Mission from '../../sections/MissionAndVision/MissionAndVission';
 import SchoolMedia from '../../sections/SchoolMedia/Media';
 import TeachersCarousel from '../../sections/TeachersCarousel/TeachersCarousel';
 import HeroCarousel from '../../sections/HeroCarousel/HeroCarousel';
 import Contact from '../../sections/Contact/Contact';
+import { Link } from 'react-router-dom';
+import SummaryApi from '../../common'; // Adjust the path as needed
+import { toast } from 'react-toastify';
+import styles from './styles/Home.module.scss'; // Import the SCSS module
+
 const Home = () => {
+    const [isPopupVisible, setPopupVisible] = useState(false);
+    const [isAdmissionOngoing, setIsAdmissionOngoing] = useState(false);
+
+    // Fetch admission status on component mount
+    useEffect(() => {
+        const fetchAdmissionStatus = async () => {
+            try {
+                const response = await fetch(SummaryApi.AdmissionStatus.url, {
+                    method: SummaryApi.AdmissionStatus.method,
+                    headers: { 'Content-Type': 'application/json' },
+                    credentials: 'include',
+                });
+
+                const result = await response.json();
+                if (result.success) {
+                    setIsAdmissionOngoing(result.isAdmissionOngoing);
+                    setPopupVisible(result.isAdmissionOngoing); // Show popup if admission is ongoing
+                } else {
+                    toast.error(result.message || 'Failed to fetch admission status');
+                }
+            } catch (error) {
+                toast.error(error.message);
+            }
+        };
+
+        fetchAdmissionStatus();
+    }, []);
+
     return (
         <div>
-            <section id="holytrio">
+            {/* Admission Status Popup */}
+            {isPopupVisible && (
+                <div className={styles.admissionPopupOverlay}>
+                    <div className={styles.admissionPopup}>
+                        <p>Admissions are currently open!</p>
+                        <button onClick={() => setPopupVisible(false)}>Close</button>
+                    </div>
+                </div>
+            )}
+
+            <section id="hero-carousel">
                 <HeroCarousel />
+            </section>
+
+            <section>
+                <Link to="/school/academic#notice">
+                    <button
+                        style={{
+                            backgroundColor: "var(--ashram-yellow)",
+                            border: "none",
+                            width: "100%",
+                            margin: "10px 0",
+                            padding: "10px 20px",
+                            color: "white",
+                            fontSize: "24px",
+                            fontWeight: "bold",
+                            cursor: "pointer",
+                        }}
+                    >
+                        View School Notice Board
+                    </button>
+                </Link>
             </section>
 
             <section id="mission">
@@ -23,11 +86,13 @@ const Home = () => {
             <section id="school-media">
                 <SchoolMedia />
             </section>
+
             <section id="teachers-carousel">
                 <TeachersCarousel />
             </section>
+
             <section id="contact">
-                <Contact/>
+                <Contact />
             </section>
         </div>
     );
