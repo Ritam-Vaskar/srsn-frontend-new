@@ -119,7 +119,17 @@ const SummaryApi={
     Message:{
         url:backendUrl+"/api/message",
         method:"POST"
-    }
+    },
+
+    //is admission ongoing
+    AdmissionStatus: {
+        url: backendUrl + "/api/eventControl", // GET request
+        method: "GET",
+    },
+    UpdateAdmissionStatus: {
+        url: backendUrl + "/api/updateAdmissionStatus", // POST request
+        method: "POST",
+    },
 
 }
 

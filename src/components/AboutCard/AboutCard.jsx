@@ -32,7 +32,7 @@ const AboutCard = ({ image, description ,title }) => {
         <img src={image} alt="About" className={styles.aboutCardImage} />
       </div>
       <div className={styles.content}>
-        <h3 style={{ color: "orangered" , marginBottom: "10px" }}>{title}</h3>
+        <h3 style={{ color: "#ff6a00" , marginBottom: "10px" }}>{title}</h3>
         <p className={styles.aboutCardDescription}>{description}</p>
         <button>Learn More</button>
       </div>
