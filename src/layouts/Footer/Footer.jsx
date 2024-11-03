@@ -9,6 +9,7 @@ import {
 } from "react-icons/fa";
 import "./styles/Footer.css";
 import footLogo from "../../assets/images/Logo.png";
+import GitHubIcon from '@mui/icons-material/GitHub';
 
 const Footer = () => {
     return (
@@ -62,23 +63,23 @@ const Footer = () => {
                     <div className="footer-top">
                         <div className="comp-logo">
                             <Link className="logo-link" to='/'>
-                                <img className="logo-svg" src={footLogo} alt="infoma logo"/>
+                                <img className="logo-svg" src={footLogo} alt="infoma logo" />
                                 Ramkrishna Sachool and Seva Sangha
                             </Link>
                         </div>
                         <div className="filler-text">Cultivating Spiritual Wisdom for a Transcendent Life</div>
                         <div className="social">
                             <a className="social-link" href="#">
-                            <FaMapMarkerAlt className="fab_logo" aria-hidden="true" style={{color: '#0d7e20'}}/>
+                                <FaMapMarkerAlt className="fab_logo" aria-hidden="true" style={{ color: '#0d7e20' }} />
                             </a>
                             <a className="social-link" href="#">
-                            <FaLinkedin className="fab_logo" aria-hidden="true" style={{color: '#007bb6'}}/>
+                                <FaLinkedin className="fab_logo" aria-hidden="true" style={{ color: '#007bb6' }} />
                             </a>
                             <a className="social-link" href="https://www.facebook.com/p/Sri-Ramakrishna-Siksha-Niketan-100057181941594/">
-                            <FaFacebook className="fab_logo" aria-hidden="true" style={{color: '#3b5998'}}/>
+                                <FaFacebook className="fab_logo" aria-hidden="true" style={{ color: '#3b5998' }} />
                             </a>
                             <a className="social-link" href="#">
-                            <FaTwitter className="fab_logo" aria-hidden="true" style={{color: '#00aced'}}/>
+                                <FaTwitter className="fab_logo" aria-hidden="true" style={{ color: '#00aced' }} />
                             </a>
                         </div>
                     </div>
@@ -134,9 +135,10 @@ const Footer = () => {
                     </div>
                 </footer>
                 <div className="footer-copyright">
-                <p>Created and Maintained by : <a href="https://www.linkedin.com/in/ritam-vaskar-50627527a/ " style={{color: 'white'}}>Ritam Vaskar</a> and <a href="https://www.linkedin.com/in/sandipto-roy-675600277/" style={{color: 'white'}}>Sandipto Roy</a></p>
+                    <p>Created and Maintained by : <a href="https://www.linkedin.com/in/ritam-vaskar-50627527a/ " style={{ color: 'white' }}>Ritam Vaskar</a> and <a href="https://www.linkedin.com/in/sandipto-roy-675600277/" style={{ color: 'white' }}>Sandipto Roy</a></p>
+                    <Link to='/source' className="footer-source"><GitHubIcon /> Source Code</Link>
                     <p>© 2024 - Present Haridasnagar Ramkrishna Mission. All rights reserved.</p>
-                    
+
                 </div>
             </div>
         </div>

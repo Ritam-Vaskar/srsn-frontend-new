@@ -1,0 +1,44 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center; // Center content horizontally
+    align-items: center; // Center content vertically
+    height: 100vh; // Full viewport height
+    background-color: #121212; // Dark background
+    color: #ffffff; // Text color
+    text-align: center;
+  }
+  
+  .linkBox {
+    position: relative; // Position for moving effect
+    background-color: #1e1e1e; // Darker box background
+    padding: 40px;
+    border-radius: 12px; // Rounded corners
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5); // Box shadow
+    transition: transform 0.3s ease, box-shadow 0.3s ease; // Smooth transition
+  
+    &:hover {
+      cursor: pointer; // Change cursor to pointer
+      box-shadow: 0 8px 30px rgba(100, 108, 255, 0.5); // Intensify shadow on hover
+    }
+  }
+  
+  .link {
+    color: #646cff; // Link color
+    text-decoration: none; // Remove underline
+    font-size: 24px; // Bigger font size
+    margin: 20px 0; // Spacing between links
+    display: block; // Stack links
+    border: 2px solid #da933c; // Border around links
+    padding: 1.5rem;
+    border-radius: 2rem;
+    
+  
+    &:hover {
+        color: orange;
+      filter: drop-shadow(0 0 2em #646cffaa); // Hover effect
+      box-shadow: 0px 0px px #f2a54e; // Box shadow
+      border: 2px solid#646cffaa; 
+    }
+  }
+  

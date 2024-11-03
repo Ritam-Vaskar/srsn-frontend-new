@@ -234,6 +234,13 @@
     justify-content: center;
     gap: 0.5rem
   }
+  .footer-source{
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5rem;
+  }
   
   @media screen and (max-width:1080px) {
     .footer-container{
