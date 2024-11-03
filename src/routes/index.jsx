@@ -30,6 +30,8 @@ import Login from './../Authentication/Login/Login';
 
 import ScrollToTop from '../helper/ScrollToTop';
 
+import SourceCode from './../Schoolpages/SourceCode/Source';
+
 
 
 
@@ -51,6 +53,10 @@ const router = createBrowserRouter([
                     <SchoolHome />
                     <SchoolFooter />
                 </>
+            },
+            {
+                path:'source',
+                element:<SourceCode/>
             },
 
             //school page
