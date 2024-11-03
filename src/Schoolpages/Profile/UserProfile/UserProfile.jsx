@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import styles from './styles/UserProfile.module.scss';
 import StudentResult from './../StudentFetch/StudentFetch';
 import ProfileEdit from '../ProfileEdit/ProfileEdit';
@@ -18,6 +18,28 @@ const UserProfile = ({ user }) => {
   const [activeComponent, setActiveComponent] = useState("Profile");
   const [isEditModalOpen, setEditModalOpen] = useState(false);
   const { fetchUser } = useContext(Context);
+
+  const[isResultActive, setIsResultActive]=useState(false);
+
+  const fetchResultPortal=async()=>{
+    try{
+      const response=await fetch(SummaryApi.MarksSubmissionFetch.url, {
+        method: SummaryApi.MarksSubmissionFetch.method,
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        credentials: 'include'
+      });
+      const result = await response.json();
+      console.log(result);
+      setIsResultActive(result.marksSubmission.isOngoing);
+    }catch(error){
+      console.log(error);
+    }
+  }
+  useEffect(() => {
+    fetchResultPortal();
+  }, []);
 
   const handleEditClick = () => setEditModalOpen(true);
   const closeEditModal = () => setEditModalOpen(false);
@@ -74,7 +96,7 @@ const UserProfile = ({ user }) => {
         {user.role === 'Student' && (
           <>
             <div className={styles.editProfile} onClick={() => handleLeftBarOptionClick("Profile")}>Your Profile</div>
-            <div className={styles.resultPortal} onClick={() => handleLeftBarOptionClick("ResultPortal")}>Result Portal</div>
+            {isResultActive && <div className={styles.resultPortal} onClick={() => handleLeftBarOptionClick("StudentResult")}>Result Portal</div>}
           </>
         )}
         {user.role === 'Admin' && (

@@ -68,3 +68,41 @@
         cursor: pointer;
     }
 }
+
+
+.modalContent {
+    max-width: 500px; /* Adjust width as needed */
+    max-height: 400px; /* Adjust height as needed */
+    overflow-y: auto; /* Enable vertical scrolling */
+    padding: 20px;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.modalOverlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+}
+
+ul {
+    padding: 0;
+    margin: 0;
+    list-style-type: none;
+}
+
+pre {
+    white-space: pre-wrap; /* Allows wrapping of long lines */
+    word-wrap: break-word; /* Breaks long words if needed */
+    background-color: #f7f7f7;
+    padding: 10px;
+    border-radius: 4px;
+}

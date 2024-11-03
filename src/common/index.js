@@ -122,16 +122,28 @@ const SummaryApi={
     },
 
     //is admission ongoing
-    AdmissionStatus: {
-        url: backendUrl + "/api/eventControl", // GET request
+    AdmissionFetch: {
+        url: backendUrl + "/api/admissionFetch", 
         method: "GET",
     },
-    UpdateAdmissionStatus: {
-        url: backendUrl + "/api/updateAdmissionStatus", // POST request
-        method: "POST",
+    EventEdit: {
+        url: backendUrl + "/api/eventEdit", 
+        method: "PUT",
+    },
+    MarksSubmissionFetch: {
+        url: backendUrl + "/api/marksSubmissionFetch", 
+        method: "GET",
+    },
+    EventToggle: {
+        url: backendUrl + "/api/eventToggle", 
+        method: "PUT",
+    },
+    Eventfetch: {
+        url: backendUrl + "/api/eventFetch", 
+        method: "GET",
     },
 
-}
+}   
 
 
 export default SummaryApi

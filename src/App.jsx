@@ -28,7 +28,8 @@ function App() {
       }
       dispatch(setUserDetails(result.user));
     } catch (err) {
-      toast.error(err.message);
+      // toast.error(err.message);
+      console.log(err);
     }
   }
   useEffect(() => {

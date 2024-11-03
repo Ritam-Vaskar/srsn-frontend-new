@@ -1,19 +1,47 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import bcrypt from 'bcryptjs';
+import { toast } from 'react-toastify';
 import styles from './Students.module.scss';
 import SummaryApi from './../../../../common/index';
-import { toast } from 'react-toastify';
 
 const Students = () => {
     const user = useSelector(state => state?.user?.user);
     const [password, setPassword] = useState('');
     const [isModalOpen, setIsModalOpen] = useState(false);
-    const [modalType, setModalType] = useState(''); 
+    const [modalType, setModalType] = useState('');
     const [errorMessage, setErrorMessage] = useState('');
+    const [events, setEvents] = useState([]);
+    const [selectedEvent, setSelectedEvent] = useState(null);
+    const [changeHistory, setChangeHistory] = useState([]);
+    const [isChangeHistoryModalOpen, setIsChangeHistoryModalOpen] = useState(false);
 
-    const handleOpenModal = (type) => {
+    // Fetch events on component mount
+    useEffect(() => {
+        fetchEvents();
+    }, []);
+
+    const fetchEvents = async () => {
+        try {
+            const response = await fetch(SummaryApi.Eventfetch.url, {
+                method: SummaryApi.Eventfetch.method,
+                headers: { 'Content-Type': 'application/json' },
+                credentials: 'include',
+            });
+            const data = await response.json();
+            if (data.success) {
+                setEvents(data.events);
+            } else {
+                toast.error('Failed to fetch events');
+            }
+        } catch (error) {
+            console.error('Error fetching events:', error);
+        }
+    };
+
+    const handleOpenModal = (type, event = null) => {
         setModalType(type);
+        setSelectedEvent(event);
         setIsModalOpen(true);
         setErrorMessage('');
     };
@@ -23,71 +51,76 @@ const Students = () => {
         if (isPasswordCorrect) {
             setIsModalOpen(false);
             setPassword('');
-            if (modalType === 'changeClass') {
-                await changeClass();
-            } else if (modalType === 'calculateResult') {
-                await calculateResult();
+            if (modalType === 'toggleEventStatus' && selectedEvent) {
+                await toggleEventStatus(selectedEvent);
             }
         } else {
             setErrorMessage('Incorrect password, please try again.');
         }
     };
 
-    const changeClass = async () => {
+    const toggleEventStatus = async (event) => {
         try {
-            const response = await fetch(SummaryApi.UserChangeClass.url, {
-                method: SummaryApi.UserChangeClass.method,
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                credentials: 'include'
+            const response = await fetch(SummaryApi.EventToggle.url, {
+                method: SummaryApi.EventToggle.method,
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ id: event._id }),
+                credentials: 'include',
             });
             const data = await response.json();
-            console.log(data);
             if (data.success) {
-                toast.success('Change  class successfully!');
+                toast.success('Event status updated successfully!');
+                fetchEvents(); // Refresh the events list
             } else {
-                toast.error('Failed to change class');
+                toast.error('Failed to update event status');
             }
         } catch (error) {
-            alert('Error changing class');
-            console.log(error);
+            console.error('Error updating event status:', error);
         }
     };
 
-    const calculateResult = async () => {
-        try {
-            const response = await fetch(SummaryApi.UserGetResult.url, {
-                method: SummaryApi.UserGetResult.method,
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                credentials: 'include'
-            });
-            const data = await response.json();
-            if (data.success) {
-                toast.success('Result calculated successfully');
-            } else {
-                toast.error('Failed to calculate result');
-            }
-        } catch (error) {
-            alert('Error calculating result');
-            console.log(error);
-        }
+    const handleViewChanges = (event) => {
+        setChangeHistory(event.changes);
+        setIsChangeHistoryModalOpen(true);
     };
 
     return (
         <div className={styles.studentsContainer}>
             <h2>Students Section</h2>
-            <p>This is the student setting option (please use it carefully)</p>
 
-            <button onClick={() => handleOpenModal('changeClass')}>Student Change Class</button>
-            <button onClick={() => handleOpenModal('calculateResult')}>Student Result Calculate</button>
+            {/* Events Table */}
+            <table className={styles.eventTable}>
+                <thead>
+                    <tr>
+                        <th>Event Name</th>
+                        <th>Status</th>
+                        <th>Toggle Status</th>
+                        <th>View Changes</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {events.map(event => (
+                        <tr key={event._id}>
+                            <td>{event.name}</td>
+                            <td>{event.isOngoing ? 'Ongoing' : 'Not Ongoing'}</td>
+                            <td>
+                                <button onClick={() => handleOpenModal('toggleEventStatus', event)}>
+                                    {event.isOngoing ? 'Turn Off' : 'Turn On'}
+                                </button>
+                            </td>
+                            <td>
+                                <button onClick={() => handleViewChanges(event)}>View Changes</button>
+                            </td>
+                        </tr>
+                    ))}
+                </tbody>
+            </table>
 
+            {/* Modal for Password Entry */}
             {isModalOpen && (
                 <div className={styles.modalOverlay}>
                     <div className={styles.modalContent}>
-                        <h3>{modalType === 'changeClass' ? 'Change Class' : 'Calculate Result'}</h3>
+                        <h3>Toggle Event Status</h3>
                         <p>Please enter your password to proceed:</p>
                         <input
                             type="password"
@@ -101,72 +134,26 @@ const Students = () => {
                     </div>
                 </div>
             )}
+
+            {/* Change History Modal */}
+            {isChangeHistoryModalOpen && (
+                <div className={styles.modalOverlay}>
+                    <div className={styles.modalContent}>
+                        <h3>Event Change History</h3>
+                        <ul>
+                            {changeHistory.map((change, index) => (
+                                <li key={index}>
+                                    <pre>{JSON.stringify(change, null, 2)}</pre>
+                                </li>
+                            ))}
+                        </ul>
+                        <button onClick={() => setIsChangeHistoryModalOpen(false)}>Close</button>
+                    </div>
+                </div>
+            )}
+
         </div>
     );
 };
 
 export default Students;
-
-
-
-// import React from 'react';
-// import styles from './Students.module.scss';
-
-// const Students = () => {
-
-//     const changeClass = async () => {
-//         try {
-//             const response = await fetch(SummaryApi.UserChangeClass.url, {
-//                 method: SummaryApi.UserChangeClass.method,
-//                 headers: {
-//                     'Content-Type': 'application/json',
-//                 },
-//                 credentials: 'true'
-//             });
-//             const data = await response.json();
-//             console.log(data);
-//             if (data.success) {
-//                 alert('Class changed successfully');
-//             } else {
-//                 alert('Failed to change class');
-//             }
-//         } catch (error) {
-//             alert('Error changing class');
-//             console.log(error);
-//         }
-//     };
-
-//     const calculateResult = async () => {
-//         try {
-//             const response = await fetch(SummaryApi.UserGetResult.url, {
-//                 method: SummaryApi.UserGetResult.method,
-//                 headers: {
-//                     'Content-Type': 'application/json',
-//                 },
-//                 credentials: 'true'
-//             });
-//             const data = await response.json();
-//             if (data.success) {
-//                 alert('Result calculated successfully');
-//             } else {
-//                 alert('Failed to calculate result');
-//             }
-//         } catch (error) {
-//             alert('Error calculating result');
-//             console.log(error);
-//         }
-//     };
-
-
-//     return (
-//         <div className={styles.studentsContainer}>
-//             <h2>Students Section</h2>
-//             <p>This is the student setting option (please use it carefully)</p>
-
-//             <button onClick={changeClass}>Student Change Class</button>
-//             <button onClick={calculateResult}>Student Result Calculate</button>
-//         </div>
-//     );
-// };
-
-// export default Students;
