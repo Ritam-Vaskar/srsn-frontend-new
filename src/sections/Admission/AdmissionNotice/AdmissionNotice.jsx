@@ -1,8 +1,34 @@
 import React, { useState, useEffect } from 'react';
 import styles from './AdmissionNotice.module.scss';
 import { Link } from 'react-router-dom';
+import SummaryApi from '../../../common';
 
 const AdmissionNotice = ({ flag }) => {
+
+  const [admissionOpen, setAdmissionOpen] = useState(false);
+
+  const fetchAdmissionOpen = async () => {
+    try {
+      const response = await fetch(SummaryApi.AdmissionFetch.url, {
+        method: SummaryApi.AdmissionFetch.method,
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        credentials: 'include'
+      })
+      const result = await response.json();
+      console.log(result);
+      setAdmissionOpen(result.admission.isOngoing);
+      console.log(result);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    fetchAdmissionOpen();
+  }, []);
+
   // Set up state for the image URL
   const [admissionImgPrimary, setAdmissionImgPrimary] = useState('https://cdn.prod.website-files.com/663d1907e337de23e83c30b2/6713c800923a46758fd19249_295664335_5705538002798067_2231674055699424621_n.jpg');
   const [admissionImgSecondary, setAdmissionImgSecondary] = useState('https://cdn.prod.website-files.com/663d1907e337de23e83c30b2/6713bd34be2521c91c45aefb_301128514_562327412349985_3679940258914638492_n.jpg');
@@ -39,7 +65,12 @@ const AdmissionNotice = ({ flag }) => {
         <div className={styles.admissionOverlay}>
           <div className={styles.admissionSlider}>
             <div className={styles.admissionText}>
-              <Link to='/school/admission_form'>🎉 Admission Open! Click Now! 🎉</Link>
+              {admissionOpen ? (
+                <Link to='/school/admission_form'>🎉 Admission Open! Click Now! 🎉</Link>
+              ) : (
+                <div>Admission will open Soon</div>
+              )}
+
             </div>
           </div>
         </div>

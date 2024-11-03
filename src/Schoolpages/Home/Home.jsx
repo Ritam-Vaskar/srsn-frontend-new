@@ -13,32 +13,7 @@ import styles from './styles/Home.module.scss'; // Import the SCSS module
 const Home = () => {
     const [isPopupVisible, setPopupVisible] = useState(false);
     const [isAdmissionOngoing, setIsAdmissionOngoing] = useState(false);
-
-    // Fetch admission status on component mount
-    useEffect(() => {
-        const fetchAdmissionStatus = async () => {
-            try {
-                const response = await fetch(SummaryApi.AdmissionStatus.url, {
-                    method: SummaryApi.AdmissionStatus.method,
-                    headers: { 'Content-Type': 'application/json' },
-                    credentials: 'include',
-                });
-
-                const result = await response.json();
-                if (result.success) {
-                    setIsAdmissionOngoing(result.isAdmissionOngoing);
-                    setPopupVisible(result.isAdmissionOngoing); // Show popup if admission is ongoing
-                } else {
-                    toast.error(result.message || 'Failed to fetch admission status');
-                }
-            } catch (error) {
-                toast.error(error.message);
-            }
-        };
-
-        fetchAdmissionStatus();
-    }, []);
-
+    
     return (
         <div>
             {/* Admission Status Popup */}

@@ -95,7 +95,7 @@ const AdmissionForm = () => {
   // On submission of the entire form
   const onSubmit = async (data) => {
     console.log('Final Submission Data:', data);
-    
+
 
     try {
       const response = await fetch(SummaryApi.UserAdmissionSignUp.url, {
@@ -133,38 +133,79 @@ const AdmissionForm = () => {
 
   const handlePrev = () => setStep((prevStep) => prevStep - 1);
 
+  const [admissionOpen, setAdmissionOpen] = useState(false);
+
+  const fetchAdmissionOpen = async () => {
+    try {
+      const response = await fetch(SummaryApi.AdmissionFetch.url, {
+        method: SummaryApi.AdmissionFetch.method,
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        credentials: 'include'
+      })
+      const result = await response.json();
+      console.log(result);
+      setAdmissionOpen(result.admission.isOngoing);
+      console.log(result);
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  useEffect(() => {
+    fetchAdmissionOpen();
+  }, []);
+
   return (
     <div className="form-container">
-      <form onSubmit={handleSubmit(onSubmit)}>
-        {step === 1 && <BasicInfo register={register} errors={errors} setValue={setValue} />}
-        {step === 2 && <PreviousSchoolDetails register={register} errors={errors} />}
-        {step === 3 && <PermanentContactDetails register={register} errors={errors} />}
-        {step === 4 && <ResidentialContactDetails register={register} errors={errors} />}
-        {step === 5 && <GuardianDetails register={register} errors={errors} />}
-        {step === 6 && <PaymentDetails register={register} errors={errors} />}
-        {step === 7 && <Preview data={watch()} />}
+      {!admissionOpen ? (
+        <h1>Admission is not ongoing</h1>
+      ) : (
+        <form onSubmit={handleSubmit(onSubmit)}>
+          {step === 1 && <BasicInfo register={register} errors={errors} setValue={setValue} />}
+          {step === 2 && <PreviousSchoolDetails register={register} errors={errors} />}
+          {step === 3 && <PermanentContactDetails register={register} errors={errors} />}
+          {step === 4 && <ResidentialContactDetails register={register} errors={errors} />}
+          {step === 5 && <GuardianDetails register={register} errors={errors} />}
+          {step === 6 && <PaymentDetails register={register} errors={errors} />}
+          {step === 7 && <Preview data={watch()} />}
 
-        <div className="form-navigation">
-          {step > 1 && <button type="button" onClick={handlePrev}>Previous</button>}
-          {step < 7 && <button type="button" onClick={handleNext}>Next</button>}
-          {step === 7 && (
-            <div>
-              <label>
-                <input
-                  type="checkbox"
-                  {...register('terms', { required: 'You must accept terms and conditions' })}
-                />
-                I accept the terms and conditions
-              </label>
-              {errors.terms && <p className="error">{errors.terms.message}</p>}
-              <button type="submit">Submit</button>
-            </div>
-          )}
-        </div>
-      </form>
-      <div>*If you face problems logging in, please contact the administrator.</div>
+          <div className="form-navigation">
+            {step > 1 && (
+              <button type="button" onClick={handlePrev} className="prev-button">
+                Previous
+              </button>
+            )}
+            {step < 7 && (
+              <button type="button" onClick={handleNext} className="next-button">
+                Next
+              </button>
+            )}
+            {step === 7 && (
+              <div className="terms-section">
+                <label>
+                  <input
+                    type="checkbox"
+                    {...register('terms', { required: 'You must accept terms and conditions' })}
+                  />
+                  I accept the terms and conditions
+                </label>
+                {errors.terms && <p className="error">{errors.terms.message}</p>}
+                <button type="submit" className="submit-button">
+                  Submit
+                </button>
+              </div>
+            )}
+          </div>
+        </form>
+      )}
+      <div className="contact-info">
+        *If you face problems logging in, please contact the administrator.
+      </div>
     </div>
   );
+
 };
 
 export default AdmissionForm;
