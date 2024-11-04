@@ -19,12 +19,13 @@ The backend for this project is hosted at [srsnbackend.onrender.com](https://srs
 
 - [Getting Started](#getting-started)
 - [Features](#features)
-- [File Structure](#file-structure)
-- [Technologies Used](#technologies-used)
-- [Environment Variables](#environment-variables)
-- [Available Scripts](#available-scripts)
+- [Project Structure](#project-structure)
+- [Tech Stack](#tech-stack)
+- [Authors](#authors)
 - [Contributing](#contributing)
 - [License](#license)
+- [Used By](#used-by)
+- [Feedback](#feedback)
 
 ---
 ## Getting Started
@@ -78,6 +79,7 @@ Start the server:
 - Smooth Scrolling: Supports smooth scrolling to sections within the page, using HashLink.
 
 - Responsive Design: Optimized for both desktop and mobile.
+
 ## Project Structure
 The project structure follows a standard Node.js MVC architecture:
 
@@ -110,6 +112,7 @@ srsn-frontend-new/
 - **Axios**: Promise-based HTTP client for making API requests.
 - **React Router**: Client-side routing for navigating between pages.
 - **Cloudinary**: For image upload and storage.
+
 ## Authors
 
 - [sandipto729](https://github.com/sandipto729)
