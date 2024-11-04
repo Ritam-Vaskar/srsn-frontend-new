@@ -15,7 +15,7 @@ const Source = () => {
 
   const handleMouseLeave = () => {
     if (linkBoxRef.current) {
-      linkBoxRef.current.style.transform = 'translate(0, 0)'; // Reset position
+      linkBoxRef.current.style.transform = 'translate(0, 0)';
     }
   };
 
@@ -32,7 +32,7 @@ const Source = () => {
           href="https://github.com/Ritam-Vaskar/srsn-frontend-new" 
           target="_blank" 
           rel="noopener noreferrer" 
-          className={styles.link}
+          className={`${styles.link} ${styles.frontendAnimation}`} 
         >
           Frontend Repository
         </a>
@@ -40,7 +40,7 @@ const Source = () => {
           href="https://github.com/sandipto729/SRSNBackend" 
           target="_blank" 
           rel="noopener noreferrer" 
-          className={styles.link}
+          className={`${styles.link} ${styles.backendAnimation}`} 
         >
           Backend Repository
         </a>
