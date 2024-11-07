@@ -13,6 +13,7 @@ const Alumni = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [search, setSearch] = useState('');
   const [showApplicationForm, setShowApplicationForm] = useState(false);
+  const [loading, setLoading] = useState(true);
 
   const alumniPerPage = 6;
 
@@ -28,7 +29,10 @@ const Alumni = () => {
     } catch (err) {
       console.log(err);
       toast.error(err.message);
+    } finally {
+      setLoading(false);
     }
+
   };
 
   useEffect(() => {
@@ -52,9 +56,15 @@ const Alumni = () => {
           </div>
         </center>
         {search.length > 1 && <SearchResult search={search} />}
-        <center><button onClick={() => setShowApplicationForm(true)} className={styles.applyButton}>
-          Apply for Alumni
-        </button></center>
+        <center>
+          {!loading ? (
+            <button onClick={() => setShowApplicationForm(true)} className={styles.applyButton}>
+              Apply for Alumni
+            </button>
+          ) : (
+            <p>Loading...</p> 
+          )}
+        </center>
       </div>
 
       <div className={styles.alumniGrid}>
