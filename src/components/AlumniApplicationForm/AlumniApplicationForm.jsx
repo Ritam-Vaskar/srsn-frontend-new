@@ -6,14 +6,14 @@ import SummaryApi from '../../common';
 import uploadImg from '../../helper/uploadImg';
 
 const AlumniApplicationForm = ({ onClose }) => {
-  const [profilePicUrl, setProfilePicUrl] = useState('');
+  const [profilePic, setprofilePic] = useState('');
   const [socialMediaLinks, setSocialMediaLinks] = useState(['', '']); // Array to store two links
 
   const { register, handleSubmit, setValue, formState: { errors } } = useForm();
 
   const onSubmit = async (data) => {
     // Add socialMediaLinks to the form data
-    const formData = { ...data, socialMediaLinks };
+    const formData = { ...data, socialMediaLinks,profilePic};
     console.log(formData);
     try {
       const response = await fetch(SummaryApi.AlumniApplicationSave.url, {
@@ -47,7 +47,7 @@ const AlumniApplicationForm = ({ onClose }) => {
   //   if (file) {
   //     try {
   //       const imageUrl = await uploadImg(file);
-  //       setProfilePicUrl(imageUrl.url);
+  //       setprofilePic(imageUrl.url);
   //       setValue("profilePic", imageUrl.url); 
   //       console.log("Image uploaded successfully: ", imageUrl.url);
   //     } catch (error) {
@@ -59,7 +59,7 @@ const AlumniApplicationForm = ({ onClose }) => {
   const handleChange = async (e) => {
     const fileList = e.target.files;
     console.log("File List: ", fileList);
-    
+
     if (fileList.length > 0) {
       const file = fileList[0];
       console.log("Selected file: ", file); // Log the selected file
@@ -67,7 +67,7 @@ const AlumniApplicationForm = ({ onClose }) => {
         const imageUrl = await uploadImg(file);
         console.log("Upload response: ", imageUrl);
         if (imageUrl.url) {
-          setProfilePicUrl(imageUrl.url);
+          setprofilePic(imageUrl.url);
           setValue("profilePic", imageUrl.url);
           console.log("Image uploaded successfully: ", imageUrl.url);
         } else {
@@ -83,7 +83,7 @@ const AlumniApplicationForm = ({ onClose }) => {
       setValue("profilePic", "");
     }
   };
-  
+
   return (
     <div className={styles.popupOverlay}>
       <div className={styles.popupContent}>
@@ -92,28 +92,19 @@ const AlumniApplicationForm = ({ onClose }) => {
         <p className={styles.instruction}>*Please wait after uploading the image</p>
         <form onSubmit={handleSubmit(onSubmit)} className={styles.form}>
           <div className={styles.row}>
-          <div>
+            <div>
               <label>Profile Picture</label>
-              <input
-                type="file"
-                {...register("profilePic")}
-                accept="image/*"
-                onChange={handleChange}
-              />
-              {errors.profilePic && <p>{errors.profilePic.message}</p>}
-              {profilePicUrl && (
-                <div>
-                  <p>Uploaded Image:</p>
-                  <img src={profilePicUrl} alt="Profile Pic" width="100" />
-                </div>
-              )}
+
+              <input type="file" onChange={handleChange} className={styles.fileInput} />
+              {profilePic && <img src={profilePic} alt="Profile" width="100" className={styles.img} />}
+
             </div>
 
             <input
               type="text"
               placeholder="Name"
               {...register("name", { required: "Name is required" })}
-              disabled={!profilePicUrl} 
+              disabled={!profilePic}
             />
             {errors.name && <p className={styles.error}>{errors.name.message}</p>}
 
@@ -121,7 +112,7 @@ const AlumniApplicationForm = ({ onClose }) => {
               type="text"
               placeholder="Starting Year"
               {...register("startingYear", { required: "Starting Year is required" })}
-              disabled={!profilePicUrl} 
+              disabled={!profilePic}
             />
             {errors.startingYear && <p className={styles.error}>{errors.startingYear.message}</p>}
 
@@ -129,7 +120,7 @@ const AlumniApplicationForm = ({ onClose }) => {
               type="text"
               placeholder="Ending Year"
               {...register("endingYear", { required: "Ending Year is required" })}
-              disabled={!profilePicUrl} 
+              disabled={!profilePic}
             />
             {errors.endingYear && <p className={styles.error}>{errors.endingYear.message}</p>}
 
@@ -137,7 +128,7 @@ const AlumniApplicationForm = ({ onClose }) => {
               type="text"
               placeholder="Designation"
               {...register("designation", { required: "Designation is required" })}
-              disabled={!profilePicUrl} 
+              disabled={!profilePic}
             />
             {errors.designation && <p className={styles.error}>{errors.designation.message}</p>}
 
@@ -145,17 +136,17 @@ const AlumniApplicationForm = ({ onClose }) => {
               type="text"
               placeholder="Current Place"
               {...register("currentState", { required: "Current State is required" })}
-              disabled={!profilePicUrl} 
+              disabled={!profilePic}
             />
             {errors.currentState && <p className={styles.error}>{errors.currentState.message}</p>}
-            
-            
+
+
 
             <input
               type="text"
               placeholder="Bio Data"
               {...register("bioData", { required: "Bio Data is required" })}
-              disabled={!profilePicUrl} 
+              disabled={!profilePic}
             />
             {errors.bioData && <p className={styles.error}>{errors.bioData.message}</p>}
           </div>
@@ -166,7 +157,7 @@ const AlumniApplicationForm = ({ onClose }) => {
               placeholder="Social Media Link 1"
               value={socialMediaLinks[0]}
               onChange={(e) => handleSocialMediaChange(0, e.target.value)}
-              disabled={!profilePicUrl} 
+              disabled={!profilePic}
             />
 
             <input
@@ -174,14 +165,14 @@ const AlumniApplicationForm = ({ onClose }) => {
               placeholder="Social Media Link 2"
               value={socialMediaLinks[1]}
               onChange={(e) => handleSocialMediaChange(1, e.target.value)}
-              disabled={!profilePicUrl} 
+              disabled={!profilePic}
             />
 
             <input
               type="text"
               placeholder="Mobile Number"
               {...register("mobileNumber", { required: "Mobile Number is required" })}
-              disabled={!profilePicUrl} 
+              disabled={!profilePic}
             />
             {errors.mobileNumber && <p className={styles.error}>{errors.mobileNumber.message}</p>}
 
@@ -189,20 +180,20 @@ const AlumniApplicationForm = ({ onClose }) => {
               type="email"
               placeholder="Email"
               {...register("email", { required: "Email is required" })}
-              disabled={!profilePicUrl} 
+              disabled={!profilePic}
             />
             {errors.email && <p className={styles.error}>{errors.email.message}</p>}
 
-            <button 
-              type="submit" 
+            <button
+              type="submit"
               className={styles.submitButton}
-              disabled={!profilePicUrl} 
+              disabled={!profilePic}
             >
               Submit
             </button>
           </div>
         </form>
-        
+
       </div>
     </div>
   );
