@@ -6,6 +6,7 @@ import SummaryApi from '../../common';
 import uploadImg from '../../helper/uploadImg';
 
 const TeacherAddForm = ({ onClose, fetchTeachers }) => {
+const TeacherAddForm = ({ onClose, fetchTeachers }) => {
   const { register, handleSubmit, setValue, formState: { errors } } = useForm();
   const [profilePic, setprofilePic] = useState('');
 
@@ -39,6 +40,7 @@ const TeacherAddForm = ({ onClose, fetchTeachers }) => {
     const fileList = e.target.files;
     console.log("File List: ", fileList);
 
+
     if (fileList.length > 0) {
       const file = fileList[0];
       console.log("Selected file: ", file); // Log the selected file
@@ -62,6 +64,7 @@ const TeacherAddForm = ({ onClose, fetchTeachers }) => {
       setValue("profilePic", "");
     }
   };
+
 
 
   return (
