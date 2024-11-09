@@ -32,6 +32,9 @@ import ScrollToTop from '../helper/ScrollToTop';
 
 import SourceCode from './../Schoolpages/SourceCode/Source';
 
+import UserPolicy from '../Policy/UserPolicy/UserPolicy';
+import Terms from './../Policy/TermsAndConditions/TermsAndConditions';
+
 
 
 
@@ -53,6 +56,14 @@ const router = createBrowserRouter([
                     <SchoolHome />
                     <SchoolFooter />
                 </>
+            },
+            {
+                path: 'privacyPolicy',
+                element: <UserPolicy/>
+            },
+            {
+                path: 'terms',
+                element: <Terms />
             },
             {
                 path:'source',

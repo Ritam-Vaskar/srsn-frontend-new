@@ -1,11 +1,14 @@
 import React from 'react';
-import styles from './PrivacyPolicy.module.scss'
-
+import styles from './PrivacyPolicy.module.scss';
 
 function PrivacyPolicy() {
+  const lastUpdated = new Date().toLocaleDateString('en-US', {
+    year: 'numeric', month: 'long', day: 'numeric'
+  });
+
   return (
-    <div className={styles.container}>
-      <h2 className={styles.privacy}>Privacy Policy</h2>
+    <section className={styles.container} aria-labelledby="privacy-policy-header">
+      <h2 id="privacy-policy-header" className={styles.privacy}>Privacy Policy</h2>
       <p className={styles.privacyparadiv}>At Sri Ramakrishna Siksha Niketan, we are committed to protecting your privacy. This policy outlines how we collect, use, and safeguard your information when you visit our website.</p>
 
       <h3 className={styles.h3div}>Information Collection</h3>
@@ -26,8 +29,8 @@ function PrivacyPolicy() {
       <h3 className={styles.h3div}>Changes to Privacy Policy</h3>
       <p className={styles.paradiv}>We reserve the right to update this privacy policy at any time. Changes will be posted on this page with an updated date.</p>
 
-      <p>Last updated: November 2024</p>
-    </div>
+      <p>Last updated: {lastUpdated}</p>
+    </section>
   );
 }
 

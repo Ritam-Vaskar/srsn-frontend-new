@@ -11,6 +11,7 @@ import "./styles/Footer.css";
 import footLogo from "../../assets/images/Logo.png";
 import GitHubIcon from '@mui/icons-material/GitHub';
 
+
 const Footer = () => {
     return (
         <div>
@@ -122,10 +123,10 @@ const Footer = () => {
                             <div className="footer-grid-heading">Legal</div>
                             <ul className="footer-links-list">
                                 <li>
-                                    <a href="tandc.html" className="footer-link" target="main">Terms of Service</a>
+                                    <Link to='/terms' className="footer-link" target="main">Terms of Service</Link>
                                 </li>
                                 <li>
-                                    <a href="privacypolicy.html" className="footer-link" target="main">Privacy Policy</a>
+                                    <Link to='/privacypolicy' className="footer-link" target="main">Privacy Policy</Link>
                                 </li>
                                 <li>
                                     <a href="#cookie" className="footer-link">Cookie Settings</a>
