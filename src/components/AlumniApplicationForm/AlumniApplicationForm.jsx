@@ -89,44 +89,10 @@ const AlumniApplicationForm = ({ onClose }) => {
       <div className={styles.popupContent}>
         <button className={styles.closeButton} onClick={onClose}>X</button>
         <h2>Apply for Alumni</h2>
+        <p className={styles.instruction}>*Please wait after uploading the image</p>
         <form onSubmit={handleSubmit(onSubmit)} className={styles.form}>
           <div className={styles.row}>
-            <input
-              type="text"
-              placeholder="Name"
-              {...register("name", { required: "Name is required" })}
-            />
-            {errors.name && <p className={styles.error}>{errors.name.message}</p>}
-
-            <input
-              type="text"
-              placeholder="Starting Year"
-              {...register("startingYear", { required: "Starting Year is required" })}
-            />
-            {errors.startingYear && <p className={styles.error}>{errors.startingYear.message}</p>}
-
-            <input
-              type="text"
-              placeholder="Ending Year"
-              {...register("endingYear", { required: "Ending Year is required" })}
-            />
-            {errors.endingYear && <p className={styles.error}>{errors.endingYear.message}</p>}
-
-            <input
-              type="text"
-              placeholder="Designation"
-              {...register("designation", { required: "Designation is required" })}
-            />
-            {errors.designation && <p className={styles.error}>{errors.designation.message}</p>}
-
-            <input
-              type="text"
-              placeholder="Current Place"
-              {...register("currentState", { required: "Current State is required" })}
-            />
-            {errors.currentState && <p className={styles.error}>{errors.currentState.message}</p>}
-            
-            <div>
+          <div>
               <label>Profile Picture</label>
               <input
                 type="file"
@@ -145,8 +111,51 @@ const AlumniApplicationForm = ({ onClose }) => {
 
             <input
               type="text"
+              placeholder="Name"
+              {...register("name", { required: "Name is required" })}
+              disabled={!profilePicUrl} 
+            />
+            {errors.name && <p className={styles.error}>{errors.name.message}</p>}
+
+            <input
+              type="text"
+              placeholder="Starting Year"
+              {...register("startingYear", { required: "Starting Year is required" })}
+              disabled={!profilePicUrl} 
+            />
+            {errors.startingYear && <p className={styles.error}>{errors.startingYear.message}</p>}
+
+            <input
+              type="text"
+              placeholder="Ending Year"
+              {...register("endingYear", { required: "Ending Year is required" })}
+              disabled={!profilePicUrl} 
+            />
+            {errors.endingYear && <p className={styles.error}>{errors.endingYear.message}</p>}
+
+            <input
+              type="text"
+              placeholder="Designation"
+              {...register("designation", { required: "Designation is required" })}
+              disabled={!profilePicUrl} 
+            />
+            {errors.designation && <p className={styles.error}>{errors.designation.message}</p>}
+
+            <input
+              type="text"
+              placeholder="Current Place"
+              {...register("currentState", { required: "Current State is required" })}
+              disabled={!profilePicUrl} 
+            />
+            {errors.currentState && <p className={styles.error}>{errors.currentState.message}</p>}
+            
+            
+
+            <input
+              type="text"
               placeholder="Bio Data"
               {...register("bioData", { required: "Bio Data is required" })}
+              disabled={!profilePicUrl} 
             />
             {errors.bioData && <p className={styles.error}>{errors.bioData.message}</p>}
           </div>
@@ -157,6 +166,7 @@ const AlumniApplicationForm = ({ onClose }) => {
               placeholder="Social Media Link 1"
               value={socialMediaLinks[0]}
               onChange={(e) => handleSocialMediaChange(0, e.target.value)}
+              disabled={!profilePicUrl} 
             />
 
             <input
@@ -164,12 +174,14 @@ const AlumniApplicationForm = ({ onClose }) => {
               placeholder="Social Media Link 2"
               value={socialMediaLinks[1]}
               onChange={(e) => handleSocialMediaChange(1, e.target.value)}
+              disabled={!profilePicUrl} 
             />
 
             <input
               type="text"
               placeholder="Mobile Number"
               {...register("mobileNumber", { required: "Mobile Number is required" })}
+              disabled={!profilePicUrl} 
             />
             {errors.mobileNumber && <p className={styles.error}>{errors.mobileNumber.message}</p>}
 
@@ -177,6 +189,7 @@ const AlumniApplicationForm = ({ onClose }) => {
               type="email"
               placeholder="Email"
               {...register("email", { required: "Email is required" })}
+              disabled={!profilePicUrl} 
             />
             {errors.email && <p className={styles.error}>{errors.email.message}</p>}
 
@@ -189,6 +202,7 @@ const AlumniApplicationForm = ({ onClose }) => {
             </button>
           </div>
         </form>
+        
       </div>
     </div>
   );
