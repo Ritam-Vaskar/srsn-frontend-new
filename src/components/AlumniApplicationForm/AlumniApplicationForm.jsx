@@ -90,7 +90,6 @@ const AlumniApplicationForm = ({ onClose }) => {
         <button className={styles.closeButton} onClick={onClose}>X</button>
         <h2>Apply for Alumni</h2>
         <p className={styles.instruction}>*Please wait after uploading the image</p>
-        <p className={styles.instruction}>*Please wait after uploading the image</p>
         <form onSubmit={handleSubmit(onSubmit)} className={styles.form}>
           <div className={styles.row}>
             <div>
