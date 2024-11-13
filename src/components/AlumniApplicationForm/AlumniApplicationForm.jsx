@@ -90,16 +90,16 @@ const AlumniApplicationForm = ({ onClose }) => {
         <button className={styles.closeButton} onClick={onClose}>X</button>
         <h2>Apply for Alumni</h2>
         <p className={styles.instruction}>*Please wait after uploading the image</p>
-        <p className={styles.instruction}>*Please wait after uploading the image</p>
         <form onSubmit={handleSubmit(onSubmit)} className={styles.form}>
-          <div className={styles.row}>
-            <div>
+        <div className={styles.picUp}>
               <label>Profile Picture</label>
 
               <input type="file" onChange={handleChange} className={styles.fileInput} />
               {profilePic && <img src={profilePic} alt="Profile" width="100" className={styles.img} />}
 
-            </div>
+        </div>
+          <div className={styles.row}>
+            
 
             <input
               type="text"
