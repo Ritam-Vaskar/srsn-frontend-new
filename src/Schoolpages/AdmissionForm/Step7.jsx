@@ -1,15 +1,13 @@
 import React from 'react';
-import './styles/AdmissionForm.css'; 
-import './styles/Preview.css'; 
+import { useRef } from 'react';
+import './styles/AdmissionForm.css';
+import './styles/Preview.css';
 import logo from '../../assets/images/Logo.png';
-const Preview = ({ data }) => {
-  // Print the form
-  const handlePrint = () => {
-    window.print();
-  };
+const Preview = ({ profilePic, data, tableRef }) => {
+
 
   return (
-    <div className="preview-container">
+    <div className="preview-container" ref={tableRef}>
       <header className="school-header">
         <img src={logo} alt="School Logo" className="school-logo" />
         <div className="school-info">
@@ -26,7 +24,8 @@ const Preview = ({ data }) => {
           <tr>
             <td><strong>Profile Picture:</strong></td>
             <td colSpan="3">
-              {data.profilePic ? <img src={data.profilePic} alt="Profile" className="profile-pic" /> : 'No image uploaded'}
+              {profilePic ? <img src={profilePic} alt="Profile" className="profile-pic" crossOrigin="anonymous" />
+                : 'No image uploaded'}
             </td>
           </tr>
           <tr>
@@ -35,7 +34,7 @@ const Preview = ({ data }) => {
             <td><strong>Email:</strong></td>
             <td>{data.email || 'N/A'}</td>
           </tr>
-        
+
           <tr>
             <td><strong>Phone:</strong></td>
             <td>{data.phone || 'N/A'}</td>
@@ -182,10 +181,6 @@ const Preview = ({ data }) => {
           </tr>
         </tbody>
       </table>
-
-      <div className="print-btn-container">
-        <button className="print-btn" onClick={handlePrint}>Print</button>
-      </div>
 
       <div className="footer">
         <p>* If you face problems logging in, please contact the administrator.</p>

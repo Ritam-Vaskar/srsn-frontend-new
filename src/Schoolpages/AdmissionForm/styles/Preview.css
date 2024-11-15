@@ -102,3 +102,14 @@
     }
   }
   
+  .preview-container {
+    width: 100%;
+  }
+  .preview-table {
+    border-collapse: collapse;
+    width: 100%;
+  }
+  .preview-table td {
+    border: 1px solid #000;
+    padding: 8px;
+  }
