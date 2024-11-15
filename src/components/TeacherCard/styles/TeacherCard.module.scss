@@ -10,12 +10,14 @@
   box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
   text-align: center;
   transition: transform 0.3s ease-in-out;
+  // height: 300px;
+  width: 330px;
   margin: 20px;
 
 
   .profilePic {
-    width: 100px;
-    height: 100px;
+    width: 150px;
+    height: 150px;
     border-radius: 50%;
     object-fit: cover;
     margin-bottom: 1rem;

@@ -1,10 +1,10 @@
 .newsCard {
-    border: 1px solid #ddd;
+    border: 1px solid #ff6a00;
     padding: 20px;
     margin: 10px;
     width: 350px;
-    height: 350px;
-    background-color: #fff;
+    /* height: 350px; */
+    background-color: #dfdfdf4f;
     overflow: hidden;
     position: relative;
     display: flex;
