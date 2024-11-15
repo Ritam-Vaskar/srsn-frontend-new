@@ -2,12 +2,13 @@ import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
 import subjectOptions from './../../../helper/classSubject';
 import styles from './StudentResult.module.scss';
+import Spinner from '../../../layouts/Loader/Spinner';
 
 const StudentResult = () => {
     const user = useSelector(state => state?.user?.user);
     const [selectedSemester, setSelectedSemester] = useState('firstSem');
 
-    if (!user) return <div>Loading...</div>;
+    if (!user) return <div><Spinner/></div>;
 
     const subjects = subjectOptions[user.grade] || [];
     const semesterMarks = user[selectedSemester] || {};
