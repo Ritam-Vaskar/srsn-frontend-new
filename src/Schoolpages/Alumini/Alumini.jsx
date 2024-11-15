@@ -8,6 +8,7 @@ import SearchIcon from '@mui/icons-material/Search';
 import CloseIcon from '@mui/icons-material/Close';
 import SearchResult from './../../sections/AlumniSearch/SearchDiv/SearchPage';
 import Spinner from '../../layouts/Loader/Spinner';
+// import Spinner from '../../assets/Spinner@1x-1.0s-200px-200px.gif';
 
 const Alumni = () => {
   const [alumniList, setAlumniList] = useState([]);
@@ -89,6 +90,7 @@ const Alumni = () => {
         {/* Display SearchResult or Default Alumni List */}
         {loading ? (
           <Spinner />
+          // <img src={Spinner} alt="loading..." />
         ) : search.length > 1 ? (
           <SearchResult search={search} />
         ) : (
