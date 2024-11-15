@@ -82,8 +82,12 @@
 }
 
 .slick-dots li button:before {
-  font-size: 0.8rem;
+  font-size: 0.5rem;
   color: #ff6513;
+
+  @media(max-width: 480px) {
+    display: none;
+  }
 }
 
 .slick-dots li.slick-active button:before {
