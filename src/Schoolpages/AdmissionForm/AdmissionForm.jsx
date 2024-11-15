@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useForm } from 'react-hook-form';
 import BasicInfo from './Step1';
 import PreviousSchoolDetails from './Step2';
@@ -10,11 +10,54 @@ import Preview from './Step7';
 import './styles/AdmissionForm.css';
 import { toast } from 'react-toastify';
 import SummaryApi from '../../common';
+import jsPDF from 'jspdf';
+import html2canvas from 'html2canvas';
 
 const LOCAL_STORAGE_KEY = 'admissionFormData';
 
+
 const AdmissionForm = () => {
   const [step, setStep] = useState(1);
+
+  const tableRef = useRef();
+
+  // const handleDownloadPDF = async () => {
+  //   const element = tableRef.current;
+  //   const canvas = await html2canvas(element);
+  //   const imgData = canvas.toDataURL('image/png');
+  //   const pdf = new jsPDF();
+  
+  //   // Adjust PDF dimensions based on content
+  //   const pdfWidth = pdf.internal.pageSize.getWidth();
+  //   const pdfHeight = (canvas.height * pdfWidth) / canvas.width;
+  
+  //   pdf.addImage(imgData, 'PNG', 0, 0, pdfWidth, pdfHeight);
+  //   pdf.save('Admission_Form.pdf');
+  // };
+  const [profilePic, setprofilePic] = useState('');
+
+  const handleDownloadPDF = async () => {
+    const element = tableRef.current;
+    // Wait for the image to load
+    const image = new Image();
+    image.src = profilePic;
+    await new Promise((resolve) => {
+      image.onload = resolve;
+      image.onerror = resolve; 
+    });
+  
+    const canvas = await html2canvas(element, { useCORS: true });
+    const imgData = canvas.toDataURL('image/png');
+    const pdf = new jsPDF();
+  
+    const pdfWidth = pdf.internal.pageSize.getWidth();
+    const pdfHeight = (canvas.height * pdfWidth) / canvas.width;
+  
+    pdf.addImage(imgData, 'PNG', 0, 0, pdfWidth, pdfHeight);
+    pdf.save('Admission_Form.pdf');
+  };
+  
+  
 
   const {
     register,
@@ -27,7 +70,6 @@ const AdmissionForm = () => {
     defaultValues: {
       name: '',
       email: '',
-      profilePic: '',
       phone: '',
       dob: '',
       dobRegNo: '',
@@ -95,7 +137,7 @@ const AdmissionForm = () => {
   // On submission of the entire form
   const onSubmit = async (data) => {
     console.log('Final Submission Data:', data);
-
+    const formData = { ...data, profilePic };
 
     try {
       const response = await fetch(SummaryApi.UserAdmissionSignUp.url, {
@@ -103,7 +145,7 @@ const AdmissionForm = () => {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify(data),
+        body: JSON.stringify(formData),
         credentials: 'include',
       });
 
@@ -115,6 +157,8 @@ const AdmissionForm = () => {
       }
 
       toast.success('Form submitted successfully!');
+      //download pdf
+      handleDownloadPDF();
       localStorage.removeItem(LOCAL_STORAGE_KEY); // Clear form data from local storage on successful submission
       console.log(result);
     } catch (error) {
@@ -163,13 +207,15 @@ const AdmissionForm = () => {
         <h1>Admission is not ongoing</h1>
       ) : (
         <form onSubmit={handleSubmit(onSubmit)}>
-          {step === 1 && <BasicInfo register={register} errors={errors} setValue={setValue} />}
+          {step === 1 && <BasicInfo profilePic={profilePic} setprofilePic={setprofilePic} register={register} errors={errors} setValue={setValue} />}
           {step === 2 && <PreviousSchoolDetails register={register} errors={errors} />}
           {step === 3 && <PermanentContactDetails register={register} errors={errors} />}
           {step === 4 && <ResidentialContactDetails register={register} errors={errors} />}
           {step === 5 && <GuardianDetails register={register} errors={errors} />}
           {step === 6 && <PaymentDetails register={register} errors={errors} />}
-          {step === 7 && <Preview data={watch()} />}
+          {step === 7 && <Preview data={watch()} profilePic={profilePic} tableRef={tableRef}/>}
+
+          
 
           <div className="form-navigation">
             {step > 1 && (
@@ -192,6 +238,7 @@ const AdmissionForm = () => {
                   I accept the terms and conditions
                 </label>
                 {errors.terms && <p className="error">{errors.terms.message}</p>}
+                <span onClick={handleDownloadPDF}>Download PDF</span>
                 <button type="submit" className="submit-button">
                   Submit
                 </button>
