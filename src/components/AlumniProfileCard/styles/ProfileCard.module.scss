@@ -128,3 +128,61 @@
     display: none;
   }
 }
+
+.infoTable {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 20px 0;
+  font-size: 1rem;
+  color: #333;
+
+  td {
+    padding: 10px 15px;
+    vertical-align: top;
+  }
+
+  tr {
+    transition: background-color 0.3s ease-in-out;
+
+    &:nth-child(even) {
+      background-color: #f9f9f9;
+    }
+
+    &:hover {
+      background-color: #ffe6cc; /* Subtle highlight on hover */
+    }
+  }
+
+  td:first-child {
+    font-weight: bold;
+    text-align: left;
+    color: #ff6a00; /* Accent color */
+    width: 40%; /* Slightly narrower for labels */
+  }
+
+  td:last-child {
+    text-align: left;
+    color: #555;
+  }
+
+  tr:last-child td {
+    text-align: justify;
+    padding-top: 15px;
+    font-style: italic;
+    color: #666;
+    border-top: 1px solid #ff6a00;
+    font-size: 0.95rem;
+  }
+
+  @media (max-width: 600px) {
+    td {
+      font-size: 0.9rem;
+      padding: 8px 10px;
+    }
+
+    tr:last-child td {
+      font-size: 0.85rem;
+    }
+  }
+}
+
