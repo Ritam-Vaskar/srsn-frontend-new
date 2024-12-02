@@ -6,8 +6,10 @@ import 'react-toastify/dist/ReactToastify.css';
 import SummaryApi from './common';
 import { useDispatch } from 'react-redux';
 import { setUserDetails } from './store/userSlice';
+import {setAlumniDetails} from './store/alumniSclice';
 import { useEffect } from 'react';
 import Context from './Context';
+
 
 function App() {
   const dispatch = useDispatch();
@@ -21,6 +23,7 @@ function App() {
         credentials: 'include'
       });
       const result = await response.json();
+      // console.log(result);
       if (!result.success) {
         // toast.error(result.message);
         dispatch(setUserDetails(null));
@@ -32,8 +35,31 @@ function App() {
       console.log(err);
     }
   }
+  const fetchAlumni=async()=>{
+    try{
+        const response = await fetch(SummaryApi.AlumniDetailsFetch.url, {
+            method: SummaryApi.AlumniDetailsFetch.method,
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            credentials: 'include'
+        });
+        const result = await response.json();
+        if (!result.success) {
+            // toast.error(result.message);
+            return;
+        }
+        const data=result;
+        console.log(data.user);
+        dispatch(setAlumniDetails(data.user));
+    }catch(err){
+        console.log(err);
+        // toast.error(err.message);
+    }
+  }
   useEffect(() => {
     fetchUser();
+    fetchAlumni();
   })
 
   //chatbat added
@@ -59,7 +85,7 @@ function App() {
 
   return (
     <>
-      <Context.Provider value={{ fetchUser }}>
+      <Context.Provider value={{ fetchUser, fetchAlumni }}>
         {/* <Navbar /> */}
         <ToastContainer />
         <Outlet />

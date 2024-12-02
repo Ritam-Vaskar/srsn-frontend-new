@@ -88,6 +88,18 @@ const SummaryApi={
         url:backendUrl+"/api/alumniDelete",
         method:"DELETE"
     },
+    AlumniOtpSend:{
+        url:backendUrl+"/api/alumniOtp",
+        method:"POST"
+    },
+    AlumniOtpVerify:{
+        url:backendUrl+"/api/otpVerify",
+        method:"POST"
+    },
+    AlumniDetailsFetch:{
+        url:backendUrl+"/api/alumniDetails",
+        method:"GET"
+    },
 
     //Notice
 

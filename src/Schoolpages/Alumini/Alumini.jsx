@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import AlumniCard from '../../components/AlumniProfileCard/ProfileCard';
-import AlumniApplicationForm from '../../components/AlumniApplicationForm/AlumniApplicationForm';
+import AlumniManage from '../../components/AlumniApplicationForm/AlumniManage';
 import styles from './styles/Alumni.module.scss';
 import SummaryApi from '../../common';
 import { toast } from 'react-toastify';
@@ -126,7 +126,7 @@ const Alumni = () => {
 
       {/* Display Application Form as Modal */}
       {showApplicationForm && (
-        <AlumniApplicationForm onClose={() => setShowApplicationForm(false)} />
+        <AlumniManage onClose={() => setShowApplicationForm(false)} />
       )}
     </div>
   );
