@@ -121,4 +121,71 @@
       overflow: auto;
     }
   }
+
+  .navOption{
+    cursor: pointer;
+    padding: 12px 0;
+    width: 100%;
+    text-align: center;
+    border-radius: 6px;
+    background-color: #ffcc80;
+    font-size: 16px;
+    font-weight: 600;
+    transition: background-color 0.3s ease-in-out;
+
+    @media (max-width: 768px) {
+        padding: 10px 0;
+        font-size: 14px;
+    }
+  }
+
+  .profileDetails {
+    display: flex;
+    flex-direction: column;
+    background: #fff;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    padding: 20px;
+    width: 100%;
+    
+    margin: 20px auto;
+  
+    .row {
+      display: flex;
+      justify-content: space-between;
+      padding: 10px 0;
+      border-bottom: 1px solid #eee;
+  
+      &:last-child {
+        border-bottom: none;
+      }
+  
+      .label {
+        font-weight: bold;
+        color: #333;
+        flex: 1;
+      }
+  
+      .value {
+        flex: 2;
+        color: #666;
+      }
+    }
+  
+    .editButton {
+      margin-top: 20px;
+      padding: 10px 20px;
+      background: #007bff;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      text-align: center;
+  
+      &:hover {
+        background: #0056b3;
+      }
+    }
+  }
+  
   

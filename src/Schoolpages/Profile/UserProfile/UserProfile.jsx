@@ -94,9 +94,27 @@ const UserProfile = ({ user }) => {
             <div className={styles.editProfile} onClick={() => handleLeftBarOptionClick("Profile")}>Your Profile</div>
             <div className={styles.studentDetails} onClick={() => handleLeftBarOptionClick("ResultPortal")}>Result Portal</div>
             <div className={styles.resultPortal} onClick={() => handleLeftBarOptionClick("StudentDetails")}>Student Details</div>
-            {
-              (alumni)&&<Link to="/school/alumni/profile" className={styles.resultPortal}>Switch to Alumni Profile</Link> 
-            }
+            <div className={styles.resultPortal}>
+            <Link 
+              to="/school/alumni/chat" 
+              className={styles.chatLink} 
+              onClick={() => handleLeftBarOptionClick("AlumniChat")}
+            >
+              Go to Chat
+            </Link>
+          </div>
+          {
+            (alumni) && (
+              <Link 
+                to="/school/alumni/profile" 
+                className={styles.resultPortal} 
+                onClick={() => handleLeftBarOptionClick("AlumniProfile")}
+              >
+                Switch to Alumni Profile
+              </Link>
+            )
+          }
+
           </>
         )}
         {user.role === 'Student' && (
@@ -114,6 +132,7 @@ const UserProfile = ({ user }) => {
             <div className={styles.studentDetails} onClick={() => handleLeftBarOptionClick("ResultPortal")}>Result Portal</div>
             <div className={styles.resultPortal} onClick={() => handleLeftBarOptionClick("StudentDetails")}>Student Details</div>
             <div className={styles.adminPortal} onClick={() => handleLeftBarOptionClick("AdminPortal")}>Admin Portal</div>
+            <div className={styles.resultPortal} onClick={() => handleLeftBarOptionClick("AlumniChat")}>Alumni Chat</div>
             {
               (alumni)&&<Link to="/school/alumni/profile" className={styles.resultPortal}>Switch to Alumni Profile</Link> 
             }
