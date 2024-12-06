@@ -6,7 +6,7 @@ const BhavaPrachaarSection = () => {
     return (
         <div className={styles.card}>
             <div className={styles.imageContainer}>
-                <img src="https://scontent.frdp1-1.fna.fbcdn.net/v/t31.18172-8/17157848_1467449389940304_4749996005523922985_o.jpg?_nc_cat=105&ccb=1-7&_nc_sid=f798df&_nc_ohc=vTsA9uAauhwQ7kNvgFcUIo1&_nc_ht=scontent.frdp1-1.fna&_nc_gid=AEZaj_L2ZCqYaMiA8633su_&oh=00_AYAdf_IwUlBUUa_o5eKguXMF7ahn68WEvMMTp-qNVtaukw&oe=67458AEA" alt="Placeholder" className={styles.image} />
+                <img src="https://res.cloudinary.com/dfoljuppg/image/upload/v1733469327/pxdy7znjy3jglnxvoywp.jpg" alt="Annual Program" className={styles.image} />
             </div>
             <div className={styles.content}>
                 <h2 className={styles.title}>Functions of Bhava Prachar Parishads</h2>

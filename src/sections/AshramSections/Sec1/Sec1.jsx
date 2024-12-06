@@ -9,7 +9,7 @@ const HomePageSection = () => {
         <div className={styles.card}>
             
             <div className={styles.imageContainer}>
-                <img src="https://scontent.frdp1-1.fna.fbcdn.net/v/t1.6435-9/138174565_4001789889839562_7100733246261345422_n.jpg?_nc_cat=101&ccb=1-7&_nc_sid=13d280&_nc_ohc=dJTpma0espoQ7kNvgGRPzan&_nc_ht=scontent.frdp1-1.fna&_nc_gid=AAw1UV7aPugvKZWCeA0j0kE&oh=00_AYBhS-CC3MX4BxSbQbChCOElHKFIHeZ_HrFPLYtJkKSKpQ&oe=67459BF6" alt="Placeholder" className={styles.image} />
+                <img src="https://res.cloudinary.com/dfoljuppg/image/upload/v1733468754/vrdu12oukn7pyvu86ki8.webp" alt="Belur Math" className={styles.image} />
             </div>
             <div className={styles.content}>
                 <h2 className={styles.title}>Sri Sri Ramakrishna Seva Sangha (Haridasnagar)</h2>
