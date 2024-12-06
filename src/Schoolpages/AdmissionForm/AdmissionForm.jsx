@@ -21,43 +21,87 @@ const AdmissionForm = () => {
 
   const tableRef = useRef();
 
-  // const handleDownloadPDF = async () => {
-  //   const element = tableRef.current;
-  //   const canvas = await html2canvas(element);
-  //   const imgData = canvas.toDataURL('image/png');
-  //   const pdf = new jsPDF();
-  
-  //   // Adjust PDF dimensions based on content
-  //   const pdfWidth = pdf.internal.pageSize.getWidth();
-  //   const pdfHeight = (canvas.height * pdfWidth) / canvas.width;
-  
-  //   pdf.addImage(imgData, 'PNG', 0, 0, pdfWidth, pdfHeight);
-  //   pdf.save('Admission_Form.pdf');
-  // };
   const [profilePic, setprofilePic] = useState('');
 
+  const waitForImagesToLoad = async (element) => {
+    const images = element.querySelectorAll('img');
+    await Promise.all(
+      Array.from(images).map((img) => {
+        if (img.complete) return Promise.resolve();
+        return new Promise((resolve) => {
+          img.onload = resolve;
+          img.onerror = resolve;
+        });
+      })
+    );
+  };
+
+  // Handle PDF download
   const handleDownloadPDF = async () => {
     const element = tableRef.current;
-    // Wait for the image to load
-    const image = new Image();
-    image.src = profilePic;
-    await new Promise((resolve) => {
-      image.onload = resolve;
-      image.onerror = resolve; 
+
+    // Ensure all images are loaded
+    await waitForImagesToLoad(element);
+
+    const scale = 2; // Moderate scale for better clarity without large size
+    const canvas = await html2canvas(element, {
+      scale,
+      useCORS: true,
+      windowWidth: element.scrollWidth,
     });
-  
-    const canvas = await html2canvas(element, { useCORS: true });
+
     const imgData = canvas.toDataURL('image/png');
-    const pdf = new jsPDF();
-  
-    const pdfWidth = pdf.internal.pageSize.getWidth();
-    const pdfHeight = (canvas.height * pdfWidth) / canvas.width;
-  
-    pdf.addImage(imgData, 'PNG', 0, 0, pdfWidth, pdfHeight);
+    const pdf = new jsPDF('p', 'mm', 'a4'); // 'a4' ensures standard page size
+
+    const pdfWidth = pdf.internal.pageSize.getWidth(); // A4 width in mm
+    const pdfHeight = pdf.internal.pageSize.getHeight(); // A4 height in mm
+
+    // Adjusted dimensions for scaling down
+    const imgWidth = pdfWidth - 10; // Leave some margin
+    const imgHeight = (canvas.height * imgWidth) / canvas.width;
+
+    if (imgHeight <= pdfHeight) {
+      // Single page
+      pdf.addImage(imgData, 'PNG', 5, 5, imgWidth, imgHeight); // Centered with margins
+    } else {
+      // Multi-page
+      let y = 0;
+      const pageHeight = (canvas.width * pdfHeight) / pdfWidth;
+
+      while (y < canvas.height) {
+        const pageCanvas = document.createElement('canvas');
+        pageCanvas.width = canvas.width;
+        pageCanvas.height = Math.min(canvas.height - y, pageHeight);
+
+        const ctx = pageCanvas.getContext('2d');
+        ctx.drawImage(
+          canvas,
+          0,
+          y,
+          canvas.width,
+          pageCanvas.height,
+          0,
+          0,
+          canvas.width,
+          pageCanvas.height
+        );
+
+        const pageImgData = pageCanvas.toDataURL('image/png');
+        pdf.addImage(pageImgData, 'PNG', 5, 5, imgWidth, (pageCanvas.height * imgWidth) / canvas.width);
+
+        y += pageCanvas.height;
+
+        if (y < canvas.height) {
+          pdf.addPage();
+        }
+      }
+    }
+
     pdf.save('Admission_Form.pdf');
   };
-  
-  
+
+
+
 
   const {
     register,
@@ -117,22 +161,22 @@ const AdmissionForm = () => {
   });
 
   // Load form data from local storage on component mount
-  // useEffect(() => {
-  //   const savedFormData = JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY));
-  //   if (savedFormData) {
-  //     Object.keys(savedFormData).forEach((key) => {
-  //       setValue(key, savedFormData[key]);
-  //     });
-  //   }
-  // }, [setValue]);
+  useEffect(() => {
+    const savedFormData = JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY));
+    if (savedFormData) {
+      Object.keys(savedFormData).forEach((key) => {
+        setValue(key, savedFormData[key]);
+      });
+    }
+  }, [setValue]);
 
-  // // Watch form data and store it in local storage whenever it changes
-  // useEffect(() => {
-  //   const subscription = watch((value) => {
-  //     localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(value));
-  //   });
-  //   return () => subscription.unsubscribe(); // Cleanup
-  // }, [watch]);
+  // Watch form data and store it in local storage whenever it changes
+  useEffect(() => {
+    const subscription = watch((value) => {
+      localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(value));
+    });
+    return () => subscription.unsubscribe(); // Cleanup
+  }, [watch]);
 
   // On submission of the entire form
   const onSubmit = async (data) => {
@@ -213,9 +257,9 @@ const AdmissionForm = () => {
           {step === 4 && <ResidentialContactDetails register={register} errors={errors} />}
           {step === 5 && <GuardianDetails register={register} errors={errors} />}
           {step === 6 && <PaymentDetails register={register} errors={errors} />}
-          {step === 7 && <Preview data={watch()} profilePic={profilePic} tableRef={tableRef}/>}
+          {step === 7 && <Preview data={watch()} profilePic={profilePic} tableRef={tableRef} />}
 
-          
+
 
           <div className="form-navigation">
             {step > 1 && (
@@ -230,20 +274,30 @@ const AdmissionForm = () => {
             )}
             {step === 7 && (
               <div className="terms-section">
-                <label>
-                  <input
-                    type="checkbox"
-                    {...register('terms', { required: 'You must accept terms and conditions' })}
-                  />
-                  I accept the terms and conditions
-                </label>
-                {errors.terms && <p className="error">{errors.terms.message}</p>}
-                <span onClick={handleDownloadPDF}>Download PDF</span>
-                <button type="submit" className="submit-button">
-                  Submit
-                </button>
+                <div className="download-pdf">
+                  <span className="pdf-link" onClick={handleDownloadPDF}>Download Application as PDF</span>
+                </div>
+
+                <div className="accept-terms">
+                  <label className="terms-label">
+                    <input
+                      type="checkbox"
+                      {...register('terms', { required: 'You must accept terms and conditions' })}
+                    />
+                    I accept the <a href="/terms" target="_blank" rel="noopener noreferrer" className="terms-link">terms and conditions</a>
+                  </label>
+                  {errors.terms && <p className="error">{errors.terms.message}</p>}
+                </div>
+
+                <div className="action-buttons">
+                  <button type="submit" className="submit-button" disabled={!watch('terms')}>
+                    Submit
+                  </button>
+                </div>
               </div>
             )}
+
+
           </div>
         </form>
       )}

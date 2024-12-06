@@ -24,8 +24,11 @@ const Preview = ({ profilePic, data, tableRef }) => {
           <tr>
             <td><strong>Profile Picture:</strong></td>
             <td colSpan="3">
-              {profilePic ? <img src={profilePic} alt="Profile" className="profile-pic" crossOrigin="anonymous" />
-                : 'No image uploaded'}
+              {profilePic ? (
+                <img src={profilePic} alt="Profile" className="profile-pic" crossOrigin="anonymous" />
+              ) : (
+                'No image uploaded'
+              )}
             </td>
           </tr>
           <tr>

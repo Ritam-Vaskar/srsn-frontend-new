@@ -1,115 +1,266 @@
-.preview-container {
-    width: 100%;
-    background-color: transparent;
+/* .preview-container {
+  max-width: 100%;
+  background-color: transparent;
+}
+
+.school-header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+}
+
+.school-logo {
+  width: 80px;
+  height: auto;
+}
+
+.school-info {
+  text-align: center;
+  p{
+      margin-top: 10px;
   }
-  
-  .school-header {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-    margin-bottom: 20px;
+}
+
+.school-info h1 {
+  margin: 0;
+  font-size: 24px;
+}
+
+.preview-title {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.preview-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.preview-table td {
+  padding: 10px;
+  border: 1px solid #ccc;
+  vertical-align: top;
+}
+
+.preview-table tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+.preview-table tr td:first-child,
+.preview-table tr td:nth-child(3) {
+  font-weight: bold;
+  width: 20%;
+}
+
+.preview-table tr td:nth-child(2),
+.preview-table tr td:nth-child(4) {
+  width: 20%;
+}
+
+.profile-pic {
+  width: 100px;
+  height: auto;
+}
+
+.print-btn-container {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.print-btn {
+  padding: 10px 20px;
+  background-color: #ff8c19;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.print-btn:hover {
+  background-color: #45a049;
+}
+
+@media print {
+  body * {
+    visibility: hidden;
   }
-  
-  .school-logo {
-    width: 80px;
-    height: auto;
+  .preview-container, .preview-container * {
+    visibility: visible;
   }
-  
-  .school-info {
-    text-align: center;
-    p{
-        margin-top: 10px;
-    }
-  }
-  
-  .school-info h1 {
-    margin: 0;
-    font-size: 24px;
-  }
-  
-  .preview-title {
-    text-align: center;
-    margin-bottom: 20px;
-  }
-  
-  .preview-table {
-    width: 100%;
-    border-collapse: collapse;
-  }
-  
-  .preview-table td {
-    padding: 10px;
-    border: 1px solid #ccc;
-    vertical-align: top;
-  }
-  
-  .preview-table tr:nth-child(even) {
-    background-color: #f2f2f2;
-  }
-  
-  .preview-table tr td:first-child,
-  .preview-table tr td:nth-child(3) {
-    font-weight: bold;
-    width: 20%;
-  }
-  
-  .preview-table tr td:nth-child(2),
-  .preview-table tr td:nth-child(4) {
-    width: 30%;
-  }
-  
-  .profile-pic {
-    width: 100px;
-    height: auto;
-  }
-  
-  .print-btn-container {
-    text-align: center;
-    margin-top: 20px;
-  }
-  
-  .print-btn {
-    padding: 10px 20px;
-    background-color: #ff8c19;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-  }
-  
-  .print-btn:hover {
-    background-color: #45a049;
-  }
-  
-  @media print {
-    body * {
-      visibility: hidden;
-    }
-    .preview-container, .preview-container * {
-      visibility: visible;
-    }
-    .preview-container {
-      position: absolute;
-      left: 0;
-      top: 0;
-      width: 100%;
-      background: white;
-      box-shadow: none;
-    }
-    .print-btn-container {
-      display: none;
-    }
-  }
-  
   .preview-container {
+    position: absolute;
+    left: 0;
+    top: 0;
     width: 100%;
+    background: white;
+    box-shadow: none;
   }
+  .print-btn-container {
+    display: none;
+  }
+}
+
+.preview-container {
+  width: 100%;
+}
+.preview-table {
+  border-collapse: collapse;
+  width: 100%;
+}
+.preview-table td {
+  border: 1px solid #000;
+  padding: 8px;
+}
+.preview-table tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+.preview-table tr td:first-child,
+.preview-table tr td:nth-child(3) {
+  font-weight: bold;
+  width: 20%;
+}
+.preview-table tr td:nth-child(2),
+.preview-table tr td:nth-child(4) {
+  width: 20%;
+} */
+
+
+
+.preview-container {
+  max-width: 100%;
+  padding: 10px; /* Add padding for better spacing */
+  background-color: transparent;
+}
+
+.school-header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+}
+
+.school-logo {
+  width: 60px; /* Reduce logo size for smaller screens */
+  height: auto;
+}
+
+.school-info {
+  text-align: center;
+}
+
+.school-info h1 {
+  margin: 0;
+  font-size: 20px; /* Adjust font size for better readability */
+}
+
+.school-info p {
+  margin-top: 10px;
+  font-size: 14px; /* Smaller font size for mobile */
+}
+
+.preview-title {
+  text-align: center;
+  margin-bottom: 15px; /* Reduce margin for smaller screens */
+  font-size: 18px; /* Adjust title size */
+}
+
+.preview-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px; /* Reduce font size for smaller screens */
+}
+
+.preview-table td {
+  padding: 8px; /* Adjust padding */
+  border: 1px solid #ccc;
+  vertical-align: top;
+}
+
+.preview-table tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+.preview-table tr td:first-child,
+.preview-table tr td:nth-child(3) {
+  font-weight: bold;
+}
+
+.profile-pic {
+  width: 80px; /* Smaller profile pic size */
+  height: auto;
+}
+
+.print-btn-container {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.print-btn {
+  padding: 10px 15px; /* Adjust button size */
+  background-color: #ff8c19;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.print-btn:hover {
+  background-color: #45a049;
+}
+
+@media print {
+  body * {
+    visibility: hidden;
+  }
+  .preview-container,
+  .preview-container * {
+    visibility: visible;
+  }
+  .preview-container {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    background: white;
+    box-shadow: none;
+  }
+  .print-btn-container {
+    display: none;
+  }
+}
+
+/* Mobile view adjustments */
+@media (max-width: 768px) {
+  .school-logo {
+    width: 50px; /* Even smaller logo for very small screens */
+  }
+
+  .school-info h1 {
+    font-size: 18px; /* Further reduce font size */
+  }
+
+  .school-info p {
+    font-size: 12px;
+  }
+
+  .preview-title {
+    font-size: 16px;
+  }
+
   .preview-table {
-    border-collapse: collapse;
-    width: 100%;
+    font-size: 12px;
   }
+
   .preview-table td {
-    border: 1px solid #000;
-    padding: 8px;
+    padding: 5px;
   }
+
+  .print-btn {
+    padding: 8px 12px; /* Adjust button size for mobile */
+  }
+}

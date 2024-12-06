@@ -18,20 +18,20 @@ const Procedure = () => {
           <h3>Step 3: Entrance Exam</h3>
           <p>Schedule and take the entrance exam as per the announced dates.</p>
         </li>
-        <li>
+        {/* <li>
           <h3>Step 4: Interview</h3>
           <p>Attend the personal interview with the admission committee.</p>
-        </li>
-        <li>
+        </li> */}
+        {/* <li>
           <h3>Step 5: Admission Offer</h3>
           <p>If selected, you will receive an admission offer letter via email.</p>
-        </li>
+        </li> */}
         <li>
-          <h3>Step 6: Fee Payment</h3>
+          <h3>Step 4: Fee Payment</h3>
           <p>Complete the fee payment within the stipulated time to secure your admission.</p>
         </li>
         <li>
-          <h3>Step 7: Orientation</h3>
+          <h3>Step 5: Orientation</h3>
           <p>Participate in the orientation session to familiarize yourself with the school.</p>
         </li>
       </ol>
