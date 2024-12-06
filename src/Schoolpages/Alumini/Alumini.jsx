@@ -97,7 +97,7 @@ const Alumni = () => {
           <>
 
           <center><button onClick={() => setShowApplicationForm(true)} className={styles.applyButton}>
-              Apply for Alumni
+              Alumni Application and Login
             </button></center>
           <div className={styles.alumniGrid}>
             

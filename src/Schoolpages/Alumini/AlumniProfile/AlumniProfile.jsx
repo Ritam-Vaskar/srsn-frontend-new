@@ -5,14 +5,14 @@ import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 
 const AlumniControlPanel = () => {
-  const [activeComponent, setActiveComponent] = useState('Profile'); // Tracks active component
-  const [isEditing, setIsEditing] = useState(false); // Tracks if the edit window is open
+  const [activeComponent, setActiveComponent] = useState('Profile'); 
+  const [isEditing, setIsEditing] = useState(false); 
   const alumni = useSelector((state) => state?.alumni?.alumni);
 
   const handleLeftBarOptionClick = (option) => {
     setActiveComponent(option);
     if (option === 'Profile') {
-      setIsEditing(false); // Close edit window if switching back to the profile
+      setIsEditing(false); 
     }
   };
 
@@ -36,7 +36,7 @@ const AlumniControlPanel = () => {
           />
         </div>
         <div className={styles.name}>{alumni?.name || 'Alumni Name'}</div>
-        <p>{alumni?.batch || 'Batch Year'}</p>
+        <p>{`${alumni?.startingYear} - ${alumni?.endingYear}` || 'Batch Year'}</p>
         <div
           className={styles.navOption}
           onClick={() => handleLeftBarOptionClick('Profile')}
@@ -64,7 +64,8 @@ const AlumniControlPanel = () => {
               </div>
               <div className={styles.row}>
                 <div className={styles.label}>Batch:</div>
-                <div className={styles.value}>{alumni?.batch || 'Not Available'}</div>
+                <div className={styles.value}>{`${alumni?.startingYear} - ${alumni?.endingYear || 'Not Available'}`}</div>
+
               </div>
               <div className={styles.row}>
                 <div className={styles.label}>Designation:</div>

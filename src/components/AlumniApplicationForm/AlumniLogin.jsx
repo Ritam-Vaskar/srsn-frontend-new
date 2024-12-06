@@ -6,6 +6,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import SummaryApi from '../../common';
 import { useEffect,useContext } from 'react';
 import Context from '../../Context';
+import { useNavigate } from 'react-router-dom';
  
 
 const AlumniLogin = ({ showLogin, setShowLogin }) => {
@@ -13,6 +14,7 @@ const AlumniLogin = ({ showLogin, setShowLogin }) => {
     const [emailSend, setEmailSend] = useState(false);
     const [email, setEmail] = useState('');
     const { fetchAlumni } = useContext(Context);
+    const Navigate = useNavigate();
 
     const onSubmit = async (data) => {
         try {
@@ -52,8 +54,10 @@ const AlumniLogin = ({ showLogin, setShowLogin }) => {
             const result = await response.json();
             if (result.success) {
                 fetchAlumni();
+                Navigate('/school/alumni/profile');
                 toast.success('OTP verified successfully');
                 reset();
+                
             } else {
                 toast.error(result.message);
             }

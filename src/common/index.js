@@ -101,7 +101,7 @@ const SummaryApi={
         method:"GET"
     },
     AlumniEdit:{
-        url:backendUrl+"/api/alumniEdit",
+        url:backendUrl+"/api/alumniUpdateProfile",
         method:"PUT"
     },
 

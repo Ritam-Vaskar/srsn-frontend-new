@@ -4,8 +4,11 @@ import { toast } from 'react-toastify';
 import styles from './styles/AlumniApplicationForm.module.scss';
 import SummaryApi from '../../common';
 import uploadImg from '../../helper/uploadImg';
+import { useSelector } from 'react-redux';
 
 const AlumniApplicationForm = ({ showLogin, setShowLogin }) => {
+
+  const alumni = useSelector(state => state?.alumni?.alumni); 
 
   const [profilePic, setprofilePic] = useState('');
   const [socialMediaLinks, setSocialMediaLinks] = useState(['', '']); // Array to store two links
@@ -120,7 +123,7 @@ const AlumniApplicationForm = ({ showLogin, setShowLogin }) => {
 
           <input
             type="text"
-            placeholder="Current Place"
+            placeholder="Current Location"
             {...register("currentState", { required: "Current State is required" })}
             disabled={!profilePic}
           />
@@ -179,10 +182,10 @@ const AlumniApplicationForm = ({ showLogin, setShowLogin }) => {
           </button>
         </div>
       </form>
-      <div className={styles.signup}>
+      {(!alumni)&&<div className={styles.signup}>
         Already have an account{' '}
         <p className={styles.signupLink} onClick={() => setShowLogin(!showLogin)}>Sign in</p>
-      </div>
+      </div>}
     </>
 
 

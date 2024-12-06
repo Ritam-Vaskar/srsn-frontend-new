@@ -1,6 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState ,useContext} from 'react';
 import styles from '../styles/ProfileEdit.module.scss';
 import { toast } from 'react-toastify';
+import SummaryApi from '../../../common';
+import Context from '../../../Context';
+
 
 
 const ProfileEdit = ({ user, closeModal, fetchUser }) => {
@@ -17,6 +20,8 @@ const ProfileEdit = ({ user, closeModal, fetchUser }) => {
     email: user.email || '',
   });
 
+  const {fetchAlumni}=useContext(Context);
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
@@ -24,22 +29,26 @@ const ProfileEdit = ({ user, closeModal, fetchUser }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    console.log(formData);
     try {
-      const response = await fetch('/api/alumniEdit', {
-        method: 'PUT',
+      const response = await fetch(SummaryApi.AlumniEdit.url, {
+        method: SummaryApi.AlumniEdit.method,
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(formData),
+        credentials: 'include',
       });
 
       const result = await response.json();
       if (result.success) {
         toast.success('Profile updated successfully!');
-        fetchUser(); // Refresh user data
+        // fetchUser(); 
+        fetchAlumni();
         closeModal(); // Close modal
       } else {
         toast.error(result.message);
       }
     } catch (error) {
+      console.log(error);
       toast.error('Failed to update profile. Please try again.');
     }
   };
@@ -93,7 +102,7 @@ const ProfileEdit = ({ user, closeModal, fetchUser }) => {
         </div>
 
         <div className={styles.formGroup}>
-          <label>Current State:</label>
+          <label>Current Location:</label>
           <input
             type="text"
             name="currentState"

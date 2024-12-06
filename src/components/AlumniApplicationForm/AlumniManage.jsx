@@ -3,8 +3,11 @@ import styles from './styles/AlumniManage.module.scss';
 import AlumniApplicationForm from './AlumniApplicationForm';
 import { useState } from 'react';
 import AlumniLogin from './AlumniLogin';
+import { useSelector } from 'react-redux';
+
 const AlumniManage= ({onClose}) => {
-    const [showLogin, setShowLogin] = useState(true);
+    
+    const [showLogin, setShowLogin] = useState(false);
     return (
         <div className={styles.popupOverlay}>   
           <div className={styles.popupContent}>
