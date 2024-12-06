@@ -6,7 +6,7 @@ const TenPointGuidelinesSection = () => {
         <div className={styles.card}>
             <div className={styles.imageContainer}>
                 <img
-                    src="https://scontent.frdp1-2.fna.fbcdn.net/v/t31.18172-8/17097494_1467451646606745_6517047025817830611_o.jpg?_nc_cat=100&ccb=1-7&_nc_sid=f798df&_nc_ohc=m8DKThhsQ8MQ7kNvgEukiI5&_nc_ht=scontent.frdp1-2.fna&_nc_gid=AY3bLgQtY74gppfyISGOHQW&oh=00_AYCyiqMrdMsPDzkk72A7cbU60Xz1IEDyWbCPn_xHIidhww&oe=674599EC"
+                    src="https://res.cloudinary.com/dfoljuppg/image/upload/v1733469786/xyxetpz4godtqmzkkjsc.jpg"
                     alt="Placeholder"
                     className={styles.image}
                 />
@@ -29,7 +29,7 @@ const TenPointGuidelinesSection = () => {
                     <li>The centre should render relief services during calamities, either independently or under the Math and Mission's guidance.</li>
                 </ul>
 
-                <h2 className={styles.sectionTitle} style={{color: '#ff6a00'}}><br />দশ-বিন্দু নির্দেশিকা</h2>
+                <h2 className={styles.sectionTitle} style={{color: '#ff6a00', textAlign: 'center'}}><br />দশ-বিন্দু নির্দেশিকা</h2>
                 <p className={styles.introText} style={{ fontWeight: "bold" }}>
                     রামকৃষ্ণ-বিবেকানন্দ ভাব প্রচার পরিষদের সদস্য হওয়ার যোগ্য হওয়ার জন্য, একটি অ-অনুমোদিত কেন্দ্র, যাকে কখনও কখনও "বেসরকারী কেন্দ্র" হিসাবে উল্লেখ করা হয়, তাকে নিম্নলিখিত নিয়মগুলি মেনে চলতে হবে:
                 </p>
