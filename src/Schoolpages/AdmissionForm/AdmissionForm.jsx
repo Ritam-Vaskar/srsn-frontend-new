@@ -35,44 +35,46 @@ const AdmissionForm = () => {
       })
     );
   };
-
+  
   // Handle PDF download
   const handleDownloadPDF = async () => {
     const element = tableRef.current;
-
+  
     // Ensure all images are loaded
     await waitForImagesToLoad(element);
-
-    const scale = 2; // Moderate scale for better clarity without large size
+  
+    // Determine scale based on device pixel ratio for better resolution
+    const scale = window.devicePixelRatio > 1 ? 2 : 1;
+  
     const canvas = await html2canvas(element, {
       scale,
       useCORS: true,
       windowWidth: element.scrollWidth,
     });
-
+  
     const imgData = canvas.toDataURL('image/png');
-    const pdf = new jsPDF('p', 'mm', 'a4'); // 'a4' ensures standard page size
-
-    const pdfWidth = pdf.internal.pageSize.getWidth(); // A4 width in mm
-    const pdfHeight = pdf.internal.pageSize.getHeight(); // A4 height in mm
-
-    // Adjusted dimensions for scaling down
-    const imgWidth = pdfWidth - 10; // Leave some margin
+    const pdf = new jsPDF('p', 'mm', 'a4'); // Portrait mode and A4 size
+  
+    const pdfWidth = pdf.internal.pageSize.getWidth();
+    const pdfHeight = pdf.internal.pageSize.getHeight();
+  
+    // Adjusted dimensions for better scaling on mobile
+    const imgWidth = pdfWidth -10; // Margins
     const imgHeight = (canvas.height * imgWidth) / canvas.width;
-
+  
     if (imgHeight <= pdfHeight) {
       // Single page
-      pdf.addImage(imgData, 'PNG', 5, 5, imgWidth, imgHeight); // Centered with margins
+      pdf.addImage(imgData, 'PNG', -5, -5, imgWidth, imgHeight); // Add image with margin
     } else {
       // Multi-page
       let y = 0;
       const pageHeight = (canvas.width * pdfHeight) / pdfWidth;
-
+  
       while (y < canvas.height) {
         const pageCanvas = document.createElement('canvas');
         pageCanvas.width = canvas.width;
         pageCanvas.height = Math.min(canvas.height - y, pageHeight);
-
+  
         const ctx = pageCanvas.getContext('2d');
         ctx.drawImage(
           canvas,
@@ -85,21 +87,22 @@ const AdmissionForm = () => {
           canvas.width,
           pageCanvas.height
         );
-
+  
         const pageImgData = pageCanvas.toDataURL('image/png');
-        pdf.addImage(pageImgData, 'PNG', 5, 5, imgWidth, (pageCanvas.height * imgWidth) / canvas.width);
-
+        pdf.addImage(pageImgData, 'PNG', 0, 0, imgWidth, (pageCanvas.height * imgWidth) / canvas.width);
+  
         y += pageCanvas.height;
-
+  
         if (y < canvas.height) {
-          pdf.addPage();
+          pdf.addPage(); // Add page if there is more content
         }
       }
     }
-
+  
+    // Save the generated PDF
     pdf.save('Admission_Form.pdf');
   };
-
+  
 
 
 
