@@ -1,0 +1,35 @@
+.overviewTemp {
+    background-color: #ffffff;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    padding: 20px;
+    
+     h3{text-align: left;
+        color:#ff6a00;
+        text-decoration:  underline;
+     }
+     p{
+        text-align: left;
+    color: rgb(81, 77, 77);
+    border: 1px solid rgb(81, 77, 77);
+    padding: 1rem;
+     }
+}
+
+.Overview {
+    font-weight:bolder;
+    flex-direction: column;
+    padding: 30px;
+    color: #ff6a00;
+    text-shadow: 3px 3px rgb(255, 255, 255);
+    text-indent:  40px;
+     p{
+        color: rgb(0, 0, 0);
+        font-weight: 750;
+        border: none;
+     }
+    
+}
+

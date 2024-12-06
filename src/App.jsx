@@ -65,8 +65,6 @@ function App() {
         <Outlet />
         {/* <Footer /> */}
       </Context.Provider>
-
-
     </>
   );
 }
