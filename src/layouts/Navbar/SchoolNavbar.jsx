@@ -10,6 +10,7 @@ import { useSelector } from 'react-redux';
 
 const SchoolNavbar = () => {
     const user = useSelector(state => state?.user?.user);
+    const alumni = useSelector(state => state?.alumni?.alumni);
 
     // console.log('check user', user);
     const [isSchool, setIsSchool] = useState(false);
@@ -134,11 +135,18 @@ const SchoolNavbar = () => {
                 <li><HashLink smooth to='/school/admission_form' className={styles.slogin}>Apply</HashLink></li>
                 {/* <li><HashLink smooth to='/login' className={styles.slogin}>Login</HashLink></li> */}
                 <li>
-                    {(user) ?
+                    {(user) &&
                         <HashLink smooth to='/school/profile' className={styles.sloginImg}>
                             <img src={user.profilePic} alt="user" />
                         </HashLink>
-                        :
+                    }
+                    {
+                        (!user && alumni) &&
+                        <HashLink smooth to='/school/alumni/profile' className={styles.sloginImg}>
+                            <img src={alumni.profilePic} alt="user" />
+                        </HashLink>
+                    }
+                        {(!user && !alumni) &&
                         <HashLink smooth to='/school/login' className={styles.slogin}>
                             Login
                         </HashLink>}
@@ -163,6 +171,12 @@ const SchoolNavbar = () => {
                                 
                             </HashLink>
                         }
+                        {
+                            (!user && alumni) &&
+                            <HashLink smooth to='/school/alumni/profile' className={styles.sloginImg}>
+                                <img src={alumni.profilePic} alt="user" onClick={toggleSideMenu}/>
+                            </HashLink>
+                        }
                         <li onClick={toggleSideMenu}><ClearIcon style={{ cursor: 'pointer', color: 'red' }} /></li>
                     </div>
 
@@ -176,7 +190,7 @@ const SchoolNavbar = () => {
                                 Login
                             </HashLink>}
                     </li> */}
-                    <li>{!user&&<HashLink smooth to='/school/login' onClick={toggleSideMenu} style={{ color: 'rgb(255, 153, 0)', fontSize: 'large', fontWeight: 'bolder' }}>Login</HashLink>}</li>
+                    <li>{(!user && !alumni)&&<HashLink smooth to='/school/login' onClick={toggleSideMenu} style={{ color: 'rgb(255, 153, 0)', fontSize: 'large', fontWeight: 'bolder' }}>Login</HashLink>}</li>
                     <li>{<HashLink smooth to='/school/admission_form' onClick={toggleSideMenu} style={{ color: 'rgb(255, 153, 0)', fontSize: 'large', fontWeight: 'bolder' }}>Apply</HashLink>}</li>
                     <li><HashLink smooth to='/ashram' onClick={() => { document.body.classList.remove('lock-scroll') }} style={{ color: 'rgb(255, 153, 0)', fontSize: 'large', fontWeight: 'bolder' }}>Ashram</HashLink></li>
                     <li><HashLink smooth to='/school/alumni' onClick={toggleSideMenu} style={{ color: 'rgb(255, 153, 0)', fontSize: 'large', fontWeight: 'bolder' }}>Alumni</HashLink></li>

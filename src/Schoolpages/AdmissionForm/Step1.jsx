@@ -2,69 +2,37 @@ import React from 'react';
 import './styles/AdmissionForm.css';
 import uploadImg from '../../helper/uploadImg';
 import { useState } from 'react';
+import { toast } from 'react-toastify';
 
-const BasicInfo = ({ register, errors, setValue }) => {
-  const [profilePicUrl, setProfilePicUrl] = useState('');
-  // const handleChange = async (e) => {
-  //   const fileList = e.target.files;
-  //   console.log("File List: ", fileList);
-    
-  //   if (fileList.length > 0) {
-  //     const file = fileList[0];
-  //     console.log("Selected file: ", file); 
-  //     try {
-  //       const imageUrl = await uploadImg(file);
-  //       console.log("Upload response: ", imageUrl);
-  //       if (imageUrl.url) {
-  //         setProfilePicUrl(imageUrl.url);
-  //         setValue("profilePic", imageUrl.url);
-  //         console.log("Image uploaded successfully: ", imageUrl.url);
-  //       } else {
-  //         toast.error("Image upload was successful, but URL is missing.");
-  //       }
-  //     } catch (error) {
-  //       console.error("Error uploading image:", error);
-  //       toast.error("Failed to upload image. Please try again.");
-  //     }
-  //   } else {
-  //     console.warn("No file selected.");
-  //     setValue("profilePic", "");
-  //   }
-  // };
+const BasicInfo = ({profilePic,setprofilePic, register, errors, setValue }) => {
   const handleChange = async (e) => {
     const fileList = e.target.files;
     console.log("File List: ", fileList);
-  
+
     if (fileList.length > 0) {
       const file = fileList[0];
-      console.log("Selected file: ", file);
-  
-      // Check file type and size
-      if (file.type.startsWith("image/") && file.size > 0) {
-        try {
-          const imageUrl = await uploadImg(file);
-          console.log("Upload response: ", imageUrl);
-  
-          if (imageUrl.url) {
-            setProfilePicUrl(imageUrl.url);
-            setValue("profilePic", imageUrl.url);
-            console.log("Image uploaded successfully: ", imageUrl.url);
-          } else {
-            toast.error("Image upload was successful, but URL is missing.");
-          }
-        } catch (error) {
-          console.error("Error uploading image:", error);
-          toast.error("Failed to upload image. Please try again.");
+      console.log("Selected file: ", file); // Log the selected file
+      try {
+        const imageUrl = await uploadImg(file);
+        console.log("Upload response: ", imageUrl);
+        if (imageUrl.url) {
+          setprofilePic(imageUrl.url);
+          setValue("profilePic", imageUrl.url);
+          console.log("Image uploaded successfully: ", imageUrl.url);
+        } else {
+          toast.error("Image upload was successful, but URL is missing.");
         }
-      } else {
-        console.warn("Invalid file type or size.");
-        setValue("profilePic", "");
+      } catch (error) {
+        console.error("Error uploading image:", error);
+        toast.error("Failed to upload image. Please try again.");
       }
     } else {
       console.warn("No file selected.");
+      toast.error("No file selected. Please try again.");
       setValue("profilePic", "");
     }
   };
+
   return (
     <div>
       <h2>Basic Information</h2>
@@ -89,22 +57,15 @@ const BasicInfo = ({ register, errors, setValue }) => {
         />
         {errors.email && <p>{errors.email.message}</p>}
       </div>
+
+
       <div>
         <label>Profile Picture</label>
-        <input
-          type="file"
-          {...register("profilePic")}
-          accept="image/*"
-          onChange={handleChange}
-        />
-        {errors.profilePic && <p>{errors.profilePic.message}</p>}
-        {profilePicUrl && (
-          <div>
-            <p>Uploaded Image:</p>
-            <img src={profilePicUrl} alt="Profile Pic" width="100" />
-          </div>
-        )}
+        <input type="file" onChange={handleChange} className="fileInput" />
+        {profilePic && <img src={profilePic} alt="Profile" width="100" />}
       </div>
+
+
       <div>
         <label>Phone</label>
         <input
@@ -187,7 +148,7 @@ const BasicInfo = ({ register, errors, setValue }) => {
       <div>
         <label>Blood Group</label>
         <select
-          {...register("bloodGroup", { required: "Blood group is required" })} disabled={!profilePicUrl}
+          {...register("bloodGroup", { required: "Blood group is required" })}
         >
           <option value="">Select...</option>
           <option value="A+">A+</option>

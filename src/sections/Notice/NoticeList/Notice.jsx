@@ -4,6 +4,7 @@ import React, { useEffect, useState, useRef, useCallback } from "react";
 import styles from "./Notice.module.scss";
 import SummaryApi from '../../../common';
 import { toast } from "react-toastify";
+import Spinner from "../../../layouts/Loader/Spinner";
 
 const Noticebar = () => {
   const [notice, setNotice] = useState([]);
@@ -74,7 +75,7 @@ const Noticebar = () => {
     }
   };
 
-  if (loading) return <p>Loading...</p>;
+  if (loading) return <Spinner />;
   if (error) return <p>Error: {error}</p>;
 
   const currentNotices = paginatedNotices();

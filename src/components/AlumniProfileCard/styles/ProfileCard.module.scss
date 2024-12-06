@@ -7,6 +7,7 @@
   margin-bottom: 20px;
   transition: transform 0.2s ease-in-out;
   width: 100%;
+  max-width: 300px;
   
   &:hover {
     box-shadow: 1px 1px 10px 1px #ff8c19;
@@ -24,6 +25,7 @@
   h3 {
     font-size: 1.3rem;
     margin-bottom: 10px;
+    text-transform: capitalize;
   }
 
   p {
@@ -32,7 +34,7 @@
   }
 
   .knowMoreButton {
-    background-color: #fe4c00;
+    background-color: #ff6a00;
     color: white;
     border: none;
     margin-top: 10px;
@@ -42,7 +44,7 @@
     transition: background-color 0.3s;
 
     &:hover {
-      background-color: #005f8c;
+      background-color: #ff8c19;
     }
   }
 }
@@ -65,6 +67,8 @@
   padding: 30px;
   border-radius: 10px;
   width: 500px;
+  height: 500px;
+  overflow: auto;
   max-width: 90%;
   position: relative;
   text-align: center;
@@ -72,8 +76,8 @@
 
   .modalProfilePic {
     border-radius: 50%;
-    width: 100px;
-    height: 100px;
+    width: 150px;
+    height: 150px;
     object-fit: cover;
     margin-bottom: 20px;
   }
@@ -92,14 +96,22 @@
     margin: 5px 0;
     color: #0073b1;
     text-decoration: none;
-    font-size: 1.1rem;
+    font-size: 2rem;
+  }
+
+  .socialLinks{
+    margin-top: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
   }
 
   .closeButton {
     background-color: #e74c3c;
     color: white;
     border: none;
-    padding: 10px 20px;
+    padding: 10px 13px;
     border-radius: 5px;
     cursor: pointer;
     transition: background-color 0.3s;
@@ -111,4 +123,66 @@
       background-color: #c0392b;
     }
   }
+
+  .hiddenLink {
+    display: none;
+  }
 }
+
+.infoTable {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 20px 0;
+  font-size: 1rem;
+  color: #333;
+
+  td {
+    padding: 10px 15px;
+    vertical-align: top;
+  }
+
+  tr {
+    transition: background-color 0.3s ease-in-out;
+
+    &:nth-child(even) {
+      background-color: #f9f9f9;
+    }
+
+    &:hover {
+      background-color: #ffe6cc; /* Subtle highlight on hover */
+    }
+  }
+
+  td:first-child {
+    font-weight: bold;
+    text-align: left;
+    color: #ff6a00; /* Accent color */
+    width: 40%; /* Slightly narrower for labels */
+  }
+
+  td:last-child {
+    text-align: left;
+    color: #555;
+  }
+
+  tr:last-child td {
+    text-align: justify;
+    padding-top: 15px;
+    font-style: italic;
+    color: #666;
+    border-top: 1px solid #ff6a00;
+    font-size: 0.95rem;
+  }
+
+  @media (max-width: 600px) {
+    td {
+      font-size: 0.9rem;
+      padding: 8px 10px;
+    }
+
+    tr:last-child td {
+      font-size: 0.85rem;
+    }
+  }
+}
+

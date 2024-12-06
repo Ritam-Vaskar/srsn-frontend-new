@@ -5,6 +5,15 @@
     font-size: 1.2em;
     text-align: left;
   }
+
+  .searchResultsGrid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    margin-top: 1rem;
+}
   
   .searchTable th, .searchTable td {
     padding: 12px;

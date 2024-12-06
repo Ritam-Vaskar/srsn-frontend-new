@@ -33,9 +33,9 @@ const ContactPage = () => {
       <div className={styles.contactLeft}>
         <img src={logo} alt="Organization Logo" className={styles.logo} />
         <h2>Contact Information</h2>
-        <p>Address: 123 Main Street, City, Country</p>
-        <p>Phone: +123 456 7890</p>
-        <p>Email: info@organization.com</p>
+        <p>Address: Haridasnagar , Raghunathganj , Murshidabad , PIN-742225</p>
+        <p>Phone: 9932842142 / 9434531454</p>
+        <p>Email: sriramakrishnasikshaniketan@gmail.com</p>
       </div>
 
       <div className={styles.contactRight}>

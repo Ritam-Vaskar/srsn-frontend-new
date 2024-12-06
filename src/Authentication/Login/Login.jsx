@@ -1,4 +1,5 @@
 import React from 'react';
+import { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import styles from './Login.module.scss';
 import SummaryApi from '../../common';
@@ -6,9 +7,24 @@ import { toast } from 'react-toastify';
 import { useDispatch } from 'react-redux';
 import { setUserDetails } from './../../store/userSlice';
 import { useNavigate } from 'react-router-dom';
+import RemoveRedEyeIcon from '@mui/icons-material/RemoveRedEye';
+import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
+import { useSelector } from 'react-redux';
+
 
 const Login = () => {
+  const user = useSelector(state => state?.user?.user);
+  const checkUser = () => {
+    console.log(user);
+    if (user) {
+      Navigate('/school/profile');
+    }
+  }
+  useEffect(() => {
+    checkUser();
+  }, [user]);
 
+  const [showPassword, setShowPassword] = React.useState(false);
   const Navigate = useNavigate();
   const { register, handleSubmit, formState: { errors } } = useForm();
 
@@ -53,10 +69,14 @@ const Login = () => {
       }
       toast.success(result.message);
       fetchUser();
-      Navigate('/');
+      Navigate('/school/profile');
     } catch (err) {
       toast.error(err.message);
     }
+  };
+
+  const handlePasswordVisibility = () => {
+    setShowPassword(!showPassword);
   };
 
   return (
@@ -77,13 +97,24 @@ const Login = () => {
         {/* Password Field */}
         <div className={styles['form-group']}>
           <label>Password:</label>
-          <input
-            type="password"
-            {...register('password', { required: 'Password is required' })}
-            placeholder="Password"
-          />
+          <div className={styles['password-container']}>
+            <input
+              type={showPassword ? 'text' : 'password'}
+              {...register('password', { required: 'Password is required' })}
+              placeholder="Password"
+            />
+            <span
+              className={styles['eye-icon']}
+              onClick={handlePasswordVisibility}
+              role="button"
+              tabIndex="0"
+            >
+              {showPassword ? <RemoveRedEyeIcon /> : <VisibilityOffIcon />}
+            </span>
+          </div>
           {errors.password && <p className={styles.error}>{errors.password.message}</p>}
         </div>
+
 
         {/* Submit Button */}
         <div className={styles['form-group']}>

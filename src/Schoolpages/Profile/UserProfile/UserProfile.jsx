@@ -11,8 +11,11 @@ import { useDispatch } from 'react-redux';
 import { setUserDetails } from '../../../store/userSlice';
 import { useNavigate } from 'react-router-dom';
 import SummaryApi from '../../../common';
+import { useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
 
 const UserProfile = ({ user }) => {
+  const alumni=useSelector(state=>state?.alumni?.alumni);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [activeComponent, setActiveComponent] = useState("Profile");
@@ -91,12 +94,36 @@ const UserProfile = ({ user }) => {
             <div className={styles.editProfile} onClick={() => handleLeftBarOptionClick("Profile")}>Your Profile</div>
             <div className={styles.studentDetails} onClick={() => handleLeftBarOptionClick("ResultPortal")}>Result Portal</div>
             <div className={styles.resultPortal} onClick={() => handleLeftBarOptionClick("StudentDetails")}>Student Details</div>
+            <div className={styles.resultPortal}>
+            <Link 
+              to="/school/alumni/chat" 
+              className={styles.chatLink} 
+              onClick={() => handleLeftBarOptionClick("AlumniChat")}
+            >
+              Go to Chat
+            </Link>
+          </div>
+          {
+            (alumni) && (
+              <Link 
+                to="/school/alumni/profile" 
+                className={styles.resultPortal} 
+                onClick={() => handleLeftBarOptionClick("AlumniProfile")}
+              >
+                Switch to Alumni Profile
+              </Link>
+            )
+          }
+
           </>
         )}
         {user.role === 'Student' && (
           <>
             <div className={styles.editProfile} onClick={() => handleLeftBarOptionClick("Profile")}>Your Profile</div>
             {isResultActive && <div className={styles.resultPortal} onClick={() => handleLeftBarOptionClick("StudentResult")}>Result Portal</div>}
+            {
+              (alumni)&&<Link to="/school/alumni/profile" className={styles.resultPortal}>Switch to Alumni Profile</Link> 
+            }
           </>
         )}
         {user.role === 'Admin' && (
@@ -105,6 +132,10 @@ const UserProfile = ({ user }) => {
             <div className={styles.studentDetails} onClick={() => handleLeftBarOptionClick("ResultPortal")}>Result Portal</div>
             <div className={styles.resultPortal} onClick={() => handleLeftBarOptionClick("StudentDetails")}>Student Details</div>
             <div className={styles.adminPortal} onClick={() => handleLeftBarOptionClick("AdminPortal")}>Admin Portal</div>
+            <div className={styles.resultPortal} onClick={() => handleLeftBarOptionClick("AlumniChat")}>Alumni Chat</div>
+            {
+              (alumni)&&<Link to="/school/alumni/profile" className={styles.resultPortal}>Switch to Alumni Profile</Link> 
+            }
           </>
         )}
         <div className={styles.logoutButton} onClick={handleLogout}>Logout</div>

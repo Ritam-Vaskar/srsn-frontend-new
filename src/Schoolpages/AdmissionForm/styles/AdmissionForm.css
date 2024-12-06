@@ -196,12 +196,13 @@ button:hover {
 
 /* Media query for responsiveness */
 @media screen and (max-width: 600px) {
-  form {
+  /* form {
     padding: 15px;
-  }
+  } */
 
   input, select, button {
     font-size: 14px;
   }
 }
+
 

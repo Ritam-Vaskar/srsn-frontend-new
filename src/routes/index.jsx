@@ -24,6 +24,8 @@ import Academic from '../Schoolpages/Academic/Academic';
 import AdmissionForm from '../Schoolpages/AdmissionForm/AdmissionForm';
 import Profile from './../Schoolpages/Profile/Profile'
 import Teacher from '../Schoolpages/Teachers/Teachers'
+import AlumniProfile from '../Schoolpages/Alumini/AlumniProfile/AlumniProfile';
+import AlumniChat from '../Schoolpages/Alumini/AlumniChat/AlumniChat';
 
 //Dashboard
 import Login from './../Authentication/Login/Login';
@@ -93,7 +95,15 @@ const router = createBrowserRouter([
                     },
                     {
                         path: 'alumni',
-                        element: <Alumni />
+                        element: <Alumni />,
+                    },
+                    {
+                        path:'alumni/profile',
+                        element:<AlumniProfile/>
+                    },
+                    {
+                        path:'alumni/chat',
+                        element:<AlumniChat/>
                     },
                     {
                         path: 'admission_form',
