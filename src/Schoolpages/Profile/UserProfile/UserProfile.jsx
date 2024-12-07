@@ -132,7 +132,13 @@ const UserProfile = ({ user }) => {
             <div className={styles.studentDetails} onClick={() => handleLeftBarOptionClick("ResultPortal")}>Result Portal</div>
             <div className={styles.resultPortal} onClick={() => handleLeftBarOptionClick("StudentDetails")}>Student Details</div>
             <div className={styles.adminPortal} onClick={() => handleLeftBarOptionClick("AdminPortal")}>Admin Portal</div>
-            <div className={styles.resultPortal} onClick={() => handleLeftBarOptionClick("AlumniChat")}>Alumni Chat</div>
+            <Link 
+              to="/school/alumni/chat" 
+              className={styles.adminPortal} 
+              onClick={() => handleLeftBarOptionClick("AlumniChat")}
+            >
+              Go to Chat
+            </Link>
             {
               (alumni)&&<Link to="/school/alumni/profile" className={styles.resultPortal}>Switch to Alumni Profile</Link> 
             }

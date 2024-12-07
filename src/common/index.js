@@ -104,6 +104,10 @@ const SummaryApi={
         url:backendUrl+"/api/alumniUpdateProfile",
         method:"PUT"
     },
+    AlumniLogOut:{
+        url:backendUrl+"/api/alumniLogOut",
+        method:"POST"
+    },
 
     //Notice
 

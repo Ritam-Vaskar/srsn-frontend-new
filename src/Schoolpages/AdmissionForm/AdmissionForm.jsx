@@ -64,7 +64,7 @@ const AdmissionForm = () => {
   
     if (imgHeight <= pdfHeight) {
       // Single page
-      pdf.addImage(imgData, 'PNG', -5, -5, imgWidth, imgHeight); // Add image with margin
+      pdf.addImage(imgData, 'PNG', 5, 5, imgWidth, imgHeight); // Add image with margin
     } else {
       // Multi-page
       let y = 0;
@@ -89,7 +89,7 @@ const AdmissionForm = () => {
         );
   
         const pageImgData = pageCanvas.toDataURL('image/png');
-        pdf.addImage(pageImgData, 'PNG', 0, 0, imgWidth, (pageCanvas.height * imgWidth) / canvas.width);
+        pdf.addImage(pageImgData, 'PNG', 5, 5, imgWidth, (pageCanvas.height * imgWidth) / canvas.width);
   
         y += pageCanvas.height;
   
@@ -203,7 +203,7 @@ const AdmissionForm = () => {
         return;
       }
 
-      toast.success('Form submitted successfully!');
+      toast.success('Form submitted successfully , you will get the application pdf in your registered email , please submit the hard copy of the pdf to the school office');
       //download pdf
       handleDownloadPDF();
       localStorage.removeItem(LOCAL_STORAGE_KEY); // Clear form data from local storage on successful submission
