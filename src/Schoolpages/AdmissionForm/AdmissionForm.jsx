@@ -7,6 +7,7 @@ import ResidentialContactDetails from './Step4';
 import GuardianDetails from './Step5';
 import PaymentDetails from './Step6';
 import Preview from './Step7';
+import classFees from '../../helper/classFees';
 import './styles/AdmissionForm.css';
 import { toast } from 'react-toastify';
 import SummaryApi from '../../common';
@@ -22,6 +23,8 @@ const AdmissionForm = () => {
   const tableRef = useRef();
 
   const [profilePic, setprofilePic] = useState('');
+
+  const [selectedClass, setSelectedClass] = useState('');
 
   const waitForImagesToLoad = async (element) => {
     const images = element.querySelectorAll('img');
@@ -103,7 +106,6 @@ const AdmissionForm = () => {
     pdf.save('Admission_Form.pdf');
   };
   
-
 
 
   const {
@@ -220,9 +222,13 @@ const AdmissionForm = () => {
     if (isStepValid) {
       setStep((prevStep) => prevStep + 1);
     }
+    window.scrollTo(0, 0);
   };
 
-  const handlePrev = () => setStep((prevStep) => prevStep - 1);
+  const handlePrev = () => {
+    setStep((prevStep) => prevStep - 1);
+    window.scrollTo(0, 0);
+  };
 
   const [admissionOpen, setAdmissionOpen] = useState(false);
 
@@ -255,17 +261,17 @@ const AdmissionForm = () => {
       ) : (
         <form onSubmit={handleSubmit(onSubmit)}>
           {step === 1 && <BasicInfo profilePic={profilePic} setprofilePic={setprofilePic} register={register} errors={errors} setValue={setValue} />}
-          {step === 2 && <PreviousSchoolDetails register={register} errors={errors} />}
+          {step === 2 && <PreviousSchoolDetails register={register} errors={errors} onClassChange={setSelectedClass} />}
           {step === 3 && <PermanentContactDetails register={register} errors={errors} />}
           {step === 4 && <ResidentialContactDetails register={register} errors={errors} />}
           {step === 5 && <GuardianDetails register={register} errors={errors} />}
-          {step === 6 && <PaymentDetails register={register} errors={errors} />}
+          {step === 6 && <PaymentDetails register={register} errors={errors} selectedClass={selectedClass} fees={classFees[selectedClass]} />}
           {step === 7 && <Preview data={watch()} profilePic={profilePic} tableRef={tableRef} />}
 
 
 
           <div className="form-navigation">
-            {step > 1 && (
+            {step > 1 && step < 7 && (
               <button type="button" onClick={handlePrev} className="prev-button">
                 Previous
               </button>
@@ -277,6 +283,9 @@ const AdmissionForm = () => {
             )}
             {step === 7 && (
               <div className="terms-section">
+                <button type="button" onClick={handlePrev} className="prev-button">
+                Previous
+              </button>
                 <div className="download-pdf">
                   <span className="pdf-link" onClick={handleDownloadPDF}>Download Application as PDF</span>
                 </div>

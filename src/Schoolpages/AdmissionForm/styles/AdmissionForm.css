@@ -83,12 +83,19 @@
 /* Terms and conditions checkbox */
 input[type="checkbox"] {
   margin-right: 8px;
+  width: min-content;
 }
 
 .checkbox-container {
-  display: flex;
-  align-items: center;
   margin-top: 15px;
+}
+
+.terms-section{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
 }
 
 /* Preview table
@@ -108,7 +115,6 @@ td {
 tbody tr:nth-child(even) {
   background-color: #f2f2f2;
 } */
-
 
 
 .form-container h2 {
@@ -189,9 +195,12 @@ button {
 }
 
 button:hover {
-  background-color: #45a049;
+  background-color: #ff6a00;
 }
-
+.contact-info{
+  text-align: center;
+  margin: 20px 0;
+}
 }
 
 /* Media query for responsiveness */
@@ -213,6 +222,9 @@ button:hover {
   }
 }
 .terms-section {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
   margin-top: 20px;
   text-align: center;
   font-family: Arial, sans-serif;
@@ -233,18 +245,15 @@ button:hover {
   color: #0056b3;
 }
 
-.accept-terms {
-  margin-top: 10px;
-}
 
-.terms-label {
+/* .terms-label {
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 5px;
   font-size: 16px;
   color: #333;
-}
+} */
 
 .terms-link {
   color: #007bff;
@@ -284,3 +293,31 @@ button:hover {
 .submit-button:hover:not(:disabled) {
   background-color: #218838;
 }
+.action-buttons{
+  text-align: center;
+  margin: -10px 0;
+}
+
+.terms-label{
+  margin: 30px 20px;
+  text-align: center;
+}
+
+.download-pdf{
+  margin: 10px 20px;
+  text-align: center;
+  cursor: pointer;
+ 
+  span{
+    padding: 14px 25px;
+    background-color: #007bff;
+    color: white;
+    font-size: 16px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+    box-shadow: 0 4px 6px rgba(0, 123, 255, 0.4);
+  }
+}
+

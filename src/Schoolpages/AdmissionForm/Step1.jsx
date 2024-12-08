@@ -133,9 +133,14 @@ const BasicInfo = ({profilePic,setprofilePic, register, errors, setValue }) => {
       </div>
       <div>
         <label>Nationality</label>
-        <input
+
+        <select
           {...register("nationality", { required: "Nationality is required" })}
-        />
+        >
+          <option value="">Select...</option>
+          <option value="Indian">Indian</option>
+          <option value="Other">Other</option>
+        </select>
         {errors.nationality && <p>{errors.nationality.message}</p>}
       </div>
       <div>

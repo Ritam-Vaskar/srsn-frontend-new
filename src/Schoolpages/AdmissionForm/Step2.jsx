@@ -1,11 +1,12 @@
 import React from 'react';
-import './styles/AdmissionForm.css';
+import './styles/AdmissionForm.css'
 
-const PreviousSchoolDetails = ({ register, errors }) => {
+
+const PreviousSchoolDetails = ({ register, errors, onClassChange }) => {
   
   return (
     <div>
-      <h2>Previous School Details</h2>
+      <h2>Class Details</h2>
       
       <div>
         <label>Student Code(Required for Class 1 to 8 Admission)</label>
@@ -18,12 +19,16 @@ const PreviousSchoolDetails = ({ register, errors }) => {
       </div>
       
       <div>
-        <label>Class</label>
+        <label>Class(Which Class do you want to Apply?)</label>
         <select 
           {...register("grade", { required: "grade is required" })}
           defaultValue="" // Set default value to an empty string for validation
+          onChange={(e) => onClassChange(e.target.value)}
         >
           <option value="" disabled>Select grade</option>
+          <option value="Beez">Beez</option>
+          <option value="Ankur">Ankur</option>
+          <option value="Kisholoy">Kisholoy</option>
           <option value="1">1</option>
           <option value="2">2</option>
           <option value="3">3</option>
