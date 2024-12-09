@@ -1,33 +1,9 @@
 {
-    "ankur": [
-      "Subject: Mathematics - Topics: Algebra, Geometry, Trigonometry",
-      "Subject: Science - Topics: Physics, Chemistry, Biology",
-      "Subject: English - Topics: Literature, Grammar, Writing Skills"
-    ],
-    "kisholoy": [
-      "Subject: Mathematics - Topics: Calculus, Statistics",
-      "Subject: History - Topics: World History, Indian History",
-      "Subject: English - Topics: Literature, Creative Writing"
-    ],
-    "class1": [
-      "Subject: Mathematics - Topics: Numbers, Addition, Subtraction",
-      "Subject: EVS - Topics: Living and Non-Living Things",
-      "Subject: English - Topics: Basic Grammar, Vocabulary"
-    ],
-    "class2": [
-      "Subject: Mathematics - Topics: Shapes, Measurement",
-      "Subject: Science - Topics: Plants, Animals",
-      "Subject: English - Topics: Reading Comprehension, Story Writing"
-    ],
-    "class3": [
-      "Subject: Mathematics - Topics: Multiplication, Division",
-      "Subject: Social Studies - Topics: Community Helpers, Festivals",
-      "Subject: English - Topics: Poetry, Paragraph Writing"
-    ],
-    "class4": [
-      "Subject: Mathematics - Topics: Fractions, Decimals",
-      "Subject: Science - Topics: Weather, Earth, and Space",
-      "Subject: English - Topics: Grammar, Book Reports"
-    ]
-  }
-  
+  "beez": "https://drive.google.com/file/d/1-7XbLgCNWKe9i4NyplLmqlfW4y5iXpt2/view?usp=sharing",
+  "ankur": "https://drive.google.com/file/d/1ShVMZ8edlF2tYCiQp4WmoBHNuFktupI6/view?usp=sharing",
+  "kisholoy": "https://drive.google.com/file/d/1w-CbFBzuCMdsmbt4n13HwpcPmFgCZum0/view?usp=sharing",
+  "class1": "https://drive.google.com/file/d/1gdg5UtvEWmKZHt0qD-Yr47yDWOMxXm5Z/view?usp=sharing",
+  "class2": "https://drive.google.com/file/d/1idQNzL6Cr6TpCVr_3iKpB_zn4BYeOkkg/view?usp=sharing",
+  "class3": "https://drive.google.com/file/d/1wkFOtNS45P7mmHRJtoByhUbPVedrXHmK/view?usp=sharing",
+  "class4": "https://drive.google.com/file/d/1dPsIOsrkxjci1b7SGCR9zIotJqjFRc-P/view?usp=sharing"
+}

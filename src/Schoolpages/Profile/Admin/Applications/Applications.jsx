@@ -204,6 +204,11 @@
 
 
 
+
+
+
+
+
 import React, { useState, useEffect } from 'react';
 import styles from './Application.module.scss';
 import StudentDetailsPopup from '../../StudentDetailsPopup/StudentDetailsPopup';
@@ -332,6 +337,7 @@ const Applications = () => {
     // Handle rank submission
     const handleSubmitRanks = async () => {
         console.log('Submitting ranks:', studentRanks);
+        const newStudentRanks = studentRanks.filter(s => s.rank !== '');
         try {
             const response = await fetch(SummaryApi.userAdmissionAddArray.url, {
                 method: SummaryApi.userAdmissionAddArray.method,
@@ -339,7 +345,7 @@ const Applications = () => {
                     'Content-Type': 'application/json'
                 },
                 credentials: 'include',
-                body: JSON.stringify({ studentRanks })
+                body: JSON.stringify({ studentRanks: newStudentRanks })
             });
             const result = await response.json();
             if (result.success) {
@@ -427,7 +433,7 @@ const Applications = () => {
             default: return null;
         }
     };
-    
+
 
     return (
         <div>
@@ -469,3 +475,9 @@ const Applications = () => {
 };
 
 export default Applications;
+
+
+
+
+
+

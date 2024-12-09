@@ -7,7 +7,7 @@ const BookList = ({ flag }) => {
     let currentYear = new Date().getFullYear()
     return (
         <div>
-            <CardComponent titile1={`Book for the Academic Year ${currentYear}`} titile2="Book for " Prischool={BookListPrimary} SecSchool={BookListSecondary} flag={flag} />
+            <CardComponent title1={`Book for the Academic Year ${currentYear}`} title2="Book for " Prischool={BookListPrimary} SecSchool={BookListSecondary} flag={flag} isImg={false} isDoc={true}/>
         </div>
     );
 };

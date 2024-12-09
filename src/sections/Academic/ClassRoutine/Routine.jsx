@@ -9,7 +9,7 @@ const Routine = ({flag}) => {
     let currentYear = new Date().getFullYear()
   return (
     <div>
-      <CardComponent titile1={`Class Routine for the Academic Year ${currentYear}`} titile2="Class Routine of " Prischool={PrimaryRoutineData.routine} SecSchool={SecondaryRoutineData.routine} flag={flag} isImg={true}/>
+      <CardComponent title1={`Class Routine for the Academic Year ${currentYear}`} title2="Class Routine of " Prischool={PrimaryRoutineData.routine} SecSchool={SecondaryRoutineData.routine} flag={flag} isImg={false} isDoc={true}/>
     </div>
   )
 }

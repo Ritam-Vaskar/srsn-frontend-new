@@ -1,127 +1,352 @@
 {
-    "BrittiClass4Exam": {
-      "2024": [
-        {
-          "name": "John Doe",
-          "marks": 88,
-          "gradeDivision": "A"
-        },
-        {
-          "name": "Jane Smith",
-          "marks": 92,
-          "gradeDivision": "A"
-        }
-      ],
-      "2023": [
-        {
-          "name": "Alice Johnson",
-          "marks": 75,
-          "gradeDivision": "B"
-        },
-        {
-          "name": "Bob Williams",
-          "marks": 82,
-          "gradeDivision": "A"
-        }
-      ],
-      "2022": [
-        {
-          "name": "Chris Evans",
-          "marks": 84,
-          "gradeDivision": "A"
-        },
-        {
-          "name": "Emma Watson",
-          "marks": 89,
-          "gradeDivision": "A"
-        }
-      ],
-      "2021": [
-        {
-          "name": "James Bond",
-          "marks": 78,
-          "gradeDivision": "B"
-        },
-        {
-          "name": "Lara Croft",
-          "marks": 91,
-          "gradeDivision": "A"
-        }
-      ],
-      "2020": [
-        {
-          "name": "Tony Stark",
-          "marks": 85,
-          "gradeDivision": "A"
-        },
-        {
-          "name": "Bruce Wayne",
-          "marks": 90,
-          "gradeDivision": "A"
-        }
-      ]
-    },
-    "MadhyamikClass10Exam": {
-      "2024": [
-        {
-          "name": "Steve Rogers",
-          "marks": 87,
-          "gradeDivision": "A"
-        },
-        {
-          "name": "Natasha Romanoff",
-          "marks": 90,
-          "gradeDivision": "A"
-        }
-      ],
-      "2023": [
-        {
-          "name": "Clark Kent",
-          "marks": 78,
-          "gradeDivision": "B"
-        },
-        {
-          "name": "Diana Prince",
-          "marks": 93,
-          "gradeDivision": "A"
-        }
-      ],
-      "2022": [
-        {
-          "name": "Peter Parker",
-          "marks": 80,
-          "gradeDivision": "B"
-        },
-        {
-          "name": "Wanda Maximoff",
-          "marks": 85,
-          "gradeDivision": "A"
-        }
-      ],
-      "2021": [
-        {
-          "name": "Bruce Banner",
-          "marks": 88,
-          "gradeDivision": "A"
-        },
-        {
-          "name": "Thor Odinson",
-          "marks": 91,
-          "gradeDivision": "A"
-        }
-      ],
-      "2020": [
-        {
-          "name": "Scott Lang",
-          "marks": 79,
-          "gradeDivision": "B"
-        },
-        {
-          "name": "Hope van Dyne",
-          "marks": 92,
-          "gradeDivision": "A"
-        }
-      ]
-    }
+  "BrittiClass4Exam": {
+    "2023": [
+      {
+        "name": "Debrani Saha",
+        "marks": "842/850",
+        "gradeDivision": "A"
+      },
+      {
+        "name": "Anwita Das",
+        "marks": "839/850",
+        "gradeDivision": "A"
+      },
+      {
+        "name": "Dhritiman Chandra Biswas",
+        "marks": "836/850",
+        "gradeDivision": "A"
+      }
+    ],
+    "2022": [
+      {
+        "name": "Aradhya Sarkar",
+        "marks": "837/850",
+        "gradeDivision": "A"
+      },
+      {
+        "name": "Kishoar Jahan",
+        "marks": "816/850",
+        "gradeDivision": "A"
+      },
+      {
+        "name": "Srijita Mondal",
+        "marks": "812/850",
+        "gradeDivision": "A"
+      }
+    ],
+    "2019": [
+      {
+        "name": "Rajanya Sarkar",
+        "marks": "836/850",
+        "gradeDivision": "A"
+      },
+      {
+        "name": "Indira Mukherjee",
+        "marks": "834/850",
+        "gradeDivision": "A"
+      },
+      {
+        "name": "Trishita Ghosh",
+        "marks": "833/850",
+        "gradeDivision": "A"
+      }
+    ],
+    "2018": [
+      {
+        "name": "Adrita Sarkar",
+        "marks": "833/850",
+        "gradeDivision": "A"
+      },
+      {
+        "name": "Swetasree Das",
+        "marks": "818/850",
+        "gradeDivision": "A"
+      },
+      {
+        "name": "Sagar Choudhury",
+        "marks": "814/850",
+        "gradeDivision": "A"
+      }
+    ],
+    "2017": [
+      {
+        "name": "Chetana Das",
+        "marks": "831/850",
+        "gradeDivision": "A"
+      },
+      {
+        "name": "Zahin Wsima",
+        "marks": "826/850",
+        "gradeDivision": "A"
+      },
+      {
+        "name": "Subham Paul",
+        "marks": "822/850",
+        "gradeDivision": "A"
+      }
+    ],
+    "2016": [
+      {
+        "name": "Monidipa Karmakar",
+        "marks": "835/850",
+        "gradeDivision": "A"
+      },
+      {
+        "name": "Shreya Singha Roy",
+        "marks": "831/850",
+        "gradeDivision": "A"
+      },
+      {
+        "name": "Saikat Sarkar",
+        "marks": "826/850",
+        "gradeDivision": "A"
+      }
+    ],
+    "2015": [
+      {
+        "name": "Suryajyoti Das",
+        "marks": "845/850",
+        "gradeDivision": "A"
+      },
+      {
+        "name": "Aditi Sarkar",
+        "marks": "842/850",
+        "gradeDivision": "A"
+      },
+      {
+        "name": "Nafisha Khatun",
+        "marks": "841/850",
+        "gradeDivision": "A"
+      }
+    ],
+    "2014": [
+      {
+        "name": "Sandipto Roy",
+        "marks": "841/850",
+        "gradeDivision": "A"
+      },
+      {
+        "name": "Shuvakrishna Sarkar",
+        "marks": "835/850",
+        "gradeDivision": "A"
+      },
+      {
+        "name": "Himan Das",
+        "marks": "834/850",
+        "gradeDivision": "A"
+      }
+    ],
+    "2013": [
+      {
+        "name": "Aritri Mukherjee",
+        "marks": "830/850",
+        "gradeDivision": "A"
+      },
+      {
+        "name": "Tousif Arefin",
+        "marks": "817/850",
+        "gradeDivision": "A"
+      },
+      {
+        "name": "Kabari Sarkar",
+        "marks": "804/850",
+        "gradeDivision": "A"
+      }
+    ],
+    "2012": [
+      {
+        "name": "Arya Mandal",
+        "marks": "834/850",
+        "gradeDivision": "A"
+      },
+      {
+        "name": "Kriti Mohanta",
+        "marks": "821/850",
+        "gradeDivision": "A"
+      },
+      {
+        "name": "Pranit Das",
+        "marks": "815/850",
+        "gradeDivision": "A"
+      }
+    ],
+    "2011": [
+      {
+        "name": "Ranit Kumar Singha",
+        "marks": "824/850",
+        "gradeDivision": "A"
+      },
+      {
+        "name": "Ranjana Roy",
+        "marks": "818/850",
+        "gradeDivision": "A"
+      },
+      {
+        "name": "Aritra Ghosh",
+        "marks": "813/850",
+        "gradeDivision": "A"
+      }
+    ],
+    "2010": [
+      {
+        "name": "Bijoy Chandra Das",
+        "marks": "779/850",
+        "gradeDivision": "A"
+      },
+      {
+        "name": "Somosree Misra",
+        "marks": "774/850",
+        "gradeDivision": "A"
+      },
+      {
+        "name": "Ishita Yeasmin",
+        "marks": "774/850",
+        "gradeDivision": "A"
+      },
+      {
+        "name": "Aritra Chandra",
+        "marks": "771/850",
+        "gradeDivision": "A"
+      }
+    ],
+    "2009": [
+      {
+        "name": "Atique Zaman",
+        "marks": "814/850",
+        "gradeDivision": "A"
+      },
+      {
+        "name": "Prerona Saha",
+        "marks": "799/850",
+        "gradeDivision": "A"
+      },
+      {
+        "name": "Debanjan Dutta",
+        "marks": "796/850",
+        "gradeDivision": "A"
+      }
+    ],
+    "2008": [
+      {
+        "name": "Atasi Sarkar",
+        "marks": "803/850",
+        "gradeDivision": "A"
+      },
+      {
+        "name": "Monali Ghosh",
+        "marks": "771/850",
+        "gradeDivision": "A"
+      },
+      {
+        "name": "Srijani Mitra Roy",
+        "marks": "766/850",
+        "gradeDivision": "A"
+      }
+    ],
+    "2007": [
+      {
+        "name": "Anjan Pal",
+        "marks": "1089/1150",
+        "gradeDivision": "A"
+      },
+      {
+        "name": "Snehashis Chatterjee",
+        "marks": "1088/1150",
+        "gradeDivision": "A"
+      },
+      {
+        "name": "Soumyodeep Moytra",
+        "marks": "1069/1150",
+        "gradeDivision": "A"
+      }
+    ],
+    "2006": [
+      {
+        "name": "Soumyodeepa Das",
+        "marks": "1104/1150",
+        "gradeDivision": "A"
+      },
+      {
+        "name": "Mouli Mondal",
+        "marks": "1078/1150",
+        "gradeDivision": "A"
+      },
+      {
+        "name": "Kanyaka Mondal",
+        "marks": "1071/1150",
+        "gradeDivision": "A"
+      }
+    ],
+    "2005": [
+      {
+        "name": "Sweta Das",
+        "marks": "1056/1150",
+        "gradeDivision": "A"
+      },
+      {
+        "name": "Shubrajit Banerjee",
+        "marks": "1052/1150",
+        "gradeDivision": "A"
+      },
+      {
+        "name": "Sayari Roy",
+        "marks": "1049/1150",
+        "gradeDivision": "A"
+      }
+    ],
+    "2004": [
+      {
+        "name": "Shubham Halder",
+        "marks": "872/1050",
+        "gradeDivision": "A"
+      },
+      {
+        "name": "Suchismita Das",
+        "marks": "849/1050",
+        "gradeDivision": "A"
+      },
+      {
+        "name": "Saikat Ghosh",
+        "marks": "848/1050",
+        "gradeDivision": "A"
+      }
+    ]
+  },
+  "MadhyamikClass10Exam": {
+    "2024": [
+      {
+        "name": "No Data Available",
+        "marks": "No Data Available",
+        "gradeDivision": "No Data Available"
+      }
+    ],
+    "2023": [
+      {
+        "name": "No Data Available",
+        "marks": "No Data Available",
+        "gradeDivision": "No Data Available"
+      }
+    ],
+    "2022": [
+      {
+        "name": "No Data Available",
+        "marks": "No Data Available",
+        "gradeDivision": "No Data Available"
+      }
+    ],
+    "2021": [
+      {
+        "name": "No Data Available",
+        "marks": "No Data Available",
+        "gradeDivision": "No Data Available"
+      }
+    ],
+    "2020": [
+      {
+        "name": "No Data Available",
+        "marks": "No Data Available",
+        "gradeDivision": "No Data Available"
+      }
+    ]
   }
-  
+}
