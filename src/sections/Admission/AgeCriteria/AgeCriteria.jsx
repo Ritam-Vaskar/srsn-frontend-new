@@ -49,23 +49,23 @@ const AgeCriteria = ({ flag }) => {
             <>
               <tr>
                 <td>Class 5</td>
-                <td>10 - 11 years</td>
+                <td>10+ years</td>
               </tr>
               <tr>
                 <td>Class 6</td>
-                <td>11 - 12 years</td>
+                <td>11+ years</td>
               </tr>
               <tr>
                 <td>Class 7</td>
-                <td>12 - 13 years</td>
+                <td>12+ years</td>
               </tr>
               <tr>
                 <td>Class 8</td>
-                <td>13 - 14 years</td>
+                <td>13+ years</td>
               </tr>
               <tr>
                 <td>Class 9</td>
-                <td>14 - 15 years</td>
+                <td>14+ years</td>
               </tr>
             </>
           )}
