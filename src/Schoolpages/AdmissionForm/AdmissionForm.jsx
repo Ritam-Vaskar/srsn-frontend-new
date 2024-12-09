@@ -265,7 +265,7 @@ const AdmissionForm = () => {
           {step === 3 && <PermanentContactDetails register={register} errors={errors} />}
           {step === 4 && <ResidentialContactDetails register={register} errors={errors} />}
           {step === 5 && <GuardianDetails register={register} errors={errors} />}
-          {step === 6 && <PaymentDetails register={register} errors={errors} selectedClass={selectedClass} fees={classFees[selectedClass]} />}
+          {step === 6 && <PaymentDetails register={register} errors={errors} selectedClass={selectedClass} fees={classFees[selectedClass]} setValue={setValue} />}
           {step === 7 && <Preview data={watch()} profilePic={profilePic} tableRef={tableRef} />}
 
 
