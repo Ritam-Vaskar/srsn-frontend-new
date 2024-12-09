@@ -4,8 +4,8 @@ import resultData from './../../../../public/SchoolResult.json';
 
 const Result = () => {
   const [results, setResults] = useState({});
-  const [selectedYearBritti, setSelectedYearBritti] = useState('2024'); 
-  const [selectedYearMadhamik, setSelectedYearMadhamik] = useState('2024'); 
+  const [selectedYearBritti, setSelectedYearBritti] = useState('2023'); 
+  const [selectedYearMadhamik, setSelectedYearMadhamik] = useState('2023'); 
 
   // get data
   useEffect(() => {
@@ -29,7 +29,7 @@ const Result = () => {
       <h2>Result Analysis</h2>
 
       {/* Britti Exam Section */}
-      <h3>Britti Exam Class 4 Result</h3>
+      <h3>Class 4 Result(Saraju Chanda Das Memorial Silver Medel)</h3>
       <div className={styles.yearContainer}>
         {Object.keys(brittiResults).map((year) => (
           <div 
