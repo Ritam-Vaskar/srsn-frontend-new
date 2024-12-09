@@ -12,7 +12,9 @@ const Preview = ({ profilePic, data, tableRef }) => {
         <img src={logo} alt="School Logo" className="school-logo" />
         <div className="school-info">
           <h1>Sri Rama Krishna Siksha Niketan</h1>
-          <p>HaridasNagar , Raghunathganj , Murshidabad</p>
+          <p>Haridasnagar , Raghunathganj , Murshidabad</p>
+          <p>Ph: 9932842142,9434531454</p>
+          <p>email: sriramakrishnasikshaniketan@gmail.com</p>
         </div>
       </header>
 
@@ -189,7 +191,7 @@ const Preview = ({ profilePic, data, tableRef }) => {
       </table>
 
       <div className="footer">
-        <p>* If you face problems logging in, please contact the administrator.</p>
+        <p>* If you face any problem regarding form submission, please contact the administrator.</p>
       </div>
     </div>
   );
