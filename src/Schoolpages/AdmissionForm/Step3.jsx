@@ -93,10 +93,14 @@ const PermanentContactDetails = ({ register, errors }) => {
 
       <div>
         <label>Country</label>
-        <input 
-          {...register("country", { required: "Country is required" })} 
-          placeholder="Enter Country" 
-        />
+        <select 
+          {...register("country", { required: "Country is required" })}
+        >
+          <option value="">Select Country</option>
+          <option value="India">India</option>
+          <option value="Other">Other</option>
+        </select>
+        
         {errors.country && <p className="error">{errors.country.message}</p>}
       </div>
     </div>

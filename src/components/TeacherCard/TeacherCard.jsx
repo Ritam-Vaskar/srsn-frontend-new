@@ -36,12 +36,9 @@ const TeacherCard = ({ teacher, customStyles }) => {
               <tbody>
                 <tr>
                   <th>Designation:</th>
-                  <td>{teacher.designation}</td>
+                  <td>{(teacher.grade)[0].toUpperCase() + (teacher.grade).slice(1)} School</td>
                 </tr>
-                <tr>
-                  <th>Subject Expertise:</th>
-                  <td>{teacher.subject}</td>
-                </tr>
+             
                 <tr>
                   <th>Qualification:</th>
                   <td>{teacher.Qualification}</td>
@@ -50,10 +47,7 @@ const TeacherCard = ({ teacher, customStyles }) => {
                   <th>Date of Joining:</th>
                   <td>{teacher.DateOfJoining}</td>
                 </tr>
-                <tr>
-                  <th>Bio:</th>
-                  <td>{teacher.bioData}</td>
-                </tr>
+              
                 {user && user._id && (
                   <tr>
                     <th>Contact:</th>
