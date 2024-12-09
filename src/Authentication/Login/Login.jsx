@@ -10,6 +10,8 @@ import { useNavigate } from 'react-router-dom';
 import RemoveRedEyeIcon from '@mui/icons-material/RemoveRedEye';
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 import { useSelector } from 'react-redux';
+import Loader2 from '../../layouts/Loader2/Loader2';
+import { tr } from 'framer-motion/client';
 
 
 const Login = () => {
@@ -29,7 +31,7 @@ const Login = () => {
   const { register, handleSubmit, formState: { errors } } = useForm();
 
   const dispatch = useDispatch();
-
+  const [loading, setLoading] = React.useState(false);
   const fetchUser = async () => {
     try {
       const response = await fetch(SummaryApi.UserProfile.url, {
@@ -52,6 +54,7 @@ const Login = () => {
   }
 
   const onSubmit = async (data) => {
+    setLoading(true);
     console.log(data);
     try {
       const response = await fetch(SummaryApi.UserSignIn.url, {
@@ -72,6 +75,9 @@ const Login = () => {
       Navigate('/school/profile');
     } catch (err) {
       toast.error(err.message);
+    }
+    finally {
+      setLoading(false);
     }
   };
 
@@ -118,7 +124,7 @@ const Login = () => {
 
         {/* Submit Button */}
         <div className={styles['form-group']}>
-          <button type="submit" className={styles.button}>Login</button>
+          {loading? <div style={{ display: 'flex', justifyContent: 'center' , marginTop: '-30px' , marginBottom: '-30px' }}><Loader2 /></div>: <button type="submit" className={styles.button}>Login</button>}
         </div>
       </form>
       <div className={styles['contact-admin']}>

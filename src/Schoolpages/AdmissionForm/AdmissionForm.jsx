@@ -13,6 +13,7 @@ import { toast } from 'react-toastify';
 import SummaryApi from '../../common';
 import jsPDF from 'jspdf';
 import html2canvas from 'html2canvas';
+import Spinner from '../../layouts/Loader2/Loader2';
 
 const LOCAL_STORAGE_KEY = 'admissionFormData';
 
@@ -165,6 +166,8 @@ const AdmissionForm = () => {
     },
   });
 
+  const [load,setload] = useState(false);
+
   // Load form data from local storage on component mount
   useEffect(() => {
     const savedFormData = JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY));
@@ -185,10 +188,12 @@ const AdmissionForm = () => {
 
   // On submission of the entire form
   const onSubmit = async (data) => {
+    setload(true);
     console.log('Final Submission Data:', data);
     const formData = { ...data, profilePic };
 
     try {
+
       const response = await fetch(SummaryApi.UserAdmissionSignUp.url, {
         method: SummaryApi.UserAdmissionSignUp.method,
         headers: {
@@ -214,6 +219,10 @@ const AdmissionForm = () => {
       toast.error(error.message);
       console.error('Submission Error:', error);
     }
+    finally{
+      setload(false);
+    }
+    
   };
 
   // Handle next button with validation
@@ -302,9 +311,11 @@ const AdmissionForm = () => {
                 </div>
 
                 <div className="action-buttons">
+                  {load? <Spinner />:
                   <button type="submit" className="submit-button" disabled={!watch('terms')}>
                     Submit
                   </button>
+                }
                 </div>
               </div>
             )}
