@@ -3,7 +3,7 @@
       "2024": [
         {
           "name": "John Doe",
-          "marks": 88,
+          "marks": "88/90",
           "gradeDivision": "A"
         },
         {
