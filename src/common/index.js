@@ -28,9 +28,17 @@ const SummaryApi={
         url:backendUrl+"/api/userAdmissionAdd",
         method:"POST"
     },
+    userAdmissionAddArray:{
+        url:backendUrl+"/api/userAdmissionAddArray",
+        method:"POST"
+    },
     UserAdmissionDelete:{
         url:backendUrl+"/api/userAdmissionDelete",
         method:"DELETE"
+    },
+    UserAdmissionSearch:{
+        url:backendUrl+"/api/userAdmissionSearch",
+        method:"POST"
     },
 
     //User Profile
@@ -104,6 +112,10 @@ const SummaryApi={
         url:backendUrl+"/api/alumniUpdateProfile",
         method:"PUT"
     },
+    AlumniLogOut:{
+        url:backendUrl+"/api/alumniLogOut",
+        method:"POST"
+    },
 
     //Notice
 
@@ -122,10 +134,15 @@ const SummaryApi={
 
     //user danger option
 
-    UserGetResult:{
-        url:backendUrl+"/api/getResult",
+    UserGetResultPrimary:{
+        url:backendUrl+"/api/getResultPrimary",
         method:"GET"
     },
+    UserGetResultHigh:{
+        url:backendUrl+"/api/getResultHigh",
+        method:"GET"
+    },
+
     UserChangeClass:{
         url:backendUrl+"/api/chnageYearClass",
         method:"PUT"

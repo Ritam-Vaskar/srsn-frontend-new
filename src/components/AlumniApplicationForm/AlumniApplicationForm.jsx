@@ -6,7 +6,7 @@ import SummaryApi from '../../common';
 import uploadImg from '../../helper/uploadImg';
 import { useSelector } from 'react-redux';
 
-const AlumniApplicationForm = ({ showLogin, setShowLogin }) => {
+const AlumniApplicationForm = ({ showLogin, setShowLogin, onClose }) => {
 
   const alumni = useSelector(state => state?.alumni?.alumni); 
 

@@ -7,6 +7,7 @@ import ResidentialContactDetails from './Step4';
 import GuardianDetails from './Step5';
 import PaymentDetails from './Step6';
 import Preview from './Step7';
+import classFees from '../../helper/classFees';
 import './styles/AdmissionForm.css';
 import { toast } from 'react-toastify';
 import SummaryApi from '../../common';
@@ -21,43 +22,91 @@ const AdmissionForm = () => {
 
   const tableRef = useRef();
 
-  // const handleDownloadPDF = async () => {
-  //   const element = tableRef.current;
-  //   const canvas = await html2canvas(element);
-  //   const imgData = canvas.toDataURL('image/png');
-  //   const pdf = new jsPDF();
-  
-  //   // Adjust PDF dimensions based on content
-  //   const pdfWidth = pdf.internal.pageSize.getWidth();
-  //   const pdfHeight = (canvas.height * pdfWidth) / canvas.width;
-  
-  //   pdf.addImage(imgData, 'PNG', 0, 0, pdfWidth, pdfHeight);
-  //   pdf.save('Admission_Form.pdf');
-  // };
   const [profilePic, setprofilePic] = useState('');
 
+  const [selectedClass, setSelectedClass] = useState('');
+
+  const waitForImagesToLoad = async (element) => {
+    const images = element.querySelectorAll('img');
+    await Promise.all(
+      Array.from(images).map((img) => {
+        if (img.complete) return Promise.resolve();
+        return new Promise((resolve) => {
+          img.onload = resolve;
+          img.onerror = resolve;
+        });
+      })
+    );
+  };
+  
+  // Handle PDF download
   const handleDownloadPDF = async () => {
     const element = tableRef.current;
-    // Wait for the image to load
-    const image = new Image();
-    image.src = profilePic;
-    await new Promise((resolve) => {
-      image.onload = resolve;
-      image.onerror = resolve; 
+  
+    // Ensure all images are loaded
+    await waitForImagesToLoad(element);
+  
+    // Determine scale based on device pixel ratio for better resolution
+    const scale = window.devicePixelRatio > 1 ? 2 : 1;
+  
+    const canvas = await html2canvas(element, {
+      scale,
+      useCORS: true,
+      windowWidth: element.scrollWidth,
     });
   
-    const canvas = await html2canvas(element, { useCORS: true });
     const imgData = canvas.toDataURL('image/png');
-    const pdf = new jsPDF();
+    const pdf = new jsPDF('p', 'mm', 'a4'); // Portrait mode and A4 size
   
     const pdfWidth = pdf.internal.pageSize.getWidth();
-    const pdfHeight = (canvas.height * pdfWidth) / canvas.width;
+    const pdfHeight = pdf.internal.pageSize.getHeight();
   
-    pdf.addImage(imgData, 'PNG', 0, 0, pdfWidth, pdfHeight);
+    // Adjusted dimensions for better scaling on mobile
+    const imgWidth = pdfWidth -10; // Margins
+    const imgHeight = (canvas.height * imgWidth) / canvas.width;
+  
+    if (imgHeight <= pdfHeight) {
+      // Single page
+      pdf.addImage(imgData, 'PNG', 5, 5, imgWidth, imgHeight); // Add image with margin
+    } else {
+      // Multi-page
+      let y = 0;
+      const pageHeight = (canvas.width * pdfHeight) / pdfWidth;
+  
+      while (y < canvas.height) {
+        const pageCanvas = document.createElement('canvas');
+        pageCanvas.width = canvas.width;
+        pageCanvas.height = Math.min(canvas.height - y, pageHeight);
+  
+        const ctx = pageCanvas.getContext('2d');
+        ctx.drawImage(
+          canvas,
+          0,
+          y,
+          canvas.width,
+          pageCanvas.height,
+          0,
+          0,
+          canvas.width,
+          pageCanvas.height
+        );
+  
+        const pageImgData = pageCanvas.toDataURL('image/png');
+        pdf.addImage(pageImgData, 'PNG', 5, 5, imgWidth, (pageCanvas.height * imgWidth) / canvas.width);
+  
+        y += pageCanvas.height;
+  
+        if (y < canvas.height) {
+          pdf.addPage(); // Add page if there is more content
+        }
+      }
+    }
+  
+    // Save the generated PDF
     pdf.save('Admission_Form.pdf');
   };
   
-  
+
 
   const {
     register,
@@ -117,22 +166,22 @@ const AdmissionForm = () => {
   });
 
   // Load form data from local storage on component mount
-  // useEffect(() => {
-  //   const savedFormData = JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY));
-  //   if (savedFormData) {
-  //     Object.keys(savedFormData).forEach((key) => {
-  //       setValue(key, savedFormData[key]);
-  //     });
-  //   }
-  // }, [setValue]);
+  useEffect(() => {
+    const savedFormData = JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY));
+    if (savedFormData) {
+      Object.keys(savedFormData).forEach((key) => {
+        setValue(key, savedFormData[key]);
+      });
+    }
+  }, [setValue]);
 
-  // // Watch form data and store it in local storage whenever it changes
-  // useEffect(() => {
-  //   const subscription = watch((value) => {
-  //     localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(value));
-  //   });
-  //   return () => subscription.unsubscribe(); // Cleanup
-  // }, [watch]);
+  // Watch form data and store it in local storage whenever it changes
+  useEffect(() => {
+    const subscription = watch((value) => {
+      localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(value));
+    });
+    return () => subscription.unsubscribe(); // Cleanup
+  }, [watch]);
 
   // On submission of the entire form
   const onSubmit = async (data) => {
@@ -156,7 +205,7 @@ const AdmissionForm = () => {
         return;
       }
 
-      toast.success('Form submitted successfully!');
+      toast.success('Form submitted successfully , you will get the application pdf in your registered email , please submit the hard copy of the pdf to the school office');
       //download pdf
       handleDownloadPDF();
       localStorage.removeItem(LOCAL_STORAGE_KEY); // Clear form data from local storage on successful submission
@@ -173,9 +222,13 @@ const AdmissionForm = () => {
     if (isStepValid) {
       setStep((prevStep) => prevStep + 1);
     }
+    window.scrollTo(0, 0);
   };
 
-  const handlePrev = () => setStep((prevStep) => prevStep - 1);
+  const handlePrev = () => {
+    setStep((prevStep) => prevStep - 1);
+    window.scrollTo(0, 0);
+  };
 
   const [admissionOpen, setAdmissionOpen] = useState(false);
 
@@ -208,17 +261,17 @@ const AdmissionForm = () => {
       ) : (
         <form onSubmit={handleSubmit(onSubmit)}>
           {step === 1 && <BasicInfo profilePic={profilePic} setprofilePic={setprofilePic} register={register} errors={errors} setValue={setValue} />}
-          {step === 2 && <PreviousSchoolDetails register={register} errors={errors} />}
+          {step === 2 && <PreviousSchoolDetails register={register} errors={errors} onClassChange={setSelectedClass} />}
           {step === 3 && <PermanentContactDetails register={register} errors={errors} />}
           {step === 4 && <ResidentialContactDetails register={register} errors={errors} />}
           {step === 5 && <GuardianDetails register={register} errors={errors} />}
-          {step === 6 && <PaymentDetails register={register} errors={errors} />}
-          {step === 7 && <Preview data={watch()} profilePic={profilePic} tableRef={tableRef}/>}
+          {step === 6 && <PaymentDetails register={register} errors={errors} selectedClass={selectedClass} fees={classFees[selectedClass]} setValue={setValue} />}
+          {step === 7 && <Preview data={watch()} profilePic={profilePic} tableRef={tableRef} />}
 
-          
+
 
           <div className="form-navigation">
-            {step > 1 && (
+            {step > 1 && step < 7 && (
               <button type="button" onClick={handlePrev} className="prev-button">
                 Previous
               </button>
@@ -230,20 +283,33 @@ const AdmissionForm = () => {
             )}
             {step === 7 && (
               <div className="terms-section">
-                <label>
-                  <input
-                    type="checkbox"
-                    {...register('terms', { required: 'You must accept terms and conditions' })}
-                  />
-                  I accept the terms and conditions
-                </label>
-                {errors.terms && <p className="error">{errors.terms.message}</p>}
-                <span onClick={handleDownloadPDF}>Download PDF</span>
-                <button type="submit" className="submit-button">
-                  Submit
-                </button>
+                <button type="button" onClick={handlePrev} className="prev-button">
+                Previous
+              </button>
+                <div className="download-pdf">
+                  <span className="pdf-link" onClick={handleDownloadPDF}>Download Application as PDF</span>
+                </div>
+
+                <div className="accept-terms">
+                  <label className="terms-label">
+                    <input
+                      type="checkbox"
+                      {...register('terms', { required: 'You must accept terms and conditions' })}
+                    />
+                    I accept the <a href="/terms" target="_blank" rel="noopener noreferrer" className="terms-link">terms and conditions</a>
+                  </label>
+                  {errors.terms && <p className="error">{errors.terms.message}</p>}
+                </div>
+
+                <div className="action-buttons">
+                  <button type="submit" className="submit-button" disabled={!watch('terms')}>
+                    Submit
+                  </button>
+                </div>
               </div>
             )}
+
+
           </div>
         </form>
       )}

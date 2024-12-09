@@ -15,7 +15,7 @@ const AlumniManage= ({onClose}) => {
             {showLogin ? (
               <AlumniLogin showLogin={showLogin} setShowLogin={setShowLogin}/>
             ) : (
-              <AlumniApplicationForm showLogin={showLogin} setShowLogin={setShowLogin}/>
+              <AlumniApplicationForm showLogin={showLogin} setShowLogin={setShowLogin} onClose={onClose}/>
             )}
           </div>
         </div>

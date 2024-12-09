@@ -15,18 +15,19 @@ import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 
 const UserProfile = ({ user }) => {
-  const alumni=useSelector(state=>state?.alumni?.alumni);
+  const alumni = useSelector(state => state?.alumni?.alumni);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [activeComponent, setActiveComponent] = useState("Profile");
   const [isEditModalOpen, setEditModalOpen] = useState(false);
   const { fetchUser } = useContext(Context);
 
-  const[isResultActive, setIsResultActive]=useState(false);
+  const [isResultActivePrimary, setIsResultActivePrimary] = useState(false);
+  const [isResultActiveHigh, setIsResultActiveHigh] = useState(false);
 
-  const fetchResultPortal=async()=>{
-    try{
-      const response=await fetch(SummaryApi.MarksSubmissionFetch.url, {
+  const fetchResultPortal = async () => {
+    try {
+      const response = await fetch(SummaryApi.MarksSubmissionFetch.url, {
         method: SummaryApi.MarksSubmissionFetch.method,
         headers: {
           'Content-Type': 'application/json'
@@ -35,8 +36,12 @@ const UserProfile = ({ user }) => {
       });
       const result = await response.json();
       console.log(result);
-      setIsResultActive(result.marksSubmission.isOngoing);
-    }catch(error){
+      console.log(result);
+      if (result.success) {
+        setIsResultActivePrimary(result.primary.isOngoing);
+        setIsResultActiveHigh(result.high.isOngoing);
+      }
+    } catch (error) {
       console.log(error);
     }
   }
@@ -95,29 +100,29 @@ const UserProfile = ({ user }) => {
             <div className={styles.studentDetails} onClick={() => handleLeftBarOptionClick("ResultPortal")}>Result Portal</div>
             <div className={styles.resultPortal} onClick={() => handleLeftBarOptionClick("StudentDetails")}>Student Details</div>
             <div className={styles.resultPortal}>
-            <Link 
-              to="/school/alumni/chat" 
-              className={styles.chatLink} 
-              onClick={() => handleLeftBarOptionClick("AlumniChat")}
-            >
-              Go to Chat
-            </Link>
-          </div>
-          {
-            (alumni) && (
-              <Link 
-                to="/school/alumni/profile" 
-                className={styles.resultPortal} 
-                onClick={() => handleLeftBarOptionClick("AlumniProfile")}
+              <Link
+                to="/school/alumni/chat"
+                className={styles.chatLink}
+                onClick={() => handleLeftBarOptionClick("AlumniChat")}
               >
-                Switch to Alumni Profile
+                Go to Chat
               </Link>
-            )
-          }
+            </div>
+            {
+              (alumni) && (
+                <Link
+                  to="/school/alumni/profile"
+                  className={styles.resultPortal}
+                  onClick={() => handleLeftBarOptionClick("AlumniProfile")}
+                >
+                  Switch to Alumni Profile
+                </Link>
+              )
+            }
 
           </>
         )}
-        {user.role === 'Student' && (
+        {/* {user.role === 'Student' && (
           <>
             <div className={styles.editProfile} onClick={() => handleLeftBarOptionClick("Profile")}>Your Profile</div>
             {isResultActive && <div className={styles.resultPortal} onClick={() => handleLeftBarOptionClick("StudentResult")}>Result Portal</div>}
@@ -125,16 +130,46 @@ const UserProfile = ({ user }) => {
               (alumni)&&<Link to="/school/alumni/profile" className={styles.resultPortal}>Switch to Alumni Profile</Link> 
             }
           </>
+        )} */}
+
+        {user.role === 'Student' && (
+          <>
+            <div className={styles.editProfile} onClick={() => handleLeftBarOptionClick("Profile")}>Your Profile</div>
+
+            {/* Check if the student's grade is 'beez', 'ankur', 'kisholoy' or grades 1-4 */}
+            {/(beez|ankur|kisholoy|[1-4])/.test(user.grade) && isResultActivePrimary && (
+              <div className={styles.resultPortal} onClick={() => handleLeftBarOptionClick("StudentResult")}>Result Portal</div>
+            )}
+
+            {/* Check if the student's grade is 5-8 */}
+            {/^[5-8]$/.test(user.grade) && isResultActiveHigh && (
+              <div className={styles.resultPortal} onClick={() => handleLeftBarOptionClick("StudentResult")}>Result Portal</div>
+            )}
+
+            {/* Link to alumni profile if alumni */}
+            {alumni && (
+              <Link to="/school/alumni/profile" className={styles.resultPortal}>Switch to Alumni Profile</Link>
+            )}
+          </>
         )}
+
+
+
         {user.role === 'Admin' && (
           <>
             <div className={styles.editProfile} onClick={() => handleLeftBarOptionClick("Profile")}>Your Profile</div>
             <div className={styles.studentDetails} onClick={() => handleLeftBarOptionClick("ResultPortal")}>Result Portal</div>
             <div className={styles.resultPortal} onClick={() => handleLeftBarOptionClick("StudentDetails")}>Student Details</div>
             <div className={styles.adminPortal} onClick={() => handleLeftBarOptionClick("AdminPortal")}>Admin Portal</div>
-            <div className={styles.resultPortal} onClick={() => handleLeftBarOptionClick("AlumniChat")}>Alumni Chat</div>
+            <Link
+              to="/school/alumni/chat"
+              className={styles.adminPortal}
+              onClick={() => handleLeftBarOptionClick("AlumniChat")}
+            >
+              Go to Chat
+            </Link>
             {
-              (alumni)&&<Link to="/school/alumni/profile" className={styles.resultPortal}>Switch to Alumni Profile</Link> 
+              (alumni) && <Link to="/school/alumni/profile" className={styles.resultPortal}>Switch to Alumni Profile</Link>
             }
           </>
         )}
@@ -144,7 +179,7 @@ const UserProfile = ({ user }) => {
       <div className={styles.rightBar}>
         {activeComponent === "Profile" && (
           <div className={styles.profileDetails}>
-            <h2 style={{ textAlign: "center" , marginBottom: "20px" }}>Profile Details</h2>
+            <h2 style={{ textAlign: "center", marginBottom: "20px" }}>Profile Details</h2>
             <table className={styles.profileTable}>
               <tbody>
                 <tr>
@@ -172,7 +207,7 @@ const UserProfile = ({ user }) => {
             <button className={styles.editButton} onClick={handleEditClick}>Edit Profile</button>
           </div>
         )}
-        {activeComponent==='StudentResult' && <StudentResultPortal />}
+        {activeComponent === 'StudentResult' && <StudentResultPortal />}
         {activeComponent === "ResultPortal" && <StudentResult />}
         {activeComponent === "StudentDetails" && <StudentDetails />}
         {activeComponent === "AdminPortal" && <AdminPortal />}

@@ -1,10 +1,17 @@
-import React, { useState } from 'react';
+import React, { useState,useContext } from 'react';
 import styles from './../styles/AlumniProfile.module.scss';
 import ProfileEdit from './ProfileEdit';
 import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
+import SummaryApi from '../../../common';
+import { toast } from 'react-toastify';
+import { useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { setAlumniDetails } from './../../../store/alumniSclice';
 
 const AlumniControlPanel = () => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
   const [activeComponent, setActiveComponent] = useState('Profile'); 
   const [isEditing, setIsEditing] = useState(false); 
   const alumni = useSelector((state) => state?.alumni?.alumni);
@@ -23,6 +30,29 @@ const AlumniControlPanel = () => {
   const closeEditWindow = () => {
     setIsEditing(false);
   };
+
+  const handleLogout = async () => {
+    try{
+      const response=await fetch(SummaryApi.AlumniLogOut.url, {
+        method: SummaryApi.AlumniLogOut.method,
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        credentials: 'include'
+      });
+      const result = await response.json();
+      console.log(result);
+      if(result.success){
+        dispatch(setAlumniDetails(null));
+        navigate('/school/alumni');
+        toast.success('Logged out successfully!');
+      }else{
+        toast.error(result.message);
+      }
+    }catch(error){
+      console.log(error);
+    }
+  }
 
   return (
     <div className={styles.container}>
@@ -48,6 +78,9 @@ const AlumniControlPanel = () => {
           onClick={() => handleLeftBarOptionClick('MessageCenter')}
         >
           Message Center
+        </div>
+        <div className={styles.logoutButton} onClick={handleLogout}>
+          Logout
         </div>
       </div>
 
