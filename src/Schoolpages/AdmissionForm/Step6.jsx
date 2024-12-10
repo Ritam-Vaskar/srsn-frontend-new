@@ -26,6 +26,7 @@
 // export default PaymentDetails;
 
 
+import { a, div } from "framer-motion/client";
 import { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
 
@@ -52,7 +53,7 @@ const PaymentDetails = ({ register, errors, selectedClass, fees, setValue }) => 
       <h2>Payment Details</h2>
 
       {selectedClass && fees && (
-        <div style={{ marginTop: "20px" }}>
+        <div style={{ marginTop: "20px" , display: "flex", flexDirection: "column", alignItems: "center"} }>
           <h3>Class: {selectedClass}</h3>
           <p style={{ marginTop: "10px", fontSize: "20px" }}>
             Fees: ₹{fees.amount}
@@ -66,6 +67,13 @@ const PaymentDetails = ({ register, errors, selectedClass, fees, setValue }) => 
           ) : (
             <p>QR code not available</p>
           )}
+          {
+            fees.qrCode && (
+              <a href={fees.qrCode} target="_blank" rel="noopener noreferrer">
+                Download QR Code
+              </a>
+            )
+          }
         </div>
       )}
 
