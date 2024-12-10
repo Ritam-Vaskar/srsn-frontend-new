@@ -22,7 +22,7 @@
 
 import React from 'react';
 import styles from './styles/AboutCard.module.css';
-import Button from '../Core/Button';
+
 // import { title } from 'framer-motion/client';
 
 const AboutCard = ({ image, description ,title }) => {
