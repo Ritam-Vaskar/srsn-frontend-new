@@ -10,6 +10,7 @@ import {
 import "./styles/Footer.css";
 import footLogo from "../../assets/images/Logo.png";
 import GitHubIcon from '@mui/icons-material/GitHub';
+import { HashLink } from 'react-router-hash-link';
 
 
 const Footer = () => {
@@ -109,7 +110,7 @@ const Footer = () => {
                             <div className="footer-grid-heading">Support</div>
                             <ul className="footer-links-list">
                                 <li>
-                                    <a href="#overview" className="footer-link">Contact</a>
+                                    <HashLink smooth to="home#contact" className="footer-link">Contact</HashLink>
                                 </li>
                                 <li>
                                     <a href="#overview" className="footer-link">Chat</a>

@@ -4,13 +4,14 @@ import { toast } from 'react-toastify';
 import SummaryApi from '../../common';
 import styles from './styles/Teachers.module.scss';
 import Spinner from '../../layouts/Loader/Spinner';
+import ArunachalSir from './../../assets/images/c67aa7eb-c9c5-49c6-8a48-9fbf813daf57.jpeg';
 
 const KnowYourTeacher = () => {
   const [teachers, setTeachers] = useState([]);
-  const [loading, setLoading] = useState(true); 
+  const [loading, setLoading] = useState(true);
 
   const fetchTeachers = async () => {
-    setLoading(true); 
+    setLoading(true);
     try {
       const response = await fetch(SummaryApi.TeacherFetch.url, {
         method: SummaryApi.TeacherFetch.method,
@@ -24,11 +25,11 @@ const KnowYourTeacher = () => {
         toast.error(result.message);
         return;
       }
-      setTeachers(result.teacher || []); 
+      setTeachers(result.teacher || []);
     } catch (err) {
       toast.error('Failed to fetch teachers.');
     } finally {
-      setLoading(false); 
+      setLoading(false);
     }
   };
 
@@ -39,7 +40,14 @@ const KnowYourTeacher = () => {
   return (
     <div className={styles.container}>
       <h2>Know Your Teachers</h2>
-      {loading ? ( 
+
+      {/* Poster Section for Arunachal Sir */}
+      <div className={styles.poster}>
+        <img src={ArunachalSir} alt="Arunachal Chakraborty" className={styles.posterImage} />
+        <h3 className={styles.posterName}>Late Arunachal Chakraborty</h3>
+      </div>
+
+      {loading ? (
         <Spinner />
       ) : (
         <div className={styles.cards}>
@@ -48,7 +56,7 @@ const KnowYourTeacher = () => {
           ))}
         </div>
       )}
-      {!loading && teachers.length === 0 && ( 
+      {!loading && teachers.length === 0 && (
         <p className={styles.noTeachersMessage}>No teachers found.</p>
       )}
     </div>

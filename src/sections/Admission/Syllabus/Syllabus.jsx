@@ -8,7 +8,7 @@ const Syllabus = ({ flag }) => {
     let currentYear = new Date().getFullYear()
     return (
         <div>
-            <CardComponent titile1={`Syllabus for the Admission Year ${currentYear}`} titile2="Syllabus of " Prischool={SyllabusPrimary} SecSchool={SyllabusSecondary} flag={flag} isDoc={true}/>
+            <CardComponent titile1={`Syllabus for the Admission Year ${currentYear}`} titile2="Syllabus of " Prischool={SyllabusPrimary} SecSchool={SyllabusSecondary} flag={flag} isDoc={flag?true:false}/>
         </div>
     );
 };
