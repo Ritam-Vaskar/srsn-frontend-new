@@ -14,6 +14,7 @@ import SummaryApi from '../../common';
 import jsPDF from 'jspdf';
 import html2canvas from 'html2canvas';
 import Spinner from '../../layouts/Loader2/Loader2';
+import Loader from '../../layouts/Loader/Spinner'
 
 const LOCAL_STORAGE_KEY = 'admissionFormData';
 
@@ -167,6 +168,7 @@ const AdmissionForm = () => {
   });
 
   const [load,setload] = useState(false);
+  const [pageLoader, setpageLoader] = useState(false);
 
   // Load form data from local storage on component mount
   useEffect(() => {
@@ -242,6 +244,7 @@ const AdmissionForm = () => {
   const [admissionOpen, setAdmissionOpen] = useState(false);
 
   const fetchAdmissionOpen = async () => {
+    setpageLoader(true);
     try {
       const response = await fetch(SummaryApi.AdmissionFetch.url, {
         method: SummaryApi.AdmissionFetch.method,
@@ -257,11 +260,18 @@ const AdmissionForm = () => {
     } catch (error) {
       console.log(error);
     }
+    finally{
+      setpageLoader(false)
+    }
   }
 
   useEffect(() => {
     fetchAdmissionOpen();
   }, []);
+
+  if(pageLoader){
+    return (<div><Loader/></div>)
+  }
 
   return (
     <div className="form-container">
