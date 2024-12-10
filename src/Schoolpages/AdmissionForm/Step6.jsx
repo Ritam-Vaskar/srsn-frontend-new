@@ -61,7 +61,7 @@ const PaymentDetails = ({ register, errors, selectedClass, fees, setValue }) => 
           {fees.qrCode ? (
             <img
               style={{ marginTop: "10px", width: "400px", height: "400px" }}
-              src={fees.qrCode}
+              src={fees.qrCodeImg}
               alt={`QR for ${selectedClass}`}
             />
           ) : (
