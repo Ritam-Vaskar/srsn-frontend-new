@@ -154,11 +154,7 @@ const Preview = ({ profilePic, data, tableRef }) => {
           )}
 
 
-          {/* Payment Details */}
-          <tr>
-            <td><strong>Payment ID:</strong></td>
-            <td>{data.paymentId || 'N/A'}</td>
-          </tr>
+          
 
           {/* Guardian Details */}
           <tr>
@@ -184,6 +180,12 @@ const Preview = ({ profilePic, data, tableRef }) => {
             <td>{data.annualIncome || 'N/A'}</td>
             <td><strong>Guardian's Qualification:</strong></td>
             <td>{data.guardianQualification || 'N/A'}</td>
+          </tr>
+
+          {/* Payment Details */}
+          <tr>
+            <td><strong>Payment ID:</strong></td>
+            <td>{data.paymentId || 'N/A'}</td>
           </tr>
 
           

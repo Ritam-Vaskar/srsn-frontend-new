@@ -197,7 +197,7 @@ const SchoolNavbar = () => {
                     <li><p>The School</p></li>
                     <li><HashLink smooth to='/school/home#holytrio' onClick={toggleSideMenu}>Home</HashLink></li>
                     <li><HashLink smooth to='/school/home#mission' onClick={toggleSideMenu}>Mission and Vision</HashLink></li>
-                    <li><HashLink smooth to='/school/home#teachers-carousel' onClick={toggleSideMenu}>Meet Our Teachers</HashLink></li>
+                    <li><HashLink smooth to='/school/teacher' onClick={toggleSideMenu}>Meet Our Teachers</HashLink></li>
                     <li><HashLink smooth to='/school/home#gallery' onClick={toggleSideMenu}>Gallery</HashLink></li>
                     <li><HashLink smooth to='/school/home#contact' onClick={toggleSideMenu}>Contact</HashLink></li>
                     <li><HashLink smooth to='/school/home#school-media' onClick={toggleSideMenu}>Media</HashLink></li>

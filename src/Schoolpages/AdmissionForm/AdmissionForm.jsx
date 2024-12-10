@@ -16,10 +16,13 @@ import html2canvas from 'html2canvas';
 import Spinner from '../../layouts/Loader2/Loader2';
 import Loader from '../../layouts/Loader/Spinner'
 
+
 const LOCAL_STORAGE_KEY = 'admissionFormData';
 
 
 const AdmissionForm = () => {
+  const [isDownload,setisDownload]=useState(false);
+
   const [step, setStep] = useState(1);
 
   const tableRef = useRef();
@@ -27,6 +30,87 @@ const AdmissionForm = () => {
   const [profilePic, setprofilePic] = useState('');
 
   const [selectedClass, setSelectedClass] = useState('');
+
+  // const waitForImagesToLoad = async (element) => {
+  //   const images = element.querySelectorAll('img');
+  //   await Promise.all(
+  //     Array.from(images).map((img) => {
+  //       if (img.complete) return Promise.resolve();
+  //       return new Promise((resolve) => {
+  //         img.onload = resolve;
+  //         img.onerror = resolve;
+  //       });
+  //     })
+  //   );
+  // };
+
+  // Handle PDF download
+  // const handleDownloadPDF = async () => {
+  //   const element = tableRef.current;
+
+  //   // Ensure all images are loaded
+  //   await waitForImagesToLoad(element);
+
+  //   // Determine scale based on device pixel ratio for better resolution
+  //   const scale = window.devicePixelRatio > 1 ? 2 : 1;
+
+  //   const canvas = await html2canvas(element, {
+  //     scale,
+  //     useCORS: true,
+  //     windowWidth: element.scrollWidth,
+  //   });
+
+  //   const imgData = canvas.toDataURL('image/png');
+  //   const pdf = new jsPDF('p', 'mm', 'a4'); // Portrait mode and A4 size
+
+  //   const pdfWidth = pdf.internal.pageSize.getWidth();
+  //   const pdfHeight = pdf.internal.pageSize.getHeight();
+
+  //   // Adjusted dimensions for better scaling on mobile
+  //   const imgWidth = pdfWidth -10; // Margins
+  //   const imgHeight = (canvas.height * imgWidth) / canvas.width;
+
+  //   if (imgHeight <= pdfHeight) {
+  //     // Single page
+  //     pdf.addImage(imgData, 'PNG', 5, 5, imgWidth, imgHeight); // Add image with margin
+  //   } else {
+  //     // Multi-page
+  //     let y = 0;
+  //     const pageHeight = (canvas.width * pdfHeight) / pdfWidth;
+
+  //     while (y < canvas.height) {
+  //       const pageCanvas = document.createElement('canvas');
+  //       pageCanvas.width = canvas.width;
+  //       pageCanvas.height = Math.min(canvas.height - y, pageHeight);
+
+  //       const ctx = pageCanvas.getContext('2d');
+  //       ctx.drawImage(
+  //         canvas,
+  //         0,
+  //         y,
+  //         canvas.width,
+  //         pageCanvas.height,
+  //         0,
+  //         0,
+  //         canvas.width,
+  //         pageCanvas.height
+  //       );
+
+  //       const pageImgData = pageCanvas.toDataURL('image/png');
+  //       pdf.addImage(pageImgData, 'PNG', 5, 5, imgWidth, (pageCanvas.height * imgWidth) / canvas.width);
+
+  //       y += pageCanvas.height;
+
+  //       if (y < canvas.height) {
+  //         pdf.addPage(); // Add page if there is more content
+  //       }
+  //     }
+  //   }
+
+  //   // Save the generated PDF
+  //   pdf.save('Admission_Form.pdf');
+  // };
+
 
   const waitForImagesToLoad = async (element) => {
     const images = element.querySelectorAll('img');
@@ -41,15 +125,38 @@ const AdmissionForm = () => {
     );
   };
   
-  // Handle PDF download
   const handleDownloadPDF = async () => {
     const element = tableRef.current;
   
     // Ensure all images are loaded
     await waitForImagesToLoad(element);
   
-    // Determine scale based on device pixel ratio for better resolution
-    const scale = window.devicePixelRatio > 1 ? 2 : 1;
+    // Check if it's a mobile device
+    if (isMobile()) {
+      const viewportMetaTag = document.querySelector('meta[name="viewport"]');
+      if (viewportMetaTag) {
+        viewportMetaTag.setAttribute('content', ''); // Temporarily disable viewport settings
+      }
+  
+      setTimeout(async () => {
+        await generatePDF(element);
+        if (viewportMetaTag) {
+          setTimeout(() => {
+            viewportMetaTag.setAttribute('content', 'width=device-width, initial-scale=1'); // Restore viewport
+          }, 0);
+        }
+      }, 0);
+    } else {
+      await generatePDF(element);
+    }
+  };
+  
+  // Helper to check if the device is mobile
+  const isMobile = () => window.innerWidth < 768;
+  
+  const generatePDF = async (element) => {
+    // Fixed scale for consistent rendering
+    const scale = 2;
   
     const canvas = await html2canvas(element, {
       scale,
@@ -58,20 +165,18 @@ const AdmissionForm = () => {
     });
   
     const imgData = canvas.toDataURL('image/png');
-    const pdf = new jsPDF('p', 'mm', 'a4'); // Portrait mode and A4 size
+    const pdf = new jsPDF('p', 'mm', 'a4'); // Always A4 size
   
     const pdfWidth = pdf.internal.pageSize.getWidth();
     const pdfHeight = pdf.internal.pageSize.getHeight();
-  
-    // Adjusted dimensions for better scaling on mobile
-    const imgWidth = pdfWidth -10; // Margins
+    const imgWidth = pdfWidth - 10; // Fixed margin
     const imgHeight = (canvas.height * imgWidth) / canvas.width;
   
     if (imgHeight <= pdfHeight) {
-      // Single page
-      pdf.addImage(imgData, 'PNG', 5, 5, imgWidth, imgHeight); // Add image with margin
+      // Single-page PDF
+      pdf.addImage(imgData, 'PNG', 5, 5, imgWidth, imgHeight);
     } else {
-      // Multi-page
+      // Multi-page PDF
       let y = 0;
       const pageHeight = (canvas.width * pdfHeight) / pdfWidth;
   
@@ -99,7 +204,7 @@ const AdmissionForm = () => {
         y += pageCanvas.height;
   
         if (y < canvas.height) {
-          pdf.addPage(); // Add page if there is more content
+          pdf.addPage(); // Add a new page
         }
       }
     }
@@ -108,7 +213,6 @@ const AdmissionForm = () => {
     pdf.save('Admission_Form.pdf');
   };
   
-
 
   const {
     register,
@@ -167,7 +271,7 @@ const AdmissionForm = () => {
     },
   });
 
-  const [load,setload] = useState(false);
+  const [load, setload] = useState(false);
   const [pageLoader, setpageLoader] = useState(false);
 
   // Load form data from local storage on component mount
@@ -215,16 +319,17 @@ const AdmissionForm = () => {
       toast.success('Form submitted successfully , you will get the application pdf in your registered email , please submit the hard copy of the pdf to the school office');
       //download pdf
       handleDownloadPDF();
+      setisDownload(true);
       localStorage.removeItem(LOCAL_STORAGE_KEY); // Clear form data from local storage on successful submission
       console.log(result);
     } catch (error) {
       toast.error(error.message);
       console.error('Submission Error:', error);
     }
-    finally{
+    finally {
       setload(false);
     }
-    
+
   };
 
   // Handle next button with validation
@@ -260,7 +365,7 @@ const AdmissionForm = () => {
     } catch (error) {
       console.log(error);
     }
-    finally{
+    finally {
       setpageLoader(false)
     }
   }
@@ -269,8 +374,8 @@ const AdmissionForm = () => {
     fetchAdmissionOpen();
   }, []);
 
-  if(pageLoader){
-    return (<div><Loader/></div>)
+  if (pageLoader) {
+    return (<div><Loader /></div>)
   }
 
   return (
@@ -303,10 +408,10 @@ const AdmissionForm = () => {
             {step === 7 && (
               <div className="terms-section">
                 <button type="button" onClick={handlePrev} className="prev-button">
-                Previous
-              </button>
+                  Previous
+                </button>
                 <div className="download-pdf">
-                  <span className="pdf-link" onClick={handleDownloadPDF}>Download Application as PDF</span>
+                  {isDownload&&<div className="pdf-link" onClick={handleDownloadPDF}>Download Application as PDF</div>}
                 </div>
 
                 <div className="accept-terms">
@@ -321,11 +426,11 @@ const AdmissionForm = () => {
                 </div>
 
                 <div className="action-buttons">
-                  {load? <Spinner />:
-                  <button type="submit" className="submit-button" disabled={!watch('terms')}>
-                    Submit
-                  </button>
-                }
+                  {load ? <Spinner /> :
+                    <button type="submit" className="submit-button" disabled={!watch('terms')}>
+                      Submit
+                    </button>
+                  }
                 </div>
               </div>
             )}

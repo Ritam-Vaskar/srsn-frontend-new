@@ -87,13 +87,6 @@ input[type="checkbox"] {
   margin-top: 15px;
 }
 
-.terms-section{
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  align-items: center;
-  margin-top: 20px;
-}
 
 /* Preview table
 table {
@@ -220,26 +213,16 @@ button:hover {
 }
 .terms-section {
   display: flex;
+  gap: 1rem;
   width: 100%;
   justify-content: space-between;
+  align-items: center;
   margin-top: 20px;
   text-align: center;
   font-family: Arial, sans-serif;
-}
-
-.download-pdf {
-  margin-bottom: 15px;
-}
-
-.pdf-link {
-  font-size: 16px;
-  color: #007bff;
-  text-decoration: underline;
-  cursor: pointer;
-}
-
-.pdf-link:hover {
-  color: #0056b3;
+  @media(max-width: 768px) {
+    flex-direction: column;
+  }
 }
 
 
@@ -288,7 +271,7 @@ button:hover {
 }
 
 .submit-button:hover:not(:disabled) {
-  background-color: #218838;
+  background-color:#ff6a00;
 }
 .action-buttons{
   text-align: center;
@@ -296,7 +279,6 @@ button:hover {
 }
 
 .terms-label{
-  margin: 30px 20px;
   text-align: center;
 }
 
@@ -304,9 +286,9 @@ button:hover {
   margin: 10px 20px;
   text-align: center;
   cursor: pointer;
- 
-  span{
-    padding: 14px 25px;
+}
+.pdf-link{
+  padding: 14px 25px;
     background-color: #007bff;
     color: white;
     font-size: 16px;
@@ -315,6 +297,8 @@ button:hover {
     cursor: pointer;
     transition: all 0.3s ease-in-out;
     box-shadow: 0 4px 6px rgba(0, 123, 255, 0.4);
-  }
+    &:hover {
+      background-color: #0056b3;
+      box-shadow: 0 6px 8px rgba(0, 123, 255, 0.6);
+    }
 }
-
