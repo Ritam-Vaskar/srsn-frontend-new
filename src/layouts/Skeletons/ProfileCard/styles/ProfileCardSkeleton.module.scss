@@ -1,0 +1,55 @@
+.alumniCard{
+    border: 1px solid #dfdfdf4f;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);;
+}
+
+.skeletonCard {
+    .skeletonProfilePic {
+      width: 150px;
+      height: 150px;
+      border-radius: 50%;
+      background: linear-gradient(90deg, #e0e0e0 25%, #f0f0f0 50%, #e0e0e0 75%);
+      background-size: 200% 100%;
+      animation: shimmer 1.5s infinite;
+      margin: 0 auto 10px;
+    }
+  
+    .skeletonText {
+      width: 60%;
+      height: 20px;
+      background: linear-gradient(90deg, #e0e0e0 25%, #f0f0f0 50%, #e0e0e0 75%);
+      background-size: 200% 100%;
+      animation: shimmer 1.5s infinite;
+      margin: 0 auto 10px;
+    }
+  
+    .skeletonSubText {
+      width: 40%;
+      height: 15px;
+      background: linear-gradient(90deg, #e0e0e0 25%, #f0f0f0 50%, #e0e0e0 75%);
+      background-size: 200% 100%;
+      animation: shimmer 1.5s infinite;
+      margin: 0 auto 10px;
+    }
+  
+    .skeletonButton {
+      width: 100px;
+      height: 35px;
+      background: linear-gradient(90deg, #e0e0e0 25%, #f0f0f0 50%, #e0e0e0 75%);
+      background-size: 200% 100%;
+      animation: shimmer 1.5s infinite;
+      margin: 10px auto 0;
+      border-radius: 5px;
+    }
+  }
+  
+  @keyframes shimmer {
+    0% {
+      background-position: -200% 0;
+    }
+    100% {
+      background-position: 200% 0;
+    }
+  }
+  
