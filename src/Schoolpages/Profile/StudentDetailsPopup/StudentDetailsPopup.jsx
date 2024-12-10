@@ -1,156 +1,328 @@
-import React, { useRef } from 'react';
-import { jsPDF } from 'jspdf';
-import styles from './styles/StudentDetailsPopup.module.scss';
-import logo from '../../../assets/images/Logo.png';
+import React, { useRef } from "react";
+import { jsPDF } from "jspdf";
+import styles from "./styles/StudentDetailsPopup.module.scss";
+import logo from "../../../assets/images/Logo.png";
 
 const StudentDetailsPopup = ({ student, onClose }) => {
-    const tableRef = useRef();
+  const tableRef = useRef();
 
+  const handleDownloadPDF = () => {
+    const doc = new jsPDF();
+    doc.html(tableRef.current, {
+      callback: function (pdf) {
+        pdf.save(`${student.name}_details.pdf`);
+      },
+      x: 10,
+      y: 10,
+      width: 180,
+      windowWidth: tableRef.current.scrollWidth,
+    });
+  };
 
-    const handleDownloadPDF = () => {
-        const doc = new jsPDF();
-        doc.html(tableRef.current, {
-            callback: function (pdf) {
-                pdf.save(`${student.name}_details.pdf`);
-            },
-            x: 10,
-            y: 10,
-            width: 180,
-            windowWidth: tableRef.current.scrollWidth
-        });
-    };
+  return (
+    <div className={styles.overlay}>
+      <div className={styles.popup}>
+        <button className={styles.closeButton} onClick={onClose}>
+          X
+        </button>
+        <h2 style={{ textAlign: "center", marginBottom: "10px" }}>
+          Student Details
+        </h2>
 
-    return (
-        <div className={styles.overlay}>
-            <div className={styles.popup}>
-                <button className={styles.closeButton} onClick={onClose}>X</button>
-                <h2 style={{ textAlign: 'center', marginBottom: '10px' }}>Student Details</h2>
+        <center>
+          <div className={styles.actions}>
+            <button
+              className={styles.downloadButton}
+              onClick={handleDownloadPDF}
+            >
+              Download as PDF
+            </button>
+          </div>
+        </center>
 
-                <center><div className={styles.actions}>
-                    <button className={styles.downloadButton} onClick={handleDownloadPDF}>Download as PDF</button>
-                </div></center>
-                
-                <table ref={tableRef} className={`${styles.detailsTable} ${styles.printContent}`}>
-                <thead>
-                    <tr>
-                        <td colSpan="4">
-                            <div className={styles.head}>
-                                <img src={logo} alt="logo" height={80} />
-                                <h3>Sri Rama Krishna Siksha Niketan <br /><p>HaridasNagar, Raghunathganj, Murshidabad</p></h3>
-                                <img src={student.profilePic} alt="" height={80} />
-                            </div>
-                        </td>
-                    </tr>
-                </thead>
+        <table
+          ref={tableRef}
+          className={`${styles.detailsTable} ${styles.printContent}`}
+        >
+          <thead>
+            <tr>
+              <td colSpan="4">
+                <div className={styles.head}>
+                  <img src={logo} alt="logo" height={80} />
+                  <h3>
+                    Sri Rama Krishna Siksha Niketan <br />
+                    <p>HaridasNagar, Raghunathganj, Murshidabad</p>
+                  </h3>
+                  <img src={student.profilePic} alt="" height={80} />
+                </div>
+              </td>
+            </tr>
+          </thead>
 
-                    <tbody>
-                        <tr>
-                            <td><strong>Name:</strong></td>
-                            <td>{student.name}</td>
-                            <td><strong>Email:</strong></td>
-                            <td>{student.email}</td>
-                        </tr>
-                        <tr>
-                            <td><strong>Phone:</strong></td>
-                            <td>{student.phone}</td>
-                            <td><strong>Date of Joining:</strong></td>
-                            <td>{student.DateOfJoining}</td>
-                        </tr>
-                        <tr>
-                            <td><strong>Qualification:</strong></td>
-                            <td>{student.Qualification}</td>
-                            <td><strong>Role:</strong></td>
-                            <td>{student.role}</td>
-                        </tr>
-                        <tr>
-                            <td><strong>DOB:</strong></td>
-                            <td>{student.dob}</td>
-                            <td><strong>Blood Group:</strong></td>
-                            <td>{student.bloodGroup}</td>
-                        </tr>
-                        <tr>
-                            <td><strong>Aadhar No:</strong></td>
-                            <td>{student.aadharNo}</td>
-                            <td><strong>Health ID:</strong></td>
-                            <td>{student.healthID}</td>
-                        </tr>
-                        <tr>
-                            <td><strong>Religion:</strong></td>
-                            <td>{student.religion}</td>
-                            <td><strong>Mother Tongue:</strong></td>
-                            <td>{student.motherTongue}</td>
-                        </tr>
-                        <tr>
-                            <td><strong>Nationality:</strong></td>
-                            <td>{student.nationality}</td>
-                            <td><strong>Student Code:</strong></td>
-                            <td>{student.studentCode}</td>
-                        </tr>
-                        <tr>
-                            <td><strong>Address:</strong></td>
-                            <td>{student.address}</td>
-                            <td><strong>City:</strong></td>
-                            <td>{student.city}</td>
-                        </tr>
-                        <tr>
-                            <td><strong>District:</strong></td>
-                            <td>{student.district}</td>
-                            <td><strong>State:</strong></td>
-                            <td>{student.state}</td>
-                        </tr>
-                        <tr>
-                            <td><strong>Pin Code:</strong></td>
-                            <td>{student.pinCode}</td>
-                            <td><strong>Country:</strong></td>
-                            <td>{student.country}</td>
-                        </tr>
-                        <tr>
-                            <td><strong>Father's Name:</strong></td>
-                            <td>{student.fatherName}</td>
-                            <td><strong>Mother's Name:</strong></td>
-                            <td>{student.motherName}</td>
-                        </tr>
-                        <tr>
-                            <td><strong>Guardian Name:</strong></td>
-                            <td>{student.guardianName}</td>
-                            <td><strong>Guardian Relation:</strong></td>
-                            <td>{student.guardianRelation}</td>
-                        </tr>
-                        <tr>
-                            <td><strong>Guardian Phone:</strong></td>
-                            <td>{student.guardianPhone}</td>
-                            <td><strong>Guardian Email:</strong></td>
-                            <td>{student.guardianEmail}</td>
-                        </tr>
-                        <tr>
-                            <td><strong>Annual Income:</strong></td>
-                            <td>{student.annualIncome}</td>
-                            <td><strong>Guardian Qualification:</strong></td>
-                            <td>{student.guardianQualification}</td>
-                        </tr>
-                        <tr>
-                            <td><strong>Residential Address:</strong></td>
-                            <td>{student.rAddress}</td>
-                            <td><strong>Residential City:</strong></td>
-                            <td>{student.rCity}</td>
-                        </tr>
-                        <tr>
-                            <td><strong>Residential District:</strong></td>
-                            <td>{student.rDistrict}</td>
-                            <td><strong>Residential State:</strong></td>
-                            <td>{student.rState}</td>
-                        </tr>
-                        <tr>
-                            <td><strong>Residential Country:</strong></td>
-                            <td>{student.rCountry}</td>
-                            <td><strong>Residential Pin Code:</strong></td>
-                            <td>{student.rPinCode}</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-        </div>
-    );
+          <tbody>
+            <tr>
+              {student.name && (
+                <td>
+                  <strong>Name:</strong>
+                </td>
+              )}
+              {student.name && <td>{student.name}</td>}
+              {student.email && (
+                <td>
+                  <strong>Email:</strong>
+                </td>
+              )}
+              {student.email && <td>{student.email}</td>}
+            </tr>
+            <tr>
+              {student.phone && (
+                <td>
+                  <strong>Phone:</strong>
+                </td>
+              )}
+              {student.phone && <td>{student.phone}</td>}
+              {student.dob && (
+                <td>
+                  <strong>DOB:</strong>
+                </td>
+              )}
+              {student.dob && <td>{student.dob}</td>}
+            </tr>
+            <tr>
+              {student.dobRegNo && (
+                <td>
+                  <strong>DOB Reg No:</strong>
+                </td>
+              )}
+              {student.dobRegNo && <td>{student.dobRegNo}</td>}
+              {student.socialCatagory && (
+                <td>
+                  <strong>Social Category:</strong>
+                </td>
+              )}
+              {student.socialCatagory && <td>{student.socialCatagory}</td>}
+            </tr>
+            <tr>
+              {student.socialCatagoryRegNo && (
+                <td>
+                  <strong>Social Category Reg No:</strong>
+                </td>
+              )}
+              {student.socialCatagoryRegNo && (
+                <td>{student.socialCatagoryRegNo}</td>
+              )}
+              {student.religion && (
+                <td>
+                  <strong>Religion:</strong>
+                </td>
+              )}
+              {student.religion && <td>{student.religion}</td>}
+            </tr>
+            <tr>
+              {student.motherTongue && (
+                <td>
+                  <strong>Mother Tongue:</strong>
+                </td>
+              )}
+              {student.motherTongue && <td>{student.motherTongue}</td>}
+              {student.nationality && (
+                <td>
+                  <strong>Nationality:</strong>
+                </td>
+              )}
+              {student.nationality && <td>{student.nationality}</td>}
+            </tr>
+            <tr>
+              {student.aadharNo && (
+                <td>
+                  <strong>Aadhar No:</strong>
+                </td>
+              )}
+              {student.aadharNo && <td>{student.aadharNo}</td>}
+              {student.bloodGroup && (
+                <td>
+                  <strong>Blood Group:</strong>
+                </td>
+              )}
+              {student.bloodGroup && <td>{student.bloodGroup}</td>}
+            </tr>
+            <tr>
+              {student.healthID && (
+                <td>
+                  <strong>Health ID:</strong>
+                </td>
+              )}
+              {student.healthID && <td>{student.healthID}</td>}
+              {student.grade && (
+                <td>
+                  <strong>Grade:</strong>
+                </td>
+              )}
+              {student.grade && <td>{student.grade}</td>}
+            </tr>
+            <tr>
+              {student.studentCode && (
+                <td>
+                  <strong>Student Code:</strong>
+                </td>
+              )}
+              {student.studentCode && <td>{student.studentCode}</td>}
+            </tr>
+            <tr>
+              {student.address && (
+                <td>
+                  <strong>Address:</strong>
+                </td>
+              )}
+              {student.address && <td>{student.address}</td>}
+              {student.city && (
+                <td>
+                  <strong>City:</strong>
+                </td>
+              )}
+              {student.city && <td>{student.city}</td>}
+            </tr>
+            <tr>
+              {student.district && (
+                <td>
+                  <strong>District:</strong>
+                </td>
+              )}
+              {student.district && <td>{student.district}</td>}
+              {student.state && (
+                <td>
+                  <strong>State:</strong>
+                </td>
+              )}
+              {student.state && <td>{student.state}</td>}
+            </tr>
+            <tr>
+              {student.country && (
+                <td>
+                  <strong>Country:</strong>
+                </td>
+              )}
+              {student.country && <td>{student.country}</td>}
+              {student.pinCode && (
+                <td>
+                  <strong>Pin Code:</strong>
+                </td>
+              )}
+              {student.pinCode && <td>{student.pinCode}</td>}
+            </tr>
+            <tr>
+              {student.fatherName && (
+                <td>
+                  <strong>Father's Name:</strong>
+                </td>
+              )}
+              {student.fatherName && <td>{student.fatherName}</td>}
+              {student.motherName && (
+                <td>
+                  <strong>Mother's Name:</strong>
+                </td>
+              )}
+              {student.motherName && <td>{student.motherName}</td>}
+            </tr>
+            <tr>
+              {student.guardianName && (
+                <td>
+                  <strong>Guardian Name:</strong>
+                </td>
+              )}
+              {student.guardianName && <td>{student.guardianName}</td>}
+              {student.guardianRelation && (
+                <td>
+                  <strong>Guardian Relation:</strong>
+                </td>
+              )}
+              {student.guardianRelation && <td>{student.guardianRelation}</td>}
+            </tr>
+            <tr>
+              {student.guardianPhone && (
+                <td>
+                  <strong>Guardian Phone:</strong>
+                </td>
+              )}
+              {student.guardianPhone && <td>{student.guardianPhone}</td>}
+              {student.guardianEmail && (
+                <td>
+                  <strong>Guardian Email:</strong>
+                </td>
+              )}
+              {student.guardianEmail && <td>{student.guardianEmail}</td>}
+            </tr>
+            <tr>
+              {student.annualIncome && (
+                <td>
+                  <strong>Annual Income:</strong>
+                </td>
+              )}
+              {student.annualIncome && <td>{student.annualIncome}</td>}
+              {student.guardianQualification && (
+                <td>
+                  <strong>Guardian Qualification:</strong>
+                </td>
+              )}
+              {student.guardianQualification && (
+                <td>{student.guardianQualification}</td>
+              )}
+            </tr>
+            <tr>
+              {student.rAddress && (
+                <td>
+                  <strong>Residential Address:</strong>
+                </td>
+              )}
+              {student.rAddress && <td>{student.rAddress}</td>}
+              {student.rCity && (
+                <td>
+                  <strong>Residential City:</strong>
+                </td>
+              )}
+              {student.rCity && <td>{student.rCity}</td>}
+            </tr>
+            <tr>
+              {student.rDistrict && (
+                <td>
+                  <strong>Residential District:</strong>
+                </td>
+              )}
+              {student.rDistrict && <td>{student.rDistrict}</td>}
+              {student.rState && (
+                <td>
+                  <strong>Residential State:</strong>
+                </td>
+              )}
+              {student.rState && <td>{student.rState}</td>}
+            </tr>
+            <tr>
+              {student.rCountry && (
+                <td>
+                  <strong>Residential Country:</strong>
+                </td>
+              )}
+              {student.rCountry && <td>{student.rCountry}</td>}
+              {student.rPinCode && (
+                <td>
+                  <strong>Residential Pin Code:</strong>
+                </td>
+              )}
+              {student.rPinCode && <td>{student.rPinCode}</td>}
+            </tr>
+            <tr>
+                {student.paymentId && (
+                  <td>
+                    <strong>Payment ID:</strong>
+                  </td>
+                )}
+                {student.paymentId && <td>{student.paymentId}</td>}
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  );
 };
 
 export default StudentDetailsPopup;
