@@ -6,6 +6,7 @@
       margin-bottom: 20px;
     }
   
+    /* Poster Section Styling */
     .poster {
       display: flex;
       flex-direction: column;
@@ -19,12 +20,24 @@
       background-color: #fefefe;
       max-width: 600px;
       text-align: center;
+      width: 100%;  /* Make it responsive */
+      
+      @media (max-width: 768px) {
+        padding: 20px;
+        max-width: 500px;
+      }
+  
+      @media (max-width: 400px) {
+        padding: 15px;
+        max-width: 300px;
+      }
   
       .posterImage {
         width: 100%;
         height: auto;
         border-radius: 10px;
         margin-bottom: 15px;
+        max-height: 400px; /* Ensure the image is not too large */
       }
   
       .posterName {
@@ -32,6 +45,14 @@
         font-weight: bold;
         color: #333;
         text-align: center;
+  
+        @media (max-width: 768px) {
+          font-size:1.5rem;
+        }
+  
+        @media (max-width: 400px) {
+          font-size: 1.2rem;
+        }
       }
     }
   
