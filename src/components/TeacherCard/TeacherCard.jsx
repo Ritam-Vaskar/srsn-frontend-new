@@ -47,13 +47,17 @@ const TeacherCard = ({ teacher, customStyles }) => {
                   <th>Date of Joining:</th>
                   <td>{teacher.DateOfJoining}</td>
                 </tr>
+                <tr>
+                  <th>Email</th>
+                  <td><a href={`mailto:${teacher.email}`} style={customStyles?.email}>Click Here to Mail {teacher.name}</a></td> 
+                </tr>
               
-                {user && user._id && (
+                {/* {user && user._id && (
                   <tr>
                     <th>Contact:</th>
                     <td><a href={`mailto:${teacher.email}`} style={customStyles?.email}>{teacher.email}</a></td>
                   </tr>
-                )}
+                )} */}
               </tbody>
             </table>
 

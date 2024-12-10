@@ -1,6 +1,6 @@
 import React from 'react';
 import './styles/HolyTrio.css';
-import Button from '../../components/Core/Button';
+
 
 const HolyTrio = () => {
   return (
@@ -17,7 +17,7 @@ const HolyTrio = () => {
         <img src="https://www.rkmvnarendrapur.org/img/sarada-devi.jpg" alt="Hero Image 3" />
       </div>
       </div>
-      <Button>View Details</Button>
+      
     </div>
   );
 };
