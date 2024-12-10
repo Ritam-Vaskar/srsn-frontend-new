@@ -37,6 +37,8 @@ import SourceCode from './../Schoolpages/SourceCode/Source';
 import UserPolicy from '../Policy/UserPolicy/UserPolicy';
 import Terms from './../Policy/TermsAndConditions/TermsAndConditions';
 
+import ErrorPage from '../layouts/ErrorPage/ErrorPage';
+
 
 
 
@@ -44,7 +46,7 @@ const router = createBrowserRouter([
     {
         path: '/',
         element: (
-            <ScrollToTop> 
+            <ScrollToTop>
                 <App />
             </ScrollToTop>
         ),
@@ -61,15 +63,15 @@ const router = createBrowserRouter([
             },
             {
                 path: 'privacyPolicy',
-                element: <UserPolicy/>
+                element: <UserPolicy />
             },
             {
                 path: 'terms',
                 element: <Terms />
             },
             {
-                path:'source',
-                element:<SourceCode/>
+                path: 'source',
+                element: <SourceCode />
             },
 
             //school page
@@ -98,28 +100,28 @@ const router = createBrowserRouter([
                         element: <Alumni />,
                     },
                     {
-                        path:'alumni/profile',
-                        element:<AlumniProfile/>
+                        path: 'alumni/profile',
+                        element: <AlumniProfile />
                     },
                     {
-                        path:'alumni/chat',
-                        element:<AlumniChat/>
+                        path: 'alumni/chat',
+                        element: <AlumniChat />
                     },
                     {
                         path: 'admission_form',
                         element: <AdmissionForm />
                     },
                     {
-                        path:'profile',
-                        element:<Profile/>
+                        path: 'profile',
+                        element: <Profile />
                     },
                     {
-                        path:'login',
-                        element:<Login/>
+                        path: 'login',
+                        element: <Login />
                     },
                     {
-                        path:'teacher',
-                        element:<Teacher/>
+                        path: 'teacher',
+                        element: <Teacher />
                     }
                 ]
             }
@@ -165,6 +167,18 @@ const router = createBrowserRouter([
                 ]
             }
         ]
+    },
+    {
+        path: '*',
+        element: <>
+
+            <Headroom>
+                <SchoolNavbar />
+            </Headroom>
+            <ErrorPage />
+            <SchoolFooter />
+
+        </>
     }
 ]);
 
