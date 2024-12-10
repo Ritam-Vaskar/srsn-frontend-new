@@ -4,6 +4,14 @@
     h2 {
       text-align: center;
       margin-bottom: 20px;
+      font-size: 35px;
+
+      @media(max-width: 768px) {
+        font-size: 30px;
+      }
+      @media(max-width: 480px) {
+        font-size: 25px;
+      }
     }
   
     /* Poster Section Styling */
@@ -13,23 +21,23 @@
       align-items: center;
       justify-content: center;
       margin: 30px auto;
-      padding: 30px;
+      padding: 20px;
       border: 2px solid #ddd;
       border-radius: 10px;
       box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
       background-color: #fefefe;
-      max-width: 600px;
+      max-width: 700px;
       text-align: center;
       width: 100%;  /* Make it responsive */
       
       @media (max-width: 768px) {
         padding: 20px;
-        max-width: 500px;
+        max-width: 600px;
       }
   
-      @media (max-width: 400px) {
+      @media (max-width: 480px) {
         padding: 15px;
-        max-width: 300px;
+        max-width: 330px;
       }
   
       .posterImage {
@@ -41,17 +49,17 @@
       }
   
       .posterName {
-        font-size: 2rem;
+        font-size: 1.5rem;
         font-weight: bold;
         color: #333;
         text-align: center;
   
         @media (max-width: 768px) {
-          font-size:1.5rem;
+          font-size:1rem;
         }
   
         @media (max-width: 400px) {
-          font-size: 1.2rem;
+          font-size: 1rem;
         }
       }
     }
