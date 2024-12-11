@@ -437,6 +437,9 @@ const Applications = () => {
 
     return (
         <div>
+            <center><div className={styles.totalCount}>
+                <p><strong>Total Students:</strong> {beez.length + ankur.length + kisholoy.length + c1.length + c2.length + c3.length + c4.length + c5.length + c6.length + c7.length + c8.length}</p>
+            </div></center>
             <div className={styles.dropdownContainer}>
                 <label htmlFor="classDropdown">Select Class:</label>
                 <select
