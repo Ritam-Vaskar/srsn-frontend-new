@@ -391,7 +391,7 @@ const Applications = () => {
                                     View Details
                                 </button>
                             </td>
-                            <td id='action'>
+                            <td id='action' className={styles.action}>
                                 <button className={styles.actionButton} onClick={() => handleApp(student)}>
                                     <CheckBoxIcon />
                                 </button>
@@ -400,7 +400,7 @@ const Applications = () => {
                                 </button>
                             </td>
                             <td>
-                                <input
+                                <input className={styles.rankInput}
                                     type="number"
                                     placeholder="Rank"
                                     value={
