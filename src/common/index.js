@@ -13,6 +13,21 @@ const SummaryApi={
         method:"POST"
     },
 
+    ForgotPasswordOtpSend:{
+        url:backendUrl+"/api/forgotpasswordotpsend",
+        method:"POST"
+    },
+
+    ForgotPasswordOtpVerify:{
+        url:backendUrl+"/api/forgotpasswordotpverify",
+        method:"POST"
+    },
+
+    ResetPassword:{
+        url:backendUrl+"/api/resetpassword",
+        method:"POST"
+    },
+
     
 
     //user admission
@@ -52,6 +67,10 @@ const SummaryApi={
     },
     UserEdit:{
         url:backendUrl+"/api/userEdit",
+        method:"PUT"
+    },
+    UserEditById:{
+        url:backendUrl+"/api/userEditById",
         method:"PUT"
     },
     UserDelete:{
