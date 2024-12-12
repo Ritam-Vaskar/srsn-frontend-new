@@ -1,3 +1,5 @@
+import StudentAppEdit from "../Schoolpages/Profile/Admin/StudentEditPopup/StudentEditPopup"
+
 const backendUrl=import.meta.env.VITE_BACKEND_URL
 
 
@@ -174,6 +176,11 @@ const SummaryApi={
     Eventfetch: {
         url: backendUrl + "/api/eventFetch", 
         method: "GET",
+    },
+
+    UserEditById: {
+        url: backendUrl + "/api/userEditById", 
+        method: "PUT",
     },
 
 }   
