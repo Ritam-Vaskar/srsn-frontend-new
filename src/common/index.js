@@ -3,6 +3,7 @@ import StudentAppEdit from "../Schoolpages/Profile/Admin/StudentEditPopup/Studen
 const backendUrl=import.meta.env.VITE_BACKEND_URL
 
 
+
 const SummaryApi={
     //User sign up and sign in 
     UserSignIn:{
