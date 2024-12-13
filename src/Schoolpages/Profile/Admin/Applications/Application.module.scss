@@ -97,11 +97,27 @@
 
 
 //hidden now when application is ongoing to avoid accidental deletion
-.action{
-    visibility: hidden;
-}
+// .action{
+//     visibility: hidden;
+// }
 //change after aplication is over
+.toggleContainer{
+    display: flex;
+    background-color: #dfdfdf4f;
+    border: 1px solid #ff6a00;
+    border-radius: 20px;
+    padding: 10px 20px 3px 20px;
+    width: fit-content;
+    margin-top: -20px;
+    margin-bottom: 10px;
 
+    input[type="checkbox"] {
+        margin: 5px 8px;
+        height: min-content;
+        width: min-content;
+       
+    }
+}
 .actionButtonDelete{
     background: none;
     border: none;
@@ -127,4 +143,48 @@
     font-size: 16px;
     border: 1px solid #ccc;
     border-radius: 4px;
+}
+.viewDetailsButton{
+    background-color: #ff8c19;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+
+    &:hover {
+        background-color: #ff6a00;
+    }
+}
+
+// .action{
+//     display: flex;
+//     align-items: center;
+//     justify-content: space-between;
+//     width: 100%;
+// }
+
+.actionButton{
+    background: none;
+    border: none;
+    cursor: pointer;
+    margin-right: 8px;
+    color: #007BFF;
+}
+
+.actionButtonDelete{
+    background: none;
+    border: none;
+    cursor: pointer;
+    margin-right: 8px;
+    color: #ed2038;
+}
+.actionButtonEdit{
+    background: none;
+    border: none;
+    cursor: pointer;
+    margin-right: 8px;
+    color: #28a745;
 }
