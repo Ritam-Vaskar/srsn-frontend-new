@@ -399,13 +399,13 @@ const AdmissionForm = () => {
 
 
           <div className="form-navigation">
-            {step > 1 && step < 7 && isProfilePic && (
-              <button type="button" onClick={handlePrev} className="prev-button">
+            {step > 1 && step < 7&& (
+              <button type="button" onClick={handlePrev} className="prev-button" disabled={!isProfilePic}>
                 Previous
               </button>
             )}
-            {step < 7 && isProfilePic && (
-              <button type="button" onClick={handleNext} className="next-button">
+            {step < 7 && (
+              <button type="button" onClick={handleNext} className="next-button" disabled={!isProfilePic}>
                 Next
               </button>
             )}
