@@ -6,7 +6,9 @@ const GuardianDetails = ({ register, errors }) => {
     <div>
       <h2>Guardian Details</h2>
       <div>
-        <label>Father's Name</label>
+        <label>Father's Name
+        <span style={{ color: "red" }}>*</span>
+        </label>
         <input
           {...register("fatherName", { required: "Father's Name is required" })}
           placeholder="Enter father's name"
@@ -14,7 +16,9 @@ const GuardianDetails = ({ register, errors }) => {
         {errors.fatherName && <p className="error">{errors.fatherName.message}</p>}
       </div>
       <div>
-        <label>Mother's Name</label>
+        <label>Mother's Name
+        <span style={{ color: "red" }}>*</span>
+        </label>
         <input
           {...register("motherName", { required: "Mother's Name is required" })}
           placeholder="Enter mother's name"
@@ -22,7 +26,9 @@ const GuardianDetails = ({ register, errors }) => {
         {errors.motherName && <p className="error">{errors.motherName.message}</p>}
       </div>
       <div>
-        <label>Guardian Name</label>
+        <label>Guardian Name
+        <span style={{ color: "red" }}>*</span>
+        </label>
         <input
           {...register("guardianName", { required: "Guardian Name is required" })}
           placeholder="Enter guardian's name"
@@ -30,23 +36,38 @@ const GuardianDetails = ({ register, errors }) => {
         {errors.guardianName && <p className="error">{errors.guardianName.message}</p>}
       </div>
       <div>
-        <label>Guardian Relation</label>
+        <label>Guardian Relation
+        <span style={{ color: "red" }}>*</span>
+        </label>
         <input
           {...register("guardianRelation", { required: "Guardian Relation is required" })}
           placeholder="Enter guardian's relation"
         />
         {errors.guardianRelation && <p className="error">{errors.guardianRelation.message}</p>}
       </div>
+
       <div>
-        <label>Guardian Phone</label>
+        <label>Guardian Phone
+        <span style={{ color: "red" }}>*</span>
+        </label>
         <input
-          {...register("guardianPhone", { required: "Guardian Phone is required" })}
+          {...register("guardianPhone", {
+            required: "Guardian Phone is required",
+            pattern: {
+              value: /^[0-9]{10}$/, // Restricts input to only 10 digits
+              message: "Phone number must be exactly 10 digits",
+            },
+          })}
           placeholder="Enter guardian's phone number"
+          maxLength={10} // Limits input to 10 digits
         />
         {errors.guardianPhone && <p className="error">{errors.guardianPhone.message}</p>}
       </div>
+
       <div>
-        <label>Guardian Email</label>
+        <label>Guardian Email
+        <span style={{ color: "red" }}>*</span>
+        </label>
         <input
           {...register("guardianEmail", { required: "Guardian Email is required", pattern: { value: /^\S+@\S+$/, message: "Invalid email format" } })}
           placeholder="Enter guardian's email"
@@ -54,7 +75,9 @@ const GuardianDetails = ({ register, errors }) => {
         {errors.guardianEmail && <p className="error">{errors.guardianEmail.message}</p>}
       </div>
       <div>
-        <label>Annual Income</label>
+        <label>Annual Income
+        <span style={{ color: "red" }}>*</span>
+        </label>
         <input
           {...register("annualIncome", { required: "Annual Income is required", valueAsNumber: true })}
           placeholder="Enter annual income"
@@ -63,7 +86,9 @@ const GuardianDetails = ({ register, errors }) => {
         {errors.annualIncome && <p className="error">{errors.annualIncome.message}</p>}
       </div>
       <div>
-        <label>Guardian Qualification</label>
+        <label>Guardian Qualification
+        <span style={{ color: "red" }}>*</span>
+        </label>
         <input
           {...register("guardianQualification", { required: "Guardian Qualification is required" })}
           placeholder="Enter guardian's qualification"
