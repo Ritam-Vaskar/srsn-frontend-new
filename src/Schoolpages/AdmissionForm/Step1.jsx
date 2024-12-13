@@ -35,6 +35,7 @@ const BasicInfo = ({profilePic,setprofilePic, register, errors, setValue }) => {
 
   return (
     <div>
+      <h3 style={{ marginBottom: '10px' }}>Read The manual <a href="https://drive.google.com/file/d/1NlHvcO9KFWF03XEDvThEB_YqpMKatlG5/view?usp=drive_link" target='_blank'>Click Here</a></h3>
       <h2>Basic Information</h2>
       <div>
         <label>Name</label>
@@ -146,10 +147,17 @@ const BasicInfo = ({profilePic,setprofilePic, register, errors, setValue }) => {
       <div>
         <label>Aadhar Number</label>
         <input
-          {...register("aadharNo", { required: "Aadhar number is required" })}
+          {...register("aadharNo", {
+            required: "Aadhar number is required",
+            pattern: {
+              value: /^[0-9]{12}$/,
+              message: "Aadhar number must be 12 digits"
+            }
+          })}
         />
         {errors.aadharNo && <p>{errors.aadharNo.message}</p>}
       </div>
+
       <div>
         <label>Blood Group</label>
         <select

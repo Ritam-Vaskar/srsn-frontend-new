@@ -91,7 +91,7 @@ const PaymentDetails = ({ register, errors, selectedClass, fees, setValue }) => 
 
       {paymentMethod === "online" && (
         <div>
-          <label>Payment ID</label>
+          <label>UPI Transaction ID/UTR Number</label>
           <input
             {...register("paymentId", {
               required: "Payment ID is required",

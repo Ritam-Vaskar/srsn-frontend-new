@@ -40,6 +40,7 @@ const PermanentContactDetails = ({ register, errors }) => {
           placeholder="Enter Municipality" 
         />
         {errors.municipality && <p className="error">{errors.municipality.message}</p>}
+        <p>If not Applicable then write 'N/A'</p>
       </div>
 
       <div>
@@ -49,6 +50,7 @@ const PermanentContactDetails = ({ register, errors }) => {
           placeholder="Enter Panchayt" 
         />
         {errors.panchayt && <p className="error">{errors.panchayt.message}</p>}
+        <p>If not Applicable then write 'N/A'</p>
       </div>
 
       <div>
