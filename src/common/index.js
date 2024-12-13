@@ -3,6 +3,7 @@ import StudentAppEdit from "../Schoolpages/Profile/Admin/StudentEditPopup/Studen
 const backendUrl=import.meta.env.VITE_BACKEND_URL
 
 
+
 const SummaryApi={
     //User sign up and sign in 
     UserSignIn:{
@@ -12,6 +13,21 @@ const SummaryApi={
     
     UserLogout:{
         url:backendUrl+"/api/userLogout",
+        method:"POST"
+    },
+
+    ForgotPasswordOtpSend:{
+        url:backendUrl+"/api/forgotpasswordotpsend",
+        method:"POST"
+    },
+
+    ForgotPasswordOtpVerify:{
+        url:backendUrl+"/api/forgotpasswordotpverify",
+        method:"POST"
+    },
+
+    ResetPassword:{
+        url:backendUrl+"/api/resetpassword",
         method:"POST"
     },
 
@@ -54,6 +70,10 @@ const SummaryApi={
     },
     UserEdit:{
         url:backendUrl+"/api/userEdit",
+        method:"PUT"
+    },
+    UserEditById:{
+        url:backendUrl+"/api/userEditById",
         method:"PUT"
     },
     UserDelete:{

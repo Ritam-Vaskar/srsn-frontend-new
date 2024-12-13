@@ -106,3 +106,20 @@
     color: #007bff;
   }
 }
+
+.forgot-password {
+  font-size: 14px;
+  color: #007bff; /* A shade of blue */
+  cursor: pointer;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.forgot-password:hover {
+  color: #0056b3; /* Darker shade of blue */
+  text-decoration: underline;
+}
+
+.forgot-password:active {
+  color: #004085; /* Even darker shade of blue for active state */
+}
