@@ -221,6 +221,7 @@ const BasicInfo = ({ profilePic, setprofilePic, register, errors, setValue, ispr
         <label>Health ID</label>
         <input {...register("healthID")} />
       </div>
+      {!isprofilePic && <p style={{marginTop:'10px', fontSize:'15px',display:'flex', justifyContent:'center'}}>*Please upload the profile photo to proceed to the next page</p>}
     </div>
   );
 };
