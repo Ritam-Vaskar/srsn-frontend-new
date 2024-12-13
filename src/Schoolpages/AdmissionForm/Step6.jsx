@@ -26,9 +26,11 @@
 // export default PaymentDetails;
 
 
+import { color } from "framer-motion";
 import { a, div } from "framer-motion/client";
 import { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
+import { Link } from "react-router-dom";
 
 const PaymentDetails = ({ register, errors, selectedClass, fees, setValue }) => {
   const [paymentMethod, setPaymentMethod] = useState("cash");
@@ -78,7 +80,9 @@ const PaymentDetails = ({ register, errors, selectedClass, fees, setValue }) => 
       )}
 
       <div>
-        <label>Payment Method</label>
+        <label>Payment Method
+        <span style={{ color: "red" }}>*</span>
+        </label>
         <select
           value={paymentMethod}
           onChange={handlePaymentMethodChange}
@@ -91,14 +95,21 @@ const PaymentDetails = ({ register, errors, selectedClass, fees, setValue }) => 
 
       {paymentMethod === "online" && (
         <div>
-          <label>UPI Transaction ID/UTR Number</label>
+          <label>UPI Transaction ID/UTR Number
+          <span style={{ color: "red" }}>*</span>
+          </label>
           <input
             {...register("paymentId", {
               required: "Payment ID is required",
             })}
           />
           {errors.paymentId && <p>{errors.paymentId.message}</p>}
+          <p style={{ color: "black" }}>
+          (Please mention UTR(for pay through Phonepay),Bank Reference Number(for pay through Amazon Pay),UPI Transaction ID(for pay through Google Pay),UPI Reference Number(for pay through Paytm)
+          More more clarification please check the notice board {<Link to="/school/academic#notice">Academic Section Notice Board</Link>})
+          </p>
         </div>
+    
       )}
     </div>
   );

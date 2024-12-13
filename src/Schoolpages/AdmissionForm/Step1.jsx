@@ -4,7 +4,7 @@ import uploadImg from '../../helper/uploadImg';
 import { useState } from 'react';
 import { toast } from 'react-toastify';
 
-const BasicInfo = ({profilePic,setprofilePic, register, errors, setValue }) => {
+const BasicInfo = ({ profilePic, setprofilePic, register, errors, setValue, isprofilePic, setisProfilePic }) => {
   const handleChange = async (e) => {
     const fileList = e.target.files;
     console.log("File List: ", fileList);
@@ -18,6 +18,7 @@ const BasicInfo = ({profilePic,setprofilePic, register, errors, setValue }) => {
         if (imageUrl.url) {
           setprofilePic(imageUrl.url);
           setValue("profilePic", imageUrl.url);
+          setisProfilePic(true);
           console.log("Image uploaded successfully: ", imageUrl.url);
         } else {
           toast.error("Image upload was successful, but URL is missing.");
@@ -38,14 +39,19 @@ const BasicInfo = ({profilePic,setprofilePic, register, errors, setValue }) => {
       <h3 style={{ marginBottom: '10px' }}>Read The manual <a href="https://drive.google.com/file/d/1NlHvcO9KFWF03XEDvThEB_YqpMKatlG5/view?usp=drive_link" target='_blank'>Click Here</a></h3>
       <h2>Basic Information</h2>
       <div>
-        <label>Name</label>
+        <label>
+          Name<span style={{ color: "red" }}>*</span>
+        </label>
+
         <input
           {...register("name", { required: "Name is required" })}
         />
         {errors.name && <p>{errors.name.message}</p>}
       </div>
       <div>
-        <label>Email</label>
+        <label>Email
+          <span style={{ color: "red" }}>*</span>
+        </label>
         <input
           type="email"
           {...register("email", {
@@ -61,22 +67,37 @@ const BasicInfo = ({profilePic,setprofilePic, register, errors, setValue }) => {
 
 
       <div>
-        <label>Profile Picture</label>
-        <input type="file" onChange={handleChange} className="fileInput" />
+        <label>Profile Picture
+          <span style={{ color: "red" }}>*</span>
+        </label>
+        <input type="file" onChange={handleChange} className="fileInput" required />
         {profilePic && <img src={profilePic} alt="Profile" width="100" />}
       </div>
 
 
       <div>
-        <label>Phone</label>
+        <label>Phone
+          <span style={{ color: "red" }}>*</span>
+        </label>
         <input
-          type="number"
-          {...register("phone", { required: "Phone is required" })}
+          type="text" 
+          {...register("phone", {
+            required: "Phone is required",
+            pattern: {
+              value: /^[0-9]{10}$/,
+              message: "Phone number must be exactly 10 digits",
+            },
+          })}
+          placeholder="Enter phone number"
+          maxLength={10} // Limits input to 10 digits
         />
         {errors.phone && <p>{errors.phone.message}</p>}
       </div>
+
       <div>
-        <label>Date of Birth</label>
+        <label>Date of Birth
+          <span style={{ color: "red" }}>*</span>
+        </label>
         <input
           type="date"
           {...register("dob", { required: "DOB is required" })}
@@ -84,14 +105,18 @@ const BasicInfo = ({profilePic,setprofilePic, register, errors, setValue }) => {
         {errors.dob && <p>{errors.dob.message}</p>}
       </div>
       <div>
-        <label>Date of Birth Registration Number</label>
+        <label>Date of Birth Registration Number
+          <span style={{ color: "red" }}>*</span>
+        </label>
         <input
           {...register("dobRegNo", { required: "DOB registration number is required" })}
         />
         {errors.dobRegNo && <p>{errors.dobRegNo.message}</p>}
       </div>
       <div>
-        <label>Social Category</label>
+        <label>Social Category
+          <span style={{ color: "red" }}>*</span>
+        </label>
         <select
           {...register("socialCatagory", { required: "Social category is required" })}
         >
@@ -104,16 +129,22 @@ const BasicInfo = ({profilePic,setprofilePic, register, errors, setValue }) => {
         </select>
         {errors.socialCatagory && <p>{errors.socialCatagory.message}</p>}
       </div>
+
       <div>
-        <label style={{ marginTop: '10px' }}>Social Category Registration Number</label>
+        <label style={{ marginTop: '10px' }}>Social Category Registration Number
+          <span style={{ color: "red" }}>*</span>
+        </label>
         <p style={{ marginTop: '10px' }}>Student Catagory from General Catagory write 'N/A'</p>
         <input
           {...register("socialCatagoryRegNo", { required: "Social category registration number is required" })}
         />
         {errors.socialCatagoryRegNo && <p>{errors.socialCatagoryRegNo.message}</p>}
       </div>
+
       <div>
-        <label>Religion</label>
+        <label>Religion
+          <span style={{ color: "red" }}>*</span>
+        </label>
         <select
           {...register("religion", { required: "Religion is required" })}
         >
@@ -125,15 +156,21 @@ const BasicInfo = ({profilePic,setprofilePic, register, errors, setValue }) => {
         </select>
         {errors.religion && <p>{errors.religion.message}</p>}
       </div>
+
       <div>
-        <label>Mother Tongue</label>
+        <label>Mother Tongue
+          <span style={{ color: "red" }}>*</span>
+        </label>
         <input
           {...register("motherTongue", { required: "Mother tongue is required" })}
         />
         {errors.motherTongue && <p>{errors.motherTongue.message}</p>}
       </div>
+
       <div>
-        <label>Nationality</label>
+        <label>Nationality
+          <span style={{ color: "red" }}>*</span>
+        </label>
 
         <select
           {...register("nationality", { required: "Nationality is required" })}
@@ -144,8 +181,11 @@ const BasicInfo = ({profilePic,setprofilePic, register, errors, setValue }) => {
         </select>
         {errors.nationality && <p>{errors.nationality.message}</p>}
       </div>
+
       <div>
-        <label>Aadhar Number</label>
+        <label>Aadhar Number
+          <span style={{ color: "red" }}>*</span>
+        </label>
         <input
           {...register("aadharNo", {
             required: "Aadhar number is required",
@@ -159,7 +199,9 @@ const BasicInfo = ({profilePic,setprofilePic, register, errors, setValue }) => {
       </div>
 
       <div>
-        <label>Blood Group</label>
+        <label>Blood Group
+          <span style={{ color: "red" }}>*</span>
+        </label>
         <select
           {...register("bloodGroup", { required: "Blood group is required" })}
         >
