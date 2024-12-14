@@ -22,7 +22,8 @@ const NoticeBar = () => {
                 return;
             }
             const data=result.notice;
-            setNews(data[data.length - 1] || {});
+            const news = data.filter((notice) => notice.sendbody !== "Technical" && notice.sendbody !== "Admission");
+            setNews(news[news.length - 1] || {});
         }catch(err){
             console.log(err);
             toast.error(err.message);
