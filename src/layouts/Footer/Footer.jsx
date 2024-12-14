@@ -67,12 +67,12 @@ const Footer = () => {
                         <div className="comp-logo">
                             <Link className="logo-link" to='/'>
                                 <img className="logo-svg" src={footLogo} alt="infoma logo" />
-                                Ramkrishna Sachool and Seva Sangha
+                                Ramkrishna School and Seva Sangha
                             </Link>
                         </div>
                         <div className="filler-text">Cultivating Spiritual Wisdom for a Transcendent Life</div>
                         <div className="social">
-                            <a className="social-link" href="https://maps.app.goo.gl/4AD9FQg6D1r4v7NUA">
+                            <a className="social-link" href="https://maps.app.goo.gl/K6GvDH5N2ADShJMr5">
                                 <FaMapMarkerAlt className="fab_logo" aria-hidden="true" style={{ color: '#0d7e20' }} />
                             </a>
                             <a className="social-link" href="https://www.facebook.com/p/Sri-Ramakrishna-Siksha-Niketan-100057181941594/">
@@ -89,21 +89,30 @@ const Footer = () => {
 
                     <div className="footer-grid">
                         <div className="footer-grid-column">
-                            <div className="footer-grid-heading">Products</div>
+                            <div className="footer-grid-heading">School</div>
                             <ul className="footer-links-list">
                                 <li>
-                                    <a href="#overview" className="footer-link">Overview</a>
+                                    <Link to="/school/home" className="footer-link" target="main">Home</Link>
                                 </li>
                                 <li>
-                                    <a href="#overview" className="footer-link">Blog</a>
+                                    <Link to="/overview" className="footer-link" target="main">Overview</Link>
+                                </li>
+                                <li>
+                                    <HashLink smooth to="/school/home#school-media" className="footer-link">School Blog</HashLink>
                                 </li>
                             </ul>
                         </div>
                         <div className="footer-grid-column">
-                            <div className="footer-grid-heading">Company</div>
+                            <div className="footer-grid-heading">Ashram</div>
                             <ul className="footer-links-list">
                                 <li>
-                                    <a href="#overview" className="footer-link">About</a>
+                                    <Link to="/ashram/home" className="footer-link" target="main">Home</Link>
+                                </li>
+                                <li>
+                                    <Link to="/ashram/news_event" className="footer-link" target="main">Ashram Blog</Link>
+                                </li>
+                                <li>
+                                    <Link to="/ashram/donate" className="footer-link" target="main">Donate</Link>
                                 </li>
                             </ul>
                         </div>
@@ -130,9 +139,7 @@ const Footer = () => {
                                 <li>
                                     <Link to='/privacypolicy' className="footer-link" target="main">Privacy Policy</Link>
                                 </li>
-                                <li>
-                                    <Link to="/overview" className="footer-link" target="main">Cookie Settings</Link>
-                                </li>
+
                             </ul>
                         </div>
                     </div>
