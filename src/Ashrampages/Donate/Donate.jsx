@@ -29,14 +29,7 @@ const Donation = () => {
             Online Donations to Sri Sri Ramkrishna Seva Sangha , Haridasnagar
           </h3>
           <p>
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-            Dignissimos explicabo nostrum placeat unde aspernatur, laudantium,
-            illo expedita temporibus voluptate natus deleniti porro provident
-            fugit amet omnis deserunt cum officiis aliquid! Lorem ipsum dolor
-            sit, amet consectetur adipisicing elit. Iure esse tempora voluptas
-            debitis facilis necessitatibus, laborum rem voluptatibus facere,
-            quod inventore asperiores impedit placeat non deserunt explicabo
-            eius nostrum sequi?
+            Haridasnagar Sri Sri Ramkrishna Sevasangha is a charitable foundation. It raises funds from renowned members of society and ashram members. These funds are used to support various initiatives, including helping people in need, plantation drives, a homeopathy charitable dispensary, eye tests and surgeries, artificial limb operations, scholarships for underprivileged meritorious students, and clothes distribution. For more information, please visit our blog. We kindly request your support for this noble cause.
           </p>
         </div>
       </div>
