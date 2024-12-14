@@ -5,6 +5,7 @@ import LogoImg from "../../assets/images/Logo.png";
 import MenuIcon from '@mui/icons-material/Menu';
 import CancelIcon from '@mui/icons-material/Cancel';
 import Headroom from "react-headroom";
+import TechnicalNav from "../TechnicalNav/TechnicalNav";
 
 const Navbar = () => {
     let menuref = useRef(null);
@@ -27,6 +28,7 @@ const Navbar = () => {
 
     return (
         <div className="header">
+            <TechnicalNav />
             <div className="upperheader">
                 <div className="logo">
                     <img

@@ -15,6 +15,7 @@ import jsPDF from 'jspdf';
 import html2canvas from 'html2canvas';
 import Spinner from '../../layouts/Loader2/Loader2';
 import Loader from '../../layouts/Loader/Spinner'
+import AdmissionNotice from './AdmissionNotice/AdmissionNotice';
 
 
 const LOCAL_STORAGE_KEY = 'admissionFormData';
@@ -384,6 +385,7 @@ const AdmissionForm = () => {
 
   return (
     <div className="form-container">
+      <AdmissionNotice />
       {!admissionOpen ? (
         <h1>Admission is not ongoing</h1>
       ) : (
