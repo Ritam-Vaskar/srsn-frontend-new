@@ -1,0 +1,27 @@
+.technicalNav {
+    background-color: #e56d0b; // Yellow background for the notice
+    color: #f6f1f1; // Dark text for readability
+    text-align: center;
+    padding: 10px 20px;
+    font-size: 1rem;
+    font-weight: 600;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    
+
+    @media (max-width: 768px) {
+        font-size: 0.9rem;
+        padding: 8px 15px;
+    }
+
+    p {
+        margin: 0;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+}

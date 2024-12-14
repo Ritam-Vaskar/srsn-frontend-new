@@ -51,6 +51,7 @@ const Notice = () => {
                 headers: {
                     'Content-Type': 'application/json',
                 },
+                
                 body: JSON.stringify(data)
             });
             const result = await response.json();
@@ -119,7 +120,12 @@ const Notice = () => {
                         <option value="">Select an option</option>
                         <option value="Primary School">Primary School</option>
                         <option value="Secondary School">Secondary School</option>
+                        <option value="Both School">Both School</option>
                         <option value="Ashram">Ashram</option>
+                        
+                        <option value="Admission">Admission</option>
+                        <option value="Technical">Technical</option>
+                        
                     </select>
                     {errors.sendbody && <p className={styles.error}>{errors.sendbody.message}</p>}
                 </label>

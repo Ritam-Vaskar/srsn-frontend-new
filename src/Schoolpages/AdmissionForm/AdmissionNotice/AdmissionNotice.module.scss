@@ -1,0 +1,21 @@
+.admissionNotice {
+    background-color: #e0f7fa; // Light cyan background for a calming look
+    color: #00796b; // Teal text color for contrast
+    padding: 15px 20px;
+    font-size: 1rem;
+    font-weight: 500;
+    border: 1px solid #b2dfdb; // Border for emphasis
+    border-radius: 8px;
+    margin-bottom: 20px; // Space below the notice
+    text-align: center;
+
+    p {
+        margin: 0;
+        line-height: 1.5;
+    }
+
+    @media (max-width: 768px) {
+        font-size: 0.9rem;
+        padding: 10px 15px;
+    }
+}

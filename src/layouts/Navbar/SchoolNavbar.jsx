@@ -7,6 +7,7 @@ import ClearIcon from '@mui/icons-material/Clear';
 import logo from '../../assets/images/Logo.png';
 import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
+import TechnicalNav from '../TechnicalNav/TechnicalNav';
 
 const SchoolNavbar = () => {
     const user = useSelector(state => state?.user?.user);
@@ -56,6 +57,7 @@ const SchoolNavbar = () => {
 
     return (
         <div className={styles.snavbar}>
+            <TechnicalNav />
             {/* Logo Section */}
             <Link to='/school' className={styles.schooldetails}>
                 <div className={styles.school_logo}>

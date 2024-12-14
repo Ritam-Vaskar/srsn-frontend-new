@@ -39,7 +39,9 @@ const Noticebar = () => {
 
       const data = result.notice;
       if (data && Array.isArray(data) && data.length > 0) {
-        const lastFiftyNotices = data.slice(-50).reverse();
+        //get last 50 notices which is not send from technical or admission body
+        const notices = data.filter((notice) => (notice.sendbody !== "Technical" && notice.sendbody !== "Admission"));
+        const lastFiftyNotices = notices.slice(-50).reverse();
         setNotice(lastFiftyNotices);
         setTotalPages(Math.ceil(lastFiftyNotices.length / noticesPerPage));
       } else {
