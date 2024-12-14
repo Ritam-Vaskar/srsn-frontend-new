@@ -1,0 +1,93 @@
+.popup {
+    z-index: 51;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.7); /* Slightly darker for better contrast */
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
+  }
+  
+  .fadeIn {
+    opacity: 1;
+    visibility: visible;
+    transition: opacity 0.5s ease-in-out;
+  }
+  
+  .popupContent {
+    position: relative;
+    border-radius: 16px; /* Softer rounding */
+    width: 90%;
+    max-width: 600px;
+    height: auto;
+    background-color: #ffffff; /* Clean white background */
+    overflow: hidden;
+    border: 2px solid #ddd; /* Soft gray border */
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2); /* Subtle shadow for depth */
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .popupImage {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    border-bottom: 2px solid #ddd; /* Matches popupContent border */
+  }
+  
+  .closeButton {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    background: rgba(0, 0, 0, 0.7);
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+    color: #ffffff;
+    padding: 8px;
+    border-radius: 20%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.3s ease-in-out;
+    z-index: 10;
+  }
+  
+  .closeButton:hover {
+    background-color: #ff4d4d; /* Light red on hover */
+  }
+  
+  .lockScroll {
+    overflow: hidden;
+  }
+  
+  /* Responsive design for mobile devices */
+  @media (max-width: 480px) {
+    .popupContent {
+      width: 95%;
+      max-width: none;
+      height: auto;
+    }
+  
+    .popupImage {
+      width: 100%;
+      height: auto;
+    }
+  
+    .closeButton {
+      top: 8px;
+      right: 8px;
+      font-size: 1.2rem;
+      padding: 6px;
+    }
+  }
+  

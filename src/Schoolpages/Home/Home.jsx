@@ -9,22 +9,14 @@ import { Link } from 'react-router-dom';
 import SummaryApi from '../../common'; // Adjust the path as needed
 import { toast } from 'react-toastify';
 import styles from './styles/Home.module.scss'; // Import the SCSS module
+import LiveEventPopup from '../../layouts/liveEvent/LiveEvent';
 
 const Home = () => {
-    const [isPopupVisible, setPopupVisible] = useState(false);
-    const [isAdmissionOngoing, setIsAdmissionOngoing] = useState(false);
     
     return (
         <div>
             {/* Admission Status Popup */}
-            {isPopupVisible && (
-                <div className={styles.admissionPopupOverlay}>
-                    <div className={styles.admissionPopup}>
-                        <p>Admissions are currently open!</p>
-                        <button onClick={() => setPopupVisible(false)}>Close</button>
-                    </div>
-                </div>
-            )}
+            <LiveEventPopup />
 
             <section id="hero-carousel">
                 <HeroCarousel />
