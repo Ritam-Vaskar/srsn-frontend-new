@@ -11,7 +11,8 @@ import "./styles/Footer.css";
 import footLogo from "../../assets/images/Logo.png";
 import GitHubIcon from '@mui/icons-material/GitHub';
 import { HashLink } from 'react-router-hash-link';
-
+import YouTubeIcon from '@mui/icons-material/YouTube';
+import MailIcon from '@mui/icons-material/Mail';
 
 const Footer = () => {
     return (
@@ -71,17 +72,17 @@ const Footer = () => {
                         </div>
                         <div className="filler-text">Cultivating Spiritual Wisdom for a Transcendent Life</div>
                         <div className="social">
-                            <a className="social-link" href="#">
+                            <a className="social-link" href="https://maps.app.goo.gl/4AD9FQg6D1r4v7NUA">
                                 <FaMapMarkerAlt className="fab_logo" aria-hidden="true" style={{ color: '#0d7e20' }} />
-                            </a>
-                            <a className="social-link" href="#">
-                                <FaLinkedin className="fab_logo" aria-hidden="true" style={{ color: '#007bb6' }} />
                             </a>
                             <a className="social-link" href="https://www.facebook.com/p/Sri-Ramakrishna-Siksha-Niketan-100057181941594/">
                                 <FaFacebook className="fab_logo" aria-hidden="true" style={{ color: '#3b5998' }} />
                             </a>
-                            <a className="social-link" href="#">
-                                <FaTwitter className="fab_logo" aria-hidden="true" style={{ color: '#00aced' }} />
+                            <a className="youtube-link" href="https://www.youtube.com/@SriRamakrishnaSikshaNiketan" style={{ display: "flex", justifyContent: "center", margin: -1 }}>
+                                <YouTubeIcon className="fab_logo" aria-hidden="true" style={{ color: 'red', fontSize: '1.8rem' }} />
+                            </a>
+                            <a className="social-link" href="mailto:sriramakrishnasikshaniketan@gmail.com">
+                                <MailIcon className="fab_logo" aria-hidden="true" style={{ color: '#007bb6' }} />
                             </a>
                         </div>
                     </div>
@@ -130,7 +131,7 @@ const Footer = () => {
                                     <Link to='/privacypolicy' className="footer-link" target="main">Privacy Policy</Link>
                                 </li>
                                 <li>
-                                    <a href="#cookie" className="footer-link">Cookie Settings</a>
+                                    <Link to="/overview" className="footer-link" target="main">Cookie Settings</Link>
                                 </li>
                             </ul>
                         </div>

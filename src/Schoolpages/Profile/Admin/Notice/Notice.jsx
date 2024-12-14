@@ -119,7 +119,7 @@ const Notice = () => {
                     >
                         <option value="">Select an option</option>
                         <option value="Primary School">Primary School</option>
-                        <option value="Upper Primary School">Upper Primary School</option>
+                        <option value="Secondary School">Secondary School</option>
                         <option value="Both School">Both School</option>
                         <option value="Ashram">Ashram</option>
                         
