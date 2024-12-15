@@ -1,0 +1,80 @@
+.blogContainer {
+    padding: 20px;
+    overflow: auto;
+
+    input, textarea, select {
+        padding: 10px;
+        font-size: 16px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        width: 100%;
+        resize: none; // Ensures consistent textarea resizing
+    }
+
+    textarea {
+        height: 100px;
+    }
+}
+
+.blogForm {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.blogForm label {
+    display: flex;
+    flex-direction: column;
+    font-size: 16px;
+}
+
+.submitButton {
+    padding: 10px;
+    font-size: 16px;
+    background-color: #3498db;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+
+    &:hover {
+        background-color: #2980b9;
+    }
+}
+
+.blogTable {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+.blogTable th, .blogTable td {
+    border: 1px solid #ddd;
+    padding: 10px;
+    text-align: center;
+    word-wrap: break-word;
+}
+
+.blogTable th {
+    background-color: #f4f4f4;
+}
+
+.deleteButton {
+    padding: 5px 10px;
+    background-color: #e74c3c;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+
+    &:hover {
+        background-color: #c0392b;
+    }
+}
+
+.error {
+    color: #e74c3c;
+    font-size: 14px;
+    margin-top: 5px;
+}
