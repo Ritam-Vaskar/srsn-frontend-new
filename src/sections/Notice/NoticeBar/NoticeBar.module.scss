@@ -1,4 +1,4 @@
-.container {
+.NoticeBoardcontainer {
     background-image: url('https://cdn.prod.website-files.com/663d1907e337de23e83c30b2/675deec431c07409ada16e9c_pngtree-notice-board-02h91729eps-announcement-attachment-png-image_4618323.png');
     background-size: cover;
     background-position: center;
@@ -12,7 +12,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    max-width: 80%; /* Larger width for laptops */
+    max-width: 80%;
 
     .divider {
         height: 100%;
@@ -21,125 +21,122 @@
         justify-content: center;
         align-items: center;
         margin-bottom: 2rem;
-    }
 
-    h2 {
-        font-size: 2rem; /* Slightly larger title */
-        margin-bottom: 10px;
-    }
+        h2 {
+            font-size: 2rem;
+            margin-bottom: 10px;
+        }
 
-    p {
-        font-size: 1.2rem;
-        margin: 5px 0;
-        font-weight: 500;
-        text-decoration: underline;
-    }
+        p {
+            font-size: 1.2rem;
+            margin: 5px 0;
+            font-weight: 500;
+            text-decoration: underline;
+        }
 
-    a {
-        color: #443dc9;
-        font-size: 1.2rem;
-        font-weight: bold;
-        text-decoration: none;
-        margin-bottom: 10px;
-        display: inline-block;
-        padding: 0.5rem;
-        border-radius: 1rem;
+        a {
+            color: #443dc9;
+            font-size: 1.2rem;
+            font-weight: bold;
+            text-decoration: none;
+            margin-bottom: 10px;
+            display: inline-block;
+            padding: 0.5rem;
+            border-radius: 1rem;
 
-        &:hover {
-            color: #ffffff;
-            background-color: black;
+            &:hover {
+                color: #ffffff;
+                background-color: black;
+            }
+        }
+
+        .sendbody {
+            color: white;
+            background-color: #ff6a00;
+            padding: 0.4rem;
+            border: 0.5px solid #443dc9;
+            border-radius: 5px;
+            font-weight: 500;
+            text-decoration: none;
         }
     }
 
-    .sendbody {
-        color: white;
-        background-color: #ff6a00;
-        padding: 0.4rem;
-        border: 0.5px solid #443dc9;
-        border-radius: 5px;
-        font-weight: 500;
-        text-decoration: none;
-    }
-}
-
-/* Responsive styles */
-@media (max-width: 768px) {
-    .container {
-        // background-image: url('https://png.pngtree.com/png-clipart/20200701/original/pngtree-wooden-board-notice-board-on-green-grass-png-image_5425346.jpg'); /* Mobile-specific image */
+    /* Responsive styles */
+    @media (max-width: 768px) {
         padding: 2rem 1rem;
         margin: 1rem auto;
         max-width: 100%;
         border-radius: 5px;
+
+        .divider {
+            margin-bottom: 1rem;
+
+            h2 {
+                font-size: 1.5rem;
+            }
+
+            p {
+                font-size: 1rem;
+            }
+
+            a {
+                font-size: 1rem;
+                padding: 0.4rem;
+            }
+
+            .sendbody {
+                font-size: 0.9rem;
+                padding: 0.3rem;
+            }
+        }
     }
 
-    .divider {
-        margin-bottom: 1rem;
-    }
-
-    h2 {
-        font-size: 1.5rem;
-    }
-
-    p {
-        font-size: 1rem;
-    }
-
-    a {
-        font-size: 1rem;
-        padding: 0.4rem;
-    }
-
-    .sendbody {
-        font-size: 0.9rem;
-        padding: 0.3rem;
-    }
-}
-
-@media (min-width: 769px) and (max-width: 1024px) {
-    .container {
+    @media (min-width: 769px) and (max-width: 1024px) {
         padding: 3rem 1.5rem;
         max-width: 85%;
+
+        .divider {
+            h2 {
+                font-size: 1.8rem;
+            }
+
+            p {
+                font-size: 1.1rem;
+            }
+
+            a {
+                font-size: 1.1rem;
+                padding: 0.5rem;
+            }
+
+            .sendbody {
+                font-size: 1rem;
+            }
+        }
     }
 
-    h2 {
-        font-size: 1.8rem;
-    }
+    @media (min-width: 1025px) {
+        padding: 6rem 4rem;
+        max-width: 70%;
 
-    p {
-        font-size: 1.1rem;
-    }
+        .divider {
+            h2 {
+                font-size: 2.2rem;
+            }
 
-    a {
-        font-size: 1.1rem;
-        padding: 0.5rem;
-    }
+            p {
+                font-size: 1.3rem;
+            }
 
-    .sendbody {
-        font-size: 1rem;
-    }
-}
+            a {
+                font-size: 1.3rem;
+                padding: 0.6rem;
+            }
 
-@media (min-width: 1025px) {
-    .container {
-        padding: 6rem 4rem; /* Increased padding for laptop screens */
-        max-width: 70%; /* Even larger width for large screens */
-    }
-
-    h2 {
-        font-size: 2.2rem;
-    }
-
-    p {
-        font-size: 1.3rem;
-    }
-
-    a {
-        font-size: 1.3rem;
-        padding: 0.6rem;
-    }
-
-    .sendbody {
-        font-size: 1.1rem;
-        padding: 0.4rem;
+            .sendbody {
+                font-size: 1.1rem;
+                padding: 0.4rem;
+            }
+        }
     }
 }
