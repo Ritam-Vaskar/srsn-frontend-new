@@ -77,6 +77,10 @@ const AlumniApplicationForm = ({ showLogin, setShowLogin, onClose }) => {
   return (
     <>
       <h2>Apply for Alumni</h2>
+      {(!alumni)&&<div className={styles.signup}>
+        Already have an account?{' '}
+        <p className={styles.signupLink} onClick={() => setShowLogin(!showLogin)}>Login</p>
+      </div>}
       <p className={styles.instruction}>*Please wait after uploading the image</p>
       <form onSubmit={handleSubmit(onSubmit)} className={styles.form}>
         <div className={styles.picUp}>
@@ -182,10 +186,7 @@ const AlumniApplicationForm = ({ showLogin, setShowLogin, onClose }) => {
           </button>
         </div>
       </form>
-      {(!alumni)&&<div className={styles.signup}>
-        Already have an account{' '}
-        <p className={styles.signupLink} onClick={() => setShowLogin(!showLogin)}>Sign in</p>
-      </div>}
+      
     </>
 
 

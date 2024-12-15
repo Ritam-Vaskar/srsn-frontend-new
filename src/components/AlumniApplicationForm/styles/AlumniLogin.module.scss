@@ -12,14 +12,11 @@
   }
   
   .popupContent {
-    background: #fff;
     padding: 30px;
     border-radius: 8px;
     max-width: 600px;
-    width: 90%;
     max-height: 90vh;
     overflow-y: auto;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     position: relative;
     text-align: center;
   }
@@ -29,10 +26,7 @@
     max-width: 400px;
     margin: 0 auto;
     padding: 2rem;
-    background-color: #f9f9f9;
-    border: 1px solid #e0e0e0;
     border-radius: 8px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
 
 /* Title */
@@ -108,12 +102,12 @@
 }
 
 .signupLink {
-    color: #007bff;
+    color: #ff8c19;
     cursor: pointer;
     font-weight: bold;
     text-decoration: underline;
 }
 
 .signupLink:hover {
-    color: #0056b3;
+    color: #ff6a00;
 }
