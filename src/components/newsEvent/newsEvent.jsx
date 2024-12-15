@@ -14,7 +14,7 @@ const NewsCard = ({ image, title, date, time, content }) => {
         <div className={styles.newsCard}>
             <img src={image} alt={title} className={styles.newsCardImage} />
             <div className={styles.newsCardContent}>
-                <h4 className={styles.schoolName}>School Name</h4> {/* Constant school name */}
+                <h4 className={styles.schoolName}>Sri Ramakrishna Siksha Niketan</h4> {/* Constant school name */}
                 <h3 className={styles.newsTitle}>{title}</h3>
                 <p className={styles.newsDateTime}>
                     {date} - {time}
