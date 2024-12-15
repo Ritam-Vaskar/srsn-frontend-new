@@ -5,15 +5,16 @@ import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import styles from './styles/Blog.module.scss';
 import SummaryApi from '../../../../common';
+import uploadImg from '../../../../helper/uploadImg';
 
 const BlogUpload = () => {
     const [blogs, setBlogs] = useState([]);
+    
 
-    const { register, handleSubmit, reset, formState: { errors } } = useForm({
+    const { register, handleSubmit, reset, setValue, formState: { errors } } = useForm({
         defaultValues: {
             title: '',
             content: '',
-            image: null,
             sender: ''
         }
     });
@@ -32,9 +33,8 @@ const BlogUpload = () => {
                 credentials: 'include'
             });
             const data = await response.json();
-
             if (data.success) {
-                setBlogs(data.blogs.reverse());
+                setBlogs(data.blog.reverse());
             } else {
                 toast.error("Failed to fetch blogs.");
             }
@@ -42,21 +42,48 @@ const BlogUpload = () => {
             toast.error("Error fetching blogs.");
         }
     };
+    const [image, setimage] = useState('');
+    const [isUploading, setIsUploading] = useState(false);
+
+    const handleChange = async (e) => {
+        const file = e.target.files[0];
+        if (file && file.type.startsWith("image/") && file.size <= 2 * 1024 * 1024) { // Check image type and size
+            setIsUploading(true);
+            try {
+                const imageUrl = await uploadImg(file);
+                if (imageUrl.url) {
+                    setimage(imageUrl.url);
+                    // setValue("image", imageUrl.url);
+                    toast.success("Image uploaded successfully!");
+
+                } else {
+                    toast.error("Image upload was successful, but URL is missing.");
+                }
+            } catch (error) {
+                toast.error("Failed to upload image. Please try again.");
+            } finally {
+                setIsUploading(false);
+            }
+        } else {
+            toast.error("Please select a valid image file under 2MB.");
+        }
+    };
 
     const onSubmit = async (data) => {
-        const formData = new FormData();
-        formData.append('title', data.title);
-        formData.append('content', data.content);
-        formData.append('image', data.image[0]);
-        formData.append('sender', data.sender);
+
+        console.log(data);
 
         try {
-            const response = await fetch(SummaryApi.BlogUpload.url, {
-                method: SummaryApi.BlogUpload.method,
-                body: formData
+            const response = await fetch(SummaryApi.BlogAdd.url, {
+                method: SummaryApi.BlogAdd.method,
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ ...data, image }), 
+                credentials: 'include',
             });
-            const result = await response.json();
 
+            const result = await response.json();
             if (result.success) {
                 toast.success("Blog uploaded successfully!");
                 fetchBlogs();
@@ -76,7 +103,7 @@ const BlogUpload = () => {
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify({ id: blogId }),
+                body: JSON.stringify({ _id: blogId }),
             });
             const result = await response.json();
 
@@ -113,24 +140,22 @@ const BlogUpload = () => {
                     {errors.content && <p className={styles.error}>{errors.content.message}</p>}
                 </label>
 
-                <label>
-                    Image:
-                    <input
-                        type="file"
-                        {...register("image", { required: "Image is required" })}
-                        accept="image/*"
-                    />
-                    {errors.image && <p className={styles.error}>{errors.image.message}</p>}
-                </label>
+                <label> Picture</label>
+                <input type="file" onChange={handleChange} className={styles.fileInput} />
+                {isUploading ? <p>Uploading...</p> : image && <img src={image} alt="Profile" width="100" className={styles.img} />}
 
                 <label>
                     Sender:
-                    <select name="sender" id="">
+                    <select
+                        {...register("sender", { required: "Sender is required" })}
+                        className={styles.selectInput}
+                    >
                         <option value="">Select sender</option>
                         <option value="school">School</option>
                         <option value="ashram">Ashram</option>
                     </select>
                 </label>
+                {errors.sender && <p className={styles.error}>{errors.sender.message}</p>}
 
                 <button type="submit" className={styles.submitButton}>Upload Blog</button>
             </form>
