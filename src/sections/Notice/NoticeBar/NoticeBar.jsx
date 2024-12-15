@@ -35,7 +35,7 @@ const NoticeBar = () => {
     }, []);
 
     return (
-        <div className={styles.container}>
+        <div className={styles.NoticeBoardcontainer}>
             <div className={styles.divider}>
                 <h2>Notice</h2>
                 <p>Latest News</p>
