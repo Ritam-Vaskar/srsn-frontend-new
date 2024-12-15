@@ -36,6 +36,7 @@ import SourceCode from './../Schoolpages/SourceCode/Source';
 
 import UserPolicy from '../Policy/UserPolicy/UserPolicy';
 import Terms from './../Policy/TermsAndConditions/TermsAndConditions';
+import Overview from '../Policy/Overview/Overview';
 
 import ErrorPage from '../layouts/ErrorPage/ErrorPage';
 
@@ -68,6 +69,10 @@ const router = createBrowserRouter([
             {
                 path: 'terms',
                 element: <Terms />
+            },
+            {
+                path: 'overview',
+                element: <Overview />
             },
             {
                 path: 'source',

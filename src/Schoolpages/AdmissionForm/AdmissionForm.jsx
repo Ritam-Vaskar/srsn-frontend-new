@@ -15,6 +15,7 @@ import jsPDF from 'jspdf';
 import html2canvas from 'html2canvas';
 import Spinner from '../../layouts/Loader2/Loader2';
 import Loader from '../../layouts/Loader/Spinner'
+import AdmissionNotice from './AdmissionNotice/AdmissionNotice';
 
 
 const LOCAL_STORAGE_KEY = 'admissionFormData';
@@ -374,17 +375,22 @@ const AdmissionForm = () => {
     fetchAdmissionOpen();
   }, []);
 
+  const [isProfilePic, setisProfilePic] = useState(false);
+
   if (pageLoader) {
     return (<div><Loader /></div>)
   }
 
+  
+
   return (
     <div className="form-container">
+      <AdmissionNotice />
       {!admissionOpen ? (
         <h1>Admission is not ongoing</h1>
       ) : (
         <form onSubmit={handleSubmit(onSubmit)}>
-          {step === 1 && <BasicInfo profilePic={profilePic} setprofilePic={setprofilePic} register={register} errors={errors} setValue={setValue} />}
+          {step === 1 && <BasicInfo profilePic={profilePic} setprofilePic={setprofilePic} register={register} errors={errors} setValue={setValue} isprofilePic={isProfilePic} setisProfilePic={setisProfilePic} />}
           {step === 2 && <PreviousSchoolDetails register={register} errors={errors} onClassChange={setSelectedClass} />}
           {step === 3 && <PermanentContactDetails register={register} errors={errors} />}
           {step === 4 && <ResidentialContactDetails register={register} errors={errors} />}
@@ -395,13 +401,13 @@ const AdmissionForm = () => {
 
 
           <div className="form-navigation">
-            {step > 1 && step < 7 && (
-              <button type="button" onClick={handlePrev} className="prev-button">
+            {step > 1 && step < 7&& (
+              <button type="button" onClick={handlePrev} className="prev-button" disabled={!isProfilePic}>
                 Previous
               </button>
             )}
             {step < 7 && (
-              <button type="button" onClick={handleNext} className="next-button">
+              <button type="button" onClick={handleNext} className="next-button" disabled={!isProfilePic}>
                 Next
               </button>
             )}

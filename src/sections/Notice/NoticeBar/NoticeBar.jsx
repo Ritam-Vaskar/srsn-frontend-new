@@ -22,7 +22,8 @@ const NoticeBar = () => {
                 return;
             }
             const data=result.notice;
-            setNews(data[data.length - 1] || {});
+            const news = data.filter((notice) => notice.sendbody !== "Technical" && notice.sendbody !== "Admission");
+            setNews(news[news.length - 1] || {});
         }catch(err){
             console.log(err);
             toast.error(err.message);
@@ -34,7 +35,7 @@ const NoticeBar = () => {
     }, []);
 
     return (
-        <div className={styles.container}>
+        <div className={styles.NoticeBoardcontainer}>
             <div className={styles.divider}>
                 <h2>Notice</h2>
                 <p>Latest News</p>

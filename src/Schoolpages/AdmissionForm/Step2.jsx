@@ -9,7 +9,10 @@ const PreviousSchoolDetails = ({ register, errors, onClassChange }) => {
       <h2>Class Details</h2>
       
       <div>
-        <label>Student Code(Required for Class 1 to 8 Admission)</label>
+        <label>Student Code(Required for Class 1 to 8 Admission)
+        <span style={{ color: "red" }}>*</span>
+        </label>
+
         <p style={{marginTop:'10px'}}>Student for admission in Class Beez , Ankur and Kisholoy write 'N/A'</p>
         <input 
           {...register("studentCode", { required: "Student Code is required" })} 
@@ -19,7 +22,9 @@ const PreviousSchoolDetails = ({ register, errors, onClassChange }) => {
       </div>
       
       <div>
-        <label>Class(Which Class do you want to Apply?)</label>
+        <label>Class(Which Class do you want to Apply?)
+        <span style={{ color: "red" }}>*</span>
+        </label>
         <select 
           {...register("grade", { required: "grade is required" })}
           defaultValue="" // Set default value to an empty string for validation

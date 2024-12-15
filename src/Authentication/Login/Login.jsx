@@ -12,6 +12,7 @@ import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 import { useSelector } from 'react-redux';
 import Loader2 from '../../layouts/Loader2/Loader2';
 import { tr } from 'framer-motion/client';
+import ForgotPassword from '../ForgotPassword/ForgotPassword';
 
 
 const Login = () => {
@@ -25,6 +26,8 @@ const Login = () => {
   useEffect(() => {
     checkUser();
   }, [user]);
+
+  const [isForgotPassword, setIsForgotPassword] = React.useState(false);
 
   const [showPassword, setShowPassword] = React.useState(false);
   const Navigate = useNavigate();
@@ -85,6 +88,10 @@ const Login = () => {
     setShowPassword(!showPassword);
   };
 
+  if (isForgotPassword) {
+    return <ForgotPassword setIsForgotPassword={setIsForgotPassword} isForgotPassword={isForgotPassword} />
+  }
+
   return (
     <div className={styles.container}>
       <h2>Login</h2>
@@ -124,12 +131,23 @@ const Login = () => {
 
         {/* Submit Button */}
         <div className={styles['form-group']}>
-          {loading? <div style={{ display: 'flex', justifyContent: 'center' , marginTop: '-30px' , marginBottom: '-30px' }}><Loader2 /></div>: <button type="submit" className={styles.button}>Login</button>}
+          {loading ? <div style={{ display: 'flex', justifyContent: 'center', marginTop: '-30px', marginBottom: '-30px' }}><Loader2 /></div> : <button type="submit" className={styles.button}>Login</button>}
         </div>
+
+        <div
+          className={styles['forgot-password']}
+          onClick={() => setIsForgotPassword(true)}
+        >
+          Forgot Password ?
+        </div>
+
+
       </form>
       <div className={styles['contact-admin']}>
         *If you face problems logging in, please contact the administrator.
       </div>
+
+
 
     </div>
   );

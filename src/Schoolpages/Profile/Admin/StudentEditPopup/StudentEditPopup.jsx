@@ -99,6 +99,26 @@ const StudentAppEdit = ({ student, onClose, onUpdate }) => {
               />
             </div>
 
+            <div className={styles.formGroup}>
+              <label>Aadhar Number</label>
+              <input
+                type="text"
+                name="aadharNo"
+                value={editedStudent.aadharNo || ''}
+                onChange={handleInputChange}
+              />
+            </div>
+
+            <div className={styles.formGroup}>
+              <label>Blood Group</label>
+              <input
+                type="text"
+                name="bloodGroup"
+                value={editedStudent.bloodGroup || ''}
+                onChange={handleInputChange}
+              />
+            </div>
+
             {/* Address Information */}
             <div className={styles.formGroup}>
               <label>Address</label>
