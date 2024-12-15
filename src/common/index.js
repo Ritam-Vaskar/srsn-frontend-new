@@ -203,6 +203,20 @@ const SummaryApi={
         method: "PUT",
     },
 
+    //Blog
+    BlogFetch: {
+        url: backendUrl + "/api/blogFetch", 
+        method: "GET",
+    },
+    BlogDelete: {
+        url: backendUrl + "/api/blogDelete", 
+        method: "DELETE",
+    },
+    BlogAdd: {
+        url: backendUrl + "/api/blogAdd", 
+        method: "POST",
+    },
+
 }   
 
 
