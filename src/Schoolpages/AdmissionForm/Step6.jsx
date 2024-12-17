@@ -88,12 +88,12 @@ const PaymentDetails = ({ register, errors, selectedClass, fees, setValue }) => 
           onChange={handlePaymentMethodChange}
           style={{ display: "block", marginBottom: "10px" }}
         >
-          <option value="online">Online</option>
-          <option value="cash">Cash</option>
+          {fees.qrCode &&<option value="online">Online</option>}
+          {<option value="cash">Cash</option>}
         </select>
       </div>
 
-      {paymentMethod === "online" && (
+      {fees.qrCode && paymentMethod === "online" && (
         <div>
           <label>UPI Transaction ID/UTR Number
           <span style={{ color: "red" }}>*</span>

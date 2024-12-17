@@ -18,7 +18,7 @@ const NewsEvent = () => {
 
             const newData = newsdata.filter((notice) => notice.sender === 'ashram');
             console.log(newData);
-            setNewsList(newData);
+            setNewsList(newData.reverse());
         } catch (error) {
             console.error('Error fetching news data:', error);
         }
