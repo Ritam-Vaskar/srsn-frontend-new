@@ -4,10 +4,14 @@ import logo from '../../assets/images/Logo.png';
 import { useForm } from "react-hook-form";
 import SummaryApi from '../../common';
 import { toast } from 'react-toastify';
+import Loader2 from '../../layouts/Loader2/Loader2';
+import { useState } from 'react';
 
 const ContactPage = () => {
+  const [loading, setLoading] = useState(false);
   const { register, handleSubmit, formState: { errors } } = useForm();
   const onSubmit = async(data) => {
+    setLoading(true);
     try{
       const response=await fetch(SummaryApi.Message.url, {
         method: SummaryApi.Message.method,
@@ -25,6 +29,9 @@ const ContactPage = () => {
       }
     }catch(err){
       toast.error(err.message);
+    }
+    finally{
+      setLoading(false);
     }
   }
 
@@ -75,7 +82,7 @@ const ContactPage = () => {
           />
           {errors.Message && <span className={styles.error}>*This field is required</span>}
 
-          <button type="submit" className={styles.submitButton}>Send Message</button>
+         { loading ? <div style={{display:"flex", justifyContent:"center", alignItems:"center"}}><Loader2 /></div> : <button type="submit" className={styles.submitButton}>Send Message</button>}
         </form>
       </div>
     </div>
