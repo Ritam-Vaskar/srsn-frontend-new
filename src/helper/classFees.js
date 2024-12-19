@@ -10,7 +10,7 @@ const classFees = {
     5: { amount: 0,qrCode:'',qrCodeImg:"" },
     6: { amount: 0,qrCode:'' ,qrCodeImg:""},
     7: { amount: 0, qrCode:'' ,qrCodeImg:""},
-    8: { amount: 0,qrCode:'' ,qrCodeImg:""},
+    8: { amount: 0,qrCode:'' ,qrCodeImg:""} ,
   };
   
   export default classFees;
