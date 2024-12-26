@@ -293,6 +293,8 @@ const AdmissionForm = () => {
     return () => subscription.unsubscribe(); // Cleanup
   }, [watch]);
 
+  const [isSubmit, setisSubmit] = useState(false);
+
   // On submission of the entire form
   const onSubmit = async (data) => {
     setload(true);
@@ -318,6 +320,7 @@ const AdmissionForm = () => {
       }
 
       toast.success('Form submitted successfully , you will get the application pdf in your registered email , please submit the hard copy of the pdf to the school office');
+      setisSubmit(true);
       //download pdf
       handleDownloadPDF();
       setisDownload(true);
@@ -413,7 +416,7 @@ const AdmissionForm = () => {
             )}
             {step === 7 && (
               <div className="terms-section">
-                <button type="button" onClick={handlePrev} className="prev-button">
+                <button type="button" onClick={handlePrev} className="prev-button" disabled={isSubmit}>
                   Previous
                 </button>
                 <div className="download-pdf">
