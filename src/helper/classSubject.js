@@ -30,14 +30,14 @@ const subjectOptions = {
         'NitiW', 'NitiO', 'GKW', 'GKO', 'Draw', 'Work', 'Physi'
     ],
     3: [
-        'Bengali1W', 'Bengali2O', 'Bengali2W', 'Bengali2O',
+        'Bengali1W', 'Bengali1O', 'Bengali2W', 'Bengali2O',
         'English1W', 'English1O', 'English2W', 'English2O',
         'Maths', 'HistoryW', 'HistoryO', 'GrographyW', 'GrographyO',
         'ScienceW', 'ScienceO', 'NitiW', 'NitiO', 'GKW', 'GKO',
         'ComputerW', 'ComputerO', 'Draw', 'Work', 'Physi'
     ],
     4: [
-        'Bengali1W', 'Bengali2O', 'Bengali2W', 'Bengali2O',
+        'Bengali1W', 'Bengali1O', 'Bengali2W', 'Bengali2O',
         'English1W', 'English1O', 'English2W', 'English2O',
         'Maths', 'HistoryW', 'HistoryO', 'GrographyW', 'GrographyO',
         'ScienceW', 'ScienceO', 'NitiW', 'NitiO', 'GKW', 'GKO',
