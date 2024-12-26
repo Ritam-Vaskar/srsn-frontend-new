@@ -3,12 +3,12 @@ import styles from "./styles/StudentEditPopup.module.scss";
 import SummaryApi from "../../../../common";
 import { toast } from "react-toastify";
 
-const StudentAppEdit = ({ student, onClose, onUpdate }) => {
+const StudentAppEdit = ({ student, onClose, onUpdate, model }) => {
   const [editedStudent, setEditedStudent] = useState({});
 
   useEffect(() => {
     // Initialize the state with the current student data
-    setEditedStudent({...student});
+    setEditedStudent({ ...student });
   }, [student]);
 
   const handleInputChange = (e) => {
@@ -28,7 +28,7 @@ const StudentAppEdit = ({ student, onClose, onUpdate }) => {
           'Content-Type': 'application/json'
         },
         credentials: 'include',
-        body: JSON.stringify(editedStudent)
+        body: JSON.stringify({ editedStudent, model })
       });
 
       const result = await response.json();
@@ -111,13 +111,34 @@ const StudentAppEdit = ({ student, onClose, onUpdate }) => {
 
             <div className={styles.formGroup}>
               <label>Blood Group</label>
-              <input
-                type="text"
+              <select
                 name="bloodGroup"
                 value={editedStudent.bloodGroup || ''}
                 onChange={handleInputChange}
+                className={styles.input}
+              >
+                <option value="">Select...</option>
+                <option value="A+">A+</option>
+                <option value="B+">B+</option>
+                <option value="O+">O+</option>
+                <option value="AB+">AB+</option>
+                <option value="A-">A-</option>
+                <option value="B-">B-</option>
+                <option value="O-">O-</option>
+                <option value="AB-">AB-</option>
+              </select>
+            </div>
+
+            <div className={styles.formGroup}>
+              <label>Student Code : </label>
+              <input
+                type="text"
+                name="studentCode"
+                value={editedStudent.studentCode || ''}
+                onChange={handleInputChange}
               />
             </div>
+
 
             {/* Address Information */}
             <div className={styles.formGroup}>
@@ -200,6 +221,16 @@ const StudentAppEdit = ({ student, onClose, onUpdate }) => {
                 onChange={handleInputChange}
               />
             </div>
+            <div className={styles.formGroup}>
+              <label>Guardian Email</label>
+              <input
+                type="email"
+                name="guardianEmail"
+                value={editedStudent.guardianEmail || ''}
+                onChange={handleInputChange}
+              />
+            </div>
+
           </div>
 
           <div className={styles.submitContainer}>

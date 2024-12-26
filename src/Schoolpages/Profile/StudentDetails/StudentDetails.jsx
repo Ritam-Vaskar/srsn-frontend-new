@@ -164,6 +164,7 @@ import React, { useState, useEffect } from 'react';
 import SummaryApi from '../../../common';
 import { toast } from 'react-toastify';
 import StudentDetailsPopup from '../StudentDetailsPopup/StudentDetailsPopup';
+import StudentEditPopup from '../Admin/StudentEditPopup/StudentEditPopup';
 import styles from './styles/StudentDetails.module.scss';
 import { useSelector } from 'react-redux';
 import EditIcon from '@mui/icons-material/Edit';
@@ -235,6 +236,8 @@ const StudentFetch = () => {
         fetchStudents();  // Fetch students whenever selectedClass changes
     }, [selectedClass]);
 
+    const [editModalOpen, setEditModalOpen] = useState(false);
+    const [stuudentView, setStudentView] = useState(false);
 
     const handleDeleteStudent = async (studentId) => {
         try {
@@ -260,6 +263,15 @@ const StudentFetch = () => {
     const handleUpdateStudent = (student) => {
         // Implement update functionality here
         console.log('Update student:', student);
+        setSelectedStudent(student);
+        setEditModalOpen(true);
+    };
+
+    const handleViewStudent = (student) => {
+        // Implement update functionality here
+        console.log('View student:', student);
+        setSelectedStudent(student);
+        setStudentView(true);
     };
 
     return (
@@ -300,7 +312,7 @@ const StudentFetch = () => {
                                 <td>{student.email}</td>
                                 <td>{student.phone}</td>
                                 <td>
-                                    <button onClick={() => setSelectedStudent(student)} className={styles.link}>
+                                    <button onClick={() => handleViewStudent(student)} className={styles.link}>
                                         View Details
                                     </button>
                                 </td>
@@ -327,10 +339,21 @@ const StudentFetch = () => {
             ) : (
                 <p>No students found for this class.</p>
             )}
-            {selectedStudent && (
+            {stuudentView && (
                 <StudentDetailsPopup
                     student={selectedStudent}
-                    onClose={() => setSelectedStudent(null)}
+                    onClose={() => setStudentView(false)}
+                />
+            )}
+            {editModalOpen && (
+                <StudentEditPopup
+                    student={selectedStudent}
+                    onClose={() => setEditModalOpen(false)}
+                    onUpdate={() => {
+                        setEditModalOpen(false);
+                        fetchStudents();
+                    }}
+                    model="User"
                 />
             )}
         </div>

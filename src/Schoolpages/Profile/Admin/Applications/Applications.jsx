@@ -299,6 +299,7 @@ const Applications = () => {
                         setIsEditPopupOpen(false);
                         fetchUserAdmission();
                     }}
+                    model="UserAdmission"
                 />
             )}
 

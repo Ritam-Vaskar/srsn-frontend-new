@@ -194,14 +194,20 @@ const UserProfile = ({ user }) => {
                   <td>Phone:</td>
                   <td>{user.phone}</td>
                 </tr>
-                <tr>
+                {user.DateOfJoining&&<tr>
                   <td>Date of Joining:</td>
                   <td>{user.DateOfJoining}</td>
-                </tr>
-                <tr>
+                </tr>}
+                {user.Qualification&&<tr>
                   <td>Qualification:</td>
                   <td>{user.Qualification}</td>
-                </tr>
+                </tr>}
+                {
+                  user.grade&&<tr>
+                    <td>Class:</td>
+                    <td>{user.grade}</td>
+                  </tr>
+                }
               </tbody>
             </table>
             <button className={styles.editButton} onClick={handleEditClick}>Edit Profile</button>
