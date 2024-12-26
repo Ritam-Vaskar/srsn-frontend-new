@@ -140,5 +140,5 @@ This project is used by the following companies:
 
 ## Feedback
 
-If you have any feedback, please reach out to us at sandipto729@gamil.com
+If you have any feedback, please reach out to us at sandipto729@gmail.com
 (Happy Coding)
