@@ -4,6 +4,7 @@ import styles from './styles/HeroCarousel.module.scss'; // Import your custom st
 
 const HeroCarousel = () => {
   const images = [
+    "https://cdn.prod.website-files.com/663d1907e337de23e83c30b2/68124b6c40177c9489653fa7_IMG-20250430-WA0005.jpg", 
     "https://cdn.prod.website-files.com/663d1907e337de23e83c30b2/6713bd34e03c2b125c749e9c_28071260_1907983642553541_4952021693143437781_o.jpg",
     "https://cdn.prod.website-files.com/663d1907e337de23e83c30b2/6713bd34be2521c91c45aefb_301128514_562327412349985_3679940258914638492_n.jpg",
     "https://cdn.prod.website-files.com/663d1907e337de23e83c30b2/6713bd3407219700795ae005_49769298_2354597557892145_2033352142013595648_n.jpg"
