@@ -37,7 +37,7 @@ export const useChatbot = () => {
     abortControllerRef.current = new AbortController();
 
     try {
-      const response = await fetch(`${process.env.REACT_APP_CHATBOT_API_URL}/api/process-url`, {
+      const response = await fetch(`${import.meta.env.VITE_CHATBOT_API_URL}/api/process-url`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

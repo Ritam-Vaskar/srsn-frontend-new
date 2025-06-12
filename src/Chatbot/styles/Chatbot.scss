@@ -93,7 +93,7 @@
   bottom: 24px;
   right: 24px;
   width: 380px;
-  height: 600px;
+  height: 550px;
   background: var(--chatbot-background);
   border-radius: var(--chatbot-radius);
   box-shadow: var(--chatbot-shadow-xl);
@@ -673,6 +673,7 @@
 
 // Floating Action Button
 .chatbot-fab {
+  border: 1px solid black;
   position: fixed;
   bottom: 24px;
   right: 24px;
@@ -704,6 +705,7 @@
   &--bottom-right {
     bottom: 24px;
     right: 24px;
+    border: 1px solid black;
   }
 
   &--bottom-left {
