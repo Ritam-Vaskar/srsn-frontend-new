@@ -7,12 +7,20 @@ import SummaryApi from './common';
 import { useDispatch } from 'react-redux';
 import { setUserDetails } from './store/userSlice';
 import {setAlumniDetails} from './store/alumniSclice';
-import { useEffect } from 'react';
+import { useState,useEffect } from 'react';
 import Context from './Context';
+import Chatbot from './Chatbot/Chatbot';
 
 
 function App() {
   const dispatch = useDispatch();
+
+  const [isChatbotOpen, setIsChatbotOpen] = useState(false);
+
+  const toggleChatbot = () => {
+    setIsChatbotOpen(!isChatbotOpen);
+  };
+
   const fetchUser = async () => {
     try {
       const response = await fetch(SummaryApi.UserProfile.url, {
@@ -62,25 +70,25 @@ function App() {
     fetchAlumni();
   })
 
-  //chatbat added
-  useEffect(() => {
-    // Create script for Botpress chat
-    const scriptInject = document.createElement('script');
-    scriptInject.src = import.meta.env.VITE_BOTPRESS_CHAT_URL;
-    document.body.appendChild(scriptInject);
+  // //chatbat added
+  // useEffect(() => {
+  //   // Create script for Botpress chat
+  //   const scriptInject = document.createElement('script');
+  //   scriptInject.src = import.meta.env.VITE_BOTPRESS_CHAT_URL;
+  //   document.body.appendChild(scriptInject);
 
-    // Create configuration script
-    const scriptConfig = document.createElement('script');
-    scriptConfig.src = import.meta.env.VITE_BOTPRESS_CONFIG_URL;
-    scriptConfig.defer = true;
-    document.body.appendChild(scriptConfig);
+  //   // Create configuration script
+  //   const scriptConfig = document.createElement('script');
+  //   scriptConfig.src = import.meta.env.VITE_BOTPRESS_CONFIG_URL;
+  //   scriptConfig.defer = true;
+  //   document.body.appendChild(scriptConfig);
 
-    // Cleanup function to remove scripts on component unmount
-    return () => {
-      document.body.removeChild(scriptInject);
-      document.body.removeChild(scriptConfig);
-    };
-  }, []);
+  //   // Cleanup function to remove scripts on component unmount
+  //   return () => {
+  //     document.body.removeChild(scriptInject);
+  //     document.body.removeChild(scriptConfig);
+  //   };
+  // }, []);
 
 
   return (
@@ -88,6 +96,11 @@ function App() {
       <Context.Provider value={{ fetchUser, fetchAlumni }}>
         {/* <Navbar /> */}
         <ToastContainer />
+        {/* Chatbot Integration */}
+      <Chatbot 
+        isOpen={isChatbotOpen} 
+        onToggle={toggleChatbot} 
+      />
         <Outlet />
         {/* <Footer /> */}
       </Context.Provider>
