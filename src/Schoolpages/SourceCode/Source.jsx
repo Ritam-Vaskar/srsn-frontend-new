@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useRef } from 'react';
 import styles from './Source.module.scss';
 
 const Source = () => {
@@ -21,28 +21,36 @@ const Source = () => {
 
   return (
     <div className={styles.container}>
-      <h2>Source Code Links</h2>
+      <h2 className={styles.heading}>Project Repositories</h2>
       <div 
-        className={styles.linkBox} 
-        ref={linkBoxRef} 
-        onMouseMove={handleMouseMove} 
+        className={styles.linkBox}
+        ref={linkBoxRef}
+        onMouseMove={handleMouseMove}
         onMouseLeave={handleMouseLeave}
       >
         <a 
           href="https://github.com/Ritam-Vaskar/srsn-frontend-new" 
           target="_blank" 
           rel="noopener noreferrer" 
-          className={`${styles.link} ${styles.frontendAnimation}`} 
+          className={styles.link}
         >
-          Frontend Repository
+          <span>Frontend Repository</span>
         </a>
         <a 
           href="https://github.com/sandipto729/SRSNBackend" 
           target="_blank" 
           rel="noopener noreferrer" 
-          className={`${styles.link} ${styles.backendAnimation}`} 
+          className={styles.link}
         >
-          Backend Repository
+          <span>Backend Repository</span>
+        </a>
+        <a 
+          href="https://github.com/sandipto729/SRSN-Chatbot.git"
+          target="_blank" 
+          rel="noopener noreferrer" 
+          className={styles.link}
+        >
+          <span>Chatbot Repository</span>
         </a>
       </div>
     </div>

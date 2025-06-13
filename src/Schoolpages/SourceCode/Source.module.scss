@@ -1,64 +1,59 @@
 .container {
   display: flex;
   flex-direction: column;
-  justify-content: center; 
-  align-items: center; 
-  gap: 1.5rem;
-  height: 100vh; 
-  background-color: #121212; 
-  color: #ffffff;
-  text-align: center;
+  align-items: center;
+  justify-content: center;
+  padding: 3rem;
+  min-height: 100vh;
+  background-color: #f4f6f8;
+  color: #1e1e1e;
+  font-family: 'Inter', sans-serif;
+}
+
+.heading {
+  font-size: 2.5rem;
+  margin-bottom: 2rem;
+  font-weight: 600;
+  color: #2b2d42;
 }
 
 .linkBox {
-  position: relative;
-  background-color: #1e1e1e;
-  padding: 40px;
-  border-radius: 12px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5); 
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  background-color: #ffffff;
+  border-radius: 1rem;
+  padding: 3rem 4rem;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  transition: transform 0.3s ease;
 
   &:hover {
-    cursor: pointer;
-    box-shadow: 0 8px 30px rgba(100, 108, 255, 0.5); 
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.1);
   }
 }
 
 .link {
-  color: #646cff;
+  background-color: #f9fafc;
+  border: 1px solid #dee2e6;
+  border-radius: 0.75rem;
+  padding: 1.25rem 2rem;
+  font-size: 1.125rem;
+  font-weight: 500;
+  color: #343a40;
   text-decoration: none;
-  font-size: 24px; 
-  margin: 20px 0;
-  display: block;
-  border: 2px solid #da933c; 
-  padding: 1.5rem;
-  border-radius: 2rem;
-  animation-duration: 1s;
-  animation-iteration-count: infinite;
+  transition: all 0.3s ease;
+  text-align: center;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.02);
 
   &:hover {
-    color: orange;
-    filter: drop-shadow(0 0 2em #646cffaa);
-    box-shadow: 0 0 10px #f2a54e; 
-    border-color: #646cffaa; 
+    background-color: #e9f2ff;
+    border-color: #0077ff;
+    color: #0077ff;
+    transform: translateY(-3px);
+    box-shadow: 0 4px 12px rgba(0, 119, 255, 0.15);
   }
-}
 
-/* Separate classes for animations */
-.frontendAnimation {
-  animation: blinkColour1 1s infinite;
-}
-
-.backendAnimation {
-  animation: blinkColour2 1s infinite;
-}
-
-@keyframes blinkColour1 {
-  0%, 100% { color: #646cff; border-color: #f2a54e; }
-  50% { color: #f2a54e; border-color: #646cff; }
-}
-
-@keyframes blinkColour2 {
-  0%, 100% { color: #f2a54e; border-color: #646cff; }
-  50% { color: #646cff; border-color: #f2a54e; }
+  span {
+    display: inline-block;
+  }
 }
