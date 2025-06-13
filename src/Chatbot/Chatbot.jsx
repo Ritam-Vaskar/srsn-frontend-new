@@ -10,9 +10,11 @@ import {
   MoreVertical,
   Trash2,
   Download,
-  Settings,
   Minimize2,
-  Maximize2
+  Maximize2,
+  Mic,
+  MicOff,
+  Volume2
 } from 'lucide-react';
 import { useChatbot } from './hooks/Chatbot';
 import { 
@@ -49,11 +51,61 @@ const EnhancedChatbot = ({
   const [isMinimized, setIsMinimized] = useState(false);
   const [showMenu, setShowMenu] = useState(false);
   const [unreadCount, setUnreadCount] = useState(0);
+  const [isListening, setIsListening] = useState(false);
+  const [isSpeaking, setIsSpeaking] = useState(false);
   
   const messagesEndRef = useRef(null);
   const inputRef = useRef(null);
   const menuRef = useRef(null);
   const containerRef = useRef(null);
+  const recognitionRef = useRef(null);
+  const speechSynthRef = useRef(null);
+
+  // Initialize speech recognition
+  useEffect(() => {
+    if ('webkitSpeechRecognition' in window || 'SpeechRecognition' in window) {
+      const SpeechRecognition = window.webkitSpeechRecognition || window.SpeechRecognition;
+      recognitionRef.current = new SpeechRecognition();
+      recognitionRef.current.continuous = false;
+      recognitionRef.current.interimResults = true;
+      recognitionRef.current.lang = 'en-US';
+
+      recognitionRef.current.onresult = (event) => {
+        const transcript = Array.from(event.results)
+          .map(result => result[0])
+          .map(result => result.transcript)
+          .join('');
+
+        setInputMessage(transcript);
+
+        if (event.results[0].isFinal) {
+          setIsListening(false);
+        }
+      };
+
+      recognitionRef.current.onerror = () => {
+        setIsListening(false);
+      };
+
+      recognitionRef.current.onend = () => {
+        setIsListening(false);
+      };
+    }
+
+    // Initialize speech synthesis
+    if ('speechSynthesis' in window) {
+      speechSynthRef.current = window.speechSynthesis;
+    }
+
+    return () => {
+      if (recognitionRef.current) {
+        recognitionRef.current.stop();
+      }
+      if (speechSynthRef.current) {
+        speechSynthRef.current.cancel();
+      }
+    };
+  }, []);
 
   // Auto-scroll to bottom
   const scrollToBottom = useCallback(() => {
@@ -74,10 +126,15 @@ const EnhancedChatbot = ({
       const lastMessage = messages[messages.length - 1];
       if (lastMessage.sender === 'bot') {
         setUnreadCount(prev => prev + 1);
-        announceToScreenReader(`New message from AI assistant: ${lastMessage.text.substring(0, 50)}...`);
+        announceToScreenReader(`New message from SRSN BOT: ${lastMessage.text.substring(0, 50)}...`);
+        
+        // Speak bot messages if enabled
+        if (enableSounds && speechSynthRef.current) {
+          speakMessage(lastMessage.text);
+        }
       }
     }
-  }, [messages, isOpen, scrollToBottom]);
+  }, [messages, isOpen, scrollToBottom, enableSounds]);
 
   // Reset unread count when chat opens
   useEffect(() => {
@@ -125,6 +182,46 @@ const EnhancedChatbot = ({
     return () => document.removeEventListener('keydown', handleKeyDown);
   }, [isOpen, onToggle]);
 
+  // Speech functions
+  const startListening = useCallback(() => {
+    if (recognitionRef.current && !isListening) {
+      setIsListening(true);
+      recognitionRef.current.start();
+    }
+  }, [isListening]);
+
+  const stopListening = useCallback(() => {
+    if (recognitionRef.current && isListening) {
+      recognitionRef.current.stop();
+      setIsListening(false);
+    }
+  }, [isListening]);
+
+  const speakMessage = useCallback((text) => {
+    if (speechSynthRef.current && !isSpeaking) {
+      // Cancel any ongoing speech
+      speechSynthRef.current.cancel();
+      
+      const utterance = new SpeechSynthesisUtterance(text);
+      utterance.rate = 0.9;
+      utterance.pitch = 1;
+      utterance.volume = 0.8;
+      
+      utterance.onstart = () => setIsSpeaking(true);
+      utterance.onend = () => setIsSpeaking(false);
+      utterance.onerror = () => setIsSpeaking(false);
+      
+      speechSynthRef.current.speak(utterance);
+    }
+  }, [isSpeaking]);
+
+  const stopSpeaking = useCallback(() => {
+    if (speechSynthRef.current) {
+      speechSynthRef.current.cancel();
+      setIsSpeaking(false);
+    }
+  }, []);
+
   // Handle form submission
   const handleSubmit = useCallback(async (e) => {
     e.preventDefault();
@@ -133,8 +230,9 @@ const EnhancedChatbot = ({
     if (!isValidMessage(message) || isLoading) return;
 
     setInputMessage('');
+    stopSpeaking(); // Stop any ongoing speech
     await sendMessage(message);
-  }, [inputMessage, isLoading, sendMessage]);
+  }, [inputMessage, isLoading, sendMessage, stopSpeaking]);
 
   // Handle input key press
   const handleKeyPress = useCallback((e) => {
@@ -148,8 +246,9 @@ const EnhancedChatbot = ({
   const handleClearChat = useCallback(() => {
     clearMessages();
     setShowMenu(false);
+    stopSpeaking();
     announceToScreenReader('Chat history cleared');
-  }, [clearMessages]);
+  }, [clearMessages, stopSpeaking]);
 
   const handleDownloadChat = useCallback(() => {
     const chatData = {
@@ -210,7 +309,7 @@ const EnhancedChatbot = ({
         className={chatContainerClass}
         style={{ maxHeight: isMinimized ? '60px' : `${maxHeight}px` }}
         role="dialog"
-        aria-label="AI Assistant Chat"
+        aria-label="SRSN BOT Chat"
         aria-expanded={isOpen}
       >
         {/* Header */}
@@ -220,9 +319,9 @@ const EnhancedChatbot = ({
               <Bot size={20} />
             </div>
             <div className="chatbot-header__text">
-              <h3>AI Assistant</h3>
+              <h3>SRSN BOT</h3>
               <span className="chatbot-header__status">
-                {isLoading ? 'Typing...' : 'Online'}
+                {isLoading ? 'Typing...' : isSpeaking ? 'Speaking...' : 'Online'}
               </span>
             </div>
           </div>
@@ -248,11 +347,6 @@ const EnhancedChatbot = ({
                   <button onClick={handleDownloadChat} className="chatbot-menu__item">
                     <Download size={14} />
                     <span>Download</span>
-                  </button>
-                  <div className="chatbot-menu__divider" />
-                  <button className="chatbot-menu__item">
-                    <Settings size={14} />
-                    <span>Settings</span>
                   </button>
                 </div>
               )}
@@ -317,6 +411,16 @@ const EnhancedChatbot = ({
                           __html: renderMessageContent(message.text)
                         }}
                       />
+                      {message.sender === 'bot' && speechSynthRef.current && (
+                        <button
+                          className="chatbot-message__speak"
+                          onClick={() => speakMessage(message.text)}
+                          disabled={isSpeaking}
+                          aria-label="Read message aloud"
+                        >
+                          <Volume2 size={12} />
+                        </button>
+                      )}
                       {showTimestamps && (
                         <span className="chatbot-message__time">
                           {formatMessageTime(message.timestamp)}
@@ -366,6 +470,32 @@ const EnhancedChatbot = ({
                   }}
                 />
                 <div className="chatbot-input__actions">
+                  {/* Voice Input */}
+                  {recognitionRef.current && (
+                    <button
+                      type="button"
+                      onClick={isListening ? stopListening : startListening}
+                      className={`chatbot-input__voice ${isListening ? 'chatbot-input__voice--active' : ''}`}
+                      aria-label={isListening ? 'Stop listening' : 'Start voice input'}
+                      disabled={isLoading}
+                    >
+                      {isListening ? <MicOff size={16} /> : <Mic size={16} />}
+                    </button>
+                  )}
+                  
+                  {/* Stop Speaking */}
+                  {isSpeaking && (
+                    <button
+                      type="button"
+                      onClick={stopSpeaking}
+                      className="chatbot-input__stop-speech"
+                      aria-label="Stop speaking"
+                    >
+                      <X size={16} />
+                    </button>
+                  )}
+                  
+                  {/* Cancel Request */}
                   {isLoading && (
                     <button
                       type="button"
@@ -376,6 +506,8 @@ const EnhancedChatbot = ({
                       <X size={16} />
                     </button>
                   )}
+                  
+                  {/* Send Button */}
                   <button
                     type="submit"
                     className="chatbot-input__send"
@@ -403,7 +535,7 @@ const EnhancedChatbot = ({
         <button
           className={`chatbot-fab chatbot-fab--${position}`}
           onClick={onToggle}
-          aria-label="Open AI Assistant Chat"
+          aria-label="Open SRSN BOT Chat"
         >
           <MessageCircle size={24} />
           {unreadCount > 0 && (
