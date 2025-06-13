@@ -126,7 +126,7 @@ const EnhancedChatbot = ({
       const lastMessage = messages[messages.length - 1];
       if (lastMessage.sender === 'bot') {
         setUnreadCount(prev => prev + 1);
-        announceToScreenReader(`New message from AI assistant: ${lastMessage.text.substring(0, 50)}...`);
+        announceToScreenReader(`New message from SRSN BOT: ${lastMessage.text.substring(0, 50)}...`);
         
         // Speak bot messages if enabled
         if (enableSounds && speechSynthRef.current) {
@@ -309,7 +309,7 @@ const EnhancedChatbot = ({
         className={chatContainerClass}
         style={{ maxHeight: isMinimized ? '60px' : `${maxHeight}px` }}
         role="dialog"
-        aria-label="AI Assistant Chat"
+        aria-label="SRSN BOT Chat"
         aria-expanded={isOpen}
       >
         {/* Header */}
@@ -319,7 +319,7 @@ const EnhancedChatbot = ({
               <Bot size={20} />
             </div>
             <div className="chatbot-header__text">
-              <h3>AI Assistant</h3>
+              <h3>SRSN BOT</h3>
               <span className="chatbot-header__status">
                 {isLoading ? 'Typing...' : isSpeaking ? 'Speaking...' : 'Online'}
               </span>
@@ -535,7 +535,7 @@ const EnhancedChatbot = ({
         <button
           className={`chatbot-fab chatbot-fab--${position}`}
           onClick={onToggle}
-          aria-label="Open AI Assistant Chat"
+          aria-label="Open SRSN BOT Chat"
         >
           <MessageCircle size={24} />
           {unreadCount > 0 && (
