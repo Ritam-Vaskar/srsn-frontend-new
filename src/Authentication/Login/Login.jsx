@@ -13,6 +13,8 @@ import { useSelector } from 'react-redux';
 import Loader2 from '../../layouts/Loader2/Loader2';
 import { tr } from 'framer-motion/client';
 import ForgotPassword from '../ForgotPassword/ForgotPassword';
+import { GoogleLogin } from '@react-oauth/google';
+import axios from 'axios';
 
 
 const Login = () => {
@@ -35,6 +37,7 @@ const Login = () => {
 
   const dispatch = useDispatch();
   const [loading, setLoading] = React.useState(false);
+
   const fetchUser = async () => {
     try {
       const response = await fetch(SummaryApi.UserProfile.url, {
@@ -55,6 +58,34 @@ const Login = () => {
       toast.error(err.message);
     }
   }
+
+  const handleLoginSuccess = async (credentialResponse) => {
+    console.log("Google Login Success:", credentialResponse);
+    try {
+      const res = await axios.post(SummaryApi.UserGoogleLogin.url, {
+        token: credentialResponse.credential,
+      }, { withCredentials: true });
+
+      const result = res.data;
+
+      if (result.success) {
+        fetchUser();
+        Navigate('/school/profile');
+        toast.success('Login successful');
+      } else {
+        toast.error(result.message || 'Login failed');
+      }
+
+    } catch (error) {
+      console.error('Login error:', error);
+      if (error.response && error.response.data && error.response.data.message) {
+        toast.error(error.response.data.message);
+      } else {
+        toast.error('Something went wrong during login');
+      }
+    }
+  };
+
 
   const onSubmit = async (data) => {
     setLoading(true);
@@ -141,7 +172,10 @@ const Login = () => {
           Forgot Password ?
         </div>
 
-
+        <GoogleLogin
+          onSuccess={handleLoginSuccess}
+          onError={() => console.log('Login Failed')}
+        />
       </form>
       <div className={styles['contact-admin']}>
         *If you face problems logging in, please contact the administrator.

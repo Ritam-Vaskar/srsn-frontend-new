@@ -31,7 +31,10 @@ const SummaryApi={
         method:"POST"
     },
 
-    
+    UserGoogleLogin:{
+        url:backendUrl+"/api/userGoogleLogin",
+        method:"POST"
+    },
 
     //user admission
     UserAdmissionSignUp:{
@@ -136,6 +139,10 @@ const SummaryApi={
     },
     AlumniLogOut:{
         url:backendUrl+"/api/alumniLogOut",
+        method:"POST"
+    },
+    AlumniGoogleLogin:{
+        url:backendUrl+"/api/alumniGoogleLogin",
         method:"POST"
     },
 
