@@ -5,7 +5,21 @@ const AgeCriteria = ({ flag }) => {
   const CurrentYear = new Date().getFullYear();
   return (
     <div className={styles.ageCriteriaContainer}>
-      <h2>Age Criteria for Admission(According to 01/01/{CurrentYear + 1})</h2>
+      <div className={styles.decorativeElement}></div>
+      <div className={styles.floatingShape}></div>
+      <div className={styles.floatingShape2}></div>
+      
+      <div className={styles.headerContainer}>
+        <div className={styles.badge}>
+          <span className={styles.badgeText}>Age Requirements</span>
+        </div>
+        <h2>
+          Age Criteria for <span className={styles.highlight}>Admission</span>
+          <br />
+          (According to 01/01/{CurrentYear + 1})
+        </h2>
+      </div>
+      
       <table className={styles.ageCriteriaTable}>
         <thead>
           <tr>
@@ -71,6 +85,12 @@ const AgeCriteria = ({ flag }) => {
           )}
         </tbody>
       </table>
+      
+      <div className={styles.bottomDecoration}>
+        <div className={styles.decorativeLine}></div>
+        <div className={styles.decorativeCircle}></div>
+        <div className={styles.decorativeLine}></div>
+      </div>
     </div>
   );
 };

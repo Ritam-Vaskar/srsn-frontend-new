@@ -1,76 +1,228 @@
+:root {
+  --ashram-yellow: #ff8c19;
+}
+
 .admissionNoticeContainer {
-    position: relative;
-    text-align: center;
-    color: white;
-    max-width: 100%;
-    overflow: hidden; // Hide overflow for the sliding effect
-    height: 70vh;
+  position: relative;
+  width: 100%;
+  max-width: 100%;
+  height: 70vh;
+  border-radius: 24px;
+  overflow: hidden;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(223, 223, 223, 0.3) 100%);
+  backdrop-filter: blur(15px);
+  box-shadow: 0 20px 60px rgba(255, 140, 25, 0.15);
+  border: 1px solid rgba(255, 140, 25, 0.2);
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.admissionNoticeContainer::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--ashram-yellow), #ff6a00, #ffb347);
+  opacity: 0.8;
+  z-index: 2;
+}
+
+.admissionNoticeContainer:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 25px 70px rgba(255, 140, 25, 0.2);
+  border-color: rgba(255, 140, 25, 0.3);
+}
+
+.admissionImg {
+  width: 100%;
+  height: 90%;
+  object-fit: cover;
+  transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  z-index: 1;
+}
+
+.admissionNoticeContainer:hover .admissionImg {
+  transform: scale(1.02);
+}
+
+.admissionOverlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 10%;
+  background: linear-gradient(135deg, var(--ashram-yellow), #ff6a00);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  z-index: 3;
+  position: relative;
+}
+
+.admissionOverlay::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  animation: shimmer 3s ease-in-out infinite;
+}
+
+@keyframes shimmer {
+  0% { left: -100%; }
+  50% { left: 100%; }
+  100% { left: 100%; }
+}
+
+.admissionSlider {
+  width: 100%;
+  white-space: nowrap;
+  animation: slide 15s linear infinite;
+  position: relative;
+  z-index: 2;
+}
+
+.admissionSlider:hover {
+  animation-play-state: paused;
+}
+
+.admissionText {
+  display: inline-block;
+  padding: 12px 0;
+  font-size: 1.5rem;
+  font-weight: 700;
+  text-align: center;
+  color: white;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+  letter-spacing: 0.5px;
+}
+
+.admissionText a {
+  color: white;
+  text-decoration: none;
+  position: relative;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  display: inline-block;
+}
+
+.admissionText a::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 50%;
+  width: 0;
+  height: 2px;
+  background: rgba(255, 255, 255, 0.8);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  transform: translateX(-50%);
+}
+
+.admissionText a:hover {
+  color: #87ceeb;
+  transform: translateY(-2px);
+  text-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+}
+
+.admissionText a:hover::after {
+  width: 100%;
+}
+
+.admissionText div {
+  color: white;
+  font-size: 1.4rem;
+  font-weight: 600;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+  opacity: 0.95;
+}
+
+@keyframes slide {
+  0% {
+    transform: translateX(100%);
   }
-  
+  100% {
+    transform: translateX(-100%);
+  }
+}
+
+.admissionText a {
+  animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.8;
+  }
+}
+
+@media (max-width: 1024px) {
+  .admissionNoticeContainer {
+    height: 65vh;
+    border-radius: 20px;
+  }
+
+  .admissionText {
+    font-size: 1.3rem;
+  }
+
+  .admissionText div {
+    font-size: 1.2rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .admissionNoticeContainer {
+    height: 55vh;
+    border-radius: 18px;
+  }
+
+  .admissionText {
+    font-size: 1.2rem;
+    padding: 10px 0;
+  }
+
+  .admissionText div {
+    font-size: 1.1rem;
+  }
+
+  .admissionSlider {
+    animation-duration: 12s;
+  }
+}
+
+@media (max-width: 480px) {
+  .admissionNoticeContainer {
+    height: 50vh;
+    border-radius: 16px;
+  }
+
   .admissionImg {
     width: 100%;
-    height: 90%;
-    aspect-ratio: 28/9;
+    height: 100%;
   }
-  .admissionOverlay{
-    // margin-top: 1rem;
-    height: 8vh;
-    width: 100%;
-    background-color:#ff5400;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+
+  .admissionOverlay {
+    height: 12%;
   }
-  
-  .admissionSlider {
-    position: absolute;
-    bottom: -5px; 
-    width: 65%;
-    white-space: nowrap; 
-    animation: slide 10s linear infinite; 
-  
-    &:hover {
-      animation-play-state: paused; 
-    }
-  }
-  
+
   .admissionText {
-    display: inline-block;
-    padding: 10px 0;
-    font-size: 1.5rem; 
-    // background-color: rgb(0, 0, 0);
-    font-weight: 800;
-    
-    a{
-      color: rgb(255, 255, 255);
-    }
-    a:hover{
-        // color:rgb(142, 189, 208);
-        color:deepskyblue;
-    }
-  }
-  
-  @keyframes slide {
-    0% {
-      transform: translateX(100%); 
-    }
-    100% {
-      transform: translateX(-100%); 
-    }
+    font-size: 1rem;
+    padding: 8px 0;
+    font-weight: 600;
   }
 
-
-  @media (max-width: 480px){
-  
-    .admissionImg {
-      width: 100%;
-      height: 100%;
-    }
-
-    .admissionNoticeContainer{
-      height: 50vh;
-    }
-    
-    
-    
+  .admissionText div {
+    font-size: 0.95rem;
   }
+
+  .admissionSlider {
+    animation-duration: 10s;
+  }
+}

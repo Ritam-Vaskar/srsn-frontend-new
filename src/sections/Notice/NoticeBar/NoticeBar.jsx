@@ -6,8 +6,8 @@ import { toast } from 'react-toastify';
 const NoticeBar = () => {
     const [news, setNews] = useState({});
 
-    const fetchNews=async ()=>{
-        try{
+    const fetchNews = async () => {
+        try {
             const response = await fetch(SummaryApi.NoticeFetch.url, {
                 method: SummaryApi.NoticeFetch.method,
                 headers: {
@@ -21,10 +21,10 @@ const NoticeBar = () => {
                 toast.error(result.message);
                 return;
             }
-            const data=result.notice;
+            const data = result.notice;
             const news = data.filter((notice) => notice.sendbody !== "Technical" && notice.sendbody !== "Admission");
             setNews(news[news.length - 1] || {});
-        }catch(err){
+        } catch (err) {
             console.log(err);
             toast.error(err.message);
         }
@@ -35,18 +35,27 @@ const NoticeBar = () => {
     }, []);
 
     return (
-        <div className={styles.NoticeBoardcontainer}>
-            <div className={styles.divider}>
-                <h2>Notice</h2>
-                <p>Latest News</p>
-                {news.url ? (
-                    <a href={news.url} target="_blank" rel="noopener noreferrer">{news.name}</a>
-                ) : (
-                    <p>No latest news available</p>
-                )}
-                <p className={styles.sendbody}>{news.sendbody}</p>
-            </div>
+        <div className={styles.noticeBar}>
+            <div className={styles.noticeContent}>
+                <div className={styles.noticeHeader}>
+                    <h3 className={styles.noticeTitle}>Notice</h3>
+                    <span className={styles.latestNewsBadge}>Latest News</span>
+                </div>
 
+                {news.url ? (
+                    <a href={news.url} className={styles.newsLink} target="_blank" rel="noopener noreferrer">
+                        {news.name}
+                    </a>
+                ) : (
+                    <div className={styles.noNews}>
+                        No latest news available
+                    </div>
+                )}
+
+                <div className={styles.newsBody}>
+                    {news.sendbody}
+                </div>
+            </div>
         </div>
     );
 };
