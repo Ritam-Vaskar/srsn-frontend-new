@@ -1,79 +1,473 @@
+// Alumni.module.scss
 .alumniPage {
-  padding: 40px;
-  background-color: #f5f5f5;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #f5f7fa 0%, #e8f0ff 100%);
+  position: relative;
+  overflow-x: hidden;
 
-  h1{
-    margin-bottom: 20px;
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 50%;
+    width: 120%;
+    height: 400px;
+    background: linear-gradient(135deg, rgba(255, 106, 0, 0.1) 0%, rgba(0, 123, 255, 0.1) 100%);
+    transform: translateX(-50%) skewY(-3deg);
+    z-index: 0;
   }
+}
 
- .alumniPage h2 {
-    text-align: center;
-    margin-bottom: 40px;
-    font-size: 2rem;
-    color: #333;
+.applyButton {
+  background: linear-gradient(135deg, #007bff 0%, #0056b3 100%);
+  color: white;
+  border: none;
+  border-radius: 12px;
+  padding: 12px 24px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(0, 123, 255, 0.3);
+
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0, 123, 255, 0.4);
   }
+}
 
-  .alumniGrid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-    gap: 20px;
-  }
+// Filters Panel
+.filtersPanel {
+  position: relative;
+   ;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 40px 30px;
+  background: white;
+  border-radius: 15px;
+  margin-bottom: 30px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  animation: slideDown 0.3s ease;
 
-  .applyButton {
-    background-color: #007bff;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    padding: 10px 20px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-    margin-bottom: 20px;
+  .filterGroup {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    padding: 20px;
 
-    &:hover {
-      background-color: #0056b3;
+    label {
+      font-weight: 600;
+      color: #333;
+      min-width: 120px;
+    }
+
+    .filterSelect {
+      padding: 10px 15px;
+      border: 2px solid #e0e6ed;
+      border-radius: 8px;
+      background: white;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: border-color 0.3s ease;
+
+      &:focus {
+        outline: none;
+        border-color: #ff6a00;
+      }
     }
   }
+
+  .clearFilters {
+    background: #ff6a00;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    transition: background 0.3s ease;
+
+    &:hover {
+      background: #e55a00;
+    }
+  }
+}
+
+// Results Info
+.resultsInfo {
+  position: relative;
+   ;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 40px 20px;
+
+  p {
+    color: #666;
+    font-size: 1rem;
+    font-weight: 500;
+  }
+}
+
+// Alumni Container
+.alumniContainer {
+  position: relative;
+   ;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 40px;
+
+  &.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 30px;
+
+    @media (max-width: 768px) {
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 20px;
+    }
+  }
+
+  &.list {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+}
+
+// Enhanced Pagination
+.paginationWrapper {
+  position: relative;
+   ;
+  max-width: 1400px;
+  margin: 60px auto 40px;
+  padding: 0 40px;
+  text-align: center;
 }
 
 .pagination {
   display: flex;
   justify-content: center;
-  margin-top: 20px;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 20px;
 
   button {
-    margin: 0 5px;
-    padding: 8px 12px;
-    background-color: #f0f0f0;
-    border: 1px solid #ccc;
+    padding: 12px 16px;
+    border: 2px solid #e0e6ed;
+    background: white;
+    color: #666;
+    border-radius: 8px;
     cursor: pointer;
+    transition: all 0.3s ease;
+    font-weight: 500;
+    min-width: 44px;
 
-    &:hover {
-      background-color: #ddd;
+    &:hover:not(:disabled) {
+      border-color: #ff6a00;
+      color: #ff6a00;
+      transform: translateY(-2px);
     }
 
     &.activePage {
-      background-color: #007bff;
+      background: #ff6a00;
       color: white;
-      border-color: #007bff;
+      border-color: #ff6a00;
+      box-shadow: 0 4px 15px rgba(255, 106, 0, 0.3);
+    }
+
+    &:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+  }
+
+  .paginationArrow {
+    padding: 12px 20px;
+    font-weight: 600;
+  }
+
+  .ellipsis {
+    padding: 12px 8px;
+    color: #999;
+  }
+}
+
+.paginationInfo {
+  color: #666;
+  font-size: 0.9rem;
+}
+
+// Animations
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+// Responsive Design
+@media (max-width: 768px) {
+  .alumniPage {
+    &::before {
+      height: 300px;
+    }
+  }
+
+  .heroSection {
+    padding: 60px 20px 40px;
+  }
+
+  .controlPanel {
+    padding: 0 20px 20px;
+  }
+
+  .alumniContainer {
+    padding: 0 20px;
+  }
+
+  .paginationWrapper {
+    padding: 0 20px;
+  }
+
+  .filtersPanel {
+    margin: 0 20px 30px;
+    padding: 0 20px 20px;
+  }
+}
+
+@media (max-width: 480px) {
+  .heroSection .heroStats {
+    flex-direction: column;
+    gap: 30px;
+  }
+
+  .controlPanel .controlsRight {
+    flex-direction: column;
+    width: 100%;
+    gap: 15px;
+  }
+
+  .pagination {
+    flex-wrap: wrap;
+    gap: 5px;
+
+    button {
+      padding: 10px 12px;
+      font-size: 0.9rem;
     }
   }
 }
 
-.alumniSearch{
+// Hero Section
+.heroSection {
+  position: relative;
+   ;
+  padding: 80px 40px 60px;
+  text-align: center;
+  background: transparent;
+
+  .heroContent {
+    max-width: 1000px;
+    margin: 0 auto;
+  }
+
+  .heroTitle {
+    font-size: 3.5rem;
+    font-weight: 700;
+    background: linear-gradient(135deg, #ff6a00 0%, #007bff 70%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 20px;
+    text-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+
+    @media (max-width: 768px) {
+      font-size: 2.5rem;
+    }
+  }
+
+  .heroSubtitle {
+    font-size: 1.3rem;
+    color: #666;
+    margin-bottom: 40px;
+    font-weight: 300;
+    line-height: 1.6;
+  }
+
+  .heroStats {
+    display: flex;
+    justify-content: center;
+    gap: 60px;
+    margin-top: 40px;
+
+    @media (max-width: 768px) {
+      gap: 40px;
+    }
+
+    .statItem {
+      text-align: center;
+
+      .statNumber {
+        display: block;
+        font-size: 2.5rem;
+        font-weight: 700;
+        color: #ff6a00;
+        margin-bottom: 5px;
+      }
+
+      .statLabel {
+        font-size: 0.9rem;
+        color: #666;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+      }
+    }
+  }
+}
+
+// Control Panel
+.controlPanel {
+  position: relative;
+   ;
   display: flex;
   justify-content: space-between;
+  align-items: flex-start;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 40px 30px;
+  gap: 30px;
+
+  @media (max-width: 1024px) {
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .searchSection {
+    flex: 1;
+    max-width: 600px;
+
+    @media (max-width: 1024px) {
+      max-width: 100%;
+    }
+  }
+
+  .controlsRight {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    flex-wrap: wrap;
+
+    @media (max-width: 1024px) {
+      width: 100%;
+      justify-content: center;
+    }
+  }
+}
+
+.alumniSearch {
+  position: relative;
+  display: flex;
   align-items: center;
-  margin-bottom: 1rem;
-  border: 1.5px solid #555;
-  border-radius: 15px;
-  padding: 0.7rem;
-  width: 80%;
+  background: white;
+  border: 2px solid #e0e6ed;
+  border-radius: 25px;
+  padding: 15px 20px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
 
+  &:focus-within {
+    border-color: #ff6a00;
+    box-shadow: 0 4px 20px rgba(255, 106, 0, 0.2);
+    transform: translateY(-2px);
+  }
 
-  input{
+  .searchIcon {
+    color: #999;
+    margin-right: 15px;
+    font-size: 1.3rem;
+  }
+
+  input {
+    flex: 1;
     border: none;
     outline: none;
-    background-color: transparent;
-    width: 100%;
+    background: transparent;
+    font-size: 1rem;
+    color: #333;
+
+    &::placeholder {
+      color: #999;
+    }
+  }
+
+  .clearIcon {
+    color: #999;
+    cursor: pointer;
+    margin-left: 10px;
+    transition: color 0.3s ease;
+
+    &:hover {
+      color: #ff6a00;
+    }
+  }
+}
+
+// Filter and View Controls
+.filterToggle {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: white;
+  border: 2px solid #e0e6ed;
+  border-radius: 12px;
+  padding: 12px 20px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-weight: 500;
+  color: #666;
+
+  &:hover, &.active {
+    border-color: #ff6a00;
+    color: #ff6a00;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(255, 106, 0, 0.2);
+  }
+}
+
+.viewToggle {
+  display: flex;
+  background: white;
+  border: 2px solid #e0e6ed;
+  border-radius: 12px;
+  overflow: hidden;
+
+  button {
+    padding: 12px 16px;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    color: #666;
+
+    &:hover {
+      background: #f8f9fa;
+    }
+
+    &.active {
+      background: #ff6a00;
+      color: white;
+    }
   }
 }

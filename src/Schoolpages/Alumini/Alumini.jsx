@@ -1,28 +1,34 @@
 import React, { useEffect, useState } from 'react';
 import AlumniCard from '../../components/AlumniProfileCard/ProfileCard';
 import AlumniManage from '../../components/AlumniApplicationForm/AlumniManage';
-import AlumniSkeleton from '../../layouts/Skeletons/ProfileCard/ProfileCardSkeleton'; // Skeleton component for cards
+import AlumniSkeleton from '../../layouts/Skeletons/ProfileCard/ProfileCardSkeleton';
 import styles from './styles/Alumni.module.scss';
 import SummaryApi from '../../common';
 import { toast } from 'react-toastify';
 import SearchIcon from '@mui/icons-material/Search';
 import CloseIcon from '@mui/icons-material/Close';
+import FilterListIcon from '@mui/icons-material/FilterList';
+import GridViewIcon from '@mui/icons-material/GridView';
+import ViewListIcon from '@mui/icons-material/ViewList';
 import SearchResult from './../../sections/AlumniSearch/SearchDiv/SearchPage';
-import Spinner from '../../layouts/Loader/Spinner'; // Spinner for full-page loading
+import Spinner from '../../layouts/Loader/Spinner';
 
 const Alumni = () => {
   const [alumniList, setAlumniList] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [search, setSearch] = useState('');
   const [showApplicationForm, setShowApplicationForm] = useState(false);
-  const [loadingPage, setLoadingPage] = useState(true); // For initial page load spinner
-  const [loadingCards, setLoadingCards] = useState(true); // For card skeleton loading
+  const [loadingPage, setLoadingPage] = useState(true);
+  const [loadingCards, setLoadingCards] = useState(true);
+  const [viewMode, setViewMode] = useState('grid'); // 'grid' or 'list'
+  const [filterYear, setFilterYear] = useState('');
+  const [showFilters, setShowFilters] = useState(false);
 
   const alumniPerPage = 12;
 
   // Fetch alumni data
   const fetchAlumniData = async () => {
-    setLoadingCards(true); // Start card skeleton loader
+    setLoadingCards(true);
     try {
       const response = await fetch(SummaryApi.AlumniFetch.url, {
         method: SummaryApi.AlumniFetch.method,
@@ -31,9 +37,9 @@ const Alumni = () => {
       });
       const data = await response.json();
       setTimeout(() => {
-        setAlumniList(data.alumni || []); // Ensure data fallback
-        setLoadingCards(false); // Stop card skeleton loader
-      }, 2000); // Ensure skeleton is visible for at least 2 seconds
+        setAlumniList(data.alumni || []);
+        setLoadingCards(false);
+      }, 2000);
     } catch (err) {
       console.error(err);
       toast.error('Failed to fetch alumni data');
@@ -43,17 +49,24 @@ const Alumni = () => {
 
   useEffect(() => {
     const loadData = async () => {
-      setLoadingPage(true); // Start full-page spinner
+      setLoadingPage(true);
       await fetchAlumniData();
-      setLoadingPage(false); // Stop full-page spinner
+      setLoadingPage(false);
     };
     loadData();
   }, []);
 
+  // Filter alumni by year
+  const filteredAlumni = alumniList.filter(alumni => {
+    if (!filterYear) return true;
+    return alumni.startingYear.toString().includes(filterYear) || 
+           alumni.endingYear.toString().includes(filterYear);
+  });
+
   // Pagination logic
   const indexOfLastAlumni = currentPage * alumniPerPage;
   const indexOfFirstAlumni = indexOfLastAlumni - alumniPerPage;
-  const currentAlumni = alumniList.slice(indexOfFirstAlumni, indexOfLastAlumni);
+  const currentAlumni = filteredAlumni.slice(indexOfFirstAlumni, indexOfLastAlumni);
 
   const paginate = (pageNumber) => {
     setCurrentPage(pageNumber);
@@ -63,85 +76,205 @@ const Alumni = () => {
     });
   };
 
-  const totalPages = Math.ceil(alumniList.length / alumniPerPage);
+  const totalPages = Math.ceil(filteredAlumni.length / alumniPerPage);
 
   // Handler to clear the search input
   const clearSearch = () => setSearch('');
 
+  // Get unique graduation years for filter
+  const getGraduationYears = () => {
+    const years = new Set();
+    alumniList.forEach(alumni => {
+      years.add(alumni.endingYear);
+    });
+    return Array.from(years).sort((a, b) => b - a);
+  };
+
   return (
     <div className={styles.alumniPage}>
       {loadingPage ? (
-        // Show full-page spinner during initial page load
         <Spinner />
       ) : (
         <>
-          <div className={styles.upperDiv}>
-            <center>
-              <h1>Our Alumni</h1>
-            </center>
+          {/* Hero Section */}
+          <div className={styles.heroSection}>
+            <div className={styles.heroContent}>
+              <h1 className={styles.heroTitle}>Our Distinguished Alumni</h1>
+              <p className={styles.heroSubtitle}>
+                Connecting generations of excellence and inspiring future leaders
+              </p>
+              <div className={styles.heroStats}>
+                <div className={styles.statItem}>
+                  <span className={styles.statNumber}>{alumniList.length}+</span>
+                  <span className={styles.statLabel}>Alumni</span>
+                </div>
+                <div className={styles.statItem}>
+                  <span className={styles.statNumber}>{getGraduationYears().length}</span>
+                  <span className={styles.statLabel}>Passing Classes</span>
+                </div>
+              </div>
+            </div>
+          </div>
 
-            {/* Search Bar */}
-            <center>
+          {/* Control Panel */}
+          <div className={styles.controlPanel}>
+            <div className={styles.searchSection}>
               <div className={styles.alumniSearch}>
+                <SearchIcon className={styles.searchIcon} />
                 <input
                   type="text"
-                  placeholder="Search Alumni"
+                  placeholder="Search alumni by name, designation, or location..."
                   value={search}
                   onChange={(e) => setSearch(e.target.value)}
                 />
-                {search ? (
-                  <CloseIcon onClick={clearSearch} className={styles.icon} />
-                ) : (
-                  <SearchIcon className={styles.icon} />
+                {search && (
+                  <CloseIcon onClick={clearSearch} className={styles.clearIcon} />
                 )}
               </div>
-            </center>
+            </div>
 
-            {/* Alumni Application Form Button */}
-            {!loadingCards && (
-              <center>
+            <div className={styles.controlsRight}>
+              {/* Filter Toggle */}
+              <button
+                onClick={() => setShowFilters(!showFilters)}
+                className={`${styles.filterToggle} ${showFilters ? styles.active : ''}`}
+              >
+                <FilterListIcon />
+                Filters
+              </button>
+
+              {/* View Mode Toggle */}
+              <div className={styles.viewToggle}>
+                <button
+                  onClick={() => setViewMode('grid')}
+                  className={viewMode === 'grid' ? styles.active : ''}
+                >
+                  <GridViewIcon />
+                </button>
+                <button
+                  onClick={() => setViewMode('list')}
+                  className={viewMode === 'list' ? styles.active : ''}
+                >
+                  <ViewListIcon />
+                </button>
+              </div>
+
+              {/* Alumni Application Button */}
+              {!loadingCards && (
                 <button
                   onClick={() => setShowApplicationForm(true)}
                   className={styles.applyButton}
                 >
-                  Alumni Application and Login
+                  Join Our Network
                 </button>
-              </center>
-            )}
-
-            {/* Display SearchResult or Alumni List */}
-            {search.length > 1 ? (
-              <SearchResult search={search} />
-            ) : (
-              <div className={styles.alumniGrid}>
-                {loadingCards ? (
-                  // Display skeleton loaders during card loading
-                  Array.from({ length: alumniPerPage }).map((_, index) => (
-                    <AlumniSkeleton key={index} />
-                  ))
-                ) : (
-                  currentAlumni.map((alumni, index) => (
-                    <AlumniCard key={index} alumni={alumni} />
-                  ))
-                )}
-              </div>
-            )}
+              )}
+            </div>
           </div>
 
-          {/* Pagination for Alumni List */}
-          {!search.length && !loadingCards && (
-            <div className={styles.pagination}>
-              {[...Array(totalPages).keys()].map((page) => (
-                <button
-                  key={page + 1}
-                  onClick={() => paginate(page + 1)}
-                  className={
-                    currentPage === page + 1 ? styles.activePage : ''
-                  }
+          {/* Filters Panel */}
+          {showFilters && (
+            <div className={styles.filtersPanel}>
+              <div className={styles.filterGroup}>
+                <label>Passing Year:</label>
+                <select
+                  value={filterYear}
+                  onChange={(e) => setFilterYear(e.target.value)}
+                  className={styles.filterSelect}
                 >
-                  {page + 1}
+                  <option value="">All Years</option>
+                  {getGraduationYears().map(year => (
+                    <option key={year} value={year}>{year}</option>
+                  ))}
+                </select>
+              </div>
+              {filterYear && (
+                <button
+                  onClick={() => setFilterYear('')}
+                  className={styles.clearFilters}
+                >
+                  Clear Filters
                 </button>
-              ))}
+              )}
+            </div>
+          )}
+
+          {/* Results Info */}
+          {!search.length && !loadingCards && (
+            <div className={styles.resultsInfo}>
+              <p>
+                Showing {currentAlumni.length} of {filteredAlumni.length} alumni
+                {filterYear && ` (Class of ${filterYear})`}
+              </p>
+            </div>
+          )}
+
+          {/* Alumni Grid/List */}
+          {search.length > 1 ? (
+            <SearchResult search={search} />
+          ) : (
+            <div className={`${styles.alumniContainer} ${styles[viewMode]}`}>
+              {loadingCards ? (
+                Array.from({ length: alumniPerPage }).map((_, index) => (
+                  <AlumniSkeleton key={index} />
+                ))
+              ) : (
+                currentAlumni.map((alumni, index) => (
+                  <AlumniCard key={index} alumni={alumni} viewMode={viewMode} />
+                ))
+              )}
+            </div>
+          )}
+
+          {/* Enhanced Pagination */}
+          {!search.length && !loadingCards && totalPages > 1 && (
+            <div className={styles.paginationWrapper}>
+              <div className={styles.pagination}>
+                <button
+                  onClick={() => paginate(Math.max(1, currentPage - 1))}
+                  disabled={currentPage === 1}
+                  className={styles.paginationArrow}
+                >
+                  ← Previous
+                </button>
+                
+                {[...Array(totalPages).keys()].map((page) => {
+                  const pageNumber = page + 1;
+                  // Show first page, last page, current page, and pages around current
+                  if (
+                    pageNumber === 1 ||
+                    pageNumber === totalPages ||
+                    (pageNumber >= currentPage - 1 && pageNumber <= currentPage + 1)
+                  ) {
+                    return (
+                      <button
+                        key={pageNumber}
+                        onClick={() => paginate(pageNumber)}
+                        className={currentPage === pageNumber ? styles.activePage : ''}
+                      >
+                        {pageNumber}
+                      </button>
+                    );
+                  } else if (
+                    pageNumber === currentPage - 2 ||
+                    pageNumber === currentPage + 2
+                  ) {
+                    return <span key={pageNumber} className={styles.ellipsis}>...</span>;
+                  }
+                  return null;
+                })}
+
+                <button
+                  onClick={() => paginate(Math.min(totalPages, currentPage + 1))}
+                  disabled={currentPage === totalPages}
+                  className={styles.paginationArrow}
+                >
+                  Next →
+                </button>
+              </div>
+              
+              <div className={styles.paginationInfo}>
+                Page {currentPage} of {totalPages}
+              </div>
             </div>
           )}
 
