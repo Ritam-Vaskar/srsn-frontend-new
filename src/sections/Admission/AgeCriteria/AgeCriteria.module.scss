@@ -1,31 +1,338 @@
-.ageCriteriaContainer {
-    padding: 20px;
-    background-color: #f9f9f9;
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    text-align: center;
-  }
-  
-  .ageCriteriaTable {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 20px;
-    text-align: center;
-  
-    th, td {
-      border: 1px solid #ddd;
-      padding: 12px;
-      text-align: center;
+:root {
+  --ashram-yellow: #ff8c19;
+}
 
-    width: 50%;
-    //   &:nth-child(even) {
-    //     background-color: #f2f2f2;
-    //   }
-    }
-  
-    th {
-      background-color: #ff8c19;
-      color: white;
-    }
+.ageCriteriaContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 40px 30px;
+  // background: linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(223, 223, 223, 0.3) 100%);
+  backdrop-filter: blur(15px);
+  border-radius: 24px;
+  box-shadow: 0 20px 60px rgba(255, 140, 25, 0.15);
+  border: 1px solid rgba(255, 140, 25, 0.2);
+  position: relative;
+  overflow: hidden;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.ageCriteriaContainer::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--ashram-yellow), #ff6a00, #ffb347);
+  opacity: 0.8;
+}
+
+.decorativeElement {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 300px;
+  height: 300px;
+  background: radial-gradient(circle, rgba(255, 140, 25, 0.08) 0%, transparent 70%);
+  border-radius: 50%;
+  z-index: -1;
+}
+
+.floatingShape {
+  position: absolute;
+  width: 50px;
+  height: 50px;
+  background: linear-gradient(45deg, rgba(255, 140, 25, 0.1), rgba(255, 179, 71, 0.15));
+  border-radius: 10px;
+  top: 8%;
+  right: 5%;
+  transform: rotate(12deg);
+  animation: float 8s ease-in-out infinite;
+}
+
+.floatingShape2 {
+  position: absolute;
+  width: 35px;
+  height: 35px;
+  background: linear-gradient(45deg, rgba(255, 179, 71, 0.12), rgba(255, 140, 25, 0.08));
+  border-radius: 50%;
+  bottom: 10%;
+  left: 3%;
+  animation: float 10s ease-in-out infinite reverse;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px) rotate(12deg); }
+  50% { transform: translateY(-15px) rotate(12deg); }
+}
+
+.ageCriteriaContainer:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 25px 70px rgba(255, 140, 25, 0.2);
+  border-color: rgba(255, 140, 25, 0.3);
+}
+
+.headerContainer {
+  text-align: center;
+  margin-bottom: 40px;
+  position: relative;
+  z-index: 2;
+}
+
+.badge {
+  background: linear-gradient(135deg, var(--ashram-yellow), #ff6a00);
+  color: white;
+  padding: 6px 16px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+  margin-bottom: 16px;
+  display: inline-block;
+  box-shadow: 0 4px 15px rgba(255, 140, 25, 0.3);
+  position: relative;
+  overflow: hidden;
+}
+
+.badge::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+  transition: left 0.6s;
+}
+
+.badge:hover::before {
+  left: 100%;
+}
+
+.badgeText {
+  background: linear-gradient(45deg, rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.7));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.ageCriteriaContainer h2 {
+  font-size: 28px;
+  font-weight: 700;
+  margin: 0;
+  color: #2d3748;
+  letter-spacing: -0.02em;
+  line-height: 1.3;
+  text-align: center;
+}
+
+.highlight {
+  background: linear-gradient(135deg, var(--ashram-yellow), #ff6a00, #ffb347);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  position: relative;
+}
+
+.highlight::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, var(--ashram-yellow), #ff6a00);
+  border-radius: 1px;
+  opacity: 0.6;
+}
+
+.ageCriteriaTable {
+  width: 100%;
+  max-width: 600px;
+  border-collapse: separate;
+  border-spacing: 0;
+  margin-top: 30px;
+  text-align: center;
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 8px 32px rgba(255, 140, 25, 0.1);
+  position: relative;
+  z-index: 2;
+}
+
+.ageCriteriaTable th {
+  background: linear-gradient(135deg, var(--ashram-yellow), #ff6a00);
+  color: white;
+  padding: 16px 20px;
+  font-weight: 600;
+  font-size: 16px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  border: none;
+  position: relative;
+}
+
+.ageCriteriaTable th::before {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, rgba(255, 255, 255, 0.3), transparent, rgba(255, 255, 255, 0.3));
+}
+
+.ageCriteriaTable td {
+  padding: 14px 20px;
+  border: none;
+  border-bottom: 1px solid rgba(255, 140, 25, 0.1);
+  font-size: 15px;
+  font-weight: 500;
+  color: #4a5568;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+}
+
+.ageCriteriaTable tbody tr {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.ageCriteriaTable tbody tr:hover {
+  background: linear-gradient(135deg, rgba(255, 140, 25, 0.05), rgba(255, 179, 71, 0.05));
+  transform: translateX(4px);
+}
+
+.ageCriteriaTable tbody tr:hover td {
+  color: var(--ashram-yellow);
+  font-weight: 600;
+}
+
+.ageCriteriaTable tbody tr:nth-child(even) {
+  background: rgba(255, 140, 25, 0.02);
+}
+
+.ageCriteriaTable tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.bottomDecoration {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 15px;
+  margin-top: 30px;
+  opacity: 0.6;
+}
+
+.decorativeLine {
+  width: 40px;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--ashram-yellow), transparent);
+}
+
+.decorativeCircle {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--ashram-yellow);
+  box-shadow: 0 0 15px rgba(255, 140, 25, 0.4);
+}
+
+/* Responsive design for tablets */
+@media (max-width: 1024px) {
+  .ageCriteriaContainer {
+    padding: 35px 25px;
+    border-radius: 20px;
   }
-  
+
+  .ageCriteriaContainer h2 {
+    font-size: 24px;
+  }
+
+  .ageCriteriaTable th {
+    padding: 14px 16px;
+    font-size: 15px;
+  }
+
+  .ageCriteriaTable td {
+    padding: 12px 16px;
+    font-size: 14px;
+  }
+
+  .floatingShape,
+  .floatingShape2 {
+    display: none;
+  }
+}
+
+/* Responsive design for mobile */
+@media (max-width: 768px) {
+  .ageCriteriaContainer {
+    padding: 30px 20px;
+    border-radius: 18px;
+  }
+
+  .ageCriteriaContainer h2 {
+    font-size: 20px;
+    line-height: 1.4;
+  }
+
+  .ageCriteriaTable {
+    max-width: 100%;
+    border-radius: 12px;
+  }
+
+  .ageCriteriaTable th {
+    padding: 12px 14px;
+    font-size: 14px;
+  }
+
+  .ageCriteriaTable td {
+    padding: 10px 14px;
+    font-size: 13px;
+  }
+
+  .badge {
+    font-size: 11px;
+    padding: 5px 12px;
+  }
+}
+
+@media (max-width: 480px) {
+  .ageCriteriaContainer {
+    padding: 25px 15px;
+    border-radius: 16px;
+  }
+
+  .ageCriteriaContainer h2 {
+    font-size: 18px;
+    padding: 0 10px;
+  }
+
+  .ageCriteriaTable th {
+    padding: 10px 12px;
+    font-size: 13px;
+  }
+
+  .ageCriteriaTable td {
+    padding: 8px 12px;
+    font-size: 12px;
+  }
+
+  .decorativeElement {
+    width: 200px;
+    height: 200px;
+  }
+
+  .bottomDecoration {
+    margin-top: 25px;
+  }
+
+  .decorativeLine {
+    width: 30px;
+  }
+}

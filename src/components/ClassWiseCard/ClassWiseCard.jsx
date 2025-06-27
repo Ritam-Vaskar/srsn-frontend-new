@@ -172,6 +172,9 @@ const BookList = ({ title1, title2, Prischool, SecSchool, flag, isImg, isDoc }) 
     return (
         <div className={styles.Container}>
             <h2>{title1}</h2>
+            <div className={styles.badge}>
+                <span className={styles.badgeText}>Class Details</span>
+            </div>
             <div className={styles.classButtons}>
                 {Object.keys(Data).map((className) => (
                     <button

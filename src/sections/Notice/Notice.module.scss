@@ -1,10 +1,182 @@
-.container{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 4rem;
+// Notice.module.scss - Main container layout
+.container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
 
-    @media(max-width: 480px){
-        flex-direction: column;
+  // Smooth animation for the entire container
+  animation: fadeIn 0.8s ease-out;
+
+  // Responsive spacing
+  @media (max-width: 768px) {
+    padding: 15px;
+    gap: 20px;
+  }
+
+  @media (max-width: 480px) {
+    padding: 10px;
+    gap: 15px;
+  }
+}
+
+// Alternative layout options - uncomment the one you prefer:
+
+// Option 1: Stacked layout (current - NoticeList on top, NoticeBar below)
+// This is the default with flex-direction: column
+
+// Option 2: Side-by-side layout for larger screens
+// .container {
+//   @media (min-width: 1024px) {
+//     flex-direction: row;
+//     align-items: flex-start;
+//     
+//     // NoticeList takes more space
+//     > :first-child {
+//       flex: 2;
+//     }
+//     
+//     // NoticeBar takes less space
+//     > :last-child {
+//       flex: 1;
+//       max-width: 400px;
+//     }
+//   }
+// }
+
+// // Option 3: NoticeBar on top (sticky), NoticeList below
+// .container {
+//   > :first-child {
+//     order: 2; // NoticeList goes second
+//   }
+  
+//   > :last-child {
+//     order: 1; // NoticeBar goes first
+//     position: sticky;
+//     top: 20px;
+//     z-index: 10;
+//   }
+// }
+
+// Option 4: Grid layout for precise control
+.container {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: auto 1fr;
+  gap: 30px;
+  
+  @media (min-width: 1024px) {
+    grid-template-columns: 2fr 1fr;
+    grid-template-rows: 1fr;
+    
+    // NoticeList spans full height
+    > :first-child {
+      grid-column: 1;
+      grid-row: 1;
     }
+    
+    // NoticeBar in sidebar
+    > :last-child {
+      grid-column: 2;
+      grid-row: 1;
+      align-self: start;
+      position: sticky;
+      top: 20px;
+    }
+  }
+}
+
+// Smooth entrance animation
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+// Enhanced visual hierarchy
+.container > * {
+  position: relative;
+  z-index: 1;
+  
+  // Subtle shadow for depth
+  filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.05));
+  
+  // Smooth transitions
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  
+  // Hover effect for the entire components
+  &:hover {
+    transform: translateY(-2px);
+    filter: drop-shadow(0 8px 15px rgba(0, 0, 0, 0.1));
+  }
+}
+
+// Responsive improvements
+@media (max-width: 768px) {
+  .container > * {
+    &:hover {
+      transform: none; // Disable hover effects on mobile
+    }
+  }
+}
+
+// Print styles
+@media print {
+  .container {
+    background: none;
+    box-shadow: none;
+    padding: 0;
+    gap: 20px;
+    
+    > * {
+      filter: none;
+      transform: none;
+    }
+  }
+}
+
+// Dark mode support (if you plan to add it)
+
+
+// High contrast mode support
+@media (prefers-contrast: high) {
+  .container {
+    background: #ffffff;
+    
+    > * {
+      border: 2px solid #000000;
+    }
+  }
+}
+
+// Reduced motion support
+@media (prefers-reduced-motion: reduce) {
+  .container {
+    animation: none;
+    
+    > * {
+      transition: none;
+      
+      &:hover {
+        transform: none;
+      }
+    }
+  }
+  
+  @keyframes fadeIn {
+    from, to {
+      opacity: 1;
+      transform: none;
+    }
+  }
 }
