@@ -70,6 +70,9 @@ const UserProfile = ({ user }) => {
       });
       const result = await response.json();
       if (result.success) {
+        localStorage.removeItem("fcm_token");
+        localStorage.removeItem("fcm_user");
+        localStorage.removeItem("fcm_role");
         dispatch(setUserDetails(null));
         navigate('/school');
         toast.success('Logged out successfully!');
