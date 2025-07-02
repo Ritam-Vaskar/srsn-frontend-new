@@ -1,4 +1,5 @@
 import React from 'react';
+import { useRef } from 'react';
 import './App.css';
 import { Outlet } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
@@ -6,13 +7,19 @@ import 'react-toastify/dist/ReactToastify.css';
 import SummaryApi from './common';
 import { useDispatch } from 'react-redux';
 import { setUserDetails } from './store/userSlice';
-import {setAlumniDetails} from './store/alumniSclice';
-import { useState,useEffect } from 'react';
+import { setAlumniDetails } from './store/alumniSclice';
+import { useState, useEffect } from 'react';
 import Context from './Context';
 import Chatbot from './Chatbot/Chatbot';
+import { requestPermission } from './firebase';
+import axios from 'axios';
+import { useSelector } from 'react-redux';
+import { UAParser } from 'ua-parser-js';
+import { onMessage } from "firebase/messaging";
 
 
 function App() {
+
   const dispatch = useDispatch();
 
   const [isChatbotOpen, setIsChatbotOpen] = useState(false);
@@ -43,26 +50,26 @@ function App() {
       console.log(err);
     }
   }
-  const fetchAlumni=async()=>{
-    try{
-        const response = await fetch(SummaryApi.AlumniDetailsFetch.url, {
-            method: SummaryApi.AlumniDetailsFetch.method,
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            credentials: 'include'
-        });
-        const result = await response.json();
-        if (!result.success) {
-            // toast.error(result.message);
-            return;
-        }
-        const data=result;
-        console.log(data.user);
-        dispatch(setAlumniDetails(data.user));
-    }catch(err){
-        console.log(err);
-        // toast.error(err.message);
+  const fetchAlumni = async () => {
+    try {
+      const response = await fetch(SummaryApi.AlumniDetailsFetch.url, {
+        method: SummaryApi.AlumniDetailsFetch.method,
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        credentials: 'include'
+      });
+      const result = await response.json();
+      if (!result.success) {
+        // toast.error(result.message);
+        return;
+      }
+      const data = result;
+      console.log(data.user);
+      dispatch(setAlumniDetails(data.user));
+    } catch (err) {
+      console.log(err);
+      // toast.error(err.message);
     }
   }
   useEffect(() => {
@@ -91,16 +98,80 @@ function App() {
   // }, []);
 
 
+  const user = useSelector(state => state?.user?.user);
+
+  const tokenSentRef = useRef(false);
+
+  useEffect(() => {
+
+    if (tokenSentRef.current) return; // Prevent multiple sends
+    const sendTokenDetails = async () => {
+
+      const userId = user?._id || "guest";
+      const role = user?.role || "guest";
+
+      const token = await requestPermission(userId, role);
+      if (!token) return;
+
+      const parser = new UAParser();
+      const ua = parser.getResult();
+
+      let ip = '';
+      try {
+        const res = await fetch('https://api.ipify.org?format=json');
+        const json = await res.json();
+        ip = json.ip;
+      } catch (err) {
+        console.warn("IP fetch failed:", err);
+      }
+
+      const payload = {
+        token,
+        userId,
+        role,
+        deviceInfo: {
+          browser: ua.browser.name,
+          os: ua.os.name,
+          ip,
+        }
+      };
+
+      await axios.post(SummaryApi.FcmTokenSend.url, payload);
+      console.log("✅ Token sent successfully");
+      tokenSentRef.current = true;
+    };
+
+    sendTokenDetails();
+  }, [user]);
+
+  useEffect(() => {
+    import("./firebase").then(({ messaging }) => {
+      if (!messaging) {
+        console.error("🚨 Firebase Messaging is undefined");
+        return;
+      }
+
+      onMessage(messaging, (payload) => {
+        console.log("📬 Foreground message received:", payload);
+        toast.info(`${payload.notification?.title}\n${payload.notification?.body}`);
+      });
+    }).catch(err => {
+      console.error("❌ Error loading Firebase:", err);
+    });
+  }, []);
+
+
+
   return (
     <>
       <Context.Provider value={{ fetchUser, fetchAlumni }}>
         {/* <Navbar /> */}
         <ToastContainer />
         {/* Chatbot Integration */}
-      <Chatbot 
-        isOpen={isChatbotOpen} 
-        onToggle={toggleChatbot} 
-      />
+        <Chatbot
+          isOpen={isChatbotOpen}
+          onToggle={toggleChatbot}
+        />
         <Outlet />
         {/* <Footer /> */}
       </Context.Provider>

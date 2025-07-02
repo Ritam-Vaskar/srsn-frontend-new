@@ -5,6 +5,11 @@ const backendUrl=import.meta.env.VITE_BACKEND_URL
 
 
 const SummaryApi={
+    //fcm token
+    FcmTokenSend:{
+        url:backendUrl+"/api/save-token",
+        method:"POST"
+    },
     //User sign up and sign in 
     UserSignIn:{
         url:backendUrl+"/api/userSignIn",

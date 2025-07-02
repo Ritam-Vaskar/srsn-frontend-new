@@ -2,21 +2,21 @@
 
 const subjectOptions = {
     //primary school
-    beez: [
+    Beez: [
         'BengaliW', 'BengaliL', 'BengaliP', 'BengaliA',
         'EnglishW', 'EnglishL', 'EnglishP', 'EnglishA',
         'MathsW', 'MathsL', 'MathsP',
         'Physi'
     ],
-    ankur: [
+    Ankur: [
         'BengaliW', 'BengaliS', 'BengaliP', 'BengaliA',
         'EnglishW', 'EnglishS', 'EnglishP', 'EnglishA',
-        'Maths', 'Work', 'Physi'
+        'Maths', 'Draw', 'Work', 'Physi'
     ],
-    kisholoy: [
+    Kisholoy: [
         'BengaliW', 'BengaliS', 'BengaliP', 'BengaliA',
         'EnglishW', 'EnglishS', 'EnglishP', 'EnglishA',
-        'Maths', 'Work', 'Physi'
+        'Maths', 'Draw','Work', 'Physi'
     ],
     1: [
         'BengaliW', 'BengaliS', 'BengaliP', 'BengaliA',

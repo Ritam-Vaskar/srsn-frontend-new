@@ -1,4 +1,4 @@
-import React, { useState,useContext } from 'react';
+import React, { useState, useContext } from 'react';
 import styles from './../styles/AlumniProfile.module.scss';
 import ProfileEdit from './ProfileEdit';
 import { useSelector } from 'react-redux';
@@ -12,14 +12,14 @@ import { setAlumniDetails } from './../../../store/alumniSclice';
 const AlumniControlPanel = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const [activeComponent, setActiveComponent] = useState('Profile'); 
-  const [isEditing, setIsEditing] = useState(false); 
+  const [activeComponent, setActiveComponent] = useState('Profile');
+  const [isEditing, setIsEditing] = useState(false);
   const alumni = useSelector((state) => state?.alumni?.alumni);
 
   const handleLeftBarOptionClick = (option) => {
     setActiveComponent(option);
     if (option === 'Profile') {
-      setIsEditing(false); 
+      setIsEditing(false);
     }
   };
 
@@ -32,27 +32,33 @@ const AlumniControlPanel = () => {
   };
 
   const handleLogout = async () => {
-    try{
-      const response=await fetch(SummaryApi.AlumniLogOut.url, {
+    try {
+      const response = await fetch(SummaryApi.AlumniLogOut.url, {
         method: SummaryApi.AlumniLogOut.method,
         headers: {
           'Content-Type': 'application/json'
         },
         credentials: 'include'
       });
+
       const result = await response.json();
       console.log(result);
-      if(result.success){
+
+      if (result.success) {
+        localStorage.removeItem("fcm_token");
+        localStorage.removeItem("fcm_user");
+        localStorage.removeItem("fcm_role");
+
         dispatch(setAlumniDetails(null));
         navigate('/school/alumni');
         toast.success('Logged out successfully!');
-      }else{
+      } else {
         toast.error(result.message);
       }
-    }catch(error){
+    } catch (error) {
       console.log(error);
     }
-  }
+  };
 
   return (
     <div className={styles.container}>
@@ -91,32 +97,32 @@ const AlumniControlPanel = () => {
             <h2>Profile Details</h2>
             {!isEditing ? (
               <div className={styles.profileDetails}>
-              <div className={styles.row}>
-                <div className={styles.label}>Name:</div>
-                <div className={styles.value}>{alumni?.name || 'Not Available'}</div>
-              </div>
-              <div className={styles.row}>
-                <div className={styles.label}>Batch:</div>
-                <div className={styles.value}>{`${alumni?.startingYear} - ${alumni?.endingYear || 'Not Available'}`}</div>
+                <div className={styles.row}>
+                  <div className={styles.label}>Name:</div>
+                  <div className={styles.value}>{alumni?.name || 'Not Available'}</div>
+                </div>
+                <div className={styles.row}>
+                  <div className={styles.label}>Batch:</div>
+                  <div className={styles.value}>{`${alumni?.startingYear} - ${alumni?.endingYear || 'Not Available'}`}</div>
 
+                </div>
+                <div className={styles.row}>
+                  <div className={styles.label}>Designation:</div>
+                  <div className={styles.value}>{alumni?.designation || 'Not Available'}</div>
+                </div>
+                <div className={styles.row}>
+                  <div className={styles.label}>Email:</div>
+                  <div className={styles.value}>{alumni?.email || 'Not Available'}</div>
+                </div>
+                <div className={styles.row}>
+                  <div className={styles.label}>Phone:</div>
+                  <div className={styles.value}>{alumni?.mobileNumber || 'Not Available'}</div>
+                </div>
+                <button className={styles.editButton} onClick={openEditWindow}>
+                  Edit Profile
+                </button>
               </div>
-              <div className={styles.row}>
-                <div className={styles.label}>Designation:</div>
-                <div className={styles.value}>{alumni?.designation || 'Not Available'}</div>
-              </div>
-              <div className={styles.row}>
-                <div className={styles.label}>Email:</div>
-                <div className={styles.value}>{alumni?.email || 'Not Available'}</div>
-              </div>
-              <div className={styles.row}>
-                <div className={styles.label}>Phone:</div>
-                <div className={styles.value}>{alumni?.mobileNumber || 'Not Available'}</div>
-              </div>
-              <button className={styles.editButton} onClick={openEditWindow}>
-                Edit Profile
-              </button>
-            </div>
-            
+
             ) : (
               <ProfileEdit
                 user={alumni}

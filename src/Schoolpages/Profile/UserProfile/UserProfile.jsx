@@ -70,6 +70,9 @@ const UserProfile = ({ user }) => {
       });
       const result = await response.json();
       if (result.success) {
+        localStorage.removeItem("fcm_token");
+        localStorage.removeItem("fcm_user");
+        localStorage.removeItem("fcm_role");
         dispatch(setUserDetails(null));
         navigate('/school');
         toast.success('Logged out successfully!');
@@ -137,7 +140,7 @@ const UserProfile = ({ user }) => {
             <div className={styles.editProfile} onClick={() => handleLeftBarOptionClick("Profile")}>Your Profile</div>
 
             {/* Check if the student's grade is 'beez', 'ankur', 'kisholoy' or grades 1-4 */}
-            {/(beez|ankur|kisholoy|[1-4])/.test(user.grade) && isResultActivePrimary && (
+            {/(Beez|Ankur|Kisholoy|[1-4])/.test(user.grade) && isResultActivePrimary && (
               <div className={styles.resultPortal} onClick={() => handleLeftBarOptionClick("StudentResult")}>Result Portal</div>
             )}
 
