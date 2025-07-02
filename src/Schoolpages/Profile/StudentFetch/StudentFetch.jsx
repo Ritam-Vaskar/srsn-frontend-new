@@ -85,7 +85,7 @@ const StudentFetch = () => {
     }, [selectedClass, selectedSemester, selectedSubject]);
 
     const handleMarksChange = (studentId, value) => {
-        if (value < 0 || value > 100) {
+        if (value < -1 || value > 100) {
             toast.warning('Please enter marks between 0 and 100');
             return;
         }
@@ -153,10 +153,12 @@ const StudentFetch = () => {
             <label>Subject:</label>
             <select className={styles.select} value={selectedSubject} onChange={(e) => setSelectedSubject(e.target.value)}>
                 <option value="" disabled>Select Subject</option>
+                <option value="total">Total Score</option>
                 {subjectOptions[selectedClass]?.map((sub) => (
                     <option key={sub} value={sub}>{sub}</option>
                 ))}
             </select>
+
 
             {loading ? (
                 <p>Loading students...</p>
@@ -171,25 +173,81 @@ const StudentFetch = () => {
                             <th>Marks</th>
                         </tr>
                     </thead>
-                    <tbody>
-                        {students.map(student => (
-                            <tr key={student._id}>
-                                <td>{students.indexOf(student) + 1}</td>
-                                <td>{student.name}</td>
-                                <td>
-                                    <input
-                                        type="number"
-                                        value={marks[student._id] || ''}
-                                        onChange={e => handleMarksChange(student._id, e.target.value)}
-                                        min="0"
-                                        max="100"
-                                        placeholder={`${student[selectedSemester]?.[selectedSubject] || 0}`}
-                                    />
-                                </td>
-                            </tr>
-                        ))}
+                    {/* <tbody>
+                        {students.map((student, index) => {
+                            const enteredMark = marks[student._id];
+                            const savedMark = student[selectedSemester]?.[selectedSubject];
+                            const effectiveMark = enteredMark !== '' && enteredMark !== undefined ? Number(enteredMark) : Number(savedMark);
+                            const isAbsent = effectiveMark === -1;
 
+                            return (
+                                <tr key={student._id} style={{ backgroundColor: isAbsent ? '#ffcccc' : 'transparent' }}>
+                                    <td>{index + 1}</td>
+                                    <td>{student.name}</td>
+                                    <td>
+                                        <input
+                                            type="number"
+                                            value={enteredMark || ''}
+                                            onChange={e => handleMarksChange(student._id, e.target.value)}
+                                            min="-1"
+                                            max="100"
+                                            placeholder={`${savedMark ?? ''}`}
+                                        />
+                                    </td>
+                                </tr>
+                            );
+                        })}
+                    </tbody> */}
+                    <tbody>
+                        {students.map((student, index) => {
+                            const enteredMark = marks[student._id];
+                            const savedMark = student[selectedSemester]?.[selectedSubject];
+
+                            let effectiveMark;
+                            let isAbsent = false;
+
+                            if (selectedSubject === 'total') {
+                                // Calculate total across all subjects
+                                const subjectMarks = subjectOptions[selectedClass] || [];
+                                const allMarks = subjectMarks.map(sub => student[selectedSemester]?.[sub]);
+                                isAbsent = allMarks.some(mark => Number(mark) === -1);
+                                effectiveMark = isAbsent
+                                    ? 'Absent'
+                                    : allMarks.reduce((sum, mark) => sum + (isNaN(mark) ? 0 : Number(mark)), 0);
+                            } else {
+                                effectiveMark = enteredMark !== '' && enteredMark !== undefined
+                                    ? Number(enteredMark)
+                                    : Number(savedMark);
+
+                                isAbsent = effectiveMark === -1;
+                            }
+
+                            return (
+                                <tr key={student._id} style={{ backgroundColor: isAbsent ? '#ffcccc' : 'transparent' }}>
+                                    <td>{index + 1}</td>
+                                    <td>{student.name}</td>
+                                    <td>
+                                        {selectedSubject === 'total' ? (
+                                            <span style={{ color: isAbsent ? 'red' : 'black', fontWeight: isAbsent ? 'bold' : 'normal' }}>
+                                                {effectiveMark}
+                                            </span>
+                                        ) : (
+                                            <input
+                                                type="number"
+                                                value={enteredMark || ''}
+                                                onChange={e => handleMarksChange(student._id, e.target.value)}
+                                                min="-1"
+                                                max="100"
+                                                placeholder={`${savedMark ?? ''}`}
+                                            />
+                                        )}
+                                    </td>
+                                </tr>
+                            );
+                        })}
                     </tbody>
+
+
                 </table>
             )}
 

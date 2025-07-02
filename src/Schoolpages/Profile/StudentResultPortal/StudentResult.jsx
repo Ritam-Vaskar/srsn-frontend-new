@@ -69,15 +69,21 @@ const StudentResult = () => {
     const subjects = subjectOptions[user.grade] || [];
     const semesterMarks = user[selectedSemester] || {};
 
-    // Calculate total marks
-    const totalMarks = Object.values(semesterMarks)
-        .filter((mark) => !isNaN(mark)) // Filter out non-numeric or 'N/A' values
-        .reduce((sum, mark) => sum + Number(mark), 0);
+    // Check if any subject is marked as absent (-1)
+    const isAbsent = Object.values(semesterMarks).some(mark => Number(mark) === -1);
+
+    // Calculate total marks (exclude absent)
+    const totalMarks = isAbsent
+        ? 'Absent'
+        : Object.values(semesterMarks)
+            .filter(mark => !isNaN(mark))
+            .reduce((sum, mark) => sum + Number(mark), 0);
 
     return (
         <div className={styles.container}>
             <h2 className={styles.header}>Welcome to the Result Portal, {user.name}</h2>
             <p>Your rank is {user.result}</p>
+
             <label htmlFor="semester" className={styles.label}>Select Semester:</label>
             <select
                 id="semester"
@@ -98,12 +104,17 @@ const StudentResult = () => {
                     </tr>
                 </thead>
                 <tbody>
-                    {subjects.map((subject) => (
-                        <tr key={subject}>
-                            <td>{subject}</td>
-                            <td>{semesterMarks[subject] || 'N/A'}</td>
-                        </tr>
-                    ))}
+                    {subjects.map((subject) => {
+                        const mark = semesterMarks[subject];
+                        const isAbsent = Number(mark) === -1;
+
+                        return (
+                            <tr key={subject} style={{ backgroundColor: isAbsent ? '#ffcccc' : 'transparent' }}>
+                                <td>{subject}</td>
+                                <td>{isAbsent ? 'Absent' : (mark ?? 'N/A')}</td>
+                            </tr>
+                        );
+                    })}
                 </tbody>
                 <tfoot>
                     <tr>
