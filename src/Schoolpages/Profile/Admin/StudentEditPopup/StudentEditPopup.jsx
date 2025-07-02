@@ -108,6 +108,15 @@ const StudentAppEdit = ({ student, onClose, onUpdate, model }) => {
                 onChange={handleInputChange}
               />
             </div>
+            <div className={styles.formGroup}>
+              <label>Roll No</label>
+              <input
+                type="text"
+                name="result"
+                value={editedStudent.result || ''}
+                onChange={handleInputChange}
+              />
+            </div>
 
             <div className={styles.formGroup}>
               <label>Blood Group</label>

@@ -6,7 +6,7 @@ import subjectOptions from '../../../helper/classSubject';
 
 const StudentFetch = () => {
     const [students, setStudents] = useState([]);
-    const [selectedClass, setSelectedClass] = useState('beez');
+    const [selectedClass, setSelectedClass] = useState('Beez');
     const [selectedSemester, setSelectedSemester] = useState('firstSem');
     const [selectedSubject, setSelectedSubject] = useState('');
     const [marks, setMarks] = useState({});
@@ -14,9 +14,9 @@ const StudentFetch = () => {
     const [error, setError] = useState('');
 
     const classOptions = [
-        { value: 'beez', label: 'Beez' },
-        { value: 'ankur', label: 'Ankur' },
-        { value: 'kisholoy', label: 'Kisholoy' },
+        { value: 'Beez', label: 'Beez' },
+        { value: 'Ankur', label: 'Ankur' },
+        { value: 'Kisholoy', label: 'Kisholoy' },
         { value: '1', label: 'Class 1' },
         { value: '2', label: 'Class 2' },
         { value: '3', label: 'Class 3' },
