@@ -17,3 +17,23 @@
 li{
     list-style: none;
 }
+/* For WebKit browsers: Chrome, Safari, Edge */
+::-webkit-scrollbar {
+  width: 6px;  /* Vertical scrollbar */
+  height: 6px; /* Horizontal scrollbar */
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #ff8c19;
+  border-radius: 4px;
+}
+
+/* For Firefox */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #ff8c19 transparent;
+}
