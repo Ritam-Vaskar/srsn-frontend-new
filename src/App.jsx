@@ -134,12 +134,13 @@ function App() {
   const tokenSentRef = useRef(false);
 
   useEffect(() => {
+    // Only request FCM permission for authenticated users
+    if (!user || !user._id || tokenSentRef.current) return;
 
-    if (tokenSentRef.current) return; // Prevent multiple sends
     const sendTokenDetails = async () => {
 
-      const userId = user?._id || "guest";
-      const role = user?.role || "guest";
+      const userId = user._id;
+      const role = user.role;
 
       const token = await requestPermission(userId, role);
       if (!token) return;

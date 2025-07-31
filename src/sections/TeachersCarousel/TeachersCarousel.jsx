@@ -40,12 +40,13 @@ const TeachersCarousel = () => {
   const fetchTeachers = async () => {
     try {
       setLoading(true);
+      
+      // Use regular fetch since teacherFetch endpoint is now public
       const response = await fetch(SummaryApi.TeacherFetch.url, {
         method: SummaryApi.TeacherFetch.method,
         headers: {
           'Content-Type': 'application/json'
-        },
-        credentials: 'include'
+        }
       });
       const result = await response.json();
       if (!result.success) {
@@ -54,7 +55,8 @@ const TeachersCarousel = () => {
       }
       setTeachers(result.teacher);
     } catch (err) {
-      toast.error(err.message);
+      console.log('Teacher fetch error:', err);
+      toast.error('Failed to load teachers');
     } finally {
       setLoading(false);
     }
@@ -141,6 +143,31 @@ const TeachersCarousel = () => {
         <div className={styles.loadingContainer}>
           <div className={styles.loadingSpinner}></div>
           <p>Loading our amazing teachers...</p>
+        </div>
+      </div>
+    );
+  }
+
+  // If no teachers (e.g., user not authenticated), show a simple message
+  if (teachers.length === 0) {
+    return (
+      <div className={styles.teacherCarousel}>
+        <div className={styles.carouselHeader}>
+          <div className={styles.headerBadge}>
+            <span>✨ Our Faculty</span>
+          </div>
+          <h2 className={styles.sectionTitle}>Meet Our Educators</h2>
+          <p className={styles.sectionSubtitle}>
+            Dedicated professionals shaping young minds with passion and expertise
+          </p>
+        </div>
+        <div className={styles.carouselFooter}>
+          <Link to="/login" className={styles.viewAllButton}>
+            <span>Login to Meet Our Teachers</span>
+            <svg className={styles.buttonArrow} width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+              <path d="M5 12h14M12 5l7 7-7 7"/>
+            </svg>
+          </Link>
         </div>
       </div>
     );
