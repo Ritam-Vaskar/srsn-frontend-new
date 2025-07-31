@@ -3,6 +3,7 @@ import styles from '../styles/ProfileEdit.module.scss';
 import { toast } from 'react-toastify';
 import SummaryApi from '../../../common';
 import Context from '../../../Context';
+import { makeAlumniAuthenticatedRequest } from '../../../helper/tokenManager';
 
 
 
@@ -31,11 +32,10 @@ const ProfileEdit = ({ user, closeModal, fetchUser }) => {
     e.preventDefault();
     console.log(formData);
     try {
-      const response = await fetch(SummaryApi.AlumniEdit.url, {
+      const response = await makeAlumniAuthenticatedRequest(SummaryApi.AlumniEdit.url, {
         method: SummaryApi.AlumniEdit.method,
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(formData),
-        credentials: 'include',
+        body: JSON.stringify(formData)
       });
 
       const result = await response.json();

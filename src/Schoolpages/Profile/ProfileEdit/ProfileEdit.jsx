@@ -5,6 +5,7 @@ import uploadImg from '../../../helper/uploadImg';
 import { toast } from 'react-toastify';
 import styles from './ProfileEdit.module.scss';
 import Context from '../../../Context';
+import { makeAuthenticatedRequest } from '../../../helper/tokenManager';
 
 const ProfileEdit = ({ user, closeModal, fetchUser }) => {
   const { register, handleSubmit, formState: { errors }, setValue } = useForm({
@@ -51,13 +52,9 @@ const ProfileEdit = ({ user, closeModal, fetchUser }) => {
   const onSubmit = async (data) => {
     console.log("Form data:", data);
     try {
-      const response = await fetch(SummaryApi.UserEdit.url, {
+      const response = await makeAuthenticatedRequest(SummaryApi.UserEdit.url, {
         method: SummaryApi.UserEdit.method,
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(data),
-        credentials: 'include'
+        body: JSON.stringify(data)
       });
       const result = await response.json();
       if (!result.success) {

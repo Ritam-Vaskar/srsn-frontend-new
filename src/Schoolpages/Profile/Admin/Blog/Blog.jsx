@@ -6,6 +6,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import styles from './styles/Blog.module.scss';
 import SummaryApi from '../../../../common';
 import uploadImg from '../../../../helper/uploadImg';
+import { makeAuthenticatedRequest } from '../../../../helper/tokenManager';
 
 const BlogUpload = () => {
     const [blogs, setBlogs] = useState([]);
@@ -25,12 +26,8 @@ const BlogUpload = () => {
 
     const fetchBlogs = async () => {
         try {
-            const response = await fetch(SummaryApi.BlogFetch.url, {
-                method: SummaryApi.BlogFetch.method,
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                credentials: 'include'
+            const response = await makeAuthenticatedRequest(SummaryApi.BlogFetch.url, {
+                method: SummaryApi.BlogFetch.method
             });
             const data = await response.json();
             if (data.success) {
@@ -74,13 +71,9 @@ const BlogUpload = () => {
         console.log(data);
 
         try {
-            const response = await fetch(SummaryApi.BlogAdd.url, {
+            const response = await makeAuthenticatedRequest(SummaryApi.BlogAdd.url, {
                 method: SummaryApi.BlogAdd.method,
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({ ...data, image }), 
-                credentials: 'include',
+                body: JSON.stringify({ ...data, image })
             });
 
             const result = await response.json();
@@ -98,12 +91,9 @@ const BlogUpload = () => {
 
     const handleDelete = async (blogId) => {
         try {
-            const response = await fetch(SummaryApi.BlogDelete.url, {
+            const response = await makeAuthenticatedRequest(SummaryApi.BlogDelete.url, {
                 method: SummaryApi.BlogDelete.method,
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({ _id: blogId }),
+                body: JSON.stringify({ _id: blogId })
             });
             const result = await response.json();
 

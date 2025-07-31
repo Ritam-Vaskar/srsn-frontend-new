@@ -3,6 +3,7 @@ import { toast } from 'react-toastify';
 import AlumniCard from '../../../../components/AlumniProfileCard/ProfileCard';
 import SummaryApi from '../../../../common';
 import styles from './styles/Alumni.module.scss';
+import { makeAuthenticatedRequest } from '../../../../helper/tokenManager';
 
 const AlumniPanel = () => {
     const [alumniList, setAlumniList] = useState([]);
@@ -14,10 +15,8 @@ const AlumniPanel = () => {
 
     const fetchAlumniData = async () => {
         try {
-            const response = await fetch(SummaryApi.AlumniApplicationFetch.url, {
-                method: SummaryApi.AlumniApplicationFetch.method,
-                headers: { 'Content-Type': 'application/json' },
-                credentials: 'include',
+            const response = await makeAuthenticatedRequest(SummaryApi.AlumniApplicationFetch.url, {
+                method: SummaryApi.AlumniApplicationFetch.method
             });
             const data = await response.json();
             if (response.ok) {
@@ -33,11 +32,9 @@ const AlumniPanel = () => {
 
     const handleAccept = async (alumniId) => {
         try {
-            const response = await fetch(SummaryApi.AlumniAccept.url, {
+            const response = await makeAuthenticatedRequest(SummaryApi.AlumniAccept.url, {
                 method: SummaryApi.AlumniAccept.method,
-                headers: { 'Content-Type': 'application/json' },
-                credentials: 'include',
-                body: JSON.stringify({ ID: alumniId, check: "true" }), // Set ID and check explicitly
+                body: JSON.stringify({ ID: alumniId, check: "true" }) // Set ID and check explicitly
             });
             const result = await response.json();
             if (response.ok && result.success) {
@@ -54,11 +51,9 @@ const AlumniPanel = () => {
 
     const handleDecline = async (alumniId) => {
         try {
-            const response = await fetch(SummaryApi.AlumniReject.url, {
+            const response = await makeAuthenticatedRequest(SummaryApi.AlumniReject.url, {
                 method: SummaryApi.AlumniReject.method,
-                headers: { 'Content-Type': 'application/json' },
-                credentials: 'include',
-                body: JSON.stringify({ ID: alumniId, check: "false" }), // Set ID and check explicitly
+                body: JSON.stringify({ ID: alumniId, check: "false" }) // Set ID and check explicitly
             });
             const result = await response.json();
             if (response.ok && result.success) {

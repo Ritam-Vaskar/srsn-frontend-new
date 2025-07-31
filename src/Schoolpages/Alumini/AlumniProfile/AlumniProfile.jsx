@@ -8,6 +8,7 @@ import { toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { setAlumniDetails } from './../../../store/alumniSclice';
+import { makeAlumniAuthenticatedRequest, clearAlumniTokens } from '../../../helper/tokenManager';
 
 const AlumniControlPanel = () => {
   const dispatch = useDispatch();
@@ -33,12 +34,8 @@ const AlumniControlPanel = () => {
 
   const handleLogout = async () => {
     try {
-      const response = await fetch(SummaryApi.AlumniLogOut.url, {
-        method: SummaryApi.AlumniLogOut.method,
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        credentials: 'include'
+      const response = await makeAlumniAuthenticatedRequest(SummaryApi.AlumniLogOut.url, {
+        method: SummaryApi.AlumniLogOut.method
       });
 
       const result = await response.json();
@@ -48,6 +45,9 @@ const AlumniControlPanel = () => {
         localStorage.removeItem("fcm_token");
         localStorage.removeItem("fcm_user");
         localStorage.removeItem("fcm_role");
+        
+        // Clear alumni tokens
+        clearAlumniTokens();
 
         dispatch(setAlumniDetails(null));
         navigate('/school/alumni');
@@ -57,6 +57,10 @@ const AlumniControlPanel = () => {
       }
     } catch (error) {
       console.log(error);
+      // Clear tokens even on error
+      clearAlumniTokens();
+      dispatch(setAlumniDetails(null));
+      navigate('/school/alumni');
     }
   };
 

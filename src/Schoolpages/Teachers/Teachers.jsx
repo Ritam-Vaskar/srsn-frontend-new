@@ -5,6 +5,7 @@ import SummaryApi from '../../common';
 import styles from './styles/Teachers.module.scss';
 import Spinner from '../../layouts/Loader/Spinner';
 import ArunachalSir from './../../assets/images/c67aa7eb-c9c5-49c6-8a48-9fbf813daf57.jpeg';
+import { makeAuthenticatedRequest } from '../../helper/tokenManager';
 
 const KnowYourTeacher = () => {
   const [teachers, setTeachers] = useState([]);
@@ -13,12 +14,8 @@ const KnowYourTeacher = () => {
   const fetchTeachers = async () => {
     setLoading(true);
     try {
-      const response = await fetch(SummaryApi.TeacherFetch.url, {
-        method: SummaryApi.TeacherFetch.method,
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        credentials: 'include',
+      const response = await makeAuthenticatedRequest(SummaryApi.TeacherFetch.url, {
+        method: SummaryApi.TeacherFetch.method
       });
       const result = await response.json();
       if (!result.success) {

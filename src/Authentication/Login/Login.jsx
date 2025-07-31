@@ -1,5 +1,5 @@
 import React from 'react';
-import { useEffect } from 'react';
+import { useEffect, useContext } from 'react';
 import { useForm } from 'react-hook-form';
 import styles from './Login.module.scss';
 import SummaryApi from '../../common';
@@ -15,10 +15,14 @@ import { tr } from 'framer-motion/client';
 import ForgotPassword from '../ForgotPassword/ForgotPassword';
 import { GoogleLogin } from '@react-oauth/google';
 import axios from 'axios';
+import { setUserTokens, clearUserTokens, hasUserAccessToken, startUserTokenRefreshService } from '../../helper/tokenManager';
+import Context from '../../Context';
 
 
 const Login = () => {
   const user = useSelector(state => state?.user?.user);
+  const { fetchUser } = useContext(Context);
+  
   const checkUser = () => {
     console.log(user);
     if (user) {
@@ -38,38 +42,19 @@ const Login = () => {
   const dispatch = useDispatch();
   const [loading, setLoading] = React.useState(false);
 
-  const fetchUser = async () => {
-    try {
-      const response = await fetch(SummaryApi.UserProfile.url, {
-        method: SummaryApi.UserProfile.method,
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        credentials: 'include'
-      });
-      const result = await response.json();
-      if (!result.success) {
-        // toast.error(result.message);
-        dispatch(setUserDetails(null));
-        return;
-      }
-      dispatch(setUserDetails(result.user));
-    } catch (err) {
-      toast.error(err.message);
-    }
-  }
-
   const handleLoginSuccess = async (credentialResponse) => {
     console.log("Google Login Success:", credentialResponse);
     try {
       const res = await axios.post(SummaryApi.UserGoogleLogin.url, {
         token: credentialResponse.credential,
-      }, { withCredentials: true });
+      });
 
       const result = res.data;
 
       if (result.success) {
-        fetchUser();
+        // Store tokens for user authentication
+        setUserTokens(result.accessToken, result.refreshToken);
+        await fetchUser(); // Wait for user data to be fetched
         Navigate('/school/profile');
         toast.success('Login successful');
       } else {
@@ -96,16 +81,18 @@ const Login = () => {
         headers: {
           'Content-Type': 'application/json'
         },
-        body: JSON.stringify(data),
-        credentials: 'include'
+        body: JSON.stringify(data)
       });
       const result = await response.json();
       if (!result.success) {
         toast.error(result.message);
         return;
       }
+      
+      // Store tokens for user authentication
+      setUserTokens(result.accessToken, result.refreshToken);
       toast.success(result.message);
-      fetchUser();
+      await fetchUser(); // Wait for user data to be fetched
       Navigate('/school/profile');
     } catch (err) {
       toast.error(err.message);
