@@ -169,6 +169,7 @@ import styles from './styles/StudentDetails.module.scss';
 import { useSelector } from 'react-redux';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
+import { makeAuthenticatedRequest } from '../../../helper/tokenManager';
 
 const StudentFetch = () => {
     const user = useSelector(state => state?.user?.user);
@@ -195,12 +196,8 @@ const StudentFetch = () => {
     ];
 
     const fetchStudents = async () => {
-        const response = await fetch(SummaryApi.StudentFetch.url, {
-            method: SummaryApi.StudentFetch.method,
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            credentials: 'include',
+        const response = await makeAuthenticatedRequest(SummaryApi.StudentFetch.url, {
+            method: SummaryApi.StudentFetch.method
         });
         const result = await response.json();
 
@@ -241,12 +238,8 @@ const StudentFetch = () => {
 
     const handleDeleteStudent = async (studentId) => {
         try {
-            const response = await fetch(`${SummaryApi.UserDelete.url}/${studentId}`, {
-                method: 'DELETE',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                credentials: 'include',
+            const response = await makeAuthenticatedRequest(`${SummaryApi.UserDelete.url}/${studentId}`, {
+                method: 'DELETE'
             });
             const result = await response.json();
             if (!result.success) {

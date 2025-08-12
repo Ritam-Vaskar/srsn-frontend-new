@@ -16,6 +16,7 @@ import axios from 'axios';
 import { useSelector } from 'react-redux';
 import { UAParser } from 'ua-parser-js';
 import { onMessage } from "firebase/messaging";
+import { makeAuthenticatedRequest, hasAccessToken, clearTokens, makeAlumniAuthenticatedRequest, hasAlumniAccessToken, clearAlumniTokens, startUserTokenRefreshService, stopUserTokenRefreshService } from './helper/tokenManager';
 
 
 function App() {
@@ -30,52 +31,82 @@ function App() {
 
   const fetchUser = async () => {
     try {
-      const response = await fetch(SummaryApi.UserProfile.url, {
-        method: SummaryApi.UserProfile.method,
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        credentials: 'include'
+      // Check if user has access token
+      if (!hasAccessToken()) {
+        dispatch(setUserDetails(null));
+        stopUserTokenRefreshService(); // Stop refresh service if no token
+        return;
+      }
+
+      const response = await makeAuthenticatedRequest(SummaryApi.UserProfile.url, {
+        method: SummaryApi.UserProfile.method
       });
+      
       const result = await response.json();
       // console.log(result);
       if (!result.success) {
         // toast.error(result.message);
         dispatch(setUserDetails(null));
+        clearTokens(); // Clear tokens if user fetch fails
+        stopUserTokenRefreshService(); // Stop refresh service
         return;
       }
       dispatch(setUserDetails(result.user));
+      startUserTokenRefreshService(); // Start automatic token refresh
     } catch (err) {
       // toast.error(err.message);
-      console.log(err);
+      console.log('fetchUser error:', err);
+      
+      // Only clear tokens if it's an authentication error
+      if (err.message?.includes('authentication failed') || err.message?.includes('login again')) {
+        dispatch(setUserDetails(null));
+        clearTokens(); // Clear tokens only on auth failure
+        stopUserTokenRefreshService(); // Stop refresh service
+      } else {
+        // For other errors, just log and don't clear tokens
+        console.log('fetchUser non-auth error:', err.message);
+      }
     }
   }
   const fetchAlumni = async () => {
     try {
-      const response = await fetch(SummaryApi.AlumniDetailsFetch.url, {
-        method: SummaryApi.AlumniDetailsFetch.method,
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        credentials: 'include'
+      // Check if alumni has access token
+      if (!hasAlumniAccessToken()) {
+        dispatch(setAlumniDetails(null));
+        return;
+      }
+
+      const response = await makeAlumniAuthenticatedRequest(SummaryApi.AlumniDetailsFetch.url, {
+        method: SummaryApi.AlumniDetailsFetch.method
       });
+      
       const result = await response.json();
       if (!result.success) {
         // toast.error(result.message);
+        dispatch(setAlumniDetails(null));
+        clearAlumniTokens(); // Clear alumni tokens if fetch fails
         return;
       }
       const data = result;
       console.log(data.user);
       dispatch(setAlumniDetails(data.user));
     } catch (err) {
-      console.log(err);
-      // toast.error(err.message);
+      console.log('fetchAlumni error:', err);
+      
+      // Only clear tokens if it's an authentication error
+      if (err.message?.includes('authentication failed') || err.message?.includes('login again')) {
+        dispatch(setAlumniDetails(null));
+        clearAlumniTokens(); // Clear alumni tokens only on auth failure
+      } else {
+        // For other errors, just log and don't clear tokens
+        console.log('fetchAlumni non-auth error:', err.message);
+      }
     }
   }
   useEffect(() => {
     fetchUser();
     fetchAlumni();
-  })
+  }, [])
 
   // //chatbat added
   // useEffect(() => {
@@ -103,12 +134,13 @@ function App() {
   const tokenSentRef = useRef(false);
 
   useEffect(() => {
+    // Only request FCM permission for authenticated users
+    if (!user || !user._id || tokenSentRef.current) return;
 
-    if (tokenSentRef.current) return; // Prevent multiple sends
     const sendTokenDetails = async () => {
 
-      const userId = user?._id || "guest";
-      const role = user?.role || "guest";
+      const userId = user._id;
+      const role = user.role;
 
       const token = await requestPermission(userId, role);
       if (!token) return;

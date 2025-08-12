@@ -13,6 +13,7 @@ import { useNavigate } from 'react-router-dom';
 import SummaryApi from '../../../common';
 import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
+import { makeAuthenticatedRequest, clearTokens } from '../../../helper/tokenManager';
 
 const UserProfile = ({ user }) => {
   const alumni = useSelector(state => state?.alumni?.alumni);
@@ -27,12 +28,8 @@ const UserProfile = ({ user }) => {
 
   const fetchResultPortal = async () => {
     try {
-      const response = await fetch(SummaryApi.MarksSubmissionFetch.url, {
-        method: SummaryApi.MarksSubmissionFetch.method,
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        credentials: 'include'
+      const response = await makeAuthenticatedRequest(SummaryApi.MarksSubmissionFetch.url, {
+        method: SummaryApi.MarksSubmissionFetch.method
       });
       const result = await response.json();
       console.log(result);
@@ -63,16 +60,15 @@ const UserProfile = ({ user }) => {
 
   const handleLogout = async () => {
     try {
-      const response = await fetch(SummaryApi.UserLogout.url, {
-        method: SummaryApi.UserLogout.method,
-        headers: { 'Content-Type': 'application/json' },
-        credentials: 'include',
+      const response = await makeAuthenticatedRequest(SummaryApi.UserLogout.url, {
+        method: SummaryApi.UserLogout.method
       });
       const result = await response.json();
       if (result.success) {
         localStorage.removeItem("fcm_token");
         localStorage.removeItem("fcm_user");
         localStorage.removeItem("fcm_role");
+        clearTokens(); // Clear access and refresh tokens
         dispatch(setUserDetails(null));
         navigate('/school');
         toast.success('Logged out successfully!');
@@ -80,6 +76,10 @@ const UserProfile = ({ user }) => {
         toast.error(result.message);
       }
     } catch (error) {
+      // Even if logout fails on server, clear local tokens
+      clearTokens();
+      dispatch(setUserDetails(null));
+      navigate('/school');
       toast.error(error.message);
     }
   };

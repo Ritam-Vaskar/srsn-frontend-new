@@ -3,6 +3,7 @@ import SummaryApi from '../../../common';
 import styles from './StudentFetch.module.scss';
 import { toast } from 'react-toastify';
 import subjectOptions from '../../../helper/classSubject';
+import { makeAuthenticatedRequest } from '../../../helper/tokenManager';
 
 const StudentFetch = () => {
     const [students, setStudents] = useState([]);
@@ -37,12 +38,8 @@ const StudentFetch = () => {
         setLoading(true);
         setError('');
         try {
-            const response = await fetch(SummaryApi.StudentFetch.url, {
-                method: SummaryApi.StudentFetch.method,
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                credentials: 'include',
+            const response = await makeAuthenticatedRequest(SummaryApi.StudentFetch.url, {
+                method: SummaryApi.StudentFetch.method
             });
             const result = await response.json();
             if (!result.success) {
@@ -110,13 +107,9 @@ const StudentFetch = () => {
         console.log("Submitting marks payload:", marksPayload);
 
         try {
-            const response = await fetch(SummaryApi.UserMarksSubmission.url, {
+            const response = await makeAuthenticatedRequest(SummaryApi.UserMarksSubmission.url, {
                 method: SummaryApi.UserMarksSubmission.method,
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(marksPayload),
-                credentials: 'include',
+                body: JSON.stringify(marksPayload)
             });
 
             const result = await response.json();

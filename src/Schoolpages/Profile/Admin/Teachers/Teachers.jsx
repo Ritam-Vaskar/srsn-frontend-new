@@ -5,6 +5,7 @@ import TeacherCard from '../../../../components/TeacherCard/TeacherCard';
 import SummaryApi from '../../../../common';
 import TeacherAddForm from '../../../../components/TeacherAdd/TeacherAdd'; // Import the TeacherAddForm
 import styles from './styles/Teachers.module.scss';
+import { makeAuthenticatedRequest } from '../../../../helper/tokenManager';
 
 const Teachers = () => {
     const [teachers, setTeachers] = useState([]);
@@ -18,10 +19,8 @@ const Teachers = () => {
     // Fetch teachers from the backend
     const fetchTeachers = async () => {
         try {
-            const response = await fetch(SummaryApi.TeacherFetch.url, {
-                method: SummaryApi.TeacherFetch.method,
-                headers: { 'Content-Type': 'application/json' },
-                credentials: 'include',
+            const response = await makeAuthenticatedRequest(SummaryApi.TeacherFetch.url, {
+                method: SummaryApi.TeacherFetch.method
             });
             const result = await response.json();
             if (!result.success) {
@@ -37,10 +36,8 @@ const Teachers = () => {
     // Handle deleting a teacher
     const handleDelete = async (teacherId) => {
         try {
-            const response = await fetch(`${SummaryApi.UserDelete.url}/${teacherId}`, {
-                method: SummaryApi.UserDelete.method, // DELETE method
-                headers: { 'Content-Type': 'application/json' },
-                credentials: 'include',
+            const response = await makeAuthenticatedRequest(`${SummaryApi.UserDelete.url}/${teacherId}`, {
+                method: SummaryApi.UserDelete.method // DELETE method
             });
             const result = await response.json();
             if (result.success) {

@@ -21,6 +21,11 @@ const SummaryApi={
         method:"POST"
     },
 
+    UserRefreshToken:{
+        url:backendUrl+"/api/refresh-token",
+        method:"POST"
+    },
+
     ForgotPasswordOtpSend:{
         url:backendUrl+"/api/forgotpasswordotpsend",
         method:"POST"

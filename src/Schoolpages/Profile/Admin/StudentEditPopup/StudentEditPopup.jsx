@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import styles from "./styles/StudentEditPopup.module.scss";
 import SummaryApi from "../../../../common";
 import { toast } from "react-toastify";
+import { makeAuthenticatedRequest } from '../../../../helper/tokenManager';
 
 const StudentAppEdit = ({ student, onClose, onUpdate, model }) => {
   const [editedStudent, setEditedStudent] = useState({});
@@ -22,12 +23,8 @@ const StudentAppEdit = ({ student, onClose, onUpdate, model }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch(SummaryApi.UserEditById.url, {
+      const response = await makeAuthenticatedRequest(SummaryApi.UserEditById.url, {
         method: SummaryApi.UserEditById.method,
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        credentials: 'include',
         body: JSON.stringify({ editedStudent, model })
       });
 

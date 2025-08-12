@@ -9,6 +9,7 @@ import Context from '../../Context';
 import { useNavigate } from 'react-router-dom';
 import { GoogleLogin } from '@react-oauth/google';
 import axios from 'axios';
+import { setAlumniTokens, clearAlumniTokens, hasAlumniAccessToken } from '../../helper/tokenManager';
 
 
 const AlumniLogin = ({ showLogin, setShowLogin }) => {
@@ -24,12 +25,14 @@ const AlumniLogin = ({ showLogin, setShowLogin }) => {
         try {
             const res = await axios.post(SummaryApi.AlumniGoogleLogin.url, {
                 token: credentialResponse.credential,
-            }, { withCredentials: true });
+            });
 
             const result = res.data;
 
             if (result.success) {
-                fetchAlumni();
+                // Store alumni tokens in localStorage
+                setAlumniTokens(result.alumniAccessToken, result.alumniRefreshToken);
+                await fetchAlumni(); // Wait for alumni data to be fetched
                 Navigate('/school/alumni/profile');
                 toast.success('Login successful');
             } else {
@@ -79,12 +82,13 @@ const AlumniLogin = ({ showLogin, setShowLogin }) => {
                     'Content-Type': 'application/json',
                 },
                 body: JSON.stringify({ email, otp: data.otp }), // Send email and OTP to verify
-                credentials: 'include'
             });
 
             const result = await response.json();
             if (result.success) {
-                fetchAlumni();
+                // Store alumni tokens in localStorage
+                setAlumniTokens(result.alumniAccessToken, result.alumniRefreshToken);
+                await fetchAlumni(); // Wait for alumni data to be fetched
                 Navigate('/school/alumni/profile');
                 toast.success('OTP verified successfully');
                 reset();

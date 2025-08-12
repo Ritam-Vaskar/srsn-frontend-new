@@ -13,12 +13,12 @@ const KnowYourTeacher = () => {
   const fetchTeachers = async () => {
     setLoading(true);
     try {
+      // Use regular fetch since teacherFetch endpoint is now public
       const response = await fetch(SummaryApi.TeacherFetch.url, {
         method: SummaryApi.TeacherFetch.method,
         headers: {
-          'Content-Type': 'application/json',
-        },
-        credentials: 'include',
+          'Content-Type': 'application/json'
+        }
       });
       const result = await response.json();
       if (!result.success) {

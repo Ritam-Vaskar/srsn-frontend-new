@@ -227,6 +227,7 @@ import bcrypt from 'bcryptjs';
 import { toast } from 'react-toastify';
 import styles from './Students.module.scss';
 import SummaryApi from './../../../../common/index';
+import { makeAuthenticatedRequest } from '../../../../helper/tokenManager';
 
 const Students = () => {
     const user = useSelector(state => state?.user?.user);
@@ -246,10 +247,8 @@ const Students = () => {
 
     const fetchEvents = async () => {
         try {
-            const response = await fetch(SummaryApi.Eventfetch.url, {
-                method: SummaryApi.Eventfetch.method,
-                headers: { 'Content-Type': 'application/json' },
-                credentials: 'include',
+            const response = await makeAuthenticatedRequest(SummaryApi.Eventfetch.url, {
+                method: SummaryApi.Eventfetch.method
             });
             const data = await response.json();
             if (data.success) {
@@ -264,10 +263,8 @@ const Students = () => {
 
     const changeClass = async () => {
         try {
-            const response = await fetch(SummaryApi.UserChangeClass.url, {
-                method: SummaryApi.UserChangeClass.method,
-                headers: { 'Content-Type': 'application/json' },
-                credentials: 'include',
+            const response = await makeAuthenticatedRequest(SummaryApi.UserChangeClass.url, {
+                method: SummaryApi.UserChangeClass.method
             });
             const data = await response.json();
             if (data.success) {
@@ -282,10 +279,8 @@ const Students = () => {
 
     const calculateBeezTo4 = async () => {
         try {
-            const response = await fetch(SummaryApi.UserGetResultPrimary.url, {
-                method: SummaryApi.UserGetResultPrimary.method,
-                headers: { 'Content-Type': 'application/json' },
-                credentials: 'include',
+            const response = await makeAuthenticatedRequest(SummaryApi.UserGetResultPrimary.url, {
+                method: SummaryApi.UserGetResultPrimary.method
             });
             const data = await response.json();
             if (data.success) {
@@ -300,10 +295,8 @@ const Students = () => {
 
     const calculate5to8 = async () => {
         try {
-            const response = await fetch(SummaryApi.UserGetResultHigh.url, {
-                method: SummaryApi.UserGetResultHigh.method,
-                headers: { 'Content-Type': 'application/json' },
-                credentials: 'include',
+            const response = await makeAuthenticatedRequest(SummaryApi.UserGetResultHigh.url, {
+                method: SummaryApi.UserGetResultHigh.method
             });
             const data = await response.json();
             if (data.success) {
@@ -340,11 +333,9 @@ const Students = () => {
 
     const toggleEventStatus = async (event) => {
         try {
-            const response = await fetch(SummaryApi.EventToggle.url, {
+            const response = await makeAuthenticatedRequest(SummaryApi.EventToggle.url, {
                 method: SummaryApi.EventToggle.method,
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ id: event._id }),
-                credentials: 'include',
+                body: JSON.stringify({ id: event._id })
             });
             const data = await response.json();
             if (data.success) {

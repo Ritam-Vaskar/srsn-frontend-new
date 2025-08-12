@@ -7,6 +7,7 @@ import { toast } from 'react-toastify';
 import DeleteIcon from '@mui/icons-material/Delete';
 import CheckBoxIcon from '@mui/icons-material/CheckBox';
 import EditIcon from '@mui/icons-material/Edit';
+import { makeAuthenticatedRequest } from '../../../../helper/tokenManager';
 
 const Applications = () => {
     const [beez, setBeez] = useState([]);
@@ -29,12 +30,8 @@ const Applications = () => {
 
     // Fetch user admission data
     const fetchUserAdmission = async () => {
-        const response = await fetch(SummaryApi.UserAdmissionFetch.url, {
-            method: SummaryApi.UserAdmissionFetch.method,
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            credentials: 'include'
+        const response = await makeAuthenticatedRequest(SummaryApi.UserAdmissionFetch.url, {
+            method: SummaryApi.UserAdmissionFetch.method
         });
         const result = await response.json();
         if (!result.success) {
@@ -75,13 +72,9 @@ const Applications = () => {
 
     // Handle student deletion
     const handleDelete = async (id) => {
-        const response = await fetch(SummaryApi.UserAdmissionDelete.url, {
+        const response = await makeAuthenticatedRequest(SummaryApi.UserAdmissionDelete.url, {
             method: SummaryApi.UserAdmissionDelete.method,
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({ id }),
-            credentials: 'include'
+            body: JSON.stringify({ id })
         });
         const result = await response.json();
         if (result.success) {
@@ -94,12 +87,8 @@ const Applications = () => {
 
     // Handle student application processing
     const handleApp = async (student) => {
-        const response = await fetch(SummaryApi.userAdmissionAdd.url, {
+        const response = await makeAuthenticatedRequest(SummaryApi.userAdmissionAdd.url, {
             method: SummaryApi.userAdmissionAdd.method,
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            credentials: 'include',
             body: JSON.stringify({ student })
         });
         const result = await response.json();
@@ -136,12 +125,8 @@ const Applications = () => {
     const handleSubmitRanks = async () => {
         const newStudentRanks = studentRanks.filter(s => s.rank !== '');
         try {
-            const response = await fetch(SummaryApi.userAdmissionAddArray.url, {
+            const response = await makeAuthenticatedRequest(SummaryApi.userAdmissionAddArray.url, {
                 method: SummaryApi.userAdmissionAddArray.method,
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                credentials: 'include',
                 body: JSON.stringify({ studentRanks: newStudentRanks })
             });
             const result = await response.json();

@@ -5,6 +5,7 @@ import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import styles from './styles/Notice.module.scss';
 import SummaryApi from '../../../../common';
+import { makeAuthenticatedRequest } from '../../../../helper/tokenManager';
 
 const Notice = () => {
     const [notices, setNotices] = useState([]);
@@ -24,12 +25,8 @@ const Notice = () => {
 
     const fetchActiveNotices = async () => {
         try {
-            const response = await fetch(SummaryApi.NoticeFetch.url, {
-                method: SummaryApi.NoticeFetch.method,
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                credentials: 'include'
+            const response = await makeAuthenticatedRequest(SummaryApi.NoticeFetch.url, {
+                method: SummaryApi.NoticeFetch.method
             });
             const data = await response.json();
            
@@ -46,12 +43,8 @@ const Notice = () => {
 
     const onSubmit = async (data) => {
         try {
-            const response = await fetch(SummaryApi.NoticeEntery.url, {
+            const response = await makeAuthenticatedRequest(SummaryApi.NoticeEntery.url, {
                 method: SummaryApi.NoticeEntery.method,
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                
                 body: JSON.stringify(data)
             });
             const result = await response.json();
@@ -71,12 +64,9 @@ const Notice = () => {
 
     const handleDelete = async (noticeId) => {
         try {
-            const response = await fetch(SummaryApi.NoticeDelete.url, {
+            const response = await makeAuthenticatedRequest(SummaryApi.NoticeDelete.url, {
                 method: SummaryApi.NoticeDelete.method,
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({ id: noticeId }),
+                body: JSON.stringify({ id: noticeId })
             });
             const result = await response.json();
 
