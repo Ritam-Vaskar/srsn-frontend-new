@@ -59,12 +59,14 @@ function App() {
       
       // Only clear tokens if it's an authentication error
       if (err.message?.includes('authentication failed') || err.message?.includes('login again')) {
+        console.log('Authentication failed, clearing tokens and stopping refresh service');
         dispatch(setUserDetails(null));
         clearTokens(); // Clear tokens only on auth failure
         stopUserTokenRefreshService(); // Stop refresh service
       } else {
-        // For other errors, just log and don't clear tokens
-        console.log('fetchUser non-auth error:', err.message);
+        // For other errors (network, etc.), don't clear tokens - might be temporary
+        // Keep the refresh service running so it can retry
+        console.log('fetchUser non-auth error (keeping tokens):', err.message);
       }
     }
   }

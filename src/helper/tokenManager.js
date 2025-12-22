@@ -95,13 +95,31 @@ export const refreshUserAccessToken = async () => {
 
   try {
     console.log('Attempting to refresh user access token...');
-    const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/refresh-token`, {
+    // Use relative URL - nginx/proxy will route to backend
+    const backendUrl = import.meta.env.VITE_BACKEND_URL || '';
+    const refreshUrl = backendUrl ? `${backendUrl}/api/refresh-token` : '/api/refresh-token';
+    const response = await fetch(refreshUrl, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({ refreshToken })
     });
+
+    // Check if response is ok before parsing JSON
+    if (!response.ok) {
+      const errorText = await response.text();
+      let errorMessage = 'Failed to refresh user token';
+      try {
+        const errorJson = JSON.parse(errorText);
+        errorMessage = errorJson.message || errorMessage;
+      } catch {
+        errorMessage = errorText || errorMessage;
+      }
+      console.error('Token refresh failed:', errorMessage, 'Status:', response.status);
+      clearUserTokens();
+      throw new Error(errorMessage);
+    }
 
     const result = await response.json();
     
@@ -131,13 +149,31 @@ export const refreshAlumniAccessToken = async () => {
   }
 
   try {
-    const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/alumniRefreshToken`, {
+    // Use relative URL - nginx/proxy will route to backend
+    const backendUrl = import.meta.env.VITE_BACKEND_URL || '';
+    const refreshUrl = backendUrl ? `${backendUrl}/api/alumniRefreshToken` : '/api/alumniRefreshToken';
+    const response = await fetch(refreshUrl, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({ alumniRefreshToken })
     });
+
+    // Check if response is ok before parsing JSON
+    if (!response.ok) {
+      const errorText = await response.text();
+      let errorMessage = 'Failed to refresh alumni token';
+      try {
+        const errorJson = JSON.parse(errorText);
+        errorMessage = errorJson.message || errorMessage;
+      } catch {
+        errorMessage = errorText || errorMessage;
+      }
+      console.error('Alumni token refresh failed:', errorMessage, 'Status:', response.status);
+      clearAlumniTokens();
+      throw new Error(errorMessage);
+    }
 
     const result = await response.json();
     
@@ -180,13 +216,18 @@ export const makeUserAuthenticatedRequest = async (url, options = {}) => {
     // Try with current access token
     let response = await makeRequest(accessToken);
     
-    // If token is expired, try to refresh
-    if (response.status === 401) {
-      console.log('Access token expired, attempting refresh...');
+    // If token is expired (401) or unauthorized (403), try to refresh
+    if (response.status === 401 || response.status === 403) {
+      console.log('Access token expired or invalid, attempting refresh...');
       try {
         accessToken = await refreshUserAccessToken();
         console.log('Token refreshed successfully, retrying request...');
         response = await makeRequest(accessToken);
+        
+        // If still getting 401/403 after refresh, token refresh failed
+        if (response.status === 401 || response.status === 403) {
+          throw new Error('Token refresh failed. Please login again.');
+        }
       } catch (refreshError) {
         console.error('Token refresh failed:', refreshError);
         throw new Error('User authentication failed. Please login again.');
@@ -196,7 +237,7 @@ export const makeUserAuthenticatedRequest = async (url, options = {}) => {
     return response;
   } catch (error) {
     // Don't log token refresh errors here as they're already handled above
-    if (!error.message?.includes('authentication failed')) {
+    if (!error.message?.includes('authentication failed') && !error.message?.includes('login again')) {
       console.error('makeUserAuthenticatedRequest error:', error);
     }
     throw error;
@@ -228,13 +269,18 @@ export const makeAlumniAuthenticatedRequest = async (url, options = {}) => {
     // Try with current access token
     let response = await makeRequest(accessToken);
     
-    // If token is expired, try to refresh
-    if (response.status === 401) {
-      console.log('Alumni access token expired, attempting refresh...');
+    // If token is expired (401) or unauthorized (403), try to refresh
+    if (response.status === 401 || response.status === 403) {
+      console.log('Alumni access token expired or invalid, attempting refresh...');
       try {
         accessToken = await refreshAlumniAccessToken();
         console.log('Alumni token refreshed successfully, retrying request...');
         response = await makeRequest(accessToken);
+        
+        // If still getting 401/403 after refresh, token refresh failed
+        if (response.status === 401 || response.status === 403) {
+          throw new Error('Alumni token refresh failed. Please login again.');
+        }
       } catch (refreshError) {
         console.error('Alumni token refresh failed:', refreshError);
         throw new Error('Alumni authentication failed. Please login again.');
@@ -244,7 +290,7 @@ export const makeAlumniAuthenticatedRequest = async (url, options = {}) => {
     return response;
   } catch (error) {
     // Don't log token refresh errors here as they're already handled above
-    if (!error.message?.includes('authentication failed')) {
+    if (!error.message?.includes('authentication failed') && !error.message?.includes('login again')) {
       console.error('makeAlumniAuthenticatedRequest error:', error);
     }
     throw error;
@@ -259,27 +305,58 @@ export const makeAuthenticatedRequest = makeUserAuthenticatedRequest;
 
 // === AUTOMATIC TOKEN REFRESH SERVICE ===
 let tokenRefreshInterval = null;
+let consecutiveFailures = 0;
+const MAX_CONSECUTIVE_FAILURES = 3;
 
 // Start automatic token refresh for users (runs every 30 seconds to check)
 export const startUserTokenRefreshService = () => {
-  if (tokenRefreshInterval) return; // Already running
+  if (tokenRefreshInterval) {
+    console.log('🔄 Token refresh service already running');
+    return; // Already running
+  }
+  
+  console.log('🚀 Starting automatic token refresh service...');
+  consecutiveFailures = 0; // Reset failure counter
   
   tokenRefreshInterval = setInterval(async () => {
-    if (hasUserAccessToken()) {
-      try {
-        // Only refresh if token is close to expiry (refresh every 30 seconds for 1 minute tokens)
-        await refreshUserAccessToken();
-        console.log('Auto-refreshed user token');
-      } catch (error) {
-        console.error('Auto token refresh failed:', error);
-        // Token refresh failed, user will be logged out on next request
-        clearInterval(tokenRefreshInterval);
-        tokenRefreshInterval = null;
-      }
-    } else {
+    if (!hasUserAccessToken()) {
       // No token, stop the service
+      console.log('⚠️ No access token found, stopping refresh service');
       clearInterval(tokenRefreshInterval);
       tokenRefreshInterval = null;
+      consecutiveFailures = 0;
+      return;
+    }
+
+    // Check if refresh token exists
+    if (!getUserRefreshToken()) {
+      console.log('⚠️ No refresh token found, stopping refresh service');
+      clearInterval(tokenRefreshInterval);
+      tokenRefreshInterval = null;
+      consecutiveFailures = 0;
+      return;
+    }
+
+    try {
+      // Refresh token proactively before it expires
+      console.log('🔄 Auto-refreshing user token...');
+      await refreshUserAccessToken();
+      console.log('✅ Auto-refreshed user token successfully');
+      consecutiveFailures = 0; // Reset on success
+    } catch (error) {
+      consecutiveFailures++;
+      console.error(`❌ Auto token refresh failed (${consecutiveFailures}/${MAX_CONSECUTIVE_FAILURES}):`, error.message);
+      
+      // Only stop if we've failed multiple times consecutively
+      // This handles cases where refresh token is expired or invalid
+      if (consecutiveFailures >= MAX_CONSECUTIVE_FAILURES) {
+        console.error('🛑 Too many consecutive refresh failures, stopping service');
+        clearInterval(tokenRefreshInterval);
+        tokenRefreshInterval = null;
+        consecutiveFailures = 0;
+        // Don't clear tokens here - let the next API call handle it
+      }
+      // Otherwise, keep trying - might be temporary network issue
     }
   }, 30000); // Every 30 seconds for testing (1 minute tokens)
 };
@@ -287,7 +364,9 @@ export const startUserTokenRefreshService = () => {
 // Stop automatic token refresh
 export const stopUserTokenRefreshService = () => {
   if (tokenRefreshInterval) {
+    console.log('🛑 Stopping automatic token refresh service');
     clearInterval(tokenRefreshInterval);
     tokenRefreshInterval = null;
+    consecutiveFailures = 0;
   }
 };
