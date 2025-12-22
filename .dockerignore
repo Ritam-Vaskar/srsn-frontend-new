@@ -1,0 +1,35 @@
+# Exclude VCS and IDE files
+.git
+.gitignore
+.vscode
+
+# Node and build caches
+node_modules
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnpm-store
+
+# Local env and secrets
+.env
+.env.*
+*.env
+*.env.*
+
+# Testing and coverage
+coverage
+
+# Docker-related
+Dockerfile*
+.dockerignore
+
+# Misc
+*.swp
+*.swo
+.DS_Store
+
+# Vite local cache
+.cache
+
+# Note: Do NOT ignore `dist/` during build — we need it copied in final stage.
+# It's excluded from build context only if you purposely add it; keep it available for multi-stage COPY.

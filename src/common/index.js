@@ -1,236 +1,239 @@
 import StudentAppEdit from "../Schoolpages/Profile/Admin/StudentEditPopup/StudentEditPopup"
 
-const backendUrl=import.meta.env.VITE_BACKEND_URL
-
-
+// Use relative URLs - nginx will proxy /api requests to backend
+// Browser → /api/... → nginx → http://backend:8000/api/...
+// In development, Vite proxy will handle this (if configured)
+// In production, nginx reverse proxy handles this
+// Always use /api prefix - proxy routes it to backend
+const apiBase = '/api';
 
 const SummaryApi={
     //fcm token
     FcmTokenSend:{
-        url:backendUrl+"/api/save-token",
+        url:apiBase+"/save-token",
         method:"POST"
     },
     //User sign up and sign in 
     UserSignIn:{
-        url:backendUrl+"/api/userSignIn",
+        url:apiBase+"/userSignIn",
         method:"POST"
     },
     
     UserLogout:{
-        url:backendUrl+"/api/userLogout",
+        url:apiBase+"/userLogout",
         method:"POST"
     },
 
     UserRefreshToken:{
-        url:backendUrl+"/api/refresh-token",
+        url:apiBase+"/refresh-token",
         method:"POST"
     },
 
     ForgotPasswordOtpSend:{
-        url:backendUrl+"/api/forgotpasswordotpsend",
+        url:apiBase+"/forgotpasswordotpsend",
         method:"POST"
     },
 
     ForgotPasswordOtpVerify:{
-        url:backendUrl+"/api/forgotpasswordotpverify",
+        url:apiBase+"/forgotpasswordotpverify",
         method:"POST"
     },
 
     ResetPassword:{
-        url:backendUrl+"/api/resetpassword",
+        url:apiBase+"/resetpassword",
         method:"POST"
     },
 
     UserGoogleLogin:{
-        url:backendUrl+"/api/userGoogleLogin",
+        url:apiBase+"/userGoogleLogin",
         method:"POST"
     },
 
     //user admission
     UserAdmissionSignUp:{
-        url:backendUrl+"/api/userAdmissionSignUp",
+        url:apiBase+"/userAdmissionSignUp",
         method:"POST"
     },
     UserAdmissionFetch:{
-        url:backendUrl+"/api/userAdmissionFetch",
+        url:apiBase+"/userAdmissionFetch",
         method:"GET"
     },
     userAdmissionAdd:{
-        url:backendUrl+"/api/userAdmissionAdd",
+        url:apiBase+"/userAdmissionAdd",
         method:"POST"
     },
     userAdmissionAddArray:{
-        url:backendUrl+"/api/userAdmissionAddArray",
+        url:apiBase+"/userAdmissionAddArray",
         method:"POST"
     },
     UserAdmissionDelete:{
-        url:backendUrl+"/api/userAdmissionDelete",
+        url:apiBase+"/userAdmissionDelete",
         method:"DELETE"
     },
     UserAdmissionSearch:{
-        url:backendUrl+"/api/userAdmissionSearch",
+        url:apiBase+"/userAdmissionSearch",
         method:"POST"
     },
 
     //User Profile
     UserProfile:{
-        url:backendUrl+"/api/userProfile",
+        url:apiBase+"/userProfile",
         method:"GET"
     },
     UserSignUp:{ //User sign up
-        url:backendUrl+"/api/userSignUp",
+        url:apiBase+"/userSignUp",
         method:"POST"
     },
     UserEdit:{
-        url:backendUrl+"/api/userEdit",
+        url:apiBase+"/userEdit",
         method:"PUT"
     },
     UserEditById:{
-        url:backendUrl+"/api/userEditById",
+        url:apiBase+"/userEditById",
         method:"PUT"
     },
     UserDelete:{
-        url:backendUrl+"/api/deleteUser",
+        url:apiBase+"/deleteUser",
         method:"DELETE"
     },
     StudentFetch:{
-        url:backendUrl+"/api/studentFetch",
+        url:apiBase+"/studentFetch",
         method:"GET"
     },
     TeacherFetch:{
-        url:backendUrl+"/api/teacherFetch",
+        url:apiBase+"/teacherFetch",
         method:"GET"
     },
     UserMarksSubmission:{
-        url:backendUrl+"/api/userMarksSubmission",
+        url:apiBase+"/userMarksSubmission",
         method:"POST"
     },
 
     //Alumni
     AlumniFetch:{
-        url:backendUrl+"/api/alumniView",
+        url:apiBase+"/alumniView",
         method:"GET"
     },
     AlumniSearch:{
-        url:backendUrl+"/api/alumniSearch",
+        url:apiBase+"/alumniSearch",
         method:"POST"
     },
     AlumniApplicationSave:{
-        url:backendUrl+"/api/alumniTempSave",
+        url:apiBase+"/alumniTempSave",
         method:"POST"
     },
     AlumniApplicationFetch:{
-        url:backendUrl+"/api/alumniApplicationView",
+        url:apiBase+"/alumniApplicationView",
         method:"GET"
     },
     AlumniAccept:{
-        url:backendUrl+"/api/alumniVeri",
+        url:apiBase+"/alumniVeri",
         method:"POST"
     },
     AlumniReject:{
-        url:backendUrl+"/api/alumniDelete",
+        url:apiBase+"/alumniDelete",
         method:"DELETE"
     },
     AlumniOtpSend:{
-        url:backendUrl+"/api/alumniOtp",
+        url:apiBase+"/alumniOtp",
         method:"POST"
     },
     AlumniOtpVerify:{
-        url:backendUrl+"/api/otpVerify",
+        url:apiBase+"/otpVerify",
         method:"POST"
     },
     AlumniDetailsFetch:{
-        url:backendUrl+"/api/alumniDetails",
+        url:apiBase+"/alumniDetails",
         method:"GET"
     },
     AlumniEdit:{
-        url:backendUrl+"/api/alumniUpdateProfile",
+        url:apiBase+"/alumniUpdateProfile",
         method:"PUT"
     },
     AlumniLogOut:{
-        url:backendUrl+"/api/alumniLogOut",
+        url:apiBase+"/alumniLogOut",
         method:"POST"
     },
     AlumniGoogleLogin:{
-        url:backendUrl+"/api/alumniGoogleLogin",
+        url:apiBase+"/alumniGoogleLogin",
         method:"POST"
     },
 
     //Notice
 
     NoticeEntery:{
-        url:backendUrl+"/api/noticeEntery",
+        url:apiBase+"/noticeEntery",
         method:"POST"
     },
     NoticeFetch:{
-        url:backendUrl+"/api/noticeFetch",
+        url:apiBase+"/noticeFetch",
         method:"GET"
     },
     NoticeDelete:{
-        url:backendUrl+"/api/noticeDelete",
+        url:apiBase+"/noticeDelete",
         method:"DELETE"
     },
 
     //user danger option
 
     UserGetResultPrimary:{
-        url:backendUrl+"/api/getResultPrimary",
+        url:apiBase+"/getResultPrimary",
         method:"GET"
     },
     UserGetResultHigh:{
-        url:backendUrl+"/api/getResultHigh",
+        url:apiBase+"/getResultHigh",
         method:"GET"
     },
 
     UserChangeClass:{
-        url:backendUrl+"/api/chnageYearClass",
+        url:apiBase+"/chnageYearClass",
         method:"PUT"
     },
 
     //Message
     Message:{
-        url:backendUrl+"/api/message",
+        url:apiBase+"/message",
         method:"POST"
     },
 
     //is admission ongoing
     AdmissionFetch: {
-        url: backendUrl + "/api/admissionFetch", 
+        url: apiBase + "/admissionFetch", 
         method: "GET",
     },
     EventEdit: {
-        url: backendUrl + "/api/eventEdit", 
+        url: apiBase + "/eventEdit", 
         method: "PUT",
     },
     MarksSubmissionFetch: {
-        url: backendUrl + "/api/marksSubmissionFetch", 
+        url: apiBase + "/marksSubmissionFetch", 
         method: "GET",
     },
     EventToggle: {
-        url: backendUrl + "/api/eventToggle", 
+        url: apiBase + "/eventToggle", 
         method: "PUT",
     },
     Eventfetch: {
-        url: backendUrl + "/api/eventFetch", 
+        url: apiBase + "/eventFetch", 
         method: "GET",
     },
 
     UserEditById: {
-        url: backendUrl + "/api/userEditById", 
+        url: apiBase + "/userEditById", 
         method: "PUT",
     },
 
     //Blog
     BlogFetch: {
-        url: backendUrl + "/api/blogFetch", 
+        url: apiBase + "/blogFetch", 
         method: "GET",
     },
     BlogDelete: {
-        url: backendUrl + "/api/blogDelete", 
+        url: apiBase + "/blogDelete", 
         method: "DELETE",
     },
     BlogAdd: {
-        url: backendUrl + "/api/blogAdd", 
+        url: apiBase + "/blogAdd", 
         method: "POST",
     },
 

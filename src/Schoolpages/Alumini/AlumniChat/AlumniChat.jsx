@@ -6,7 +6,11 @@ import { toast } from "react-toastify";
 import DeleteIcon from "@mui/icons-material/Delete";
 
 const AlumniChat = () => {
-    const socket = io.connect(import.meta.env.VITE_BACKEND_URL, {
+    // Use same origin - nginx will proxy socket.io to backend
+    // In development, Vite proxy handles this
+    // In production, nginx reverse proxy handles this
+    const socketUrl = import.meta.env.VITE_BACKEND_URL || window.location.origin;
+    const socket = io.connect(socketUrl, {
         query: {
             user: JSON.stringify(useSelector((state) => state?.user?.user || state?.alumni?.alumni)),
         },
