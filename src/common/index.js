@@ -5,7 +5,8 @@ import StudentAppEdit from "../Schoolpages/Profile/Admin/StudentEditPopup/Studen
 // In development, Vite proxy will handle this (if configured)
 // In production, nginx reverse proxy handles this
 // Always use /api prefix - proxy routes it to backend
-const apiBase = '/api';
+const apiURI=import.meta.env.VITE_API_BASE_URL || 'http://localhost:8000';
+const apiBase = apiURI+"/api";
 
 const SummaryApi={
     //fcm token
