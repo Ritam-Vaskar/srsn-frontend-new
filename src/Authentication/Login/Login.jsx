@@ -1,5 +1,5 @@
 import React from 'react';
-import { useEffect, useContext } from 'react';
+import { useEffect, useContext, useRef, useCallback } from 'react';
 import { useForm } from 'react-hook-form';
 import styles from './Login.module.scss';
 import SummaryApi from '../../common';
@@ -17,6 +17,8 @@ import { GoogleLogin } from '@react-oauth/google';
 import axios from 'axios';
 import { setUserTokens, clearUserTokens, hasUserAccessToken, startUserTokenRefreshService } from '../../helper/tokenManager';
 import Context from '../../Context';
+
+const TURNSTILE_SITE_KEY = import.meta.env.VITE_TURNSTILE_SITE_KEY || '0x4AAAAAACfBpOVcWnbN0dSR';
 
 
 const Login = () => {
@@ -41,6 +43,52 @@ const Login = () => {
 
   const dispatch = useDispatch();
   const [loading, setLoading] = React.useState(false);
+
+  // Turnstile state
+  const [turnstileToken, setTurnstileToken] = React.useState(null);
+  const turnstileRef = useRef(null);
+  const turnstileWidgetId = useRef(null);
+
+  const resetTurnstile = useCallback(() => {
+    if (turnstileWidgetId.current !== null && window.turnstile) {
+      window.turnstile.reset(turnstileWidgetId.current);
+      setTurnstileToken(null);
+    }
+  }, []);
+
+  useEffect(() => {
+    // Render Turnstile widget once the script is loaded
+    const renderWidget = () => {
+      if (turnstileRef.current && window.turnstile && turnstileWidgetId.current === null) {
+        turnstileWidgetId.current = window.turnstile.render(turnstileRef.current, {
+          sitekey: TURNSTILE_SITE_KEY,
+          callback: (token) => setTurnstileToken(token),
+          'expired-callback': () => setTurnstileToken(null),
+          'error-callback': () => setTurnstileToken(null),
+        });
+      }
+    };
+
+    if (window.turnstile) {
+      renderWidget();
+    } else {
+      // Wait for the script to load
+      const interval = setInterval(() => {
+        if (window.turnstile) {
+          renderWidget();
+          clearInterval(interval);
+        }
+      }, 300);
+      return () => clearInterval(interval);
+    }
+
+    return () => {
+      if (turnstileWidgetId.current !== null && window.turnstile) {
+        window.turnstile.remove(turnstileWidgetId.current);
+        turnstileWidgetId.current = null;
+      }
+    };
+  }, [isForgotPassword]);
 
   const handleLoginSuccess = async (credentialResponse) => {
     console.log("Google Login Success:", credentialResponse);
@@ -73,6 +121,10 @@ const Login = () => {
 
 
   const onSubmit = async (data) => {
+    if (!turnstileToken) {
+      toast.error('Please complete the CAPTCHA verification');
+      return;
+    }
     setLoading(true);
     console.log(data);
     try {
@@ -81,11 +133,12 @@ const Login = () => {
         headers: {
           'Content-Type': 'application/json'
         },
-        body: JSON.stringify(data)
+        body: JSON.stringify({ ...data, turnstileToken })
       });
       const result = await response.json();
       if (!result.success) {
         toast.error(result.message);
+        resetTurnstile();
         return;
       }
       
@@ -96,6 +149,7 @@ const Login = () => {
       Navigate('/school/profile');
     } catch (err) {
       toast.error(err.message);
+      resetTurnstile();
     }
     finally {
       setLoading(false);
@@ -147,9 +201,12 @@ const Login = () => {
         </div>
 
 
+        {/* Cloudflare Turnstile CAPTCHA */}
+        <div ref={turnstileRef} style={{ marginBottom: '10px' }}></div>
+
         {/* Submit Button */}
         <div className={styles['form-group']}>
-          {loading ? <div style={{ display: 'flex', justifyContent: 'center', marginTop: '-30px', marginBottom: '-30px' }}><Loader2 /></div> : <button type="submit" className={styles.button}>Login</button>}
+          {loading ? <div style={{ display: 'flex', justifyContent: 'center', marginTop: '-30px', marginBottom: '-30px' }}><Loader2 /></div> : <button type="submit" className={styles.button} disabled={!turnstileToken}>Login</button>}
         </div>
 
         <div

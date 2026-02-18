@@ -1,16 +1,66 @@
-import React from 'react';
+import React, { useState, useEffect, useRef, useCallback } from 'react';
 import styles from './styles/Contact.module.css';
 import logo from '../../assets/images/Logo.png';
 import { useForm } from "react-hook-form";
 import SummaryApi from '../../common';
 import { toast } from 'react-toastify';
 import Loader2 from '../../layouts/Loader2/Loader2';
-import { useState } from 'react';
+
+const TURNSTILE_SITE_KEY = import.meta.env.VITE_TURNSTILE_SITE_KEY || '0x4AAAAAACfBpOVcWnbN0dSR';
 
 const ContactPage = () => {
   const [loading, setLoading] = useState(false);
   const { register, handleSubmit, formState: { errors } } = useForm();
+
+  // Turnstile state
+  const [turnstileToken, setTurnstileToken] = useState(null);
+  const turnstileRef = useRef(null);
+  const turnstileWidgetId = useRef(null);
+
+  const resetTurnstile = useCallback(() => {
+    if (turnstileWidgetId.current !== null && window.turnstile) {
+      window.turnstile.reset(turnstileWidgetId.current);
+      setTurnstileToken(null);
+    }
+  }, []);
+
+  useEffect(() => {
+    const renderWidget = () => {
+      if (turnstileRef.current && window.turnstile && turnstileWidgetId.current === null) {
+        turnstileWidgetId.current = window.turnstile.render(turnstileRef.current, {
+          sitekey: TURNSTILE_SITE_KEY,
+          callback: (token) => setTurnstileToken(token),
+          'expired-callback': () => setTurnstileToken(null),
+          'error-callback': () => setTurnstileToken(null),
+        });
+      }
+    };
+
+    if (window.turnstile) {
+      renderWidget();
+    } else {
+      const interval = setInterval(() => {
+        if (window.turnstile) {
+          renderWidget();
+          clearInterval(interval);
+        }
+      }, 300);
+      return () => clearInterval(interval);
+    }
+
+    return () => {
+      if (turnstileWidgetId.current !== null && window.turnstile) {
+        window.turnstile.remove(turnstileWidgetId.current);
+        turnstileWidgetId.current = null;
+      }
+    };
+  }, []);
+
   const onSubmit = async(data) => {
+    if (!turnstileToken) {
+      toast.error('Please complete the CAPTCHA verification');
+      return;
+    }
     setLoading(true);
     try{
       const response=await fetch(SummaryApi.Message.url, {
@@ -18,17 +68,20 @@ const ContactPage = () => {
         headers: {
           'Content-Type': 'application/json'
         },
-        body: JSON.stringify(data),
+        body: JSON.stringify({ ...data, turnstileToken }),
         credentials: 'include'
       })
       const result=await response.json();
       if(result.success){
         toast.success('Message sent successfully!');
+        resetTurnstile();
       }else{
         toast.error(result.message);
+        resetTurnstile();
       }
     }catch(err){
       toast.error(err.message);
+      resetTurnstile();
     }
     finally{
       setLoading(false);
@@ -82,7 +135,10 @@ const ContactPage = () => {
           />
           {errors.Message && <span className={styles.error}>*This field is required</span>}
 
-         { loading ? <div style={{display:"flex", justifyContent:"center", alignItems:"center"}}><Loader2 /></div> : <button type="submit" className={styles.submitButton}>Send Message</button>}
+          {/* Cloudflare Turnstile CAPTCHA */}
+          <div ref={turnstileRef} style={{ marginBottom: '10px' }}></div>
+
+         { loading ? <div style={{display:"flex", justifyContent:"center", alignItems:"center"}}><Loader2 /></div> : <button type="submit" className={styles.submitButton} disabled={!turnstileToken}>Send Message</button>}
         </form>
       </div>
     </div>

@@ -1,13 +1,63 @@
-import React from 'react';
+import React, { useEffect, useRef, useCallback } from 'react';
 import { useForm } from 'react-hook-form';
 import styles from './StudentEntry.module.scss';
 import SummaryApi from '../../common';
 import { toast } from 'react-toastify';
 
+const TURNSTILE_SITE_KEY = import.meta.env.VITE_TURNSTILE_SITE_KEY || '0x4AAAAAACfBpOVcWnbN0dSR';
+
 const StudentEntry = () => {
   const { register, handleSubmit, formState: { errors } } = useForm();
 
+  // Turnstile state
+  const [turnstileToken, setTurnstileToken] = React.useState(null);
+  const turnstileRef = useRef(null);
+  const turnstileWidgetId = useRef(null);
+
+  const resetTurnstile = useCallback(() => {
+    if (turnstileWidgetId.current !== null && window.turnstile) {
+      window.turnstile.reset(turnstileWidgetId.current);
+      setTurnstileToken(null);
+    }
+  }, []);
+
+  useEffect(() => {
+    const renderWidget = () => {
+      if (turnstileRef.current && window.turnstile && turnstileWidgetId.current === null) {
+        turnstileWidgetId.current = window.turnstile.render(turnstileRef.current, {
+          sitekey: TURNSTILE_SITE_KEY,
+          callback: (token) => setTurnstileToken(token),
+          'expired-callback': () => setTurnstileToken(null),
+          'error-callback': () => setTurnstileToken(null),
+        });
+      }
+    };
+
+    if (window.turnstile) {
+      renderWidget();
+    } else {
+      const interval = setInterval(() => {
+        if (window.turnstile) {
+          renderWidget();
+          clearInterval(interval);
+        }
+      }, 300);
+      return () => clearInterval(interval);
+    }
+
+    return () => {
+      if (turnstileWidgetId.current !== null && window.turnstile) {
+        window.turnstile.remove(turnstileWidgetId.current);
+        turnstileWidgetId.current = null;
+      }
+    };
+  }, []);
+
   const onSubmit = async (data) => {
+    if (!turnstileToken) {
+      toast.error('Please complete the CAPTCHA verification');
+      return;
+    }
     console.log(data);
     try {
       const response = await fetch(SummaryApi.UserSignUp.url, {
@@ -15,17 +65,20 @@ const StudentEntry = () => {
         headers: {
           'Content-Type': 'application/json'
         },
-        body: JSON.stringify(data),
+        body: JSON.stringify({ ...data, turnstileToken }),
         credentials: 'include'
       });
       const result = await response.json();
       if (!result.success) {
         toast.error(result.message);
+        resetTurnstile();
         return;
       }
       toast.success(result.message);
+      resetTurnstile();
     } catch (err) {
       toast.error(err.message);
+      resetTurnstile();
     }
   };
 
@@ -102,9 +155,12 @@ const StudentEntry = () => {
           {errors.grade && <p className={styles.error}>{errors.grade.message}</p>}
         </div>
 
+        {/* Cloudflare Turnstile CAPTCHA */}
+        <div ref={turnstileRef} style={{ marginBottom: '10px' }}></div>
+
         {/* Submit Button */}
         <div className={styles['form-group']}>
-          <button type="submit">Submit</button>
+          <button type="submit" disabled={!turnstileToken}>Submit</button>
         </div>
       </form>
     </div>
