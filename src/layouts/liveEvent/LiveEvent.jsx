@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 
 const LiveEventPopup = () => {
     const [isVisible, setIsVisible] = useState(false);
-    const eventImage = "https://scontent-sin6-3.xx.fbcdn.net/v/t39.30808-6/630987831_1424769946105723_4906924420555463054_n.jpg?stp=dst-jpg_p843x403_tt6&_nc_cat=110&ccb=1-7&_nc_sid=127cfc&_nc_ohc=d810dS2_ou4Q7kNvwEoq-qU&_nc_oc=Adkvih0CL1AshunSgTQruUUBxVh30cmmKfNTztK_rvdrAO5RRf35P_nK6vqC0bdwbCXW4yZKs4hTsvc-v5xbpVuf&_nc_zt=23&_nc_ht=scontent-sin6-3.xx&_nc_gid=wOXX-OPvtGJMYFD2YwNRaw&oh=00_AftIl6ezCsXjAHIEuMSkBMkbgPpNxSijofbWjMIuOnsE1g&oe=6992A1B7";
+    const eventImage = "https://cdn.prod.website-files.com/663d1907e337de23e83c30b2/6995d21ea6d7935be33164ad_WhatsApp%20Image%202026-02-18%20at%208.17.23%20PM%20(1).jpeg";
 
     useEffect(() => {
         // Check if the popup hasn't been displayed yet
