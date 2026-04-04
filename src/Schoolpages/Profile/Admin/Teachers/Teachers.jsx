@@ -4,12 +4,15 @@ import { toast } from 'react-toastify';
 import TeacherCard from '../../../../components/TeacherCard/TeacherCard';
 import SummaryApi from '../../../../common';
 import TeacherAddForm from '../../../../components/TeacherAdd/TeacherAdd'; // Import the TeacherAddForm
+import TeacherEditPopup from './TeacherEditPopup';
 import styles from './styles/Teachers.module.scss';
 import { makeAuthenticatedRequest } from '../../../../helper/tokenManager';
 
 const Teachers = () => {
     const [teachers, setTeachers] = useState([]);
     const [isAddTeacherFormOpen, setIsAddTeacherFormOpen] = useState(false); // State for form visibility
+    const [isEditTeacherFormOpen, setIsEditTeacherFormOpen] = useState(false);
+    const [selectedTeacher, setSelectedTeacher] = useState(null);
 
     // Fetch teachers on component mount
     useEffect(() => {
@@ -52,11 +55,21 @@ const Teachers = () => {
         }
     };
 
+    const handleEditClick = (teacher) => {
+        setSelectedTeacher(teacher);
+        setIsEditTeacherFormOpen(true);
+    };
+
+    const handleCloseEditPopup = () => {
+        setIsEditTeacherFormOpen(false);
+        setSelectedTeacher(null);
+    };
+
     return (
         <div className={styles.teachersPanel}>
             <h2>Teachers Management</h2>
             <center><button 
-                onClick={() => setIsAddTeacherFormOpen(true,fetchTeachers)} 
+                onClick={() => setIsAddTeacherFormOpen(true)} 
                 className={styles.addTeacherButton}>
                 Add Teacher
             </button></center>
@@ -66,11 +79,24 @@ const Teachers = () => {
                 <TeacherAddForm fetchTeachers={fetchTeachers} onClose={() => setIsAddTeacherFormOpen(false)} />
             )}
 
+            {isEditTeacherFormOpen && selectedTeacher && (
+                <TeacherEditPopup
+                    teacher={selectedTeacher}
+                    onClose={handleCloseEditPopup}
+                    onUpdate={fetchTeachers}
+                />
+            )}
+
             <div className={styles.teachersList}>
                 {teachers.map(teacher => (
                     <div key={teacher._id} className={styles.teacherCardContainer}>
                         <TeacherCard teacher={teacher} />
                         <div className={styles.actionButtons}>
+                            <button
+                                onClick={() => handleEditClick(teacher)}
+                                className={styles.editButton}>
+                                Edit
+                            </button>
                             <button 
                                 onClick={() => handleDelete(teacher._id)} 
                                 className={styles.deleteButton}>

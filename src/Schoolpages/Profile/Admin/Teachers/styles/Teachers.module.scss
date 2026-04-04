@@ -49,9 +49,25 @@
 .actionButtons {
     display: flex;
     justify-content: center;
+    gap: 10px;
     padding: 10px;
     background-color: #f1f1f1;
     border-top: 1px solid #ddd;
+
+    .editButton {
+        padding: 8px 16px;
+        border: none;
+        background-color: #28a745;
+        color: #fff;
+        font-size: 14px;
+        border-radius: 4px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+
+        &:hover {
+            background-color: #218838;
+        }
+    }
 
     .deleteButton {
         padding: 8px 16px;
