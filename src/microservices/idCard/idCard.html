@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ID Card – Sri Ramakrishna Siksha Niketan</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Titan+One&display=swap" rel="stylesheet">
+
+<style>
+/* ==========================================================================
+   ID CARD STYLES
+   The whole card is built on one unit:  --u = card width / 840.
+   Every size below is  N * --u  (N = pixel value in the 840 x 1200 design),
+   so the card scales perfectly to any width. Change only --card-width.
+   ========================================================================== */
+
+:root {
+  --card-width: 420px;            /* <- the only size you need to touch */
+
+  --ink: #1c2150;
+  --green-dark: #0a5c4b;
+  --green-mid: #47a183;
+  --green-light: #4fa98a;
+  --school-bg: url("./school-bg.png");
+}
+
+.id-card-wrap {
+  width: var(--card-width);
+  container-type: inline-size;
+  flex: none;
+}
+
+.id-card {
+  --u: calc(100cqw / 840);
+  position: relative;
+  width: 100%;
+  aspect-ratio: 840 / 1200;
+  overflow: hidden;
+  background: #fff;
+  color: var(--ink);
+  font-family: "Poppins", "Segoe UI", Arial, sans-serif;
+  -webkit-print-color-adjust: exact;
+  print-color-adjust: exact;
+}
+.id-card * { box-sizing: border-box; margin: 0; padding: 0; }
+.id-card > * { position: absolute; }
+
+/* ---------- background layers ---------- */
+.ic-bg-photo {
+  left: calc(24 * var(--u)); top: calc(395 * var(--u));
+  width: calc(1280 * var(--u)); height: calc(960 * var(--u));
+  background: var(--school-bg) center / 85% 85% no-repeat;
+  opacity: .4;
+  -webkit-mask-image:
+    linear-gradient(to bottom, transparent 30%, #000 52%),
+    linear-gradient(to right, transparent 19%, #000 27%);
+  -webkit-mask-composite: source-in;
+  mask-image:
+    linear-gradient(to bottom, transparent 30%, #000 52%),
+    linear-gradient(to right, transparent 19%, #000 27%);
+  mask-composite: intersect;
+}
+.ic-chevrons { left: 0; top: 0; width: 100%; height: 100%; }
+
+/* ---------- header ---------- */
+.ic-logo { left: calc(42 * var(--u)); top: calc(26 * var(--u)); width: calc(138 * var(--u)); }
+.ic-school {
+  left: calc(190 * var(--u)); top: calc(18 * var(--u)); width: calc(640 * var(--u));
+  text-align: center; font-weight: 700;
+  font-size: calc(72 * var(--u)); line-height: calc(82 * var(--u));
+}
+.ic-session {
+  left: calc(50 * var(--u)); top: calc(206 * var(--u)); width: calc(155 * var(--u));
+  text-align: center; font-weight: 700;
+  font-size: calc(31 * var(--u)); line-height: calc(40 * var(--u));
+}
+.ic-section {
+  left: calc(595 * var(--u)); top: calc(204 * var(--u)); width: calc(210 * var(--u));
+  text-align: center; font-weight: 700;
+  font-size: calc(40 * var(--u)); line-height: calc(40 * var(--u));
+}
+
+/* ---------- photo ---------- */
+.ic-photo {
+  left: calc(320 * var(--u)); top: calc(192 * var(--u));
+  width: calc(238 * var(--u)); height: calc(323 * var(--u));
+  border: calc(3 * var(--u)) solid #fff;
+  border-radius: calc(10 * var(--u));
+  box-shadow: 0 0 calc(6 * var(--u)) rgba(0, 0, 0, .28);
+  background: #d9dde6;
+  overflow: hidden;
+}
+.ic-photo img { width: 100%; height: 100%; object-fit: cover; object-position: center top; display: block; }
+
+/* ---------- name / title / class ---------- */
+.ic-center { left: 0; width: calc(880 * var(--u)); text-align: center; }   /* design centre is x = 440 */
+
+.ic-name {
+  top: calc(520 * var(--u)); font-weight: 600; line-height: calc(40 * var(--u));
+}
+.ic-title {
+  top: calc(560 * var(--u));
+  font-family: "Titan One", "Poppins", sans-serif; font-weight: 400;
+  font-size: calc(66 * var(--u)); line-height: calc(76 * var(--u));
+  color: #f26b21; letter-spacing: calc(9 * var(--u)); padding-left: calc(9 * var(--u));
+  -webkit-text-stroke: calc(5 * var(--u)) var(--ink);
+  paint-order: stroke fill;
+  text-shadow: calc(3 * var(--u)) calc(4 * var(--u)) 0 var(--ink);
+}
+.ic-class-row { top: calc(640 * var(--u)); display: flex; justify-content: center; }
+.ic-class {
+  max-width: calc(520 * var(--u)); min-width: calc(326 * var(--u)); height: calc(62 * var(--u));
+  padding: 0 calc(24 * var(--u));
+  background: var(--green-dark); color: #fff; border-radius: calc(20 * var(--u));
+  display: flex; align-items: center; justify-content: center;
+  font-weight: 700;
+}
+
+/* ---------- single-line text that shrinks to fit (see JS) ---------- */
+.fit {
+  display: block; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+  font-size: calc(var(--fs) * var(--u) * var(--fit, 1));
+}
+.ic-name .fit  { --fs: 28; max-width: calc(480 * var(--u)); margin: 0 auto; }
+.ic-class .fit { --fs: 27; }
+
+/* ---------- detail rows ---------- */
+.ic-details {
+  left: 0; top: calc(707 * var(--u)); width: 100%;
+  font-size: calc(22 * var(--u));
+}
+.ic-row {
+  display: grid;
+  grid-template-columns: calc(66 * var(--u)) calc(190 * var(--u)) calc(14 * var(--u)) minmax(0, 1fr);
+  min-height: calc(41.5 * var(--u));
+  line-height: calc(41.5 * var(--u));
+  padding-right: calc(50 * var(--u));
+}
+.ic-row .label { grid-column: 2; font-weight: 600; white-space: nowrap; }
+.ic-row .colon { grid-column: 3; font-weight: 400; }
+.ic-row .value { grid-column: 4; min-width: 0; font-weight: 400; }
+.ic-row .value.fit { --fs: 22; }
+
+.ic-row.address { align-items: start; }
+.ic-row.address .value {
+  line-height: calc(41 * var(--u));
+  max-width: calc(450 * var(--u));         /* keeps clear of the signature */
+  display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 3; line-clamp: 3;
+  overflow: hidden; overflow-wrap: anywhere;
+}
+
+/* ---------- barcode + signature ---------- */
+.ic-barcode { left: calc(40 * var(--u)); top: calc(1017 * var(--u)); width: calc(205 * var(--u)); height: calc(56 * var(--u)); }
+.ic-barcode svg { display: block; width: 100%; height: 100%; }
+.ic-sign { left: calc(740 * var(--u)); top: calc(981 * var(--u)); width: calc(58 * var(--u)); }
+
+/* ---------- footer ---------- */
+.ic-foot-band {
+  left: 0; top: calc(1095 * var(--u)); width: 100%; height: calc(36 * var(--u));
+  background: var(--green-mid);
+}
+.ic-instructions {
+  left: calc(52 * var(--u)); top: calc(1095 * var(--u)); height: calc(36 * var(--u));
+  line-height: calc(36 * var(--u)); font-size: calc(20 * var(--u)); font-weight: 500; color: #111;
+}
+.ic-head {
+  right: calc(25 * var(--u)); top: calc(1095 * var(--u)); height: calc(36 * var(--u));
+  line-height: calc(36 * var(--u)); font-size: calc(26 * var(--u)); font-weight: 500; color: #111;
+}
+.ic-note {
+  left: 0; top: calc(1131 * var(--u)); width: 100%; height: calc(69 * var(--u));
+  background: var(--green-dark); color: #fff; text-align: center;
+  line-height: calc(69 * var(--u)); padding-left: calc(40 * var(--u)); font-size: calc(25.5 * var(--u)); font-weight: 400;
+}
+
+.ic-bg-photo { z-index: 0; }
+.ic-chevrons { z-index: 0; }
+.ic-details, .ic-barcode, .ic-sign { z-index: 1; }
+.ic-foot-band, .ic-instructions, .ic-head, .ic-note { z-index: 2; }
+.ic-photo, .ic-name, .ic-title, .ic-class-row, .ic-logo, .ic-school, .ic-session, .ic-section { z-index: 3; }
+
+/* ==========================================================================
+   Page layout for the demo / print – adapt or delete in your project
+   ========================================================================== */
+body { margin: 0; padding: 24px; background: #eef0f3; }
+#cards { display: flex; flex-wrap: wrap; gap: 24px; }
+
+@media print {
+  body { padding: 0; background: #fff; }
+  #cards { display: block; }
+  .id-card-wrap { break-inside: avoid; page-break-inside: avoid; margin: 0 auto 10mm; }
+}
+</style>
+</head>
+
+<body>
+
+<div id="cards"></div>
+
+<!-- ======================================================================
+     CARD TEMPLATE  – cloned once per student.
+     Anything with data-field="..." is filled from your data.
+     School-wide text (school name, footer line, "Head Master"…) is plain text
+     here: edit it once and it applies to every card.
+     ====================================================================== -->
+<template id="id-card-template">
+  <div class="id-card-wrap">
+    <div class="id-card">
+
+      <div class="ic-bg-photo"></div>
+
+      <svg class="ic-chevrons" viewBox="0 0 840 1200" preserveAspectRatio="none" aria-hidden="true">
+        <g id="chev-left">
+          <polygon points="0,395 439,206 439,281 0,470" fill="#0a5c4b"/>
+          <polygon points="0,470 439,281 439,401 0,590" fill="#4fa98a"/>
+        </g>
+        <g transform="translate(878 0) scale(-1 1)">
+          <polygon points="0,395 439,206 439,281 0,470" fill="#0a5c4b"/>
+          <polygon points="0,470 439,281 439,401 0,590" fill="#4fa98a"/>
+        </g>
+      </svg>
+
+      <!-- header -->
+      <img class="ic-logo" src="./logo.png" alt="School logo">
+      <div class="ic-school">Sri Ramakrishna<br>Siksha Niketan</div>
+      <div class="ic-session">SESSION<br><span data-field="session">2027</span></div>
+      <div class="ic-section" data-field="section">Primary School</div>
+
+      <!-- photo + name + title + class -->
+      <div class="ic-photo"><img data-field="photo" alt=""></div>
+      <div class="ic-center ic-name"><span class="fit" data-field="name"></span></div>
+      <div class="ic-center ic-title">IDENTITY CARD</div>
+      <div class="ic-center ic-class-row">
+        <div class="ic-class"><span class="fit">CLASS - <span data-field="className"></span></span></div>
+      </div>
+
+      <!-- details -->
+      <div class="ic-details">
+        <div class="ic-row"><span class="label">PEN No</span><span class="colon">:</span><span class="value fit" data-field="penNo"></span></div>
+        <div class="ic-row"><span class="label">ROLL No</span><span class="colon">:</span><span class="value fit" data-field="rollNo"></span></div>
+        <div class="ic-row"><span class="label">FATHER’S NAME</span><span class="colon">:</span><span class="value fit" data-field="fatherName"></span></div>
+        <div class="ic-row"><span class="label">MOTHER’S NAME</span><span class="colon">:</span><span class="value fit" data-field="motherName"></span></div>
+        <div class="ic-row"><span class="label">DATE OF BIRTH</span><span class="colon">:</span><span class="value fit" data-field="dob"></span></div>
+        <div class="ic-row"><span class="label">CONTACT No</span><span class="colon">:</span><span class="value fit" data-field="contact"></span></div>
+        <div class="ic-row address"><span class="label">ADDRESS</span><span class="colon">:</span><span class="value" data-field="address"></span></div>
+      </div>
+
+      <div class="ic-barcode" data-barcode></div>
+      <img class="ic-sign" src="./signature.png" alt="Head Master signature">
+
+      <!-- footer -->
+      <div class="ic-foot-band"></div>
+      <div class="ic-instructions">INSTRUCTIONS</div>
+      <div class="ic-head">Head Master</div>
+      <div class="ic-note">Please carry this card whenever you visit the School.</div>
+
+    </div>
+  </div>
+</template>
+
+
+<script>
+/* ==========================================================================
+   HOW TO USE
+   --------------------------------------------------------------------------
+   renderIdCards(students, containerElement)
+
+   Each student object may contain:
+     name, className, penNo, rollNo, fatherName, motherName,
+     dob, contact, address, photo (image URL)
+   Optional:
+     session  (default "2027")
+     section  (default "Primary School")
+     barcode  (default: the PEN number)
+
+   Map your Excel columns to these keys, then call renderIdCards().
+   Text is inserted with textContent, so Excel data can never inject HTML.
+   ========================================================================== */
+
+const ID_CARD_DEFAULTS = { session: "2027", section: "Primary School" };
+
+/* ---- Code 128-B barcode (pure JS, no library) -------------------------- */
+const C128 = "11011001100,11001101100,11001100110,10010011000,10010001100,10001001100,10011001000,10011000100,10001100100,11001001000,11001000100,11000100100,10110011100,10011011100,10011001110,10111001100,10011101100,10011100110,11001110010,11001011100,11001001110,11011100100,11001110100,11101101110,11101001100,11100101100,11100100110,11101100100,11100110100,11100110010,11011011000,11011000110,11000110110,10100011000,10001011000,10001000110,10110001000,10001101000,10001100010,11010001000,11000101000,11000100010,10110111000,10110001110,10001101110,10111011000,10111000110,10001110110,11101110110,11010001110,11000101110,11011101000,11011100010,11011101110,11101011000,11101000110,11100010110,11101101000,11101100010,11100011010,11101111010,11001000010,11110001010,10100110000,10100001100,10010110000,10010000110,10000101100,10000100110,10110010000,10110000100,10011010000,10011000010,10000110100,10000110010,11000010010,11001010000,11110111010,11000010100,10001111010,10100111100,10010111100,10010011110,10111100100,10011110100,10011110010,11110100100,11110010100,11110010010,11011011110,11011110110,11110110110,10101111000,10100011110,10001011110,10111101000,10111100010,11110101000,11110100010,10111011110,10111101110,11101011110,11110101110,11010000100,11010010000,11010011100".split(",");
+
+function code128Bits(text) {
+  const chars = [...String(text)].filter(c => c.charCodeAt(0) >= 32 && c.charCodeAt(0) <= 126);
+  if (!chars.length) return "";
+  const values = [104];                                   // start code B
+  let sum = 104;
+  chars.forEach((c, i) => { const v = c.charCodeAt(0) - 32; values.push(v); sum += v * (i + 1); });
+  values.push(sum % 103);                                 // checksum
+  return values.map(v => C128[v]).join("") + "1100011101011";   // stop + termination bar
+}
+
+function drawBarcode(slot, text) {
+  slot.textContent = "";
+  const bits = code128Bits(text);
+  if (!bits) return;
+  const NS = "http://www.w3.org/2000/svg";
+  const svg = document.createElementNS(NS, "svg");
+  svg.setAttribute("viewBox", `-8 0 ${bits.length + 16} 1`);
+  svg.setAttribute("preserveAspectRatio", "none");
+  svg.setAttribute("shape-rendering", "crispEdges");
+  for (let i = 0; i < bits.length;) {
+    let j = i;
+    while (j < bits.length && bits[j] === bits[i]) j++;
+    if (bits[i] === "1") {
+      const r = document.createElementNS(NS, "rect");
+      r.setAttribute("x", i); r.setAttribute("width", j - i); r.setAttribute("height", 1);
+      r.setAttribute("fill", "#111");
+      svg.appendChild(r);
+    }
+    i = j;
+  }
+  slot.appendChild(svg);
+}
+
+/* ---- shrink single-line text to fit its box ---------------------------- */
+function fitText(el) {
+  el.style.removeProperty("--fit");
+  const w = el.clientWidth, s = el.scrollWidth;
+  if (w > 0 && s > w) el.style.setProperty("--fit", Math.max(0.5, w / s - 0.01));
+}
+
+/* ---- build one card ---------------------------------------------------- */
+function createIdCard(student) {
+  const data = { ...ID_CARD_DEFAULTS, ...student };
+  const card = document.getElementById("id-card-template").content.firstElementChild.cloneNode(true);
+
+  card.querySelectorAll("[data-field]").forEach(el => {
+    const value = data[el.dataset.field];
+    if (el.tagName === "IMG") {
+      if (value) el.src = value; else el.style.display = "none";
+      el.onerror = () => { el.style.display = "none"; };
+    } else {
+      el.textContent = value == null ? "" : String(value);
+    }
+  });
+
+  drawBarcode(card.querySelector("[data-barcode]"), data.barcode ?? data.penNo ?? "");
+  return card;
+}
+
+/* ---- render many cards ------------------------------------------------- */
+function renderIdCards(students, container) {
+  container.textContent = "";
+  students.forEach(s => container.appendChild(createIdCard(s)));
+  const fitAll = () => container.querySelectorAll(".fit").forEach(fitText);
+  fitAll();
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(fitAll);   // re-fit once fonts load
+}
+
+
+/* ==========================================================================
+   DEMO – delete this block when integrating
+   ========================================================================== */
+document.addEventListener("DOMContentLoaded", () => {
+  renderIdCards([
+    {
+      name: "Adam Fletcher", className: "KISHALOY",
+      penNo: "123456789123456", rollNo: "123456789123456",
+      fatherName: "ABCDEFGHIJKLMAOPQRSTUVWXYX", motherName: "ABCDEFGHIJKLMNOPQRSTUVWXYZ",
+      dob: "00 / 00 / 0000", contact: "+91 1234567899",
+      address: "ABCDEFGHIJKLMNOPQRSTUVWXYZ ABCDEFGHIJKLMNOPQRSTUVWXYZ ABCDEFGHIJKLMNOPQRSTUVWXYZ",
+      photo: "assets/sample-photo.jpg"
+    }
+  ], document.getElementById("cards"));
+});
+</script>
+</body>
+</html>

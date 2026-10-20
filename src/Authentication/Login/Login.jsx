@@ -6,7 +6,7 @@ import SummaryApi from '../../common';
 import { toast } from 'react-toastify';
 import { useDispatch } from 'react-redux';
 import { setUserDetails } from './../../store/userSlice';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import RemoveRedEyeIcon from '@mui/icons-material/RemoveRedEye';
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 import { useSelector } from 'react-redux';
@@ -24,16 +24,18 @@ const TURNSTILE_SITE_KEY = import.meta.env.VITE_TURNSTILE_SITE_KEY || '0x4AAAAAA
 const Login = () => {
   const user = useSelector(state => state?.user?.user);
   const { fetchUser } = useContext(Context);
+  const location = useLocation();
+  const redirectPath = new URLSearchParams(location.search).get('redirect') || '/school/profile';
   
   const checkUser = () => {
     console.log(user);
     if (user) {
-      Navigate('/school/profile');
+      Navigate(redirectPath);
     }
   }
   useEffect(() => {
     checkUser();
-  }, [user]);
+  }, [user, redirectPath]);
 
   const [isForgotPassword, setIsForgotPassword] = React.useState(false);
 
@@ -103,7 +105,7 @@ const Login = () => {
         // Store tokens for user authentication
         setUserTokens(result.accessToken, result.refreshToken);
         await fetchUser(); // Wait for user data to be fetched
-        Navigate('/school/profile');
+        Navigate(redirectPath);
         toast.success('Login successful');
       } else {
         toast.error(result.message || 'Login failed');
@@ -146,7 +148,7 @@ const Login = () => {
       setUserTokens(result.accessToken, result.refreshToken);
       toast.success(result.message);
       await fetchUser(); // Wait for user data to be fetched
-      Navigate('/school/profile');
+      Navigate(redirectPath);
     } catch (err) {
       toast.error(err.message);
       resetTurnstile();

@@ -39,6 +39,7 @@ import Terms from './../Policy/TermsAndConditions/TermsAndConditions';
 import Overview from '../Policy/Overview/Overview';
 
 import ErrorPage from '../layouts/ErrorPage/ErrorPage';
+import IdCard from '../microservices/idCard/IdCard';
 
 
 
@@ -77,6 +78,10 @@ const router = createBrowserRouter([
             {
                 path: 'source',
                 element: <SourceCode />
+            },
+            {
+                path: 'idcard',
+                element: <IdCard />
             },
 
             //school page
