@@ -843,11 +843,11 @@
 
 .idcard-preview-shell .ic-bg-photo {
 	left: calc(24 * var(--u));
-	top: calc(395 * var(--u));
+	top: calc(430 * var(--u));
 	width: calc(1280 * var(--u));
 	height: calc(960 * var(--u));
 	object-fit: fill;
-	opacity: .65;
+	opacity: .25;
 	z-index: 0;
 }
 
@@ -935,7 +935,7 @@
 
 .ic-name {
 	top: calc(520 * var(--u));
-	font-weight: 600;
+	font-weight: 800;
 	line-height: calc(40 * var(--u));
 	z-index: 3;
 }
@@ -1012,7 +1012,7 @@
 
 .ic-row .label {
 	grid-column: 2;
-	font-weight: 600;
+	font-weight: 800;
 	white-space: nowrap;
 }
 
@@ -1023,7 +1023,7 @@
 .ic-row .value {
 	grid-column: 4;
 	min-width: 0;
-	font-weight: 400;
+	font-weight: 600;
 }
 
 .ic-row .value.fit {
