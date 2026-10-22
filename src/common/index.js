@@ -9,6 +9,14 @@ const apiURI=import.meta.env.VITE_BACKEND_URL||"http://api.srsnrng.in";
 const apiBase = apiURI+"/api";
 
 const SummaryApi={
+    IdcardTemplates:{ url:apiBase+"/idcard/templates", method:"GET" },
+    IdcardTemplateCreate:{ url:apiBase+"/idcard/templates", method:"POST" },
+    IdcardTemplateDelete:{ url:apiBase+"/idcard/templates", method:"DELETE" },
+    IdcardUpload:{ url:apiBase+"/idcard/upload", method:"POST" },
+    IdcardBatchStatus:{ url:apiBase+"/idcard/batches", method:"GET" },
+    IdcardBatchDetail:{ url:apiBase+"/idcard/batches", method:"GET" },
+    IdcardBatchHistory:{ url:apiBase+"/idcard/batches", method:"GET" },
+    IdcardBatchRegenerate:{ url:apiBase+"/idcard/batches", method:"POST" },
     //fcm token
     FcmTokenSend:{
         url:apiBase+"/save-token",
