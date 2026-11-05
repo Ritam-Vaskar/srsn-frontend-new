@@ -7,6 +7,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Titan+One&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/qrcode@1.5.3/build/qrcode.min.js"></script>
 
 <style>
 /* ==========================================================================
@@ -84,7 +85,7 @@
   background: #d9dde6;
   overflow: hidden;
 }
-.ic-photo img { width: 100%; height: 100%; object-fit: cover; object-position: center top; display: block; }
+.ic-photo img { width: 100%; height: 100%; object-fit: fill; object-position: center top; display: block; }
 
 /* ---------- name / title / class ---------- */
 .ic-center { left: 0; width: calc(880 * var(--u)); text-align: center; }   /* design centre is x = 440 */
@@ -143,9 +144,13 @@
   overflow: hidden; overflow-wrap: anywhere;
 }
 
-/* ---------- barcode + signature ---------- */
-.ic-barcode { left: calc(40 * var(--u)); top: calc(1017 * var(--u)); width: calc(205 * var(--u)); height: calc(56 * var(--u)); }
-.ic-barcode svg { display: block; width: 100%; height: 100%; }
+/* ---------- barcode / qr + signature ---------- */
+.ic-code-block { position: absolute; left: calc(40 * var(--u)); top: calc(992 * var(--u)); display: flex; align-items: center; gap: calc(12 * var(--u)); z-index: 1; }
+.ic-qr-slot { width: calc(88 * var(--u)); height: calc(88 * var(--u)); background: #ffffff; padding: calc(2 * var(--u)); border-radius: calc(3 * var(--u)); box-shadow: 0 0 calc(4 * var(--u)) rgba(0, 0, 0, 0.15); box-sizing: border-box; }
+.ic-qr-text { display: flex; flex-direction: column; justify-content: center; text-align: left; line-height: 1.25; }
+.ic-qr-head { font-size: calc(16 * var(--u)); font-weight: 800; color: var(--green-dark); letter-spacing: calc(0.3 * var(--u)); }
+.ic-qr-site { font-size: calc(13 * var(--u)); color: #555; font-weight: 500; }
+.ic-qr-pen { font-size: calc(17 * var(--u)); font-weight: 700; color: #111; margin-top: calc(2 * var(--u)); }
 .ic-sign { left: calc(740 * var(--u)); top: calc(981 * var(--u)); width: calc(58 * var(--u)); }
 
 /* ---------- footer ---------- */
@@ -239,7 +244,14 @@ body { margin: 0; padding: 24px; background: #eef0f3; }
         <div class="ic-row address"><span class="label">ADDRESS</span><span class="colon">:</span><span class="value" data-field="address"></span></div>
       </div>
 
-      <div class="ic-barcode" data-barcode></div>
+      <div class="ic-code-block">
+        <canvas class="ic-qr-slot" data-qr></canvas>
+        <!-- <div class="ic-qr-text">
+          <span class="ic-qr-head">SCAN TO VERIFY</span>
+          <span class="ic-qr-site">verified by srsnrng.in</span>
+          <span class="ic-qr-pen" data-field="penNo"></span>
+        </div> -->
+      </div>
       <img class="ic-sign" src="./signature.png" alt="Head Master signature">
 
       <!-- footer -->
@@ -331,7 +343,12 @@ function createIdCard(student) {
     }
   });
 
-  drawBarcode(card.querySelector("[data-barcode]"), data.barcode ?? data.penNo ?? "");
+  const verifyId = data._id || data.id || data.penNo || "";
+  const verifyUrl = verifyId ? "https://srsnrng.in/verify-id/" + encodeURIComponent(verifyId) : "";
+  const qrCanvas = card.querySelector("[data-qr]");
+  if (qrCanvas && window.QRCode) {
+    QRCode.toCanvas(qrCanvas, verifyUrl, { width: 44, margin: 1, color: { dark: "#111827", light: "#ffffff" } });
+  }
   return card;
 }
 

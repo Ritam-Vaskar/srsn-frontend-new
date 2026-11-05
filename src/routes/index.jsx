@@ -40,6 +40,7 @@ import Overview from '../Policy/Overview/Overview';
 
 import ErrorPage from '../layouts/ErrorPage/ErrorPage';
 import IdCard from '../microservices/idCard/IdCard';
+import IdCardVerification from '../microservices/idCard/IdCardVerification';
 
 
 
@@ -82,6 +83,22 @@ const router = createBrowserRouter([
             {
                 path: 'idcard',
                 element: <IdCard />
+            },
+            {
+                path: 'verify-id/:identifier',
+                element: <IdCardVerification />
+            },
+            {
+                path: 'verify-id',
+                element: <IdCardVerification />
+            },
+            {
+                path: 'verify/:identifier',
+                element: <IdCardVerification />
+            },
+            {
+                path: 'verify',
+                element: <IdCardVerification />
             },
 
             //school page

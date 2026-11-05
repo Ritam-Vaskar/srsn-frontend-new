@@ -17,6 +17,7 @@ const SummaryApi={
     IdcardBatchDetail:{ url:apiBase+"/idcard/batches", method:"GET" },
     IdcardBatchHistory:{ url:apiBase+"/idcard/batches", method:"GET" },
     IdcardBatchRegenerate:{ url:apiBase+"/idcard/batches", method:"POST" },
+    IdcardVerify:{ url:apiBase+"/idcard/verify", method:"GET" },
     //fcm token
     FcmTokenSend:{
         url:apiBase+"/save-token",

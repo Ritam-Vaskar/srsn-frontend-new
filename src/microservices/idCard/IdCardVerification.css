@@ -1,0 +1,909 @@
+/* ─── Public ID Card Verification Page Styles ────────────────── */
+:root {
+  --idv-bg: #091a16;
+  --idv-card-bg: rgba(16, 38, 33, 0.85);
+  --idv-card-border: rgba(71, 161, 131, 0.25);
+  --idv-primary: #0a5c4b;
+  --idv-primary-light: #47a183;
+  --idv-accent: #f26b21;
+  --idv-gold: #e2b347;
+  --idv-text: #f0f7f4;
+  --idv-text-muted: #9ab6ab;
+  --idv-surface: rgba(255, 255, 255, 0.04);
+  --idv-surface-hover: rgba(255, 255, 255, 0.08);
+  --idv-shadow: 0 20px 45px -10px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(71, 161, 131, 0.15);
+}
+
+.idv-page {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: radial-gradient(circle at 50% 0%, #153830 0%, #091a16 65%, #05100e 100%);
+  color: var(--idv-text);
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  padding: 0;
+  margin: 0;
+}
+
+/* ─── Header ─────────────────────────────────────────────────── */
+.idv-header {
+  border-bottom: 1px solid rgba(71, 161, 131, 0.2);
+  background: rgba(9, 26, 22, 0.75);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.idv-header-inner {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 14px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.idv-brand {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  text-decoration: none;
+  color: inherit;
+  transition: opacity 0.2s;
+}
+
+.idv-brand:hover {
+  opacity: 0.9;
+}
+
+.idv-logo {
+  width: 44px;
+  height: 44px;
+  object-fit: contain;
+  filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.4));
+}
+
+.idv-brand-name {
+  font-size: 16px;
+  font-weight: 700;
+  letter-spacing: 0.2px;
+  color: #fff;
+}
+
+.idv-brand-sub {
+  font-size: 11px;
+  color: var(--idv-text-muted);
+  font-weight: 400;
+}
+
+.idv-portal-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 14px;
+  background: rgba(71, 161, 131, 0.12);
+  border: 1px solid rgba(71, 161, 131, 0.35);
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--idv-primary-light);
+}
+
+.idv-live-dot {
+  width: 8px;
+  height: 8px;
+  background: #22c55e;
+  border-radius: 50%;
+  box-shadow: 0 0 8px #22c55e;
+  animation: idv-pulse 2s infinite ease-in-out;
+}
+
+@keyframes idv-pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.4; transform: scale(0.85); }
+}
+
+/* ─── Main Content ───────────────────────────────────────────── */
+.idv-main {
+  flex: 1;
+  max-width: 880px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 32px 20px 48px;
+  box-sizing: border-box;
+}
+
+/* ─── Search Bar ─────────────────────────────────────────────── */
+.idv-search-bar-wrap {
+  margin-bottom: 28px;
+}
+
+.idv-search-form {
+  display: flex;
+  align-items: center;
+  background: rgba(16, 38, 33, 0.9);
+  border: 1px solid rgba(71, 161, 131, 0.3);
+  border-radius: 14px;
+  padding: 6px 8px 6px 16px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
+  transition: all 0.2s ease;
+}
+
+.idv-search-form:focus-within {
+  border-color: var(--idv-primary-light);
+  box-shadow: 0 0 0 3px rgba(71, 161, 131, 0.2), 0 8px 24px rgba(0, 0, 0, 0.35);
+}
+
+.idv-search-icon {
+  color: var(--idv-text-muted);
+  margin-right: 12px;
+  flex-shrink: 0;
+}
+
+.idv-search-input {
+  flex: 1;
+  background: transparent;
+  border: none;
+  outline: none;
+  color: #fff;
+  font-size: 15px;
+  font-family: inherit;
+}
+
+.idv-search-input::placeholder {
+  color: #6c9287;
+}
+
+.idv-search-btn {
+  background: linear-gradient(135deg, #0a5c4b 0%, #0e7862 100%);
+  color: #fff;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 10px;
+  padding: 10px 22px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.idv-search-btn:hover {
+  background: linear-gradient(135deg, #0e7862 0%, #13957a 100%);
+  transform: translateY(-1px);
+}
+
+/* ─── Loading / Error / Welcome States ────────────────────────── */
+.idv-loading-state,
+.idv-error-card,
+.idv-welcome-card {
+  background: var(--idv-card-bg);
+  border: 1px solid var(--idv-card-border);
+  border-radius: 20px;
+  padding: 44px 32px;
+  text-align: center;
+  box-shadow: var(--idv-shadow);
+  backdrop-filter: blur(10px);
+}
+
+.idv-spinner {
+  width: 48px;
+  height: 48px;
+  border: 3px solid rgba(71, 161, 131, 0.2);
+  border-top-color: var(--idv-primary-light);
+  border-radius: 50%;
+  margin: 0 auto 20px;
+  animation: idv-spin 0.8s linear infinite;
+}
+
+@keyframes idv-spin {
+  to { transform: rotate(360deg); }
+}
+
+.idv-loading-state h3 {
+  margin: 0 0 8px;
+  font-size: 20px;
+  font-weight: 600;
+  color: #fff;
+}
+
+.idv-loading-state p {
+  margin: 0;
+  color: var(--idv-text-muted);
+  font-size: 14px;
+}
+
+.idv-error-card {
+  border-color: rgba(239, 68, 68, 0.35);
+}
+
+.idv-error-icon {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background: rgba(239, 68, 68, 0.15);
+  color: #ef4444;
+  display: grid;
+  place-items: center;
+  margin: 0 auto 18px;
+}
+
+.idv-error-card h2 {
+  margin: 0 0 10px;
+  font-size: 22px;
+  color: #fca5a5;
+}
+
+.idv-error-msg {
+  color: #f3f4f6;
+  font-size: 15px;
+  margin: 0 0 20px;
+}
+
+.idv-error-hint {
+  text-align: left;
+  background: rgba(0, 0, 0, 0.25);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 12px;
+  padding: 16px 20px;
+  margin: 0 auto 24px;
+  max-width: 560px;
+  font-size: 13px;
+  color: var(--idv-text-muted);
+}
+
+.idv-error-hint strong {
+  color: #fff;
+  display: block;
+  margin-bottom: 6px;
+}
+
+.idv-error-hint ul {
+  margin: 0;
+  padding-left: 18px;
+}
+
+.idv-error-hint li {
+  margin-bottom: 4px;
+}
+
+.idv-welcome-badge {
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  background: rgba(71, 161, 131, 0.15);
+  color: var(--idv-primary-light);
+  display: grid;
+  place-items: center;
+  margin: 0 auto 20px;
+  box-shadow: 0 0 24px rgba(71, 161, 131, 0.2);
+}
+
+.idv-welcome-card h2 {
+  font-size: 24px;
+  color: #fff;
+  margin: 0 0 12px;
+}
+
+.idv-welcome-card p {
+  color: var(--idv-text-muted);
+  max-width: 540px;
+  margin: 0 auto 28px;
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.idv-trust-badges {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 14px;
+}
+
+.idv-trust-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(71, 161, 131, 0.25);
+  padding: 10px 18px;
+  border-radius: 999px;
+  font-size: 13px;
+  color: #d1fae5;
+  font-weight: 500;
+}
+
+/* ─── Main Certificate Card (NOT an ID card replica) ─────────── */
+.idv-certificate-card {
+  background: var(--idv-card-bg);
+  border: 1px solid var(--idv-card-border);
+  border-radius: 24px;
+  padding: 36px 40px;
+  box-shadow: var(--idv-shadow);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Decorative subtle background watermark */
+.idv-certificate-card::before {
+  content: '';
+  position: absolute;
+  top: -60px;
+  right: -60px;
+  width: 260px;
+  height: 260px;
+  background: radial-gradient(circle, rgba(71, 161, 131, 0.12) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.idv-cert-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-bottom: 24px;
+}
+
+.idv-verified-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: linear-gradient(135deg, rgba(34, 197, 94, 0.15) 0%, rgba(16, 185, 129, 0.22) 100%);
+  border: 1px solid rgba(34, 197, 94, 0.45);
+  color: #4ade80;
+  padding: 8px 18px;
+  border-radius: 999px;
+  font-size: 13.5px;
+  font-weight: 700;
+  letter-spacing: 0.3px;
+  box-shadow: 0 0 16px rgba(34, 197, 94, 0.2);
+}
+
+.idv-cert-meta {
+  font-size: 12px;
+  color: var(--idv-text-muted);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.idv-sep {
+  opacity: 0.4;
+}
+
+/* School Banner */
+.idv-school-banner {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  margin-bottom: 24px;
+}
+
+.idv-school-crest {
+  width: 58px;
+  height: 58px;
+  object-fit: contain;
+  filter: drop-shadow(0 3px 8px rgba(0, 0, 0, 0.4));
+  flex-shrink: 0;
+}
+
+.idv-school-heading {
+  margin: 0 0 4px;
+  font-size: 23px;
+  font-weight: 800;
+  letter-spacing: -0.3px;
+  color: #fff;
+}
+
+.idv-school-sub {
+  font-size: 13px;
+  color: var(--idv-gold);
+  font-weight: 500;
+}
+
+.idv-cert-divider {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(71, 161, 131, 0.35), transparent);
+  margin: 20px 0 28px;
+}
+
+/* Student Hero Section */
+.idv-student-hero {
+  display: flex;
+  align-items: center;
+  gap: 28px;
+  background: rgba(0, 0, 0, 0.22);
+  border: 1px solid rgba(71, 161, 131, 0.22);
+  border-radius: 18px;
+  padding: 22px 26px;
+  margin-bottom: 28px;
+}
+
+.idv-photo-frame {
+  width: 120px;
+  height: 150px;
+  flex-shrink: 0;
+  border-radius: 14px;
+  overflow: hidden;
+  border: 3px solid rgba(71, 161, 131, 0.4);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.45);
+  background: #112822;
+  position: relative;
+  display: grid;
+  place-items: center;
+}
+
+.idv-student-photo {
+  width: 100%;
+  height: 100%;
+  object-fit: fill; /* Stretches to fill frame completely */
+  display: block;
+}
+
+.idv-photo-placeholder {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  color: #47a183;
+  font-size: 11px;
+  font-weight: 600;
+}
+
+.idv-photo-verified-tag {
+  position: absolute;
+  bottom: 6px;
+  left: 6px;
+  right: 6px;
+  background: rgba(9, 26, 22, 0.88);
+  border: 1px solid rgba(71, 161, 131, 0.4);
+  border-radius: 6px;
+  padding: 2px 4px;
+  font-size: 10px;
+  font-weight: 700;
+  color: #4ade80;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 3px;
+}
+
+.idv-student-summary {
+  flex: 1;
+  min-width: 0;
+}
+
+.idv-verified-badge-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 8px;
+  flex-wrap: wrap;
+}
+
+.idv-status-live {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  font-weight: 600;
+  color: #34d399;
+}
+
+.idv-pill-session {
+  background: rgba(226, 179, 71, 0.15);
+  border: 1px solid rgba(226, 179, 71, 0.35);
+  color: #fcd34d;
+  font-size: 11px;
+  font-weight: 600;
+  padding: 3px 10px;
+  border-radius: 999px;
+}
+
+.idv-student-name {
+  margin: 0 0 14px;
+  font-size: 26px;
+  font-weight: 800;
+  color: #fff;
+  letter-spacing: -0.2px;
+  word-break: break-word;
+}
+
+.idv-quick-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.idv-quick-pill {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 6px 14px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+}
+
+.idv-quick-pill.highlight {
+  background: rgba(10, 92, 75, 0.3);
+  border-color: rgba(71, 161, 131, 0.45);
+}
+
+.idv-pill-lbl {
+  color: var(--idv-text-muted);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+}
+
+.idv-pill-val {
+  color: #fff;
+  font-weight: 700;
+}
+
+/* ─── Details Grid ───────────────────────────────────────────── */
+.idv-details-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 14px;
+  margin-bottom: 28px;
+}
+
+.idv-detail-card {
+  background: var(--idv-surface);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 14px;
+  padding: 14px 18px;
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  transition: all 0.2s ease;
+}
+
+.idv-detail-card:hover {
+  background: var(--idv-surface-hover);
+  border-color: rgba(71, 161, 131, 0.3);
+}
+
+.idv-detail-card.full-width {
+  grid-column: 1 / -1;
+}
+
+.idv-detail-icon {
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
+  background: rgba(71, 161, 131, 0.12);
+  color: var(--idv-primary-light);
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+}
+
+.idv-detail-content {
+  flex: 1;
+  min-width: 0;
+}
+
+.idv-detail-label {
+  font-size: 11px;
+  color: var(--idv-text-muted);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 4px;
+}
+
+.idv-detail-value {
+  font-size: 14.5px;
+  color: #fff;
+  font-weight: 500;
+  line-height: 1.4;
+  word-break: break-word;
+}
+
+.idv-detail-value.bold {
+  font-weight: 700;
+  color: #a7f3d0;
+  font-family: monospace, inherit;
+  font-size: 15px;
+}
+
+/* ─── Certificate Footer / Security Seal ──────────────────────── */
+.idv-cert-footer {
+  background: rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(71, 161, 131, 0.2);
+  border-radius: 16px;
+  padding: 18px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 18px;
+  margin-bottom: 28px;
+}
+
+.idv-authority-seal {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.idv-seal-badge {
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, rgba(226, 179, 71, 0.2) 0%, rgba(10, 92, 75, 0.3) 100%);
+  border: 1px solid rgba(226, 179, 71, 0.4);
+  color: var(--idv-gold);
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+}
+
+.idv-auth-title {
+  font-size: 14px;
+  font-weight: 700;
+  color: #fff;
+}
+
+.idv-auth-sub {
+  font-size: 12px;
+  color: var(--idv-text-muted);
+}
+
+.idv-auth-note {
+  font-size: 11px;
+  color: #6c9287;
+  font-style: italic;
+  margin-top: 2px;
+}
+
+.idv-security-stamp {
+  text-align: right;
+}
+
+.idv-stamp-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 0.8px;
+  color: #34d399;
+}
+
+.idv-stamp-domain {
+  font-size: 12px;
+  font-weight: 600;
+  color: #fff;
+  margin-top: 2px;
+}
+
+.idv-stamp-time {
+  font-size: 11px;
+  color: var(--idv-text-muted);
+  margin-top: 2px;
+}
+
+/* ─── Action Buttons ─────────────────────────────────────────── */
+.idv-action-bar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  justify-content: flex-end;
+}
+
+.idv-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 20px;
+  border-radius: 10px;
+  font-size: 13.5px;
+  font-weight: 600;
+  cursor: pointer;
+  text-decoration: none;
+  transition: all 0.2s ease;
+  border: none;
+}
+
+.idv-btn-primary {
+  background: linear-gradient(135deg, #0a5c4b 0%, #0e7862 100%);
+  color: #fff;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  box-shadow: 0 4px 12px rgba(10, 92, 75, 0.3);
+}
+
+.idv-btn-primary:hover {
+  background: linear-gradient(135deg, #0e7862 0%, #13957a 100%);
+  transform: translateY(-1px);
+}
+
+.idv-btn-secondary {
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  color: #fff;
+}
+
+.idv-btn-secondary:hover {
+  background: rgba(255, 255, 255, 0.14);
+}
+
+.idv-btn-ghost {
+  background: transparent;
+  color: var(--idv-text-muted);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.idv-btn-ghost:hover {
+  color: #fff;
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.idv-btn-outline {
+  background: transparent;
+  border: 1px solid rgba(71, 161, 131, 0.4);
+  color: var(--idv-primary-light);
+}
+
+.idv-btn-outline:hover {
+  background: rgba(71, 161, 131, 0.1);
+}
+
+/* ─── Footer ─────────────────────────────────────────────────── */
+.idv-footer {
+  border-top: 1px solid rgba(71, 161, 131, 0.2);
+  background: rgba(5, 16, 14, 0.8);
+  padding: 24px 20px;
+  text-align: center;
+}
+
+.idv-footer-content {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.idv-footer-content p {
+  margin: 0 0 6px;
+  font-size: 13px;
+  color: var(--idv-text-muted);
+}
+
+.idv-disclaimer {
+  font-size: 12px !important;
+  color: #6c9287 !important;
+  line-height: 1.5;
+}
+
+/* Verification uses the main site's light paper/orange visual language. */
+.idv-page {
+  --idv-bg: #f5f7f3;
+  --idv-card-bg: #fff;
+  --idv-card-border: #dfe6e0;
+  --idv-text: #16252a;
+  --idv-text-muted: #68777a;
+  background: #f5f7f3;
+  color: #16252a;
+}
+.idv-header { background: #fff; border-bottom-color: #dfe6e0; }
+.idv-brand-name, .idv-school-heading, .idv-loading-state h3, .idv-welcome-card h2 { color: #16252a; }
+.idv-brand-sub, .idv-cert-meta, .idv-loading-state p, .idv-welcome-card p { color: #68777a; }
+.idv-portal-badge { color: #d56d2e; background: #fff3e9; border-color: #f2c5a5; }
+.idv-live-dot { background: #d56d2e; box-shadow: 0 0 8px rgba(213, 109, 46, .45); }
+.idv-search-form { background: #fff; border-color: #d5dfd7; box-shadow: 0 8px 24px rgba(25, 59, 51, .08); }
+.idv-search-input { color: #16252a; }.idv-search-input::placeholder { color: #84918e; }.idv-search-icon { color: #68777a; }
+.idv-search-btn, .idv-btn-primary { background: #d56d2e; border-color: #d56d2e; box-shadow: 0 4px 12px rgba(213, 109, 46, .22); }.idv-search-btn:hover, .idv-btn-primary:hover { background: #bd5b22; }
+.idv-certificate-card, .idv-loading-state, .idv-error-card, .idv-welcome-card { background: #fff; border-color: #dfe6e0; box-shadow: 0 15px 35px rgba(25, 59, 51, .08); backdrop-filter: none; }
+.idv-student-hero, .idv-cert-footer, .idv-detail-card { background: #f5f7f3; border-color: #dfe6e0; }
+.idv-student-name, .idv-detail-value, .idv-auth-title, .idv-stamp-domain { color: #16252a; }.idv-detail-label, .idv-auth-sub, .idv-stamp-time { color: #68777a; }
+.idv-btn-secondary { color: #32514b; background: #e5eee8; border-color: #c9ddd1; }.idv-btn-secondary:hover { background: #d8e9de; }.idv-btn-outline { color: #d56d2e; border-color: #e9b38e; }.idv-btn-outline:hover { background: #fff3e9; }
+.idv-footer { background: #fff; border-top-color: #dfe6e0; }.idv-footer-content p, .idv-disclaimer { color: #68777a !important; }
+.idv-verified-pill { color: #d56d2e; background: #fff3e9; border-color: #f2c5a5; box-shadow: none; }.idv-verified-pill svg, .idv-status-live, .idv-stamp-badge { color: #d56d2e; }.idv-status-live { background: #fff3e9; border-color: #f2c5a5; }.idv-pill-session { color: #d56d2e; background: #fff3e9; border-color: #f2c5a5; }.idv-pill.highlight { color: #d56d2e; background: #fff3e9; border-color: #f2c5a5; }.idv-detail-icon { color: #d56d2e; background: #fff3e9; }.idv-detail-value.bold { color: #d56d2e; }.idv-seal-badge { color: #d56d2e; background: #fff3e9; border-color: #f2c5a5; }
+
+/* ─── Responsive Adjustments ─────────────────────────────────── */
+@media (max-width: 680px) {
+  .idv-certificate-card {
+    padding: 24px 20px;
+    border-radius: 18px;
+  }
+
+  .idv-student-hero {
+    flex-direction: column;
+    text-align: center;
+    gap: 18px;
+    padding: 20px 16px;
+  }
+
+  .idv-verified-badge-row,
+  .idv-quick-pills {
+    justify-content: center;
+  }
+
+  .idv-student-name {
+    font-size: 22px;
+  }
+
+  .idv-details-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .idv-cert-footer {
+    flex-direction: column;
+    text-align: center;
+    gap: 16px;
+  }
+
+  .idv-security-stamp {
+    text-align: center;
+  }
+
+  .idv-action-bar {
+    justify-content: stretch;
+  }
+
+  .idv-action-bar .idv-btn {
+    flex: 1 1 100%;
+    justify-content: center;
+  }
+}
+
+/* ─── Print Styles ───────────────────────────────────────────── */
+@media print {
+  body, .idv-page {
+    background: #fff !important;
+    color: #111 !important;
+  }
+
+  .idv-header,
+  .idv-search-bar-wrap,
+  .idv-action-bar,
+  .idv-footer,
+  .no-print {
+    display: none !important;
+  }
+
+  .idv-certificate-card {
+    box-shadow: none !important;
+    border: 2px solid #0a5c4b !important;
+    background: #fff !important;
+    color: #111 !important;
+    padding: 24px !important;
+    margin: 0 !important;
+  }
+
+  .idv-school-heading,
+  .idv-student-name,
+  .idv-detail-value,
+  .idv-auth-title {
+    color: #111 !important;
+  }
+
+  .idv-verified-pill {
+    background: #f0fdf4 !important;
+    border-color: #22c55e !important;
+    color: #15803d !important;
+  }
+
+  .idv-student-hero {
+    background: #f9fafb !important;
+    border-color: #e5e7eb !important;
+  }
+
+  .idv-detail-card {
+    background: #f9fafb !important;
+    border-color: #e5e7eb !important;
+  }
+
+  .idv-cert-footer {
+    background: #f9fafb !important;
+    border-color: #e5e7eb !important;
+  }
+}
