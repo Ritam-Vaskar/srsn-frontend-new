@@ -7,13 +7,16 @@ import router from './routes/index';
 import { Provider } from 'react-redux';
 import store from './store/store';
 import { GoogleOAuthProvider } from '@react-oauth/google';
+import { ToastProvider } from './components/Core/Toast.jsx';
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
     <GoogleOAuthProvider clientId={import.meta.env.VITE_GOOGLE_CLIENT_ID}>
       <Provider store={store}>
-        <RouterProvider router={router}>
-        </RouterProvider>
+        <ToastProvider>
+          <RouterProvider router={router}>
+          </RouterProvider>
+        </ToastProvider>
       </Provider>
     </GoogleOAuthProvider>
   </StrictMode>,
